@@ -36,14 +36,14 @@ type PermissionMiddleware interface {
 }
 
 type permissionMiddleware struct {
-	authService services.ultraAuthService
+	authService services.UltraAuthService
 }
 
 // NewPermissionMiddleware cria uma nova instância do middleware de permissões
 // Delegando toda lógica para ultraAuthService para consistência
 func NewPermissionMiddleware(ultraAuthBaseURL string) PermissionMiddleware {
 	return &permissionMiddleware{
-		authService: services.NewultraAuthService(ultraAuthBaseURL),
+		authService: services.NewUltraAuthService(ultraAuthBaseURL),
 	}
 }
 

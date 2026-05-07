@@ -14,14 +14,14 @@ type JWTMiddleware interface {
 }
 
 type jwtMiddleware struct {
-	cfgJWT       *config.JWTConfig
-	cfgultralution *config.ultralutionConfig
+	cfgJWT    *config.JWTConfig
+	cfgUltra  *config.UltraAuthConfig
 }
 
 func NewJWTMiddleware(cfg *config.Config) JWTMiddleware {
 	return &jwtMiddleware{
-		cfgJWT:       &cfg.JWT,
-		cfgultralution: &cfg.ultralution,
+		cfgJWT:   &cfg.JWT,
+		cfgUltra: &cfg.UltraAuth,
 	}
 }
 
