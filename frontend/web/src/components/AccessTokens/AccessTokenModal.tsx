@@ -14,6 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Search } from 'lucide-react';
 import type { AccessToken, AccessTokenFormData } from '@/types/auth';
 import { useUserPermissions } from '@/hooks/useUserPermissions';
@@ -103,7 +104,7 @@ export default function AccessTokenModal({
       
       setCategorizedPermissions(categorized);
     } catch (error) {
-      console.error('Error loading permissions:', error);
+      logger.error('Error loading permissions:', error);
       setScopesError(t('permissions.loadError'));
       setCategorizedPermissions({});
     } finally {

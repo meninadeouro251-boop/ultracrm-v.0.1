@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type { ChannelConfiguration, UltraSettings } from '@/types/channels/inbox';
+import logger from '@/utils/logger';
 
 const ChannelConfigurationService = {
   /**
@@ -16,7 +17,7 @@ const ChannelConfigurationService = {
       const { data } = await api.patch(`/inboxes/${inboxId}`, payload);
       return data;
     } catch (error) {
-      console.error('ChannelConfigurationService.updateConfiguration error:', error);
+      logger.error('ChannelConfigurationService.updateConfiguration error:', error);
       throw error;
     }
   },
@@ -39,7 +40,7 @@ const ChannelConfigurationService = {
       const { data } = await api.patch(`/inboxes/${inboxId}/imap`, payload);
       return data;
     } catch (error) {
-      console.error('ChannelConfigurationService.updateIMAPConfiguration error:', error);
+      logger.error('ChannelConfigurationService.updateIMAPConfiguration error:', error);
       // Fallback to regular update if specific endpoint doesn't exist
       return this.updateConfiguration(inboxId, imapConfig);
     }
@@ -53,7 +54,7 @@ const ChannelConfigurationService = {
       const { data } = await api.post(`/inboxes/${inboxId}/setup_channel_provider`);
       return data;
     } catch (error) {
-      console.error('ChannelConfigurationService.setupChannelProvider error:', error);
+      logger.error('ChannelConfigurationService.setupChannelProvider error:', error);
       throw error;
     }
   },
@@ -66,7 +67,7 @@ const ChannelConfigurationService = {
       const { data } = await api.post(`/inboxes/${inboxId}/disconnect_channel_provider`);
       return data;
     } catch (error) {
-      console.error('ChannelConfigurationService.disconnectChannelProvider error:', error);
+      logger.error('ChannelConfigurationService.disconnectChannelProvider error:', error);
       throw error;
     }
   },
@@ -93,7 +94,7 @@ export const UltraApiService = {
       });
       return data;
     } catch (error) {
-      console.error('UltraApiService.verifyConnection error:', error);
+      logger.error('UltraApiService.verifyConnection error:', error);
       throw error;
     }
   },
@@ -112,7 +113,7 @@ export const UltraApiService = {
       const { data } = await api.get(endpoint);
       return data;
     } catch (error) {
-      console.error('UltraApiService.getQRCode error:', error);
+      logger.error('UltraApiService.getQRCode error:', error);
       throw error;
     }
   },
@@ -133,7 +134,7 @@ export const UltraApiService = {
       });
       return data;
     } catch (error) {
-      console.error('UltraApiService.refreshQRCode error:', error);
+      logger.error('UltraApiService.refreshQRCode error:', error);
       throw error;
     }
   },
@@ -151,7 +152,7 @@ export const UltraApiService = {
       const { data } = await api.get(endpoint);
       return data;
     } catch (error) {
-      console.error('UltraApiService.getSettings error:', error);
+      logger.error('UltraApiService.getSettings error:', error);
       throw error;
     }
   },
@@ -175,7 +176,7 @@ export const UltraApiService = {
       });
       return data;
     } catch (error) {
-      console.error('UltraApiService.updateSettings error:', error);
+      logger.error('UltraApiService.updateSettings error:', error);
       throw error;
     }
   },
@@ -188,7 +189,7 @@ export const UltraApiService = {
       const { data } = await api.get(`/ultra/proxies/${instanceName}`);
       return data;
     } catch (error) {
-      console.error('UltraApiService.getProxy error:', error);
+      logger.error('UltraApiService.getProxy error:', error);
       throw error;
     }
   },
@@ -206,7 +207,7 @@ export const UltraApiService = {
       });
       return data;
     } catch (error) {
-      console.error('UltraApiService.updateProxy error:', error);
+      logger.error('UltraApiService.updateProxy error:', error);
       throw error;
     }
   },
@@ -233,7 +234,7 @@ export const UltraApiService = {
       const { data } = await api.get(endpoint);
       return data;
     } catch (error) {
-      console.error('UltraApiService.getInstances error:', error);
+      logger.error('UltraApiService.getInstances error:', error);
       throw error;
     }
   },
@@ -251,7 +252,7 @@ export const UltraApiService = {
       const { data } = await api.delete(endpoint);
       return data;
     } catch (error) {
-      console.error('UltraApiService.logout error:', error);
+      logger.error('UltraApiService.logout error:', error);
       throw error;
     }
   },
@@ -269,7 +270,7 @@ export const UltraApiService = {
       const { data } = await api.get(endpoint);
       return data;
     } catch (error) {
-      console.error('UltraApiService.getProfile error:', error);
+      logger.error('UltraApiService.getProfile error:', error);
       throw error;
     }
   },
@@ -291,7 +292,7 @@ export const UltraApiService = {
       const { data } = await api.post(endpoint, { number: phoneNumber });
       return data;
     } catch (error) {
-      console.error('UltraApiService.fetchProfile error:', error);
+      logger.error('UltraApiService.fetchProfile error:', error);
       throw error;
     }
   },
@@ -313,7 +314,7 @@ export const UltraApiService = {
       const { data } = await api.post(endpoint, { name });
       return data;
     } catch (error) {
-      console.error('UltraApiService.updateProfileName error:', error);
+      logger.error('UltraApiService.updateProfileName error:', error);
       throw error;
     }
   },
@@ -335,7 +336,7 @@ export const UltraApiService = {
       const { data } = await api.post(endpoint, { status });
       return data;
     } catch (error) {
-      console.error('UltraApiService.updateProfileStatus error:', error);
+      logger.error('UltraApiService.updateProfileStatus error:', error);
       throw error;
     }
   },
@@ -357,7 +358,7 @@ export const UltraApiService = {
       const { data } = await api.post(endpoint, { picture: pictureUrl });
       return data;
     } catch (error) {
-      console.error('UltraApiService.updateProfilePicture error:', error);
+      logger.error('UltraApiService.updateProfilePicture error:', error);
       throw error;
     }
   },
@@ -375,7 +376,7 @@ export const UltraApiService = {
       const { data } = await api.delete(endpoint);
       return data;
     } catch (error) {
-      console.error('UltraApiService.removeProfilePicture error:', error);
+      logger.error('UltraApiService.removeProfilePicture error:', error);
       throw error;
     }
   },
@@ -393,7 +394,7 @@ export const UltraApiService = {
       const { data } = await api.get(endpoint);
       return data;
     } catch (error) {
-      console.error('UltraApiService.fetchPrivacySettings error:', error);
+      logger.error('UltraApiService.fetchPrivacySettings error:', error);
       throw error;
     }
   },
@@ -426,7 +427,7 @@ export const UltraApiService = {
       const { data } = await api.put(endpoint, { privacy: privacySettings });
       return data;
     } catch (error) {
-      console.error('UltraApiService.updatePrivacySettings error:', error);
+      logger.error('UltraApiService.updatePrivacySettings error:', error);
       throw error;
     }
   },
@@ -451,7 +452,7 @@ export const ZapiService = {
       });
       return data;
     } catch (error) {
-      console.error('ZapiService.uploadFile error:', error);
+      logger.error('ZapiService.uploadFile error:', error);
       throw error;
     }
   },
@@ -464,7 +465,7 @@ export const ZapiService = {
       const { data } = await api.get(`/zapi/qrcodes/${instanceId}`);
       return data;
     } catch (error) {
-      console.error('ZapiService.getQRCode error:', error);
+      logger.error('ZapiService.getQRCode error:', error);
       throw error;
     }
   },
@@ -477,7 +478,7 @@ export const ZapiService = {
       const { data } = await api.post(`/zapi/qrcodes/${instanceId}`);
       return data;
     } catch (error) {
-      console.error('ZapiService.refreshQRCode error:', error);
+      logger.error('ZapiService.refreshQRCode error:', error);
       throw error;
     }
   },
@@ -490,7 +491,7 @@ export const ZapiService = {
       const { data } = await api.get(`/zapi/qrcodes/status?instance_id=${instanceId}`);
       return data;
     } catch (error) {
-      console.error('ZapiService.getStatus error:', error);
+      logger.error('ZapiService.getStatus error:', error);
       throw error;
     }
   },
@@ -503,7 +504,7 @@ export const ZapiService = {
       const { data } = await api.get(`/zapi/settings/${instanceId}`);
       return data;
     } catch (error) {
-      console.error('ZapiService.getInstanceData error:', error);
+      logger.error('ZapiService.getInstanceData error:', error);
       throw error;
     }
   },
@@ -518,7 +519,7 @@ export const ZapiService = {
       });
       return data;
     } catch (error) {
-      console.error('ZapiService.updateProfilePicture error:', error);
+      logger.error('ZapiService.updateProfilePicture error:', error);
       throw error;
     }
   },
@@ -533,7 +534,7 @@ export const ZapiService = {
       });
       return data;
     } catch (error) {
-      console.error('ZapiService.updateInstanceName error:', error);
+      logger.error('ZapiService.updateInstanceName error:', error);
       throw error;
     }
   },
@@ -548,7 +549,7 @@ export const ZapiService = {
       });
       return data;
     } catch (error) {
-      console.error('ZapiService.updateProfileName error:', error);
+      logger.error('ZapiService.updateProfileName error:', error);
       throw error;
     }
   },
@@ -563,7 +564,7 @@ export const ZapiService = {
       });
       return data;
     } catch (error) {
-      console.error('ZapiService.updateProfileDescription error:', error);
+      logger.error('ZapiService.updateProfileDescription error:', error);
       throw error;
     }
   },
@@ -578,7 +579,7 @@ export const ZapiService = {
       });
       return data;
     } catch (error) {
-      console.error('ZapiService.updateCallReject error:', error);
+      logger.error('ZapiService.updateCallReject error:', error);
       throw error;
     }
   },
@@ -593,7 +594,7 @@ export const ZapiService = {
       });
       return data;
     } catch (error) {
-      console.error('ZapiService.updateCallRejectMessage error:', error);
+      logger.error('ZapiService.updateCallRejectMessage error:', error);
       throw error;
     }
   },
@@ -606,7 +607,7 @@ export const ZapiService = {
       const { data } = await api.post(`/zapi/settings/${instanceId}/restart`);
       return data;
     } catch (error) {
-      console.error('ZapiService.restartInstance error:', error);
+      logger.error('ZapiService.restartInstance error:', error);
       throw error;
     }
   },
@@ -619,7 +620,7 @@ export const ZapiService = {
       const { data } = await api.post(`/zapi/settings/${instanceId}/disconnect`);
       return data;
     } catch (error) {
-      console.error('ZapiService.disconnectInstance error:', error);
+      logger.error('ZapiService.disconnectInstance error:', error);
       throw error;
     }
   },
@@ -634,7 +635,7 @@ export const ZapiService = {
       );
       return data;
     } catch (error) {
-      console.error('ZapiService.getDisallowedContacts error:', error);
+      logger.error('ZapiService.getDisallowedContacts error:', error);
       throw error;
     }
   },
@@ -658,7 +659,7 @@ export const ZapiService = {
       );
       return data;
     } catch (error) {
-      console.error('ZapiService.setLastSeen error:', error);
+      logger.error('ZapiService.setLastSeen error:', error);
       throw error;
     }
   },
@@ -682,7 +683,7 @@ export const ZapiService = {
       );
       return data;
     } catch (error) {
-      console.error('ZapiService.setPhotoVisualization error:', error);
+      logger.error('ZapiService.setPhotoVisualization error:', error);
       throw error;
     }
   },
@@ -706,7 +707,7 @@ export const ZapiService = {
       );
       return data;
     } catch (error) {
-      console.error('ZapiService.setDescription error:', error);
+      logger.error('ZapiService.setDescription error:', error);
       throw error;
     }
   },
@@ -730,7 +731,7 @@ export const ZapiService = {
       );
       return data;
     } catch (error) {
-      console.error('ZapiService.setGroupAddPermission error:', error);
+      logger.error('ZapiService.setGroupAddPermission error:', error);
       throw error;
     }
   },
@@ -751,7 +752,7 @@ export const ZapiService = {
       const { data } = await api.post(`/zapi/settings/${instanceId}/privacy_set_online`, payload);
       return data;
     } catch (error) {
-      console.error('ZapiService.setOnline error:', error);
+      logger.error('ZapiService.setOnline error:', error);
       throw error;
     }
   },
@@ -775,7 +776,7 @@ export const ZapiService = {
       );
       return data;
     } catch (error) {
-      console.error('ZapiService.setReadReceipts error:', error);
+      logger.error('ZapiService.setReadReceipts error:', error);
       throw error;
     }
   },
@@ -793,7 +794,7 @@ export const ZapiService = {
       );
       return data;
     } catch (error) {
-      console.error('ZapiService.setMessagesDuration error:', error);
+      logger.error('ZapiService.setMessagesDuration error:', error);
       throw error;
     }
   },

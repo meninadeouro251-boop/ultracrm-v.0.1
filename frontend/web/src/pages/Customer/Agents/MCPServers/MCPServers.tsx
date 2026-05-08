@@ -14,6 +14,7 @@ import MCPServersPagination from '@/components/mcpServers/MCPServersPagination';
 import MCPServerDetails from '@/components/mcpServers/MCPServerDetails';
 import { listMCPServers } from '@/services/agents/mcpServerService';
 import { DEFAULT_PAGE_SIZE } from '@/constants/pagination';
+import logger from '@/utils/logger';
 
 const INITIAL_STATE: MCPServersState = {
   servers: [],
@@ -77,7 +78,7 @@ export default function MCPServers() {
           loading: { ...prev.loading, list: false },
         }));
       } catch (error) {
-        console.error('Error loading MCP servers:', error);
+        logger.error('Error loading MCP servers:', error);
         toast.error(t('errors.loadError'));
         setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
       }

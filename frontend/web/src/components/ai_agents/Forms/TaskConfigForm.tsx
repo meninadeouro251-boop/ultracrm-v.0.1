@@ -26,6 +26,7 @@ import { Maximize2, Save, X, ArrowDown, List, Search, Edit, PenTool, Loader2 } f
 import { listAgents } from '@/services/agents';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Agent } from '@/types/agents';
+import logger from '@/utils/logger';
 
 type AgentPageMode = 'create' | 'edit' | 'view';
 
@@ -128,7 +129,7 @@ const TaskConfigForm = ({
       const filteredAgents = response.data.filter((agent: Agent) => agent.id !== editingAgentId);
       setAvailableAgents(filteredAgents);
     } catch (err) {
-      console.error('Error loading agents:', err);
+      logger.error('Error loading agents:', err);
       setError(t('subAgents.loadError'));
     } finally {
       setIsLoading(false);

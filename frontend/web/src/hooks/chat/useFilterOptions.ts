@@ -3,6 +3,7 @@ import InboxesService from '@/services/channels/inboxesService';
 import chatService from '@/services/chat/chatService';
 import { Inbox } from '@/types/channels/inbox';
 import type { Pipeline } from '@/types/chat/api';
+import logger from '@/utils/logger';
 
 interface FilterOptions {
   inboxes: Array<{ label: string; value: string }>;
@@ -77,7 +78,7 @@ export const useFilterOptions = (params: UseFilterOptionsParams = {}): FilterOpt
               })),
             );
           } else {
-            console.warn('⚠️ Pipelines data não é um array:', pipelinesData);
+            logger.warn('⚠️ Pipelines data não é um array:', pipelinesData);
           }
         }
 
@@ -96,13 +97,13 @@ export const useFilterOptions = (params: UseFilterOptionsParams = {}): FilterOpt
 
         // ✅ Log de erros individuais sem falhar o hook
         if (inboxesResponse.status === 'rejected') {
-          console.warn('Erro ao carregar inboxes:', inboxesResponse.reason);
+          logger.warn('Erro ao carregar inboxes:', inboxesResponse.reason);
         }
         if (pipelinesResponse.status === 'rejected') {
-          console.warn('Erro ao carregar pipelines:', pipelinesResponse.reason);
+          logger.warn('Erro ao carregar pipelines:', pipelinesResponse.reason);
         }
       } catch (error) {
-        console.error('Erro ao carregar opções de filtro:', error);
+        logger.error('Erro ao carregar opções de filtro:', error);
         setOptions(prev => ({
           ...prev,
           loading: false,

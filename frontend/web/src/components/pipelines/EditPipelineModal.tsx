@@ -27,6 +27,7 @@ import TeamsService from '@/services/teams/teamsService';
 import { Team } from '@/types/users/teams';
 import { LocalAttributeDefinition, LocalAttributeDefinitionPayload } from '@/types/pipelines/localAttributeDefinition';
 import PipelineCustomAttributes from './PipelineCustomAttributes';
+import logger from '@/utils/logger';
 
 interface EditPipelineModalProps {
   open: boolean;
@@ -98,7 +99,7 @@ export default function EditPipelineModal({
       setTeamsLoading(true);
       TeamsService.getTeams({ page: 1, per_page: 100, sort: 'name', order: 'asc' })
         .then(response => setTeams(response.data))
-        .catch(err => console.error('Error loading teams:', err))
+        .catch(err => logger.error('Error loading teams:', err))
         .finally(() => setTeamsLoading(false));
     }
     if (formData.visibility !== 'team') {

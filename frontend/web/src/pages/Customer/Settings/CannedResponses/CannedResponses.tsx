@@ -11,6 +11,7 @@ import {
   DialogTitle,
   Button,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { MessageSquare } from 'lucide-react';
 import EmptyState from '@/components/base/EmptyState';
 
@@ -91,7 +92,7 @@ export default function CannedResponses() {
         loading: { ...prev.loading, list: false },
       }));
     } catch (error) {
-      console.error('Error loading canned responses:', error);
+      logger.error('Error loading canned responses:', error);
       toast.error(t('messages.loadError'));
       setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
     }
@@ -197,7 +198,7 @@ export default function CannedResponses() {
       setDeleteDialogOpen(false);
       setCannedResponseToDelete(null);
     } catch (error) {
-      console.error('Error deleting canned response:', error);
+      logger.error('Error deleting canned response:', error);
       toast.error(t('messages.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -226,7 +227,7 @@ export default function CannedResponses() {
 
       setBulkDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error bulk deleting canned responses:', error);
+      logger.error('Error bulk deleting canned responses:', error);
       toast.error(t('messages.bulkDeleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, bulk: false } }));
@@ -258,7 +259,7 @@ export default function CannedResponses() {
       setCannedResponseModalOpen(false);
       setEditingCannedResponse(null);
     } catch (error) {
-      console.error('Error saving canned response:', error);
+      logger.error('Error saving canned response:', error);
       toast.error(editingCannedResponse ? t('messages.updateError') : t('messages.createError'));
     } finally {
       setState(prev => ({

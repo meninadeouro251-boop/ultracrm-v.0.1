@@ -5,6 +5,7 @@ import { Mail, AlertTriangle } from 'lucide-react';
 import EmailOauthService from '@/services/channels/emailOauthService';
 import { EmailChannelPayload } from '@/types/channels/inbox';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 interface EmailFormProps {
   provider: 'google' | 'microsoft' | 'other_provider';
@@ -66,7 +67,7 @@ const EmailForm: React.FC<EmailFormProps> = ({ provider, onSuccess, onBack }) =>
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('OAuth authorization error:', error);
+      logger.error('OAuth authorization error:', error);
       setAuthError(t('errors.authError'));
       toast.error(
         t('errors.connectError', { provider: provider === 'google' ? 'Google' : 'Microsoft' }),
@@ -124,7 +125,7 @@ const EmailForm: React.FC<EmailFormProps> = ({ provider, onSuccess, onBack }) =>
       toast.success(t('success.created'));
       onSuccess(result.id);
     } catch (error) {
-      console.error('Create channel error:', error);
+      logger.error('Create channel error:', error);
       toast.error(t('errors.createError'));
     } finally {
       setIsLoading(false);

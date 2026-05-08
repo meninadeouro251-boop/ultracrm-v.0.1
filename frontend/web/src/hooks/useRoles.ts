@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Role } from '@/types/auth';
 import { fetchRoles, fetchRolesFull } from '@/services/rbac';
+import logger from '@/utils/logger';
 
 interface UseRolesOptions {
   autoLoad?: boolean;
@@ -26,7 +27,7 @@ export default function useRoles(options: UseRolesOptions = {}) {
       const roles = Array.isArray(response.data) ? response.data : Array.isArray(response) ? response : [];
       setRoles(roles);
     } catch (error) {
-      console.error('Erro ao buscar roles:', error);
+      logger.error('Erro ao buscar roles:', error);
       setError(error instanceof Error ? error.message : 'Erro desconhecido');
     } finally {
       setLoading(false);

@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   MessageTemplate,
   TemplateFormData,
   MessageTemplateResponse,
@@ -132,7 +133,7 @@ const MessageTemplateService = {
 
       return extractResponse<MessageTemplate>(response) as MessageTemplateResponse;
     } catch (error) {
-      console.error('MessageTemplateService.getTemplates error:', error);
+      logger.error('MessageTemplateService.getTemplates error:', error);
       throw error;
     }
   },
@@ -145,7 +146,7 @@ const MessageTemplateService = {
       const { data } = await api.post(`/inboxes/${inboxId}/message_templates/sync`);
       return Array.isArray(data) ? data : [data];
     } catch (error) {
-      console.error('MessageTemplateService.syncTemplates error:', error);
+      logger.error('MessageTemplateService.syncTemplates error:', error);
       throw error;
     }
   },
@@ -166,7 +167,7 @@ const MessageTemplateService = {
       });
       return data;
     } catch (error) {
-      console.error('MessageTemplateService.createTemplate error:', error);
+      logger.error('MessageTemplateService.createTemplate error:', error);
       throw error;
     }
   },
@@ -188,7 +189,7 @@ const MessageTemplateService = {
       });
       return data;
     } catch (error) {
-      console.error('MessageTemplateService.updateTemplate error:', error);
+      logger.error('MessageTemplateService.updateTemplate error:', error);
       throw error;
     }
   },
@@ -200,7 +201,7 @@ const MessageTemplateService = {
     try {
       await api.delete(`/inboxes/${inboxId}/message_templates/${templateId}`);
     } catch (error) {
-      console.error('MessageTemplateService.deleteTemplate error:', error);
+      logger.error('MessageTemplateService.deleteTemplate error:', error);
       throw error;
     }
   },
@@ -220,7 +221,7 @@ const MessageTemplateService = {
       );
       return data;
     } catch (error) {
-      console.error('MessageTemplateService.toggleTemplate error:', error);
+      logger.error('MessageTemplateService.toggleTemplate error:', error);
       throw error;
     }
   },

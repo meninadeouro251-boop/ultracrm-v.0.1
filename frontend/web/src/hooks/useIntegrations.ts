@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { agentIntegrationsService } from '@/services/agents/agentIntegrationsService';
+import logger from '@/utils/logger';
 
 interface ElevenLabsConfig {
   provider?: string;
@@ -123,7 +124,7 @@ export function useIntegrations(agentId: string): UseIntegrationsReturn {
         setGoogleSheetsConfig(sanitizeConfig(googleSheetsData) as unknown as GoogleSheetsConfig);
       }
     } catch (error) {
-      console.error('Error loading integrations:', error);
+      logger.error('Error loading integrations:', error);
       setCredentialsConfigured({
         elevenlabs: false,
         'google-calendar': false,

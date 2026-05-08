@@ -6,6 +6,7 @@ import { IntegrationHeader, IntegrationStatus, IntegrationActions } from '../../
 import { Integration, SlackConfiguration } from '@/types/integrations';
 import { integrationsService } from '@/services/integrations';
 import { toast } from 'sonner';
+import logger from '@/utils/logger';
 
 interface SlackIntegrationProps {
   integration: Integration;
@@ -44,7 +45,7 @@ export default function SlackIntegration({ integration, onBack }: SlackIntegrati
         });
       }
     } catch (error) {
-      console.error('Error loading Slack configuration:', error);
+      logger.error('Error loading Slack configuration:', error);
       toast.error(t('slack.messages.loadError'));
     } finally {
       setLoading(false);
@@ -58,7 +59,7 @@ export default function SlackIntegration({ integration, onBack }: SlackIntegrati
       toast.success(t('slack.messages.saveSuccess'));
       await loadSlackConfiguration();
     } catch (error) {
-      console.error('Error saving Slack configuration:', error);
+      logger.error('Error saving Slack configuration:', error);
       toast.error(t('slack.messages.saveError'));
     } finally {
       setSaving(false);
@@ -71,7 +72,7 @@ export default function SlackIntegration({ integration, onBack }: SlackIntegrati
       toast.success(t('slack.messages.disconnectSuccess'));
       onBack();
     } catch (error) {
-      console.error('Error disconnecting Slack:', error);
+      logger.error('Error disconnecting Slack:', error);
       toast.error(t('slack.messages.disconnectError'));
     }
   };

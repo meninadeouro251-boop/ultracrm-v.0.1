@@ -6,6 +6,7 @@ import {
   CardTitle,
   Button,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -261,7 +262,7 @@ export function usePanelState({
       }
       setHasChanges(false);
     } catch (error) {
-      console.error('Erro ao salvar:', error);
+      logger.error('Erro ao salvar:', error);
     } finally {
       setIsLoading(false);
     }

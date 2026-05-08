@@ -5,6 +5,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useGlobalConfig } from '@/contexts/GlobalConfigContext';
 import instagramService from '@/services/channels/instagramService';
 import { Instagram, AlertTriangle } from 'lucide-react';
+import logger from '@/utils/logger';
 
 interface InstagramFormProps {
   onCancel?: () => void;
@@ -34,7 +35,7 @@ export default function InstagramForm({ onCancel }: InstagramFormProps) {
       // Redirect to Instagram OAuth (no popup)
       window.location.href = response.url;
     } catch (error: unknown) {
-      console.error('Instagram: Error generating authorization URL:', error);
+      logger.error('Instagram: Error generating authorization URL:', error);
       const errorMessage =
         (error as { response?: { data?: { error?: { message?: string } } }; message?: string })
           ?.response?.data?.error?.message ||

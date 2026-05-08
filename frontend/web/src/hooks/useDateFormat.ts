@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 /**
  * Hook para formatação de datas baseado no locale atual do i18n
@@ -81,7 +82,7 @@ export function useDateFormat() {
 
       return date.toLocaleDateString(getLocale, defaultOptions);
     } catch (error) {
-      console.error('Error formatting date:', error);
+      logger.error('Error formatting date:', error);
       return 'Invalid date';
     }
   };
@@ -120,7 +121,7 @@ export function useDateFormat() {
 
       return date.toLocaleString(getLocale, defaultOptions);
     } catch (error) {
-      console.error('Error formatting datetime:', error);
+      logger.error('Error formatting datetime:', error);
       return 'Invalid date';
     }
   };
@@ -156,7 +157,7 @@ export function useDateFormat() {
 
       return date.toLocaleTimeString(getLocale, defaultOptions);
     } catch (error) {
-      console.error('Error formatting time:', error);
+      logger.error('Error formatting time:', error);
       return 'Invalid date';
     }
   };

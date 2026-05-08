@@ -18,6 +18,7 @@ import {
   listApiKeys,
   getAccessibleAgents,
 } from '@/services/agents';
+import logger from '@/utils/logger';
 import { ApiKey, AgentCreate, Agent } from '@/types/agents';
 import { CustomTool } from '@/types/ai';
 import { extractBackendErrorMessage } from '@/utils/agentUtils';
@@ -130,7 +131,7 @@ const AgentPage = () => {
       const apiKeysData = await listApiKeys();
       setApiKeys(apiKeysData);
     } catch (error) {
-      console.error(t('messages.apiKeysError'), error);
+      logger.error(t('messages.apiKeysError'), error);
     }
   }, [t]);
 
@@ -150,7 +151,7 @@ const AgentPage = () => {
 
       return agentToolsData;
     } catch (error) {
-      console.error(t('messages.agentToolsError'), error);
+      logger.error(t('messages.agentToolsError'), error);
       return [];
     }
   }, []);
@@ -252,7 +253,7 @@ const AgentPage = () => {
             >,
           });
         } catch (error) {
-          console.error(t('messages.loadError'), error);
+          logger.error(t('messages.loadError'), error);
           toast.error(t('messages.loadError'), {
             description: t('messages.loadErrorDescription'),
           });
@@ -385,7 +386,7 @@ const AgentPage = () => {
         setIsDirty(false);
       }
     } catch (error: unknown) {
-      console.error('Erro ao salvar agente:', error);
+      logger.error('Erro ao salvar agente:', error);
 
       // Extrair mensagem de erro amigável do backend
       const errorMessage = extractBackendErrorMessage(error);
@@ -424,7 +425,7 @@ const AgentPage = () => {
 
   const handleDuplicate = useCallback(() => {
     // TODO: Implementar duplicação
-    console.log('Duplicando agente...');
+    logger.debug('Duplicando agente...');
   }, []);
 
   const handleTabChange = useCallback((tab: string) => {

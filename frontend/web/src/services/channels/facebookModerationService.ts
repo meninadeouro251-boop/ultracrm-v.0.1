@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type { FacebookCommentModeration, ModerationsResponse } from '@/types/channels/inbox';
+import logger from '@/utils/logger';
 
 const FacebookModerationService = {
   // Get moderations list
@@ -17,7 +18,7 @@ const FacebookModerationService = {
       });
       return data;
     } catch (error) {
-      console.error('FacebookModerationService.getModerations error:', error);
+      logger.error('FacebookModerationService.getModerations error:', error);
       throw error;
     }
   },
@@ -30,7 +31,7 @@ const FacebookModerationService = {
       );
       return data;
     } catch (error) {
-      console.error('FacebookModerationService.getModeration error:', error);
+      logger.error('FacebookModerationService.getModeration error:', error);
       throw error;
     }
   },
@@ -43,7 +44,7 @@ const FacebookModerationService = {
       );
       return data;
     } catch (error) {
-      console.error('FacebookModerationService.approveModeration error:', error);
+      logger.error('FacebookModerationService.approveModeration error:', error);
       throw error;
     }
   },
@@ -60,7 +61,7 @@ const FacebookModerationService = {
       );
       return data;
     } catch (error) {
-      console.error('FacebookModerationService.rejectModeration error:', error);
+      logger.error('FacebookModerationService.rejectModeration error:', error);
       throw error;
     }
   },
@@ -73,7 +74,7 @@ const FacebookModerationService = {
       );
       return data;
     } catch (error) {
-      console.error('FacebookModerationService.regenerateResponse error:', error);
+      logger.error('FacebookModerationService.regenerateResponse error:', error);
       throw error;
     }
   },

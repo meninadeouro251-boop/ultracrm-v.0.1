@@ -9,6 +9,7 @@ import {
   MessageSquare,
   CheckCircle,
 } from 'lucide-react';
+import logger from '@/utils/logger';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
 import { useGlobalConfig } from '@/contexts/GlobalConfigContext';
@@ -323,7 +324,7 @@ const AuthorizationSuccessBanner: React.FC<{
                 // Reload page to refresh connection status
                 setTimeout(() => window.location.reload(), 1000);
               } catch (error: any) {
-                console.error('Error reconnecting Facebook:', error);
+                logger.error('Error reconnecting Facebook:', error);
                 toast.error(
                   error?.message || t('settings.authorizationBanners.success.reconnectError'),
                 );
@@ -334,7 +335,7 @@ const AuthorizationSuccessBanner: React.FC<{
               toast.error(t('settings.authorizationBanners.success.loginCancelled'));
             }
           })().catch((error: any) => {
-            console.error('Error in Facebook reconnect callback:', error);
+            logger.error('Error in Facebook reconnect callback:', error);
             setIsReconnecting(false);
           });
         },
@@ -344,7 +345,7 @@ const AuthorizationSuccessBanner: React.FC<{
         },
       );
     } catch (error: any) {
-      console.error('Error reconnecting Facebook:', error);
+      logger.error('Error reconnecting Facebook:', error);
       toast.error(error?.message || t('settings.authorizationBanners.success.reconnectError'));
       setIsReconnecting(false);
     }
@@ -362,7 +363,7 @@ const AuthorizationSuccessBanner: React.FC<{
       const response = await instagramService.generateAuthorization();
       window.location.href = response.url;
     } catch (error: any) {
-      console.error('Error reconnecting Instagram:', error);
+      logger.error('Error reconnecting Instagram:', error);
       toast.error(error?.message || t('settings.authorizationBanners.success.reconnectError'));
       setIsReconnecting(false);
     }
@@ -412,7 +413,7 @@ const AuthorizationSuccessBanner: React.FC<{
                       toast.success(t('settings.authorizationBanners.success.reconnected'));
                       setTimeout(() => window.location.reload(), 1000);
                     } catch (error: any) {
-                      console.error('Error reconnecting WhatsApp:', error);
+                      logger.error('Error reconnecting WhatsApp:', error);
                       toast.error(
                         error?.message || t('settings.authorizationBanners.success.reconnectError'),
                       );
@@ -420,12 +421,12 @@ const AuthorizationSuccessBanner: React.FC<{
                       setIsReconnecting(false);
                     }
                   })().catch((error: any) => {
-                    console.error('Error in WhatsApp reconnect callback:', error);
+                    logger.error('Error in WhatsApp reconnect callback:', error);
                     setIsReconnecting(false);
                   });
                 });
               } catch (error: any) {
-                console.error('Error setting up WhatsApp reconnection:', error);
+                logger.error('Error setting up WhatsApp reconnection:', error);
                 toast.error(
                   error?.message || t('settings.authorizationBanners.success.reconnectError'),
                 );
@@ -436,7 +437,7 @@ const AuthorizationSuccessBanner: React.FC<{
               toast.error(t('settings.authorizationBanners.success.loginCancelled'));
             }
           })().catch((error: any) => {
-            console.error('Error in WhatsApp reconnect callback:', error);
+            logger.error('Error in WhatsApp reconnect callback:', error);
             setIsReconnecting(false);
           });
         },
@@ -450,7 +451,7 @@ const AuthorizationSuccessBanner: React.FC<{
         },
       );
     } catch (error: any) {
-      console.error('Error reconnecting WhatsApp:', error);
+      logger.error('Error reconnecting WhatsApp:', error);
       toast.error(error?.message || t('settings.authorizationBanners.success.reconnectError'));
       setIsReconnecting(false);
     }
@@ -473,7 +474,7 @@ const AuthorizationSuccessBanner: React.FC<{
         window.location.href = response.url;
       }
     } catch (error: any) {
-      console.error('Error reconnecting Google:', error);
+      logger.error('Error reconnecting Google:', error);
       toast.error(error?.message || t('settings.authorizationBanners.success.reconnectError'));
       setIsReconnecting(false);
     }
@@ -496,7 +497,7 @@ const AuthorizationSuccessBanner: React.FC<{
         window.location.href = response.url;
       }
     } catch (error: any) {
-      console.error('Error reconnecting Microsoft:', error);
+      logger.error('Error reconnecting Microsoft:', error);
       toast.error(error?.message || t('settings.authorizationBanners.success.reconnectError'));
       setIsReconnecting(false);
     }
@@ -552,7 +553,7 @@ const AuthorizationSuccessBanner: React.FC<{
                 <Button
                   onClick={() => {
                     handleReconnect().catch(error => {
-                      console.error('Error in handleReconnect:', error);
+                      logger.error('Error in handleReconnect:', error);
                     });
                   }}
                   loading={isReconnecting}
@@ -616,7 +617,7 @@ const AuthorizationBanners: React.FC<AuthorizationBannersProps> = ({ inbox, onRe
         )}&scope=https://graph.microsoft.com/Mail.Read&response_type=code`;
         break;
       default:
-        console.warn('Provider não suportado para reautorização:', providerType);
+        logger.warn('Provider não suportado para reautorização:', providerType);
     }
 
     onReauthorize(providerType);

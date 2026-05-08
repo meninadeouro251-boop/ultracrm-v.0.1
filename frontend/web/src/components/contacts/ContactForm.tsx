@@ -15,6 +15,7 @@ import {
   Separator,
   Switch,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import {
   User,
   MapPin,
@@ -141,7 +142,7 @@ export default function ContactForm({
         const response = await labelsService.getLabels();
         setAvailableLabels(response.data || []);
       } catch (error) {
-        console.error('Error loading labels:', error);
+        logger.error('Error loading labels:', error);
       }
     };
 

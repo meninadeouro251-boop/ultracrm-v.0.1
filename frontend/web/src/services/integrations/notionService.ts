@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   NotionConfig,
   NotionOAuthResponse,
   NotionConnectionResponse,
@@ -17,7 +18,7 @@ const NotionService = {
       );
       return data;
     } catch (error) {
-      console.error('NotionService.generateAuthorization error:', error);
+      logger.error('NotionService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -40,7 +41,7 @@ const NotionService = {
       );
       return data;
     } catch (error) {
-      console.error('NotionService.completeAuthorization error:', error);
+      logger.error('NotionService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -58,7 +59,7 @@ const NotionService = {
       if (error.response?.status === 404) {
         return null;
       }
-      console.error('NotionService.getConfiguration error:', error);
+      logger.error('NotionService.getConfiguration error:', error);
       throw error;
     }
   },
@@ -77,7 +78,7 @@ const NotionService = {
       );
       return data;
     } catch (error) {
-      console.error('NotionService.saveConfiguration error:', error);
+      logger.error('NotionService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -92,7 +93,7 @@ const NotionService = {
       );
       return data;
     } catch (error) {
-      console.error('NotionService.disconnect error:', error);
+      logger.error('NotionService.disconnect error:', error);
       throw error;
     }
   },
@@ -108,7 +109,7 @@ const NotionService = {
       );
       return data;
     } catch (error) {
-      console.error('NotionService.discoverTools error:', error);
+      logger.error('NotionService.discoverTools error:', error);
       throw error;
     }
   },

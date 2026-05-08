@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import { chatService } from '@/services/chat/chatService';
 import { Message } from '@/types/chat/api';
 import { extractMessagesWithMeta } from '@/utils/chat/responseHelpers';
+import logger from '@/utils/logger';
 
 interface UseMessageHistoryProps {
   conversationId: string;
@@ -99,7 +100,7 @@ export const useMessageHistory = ({ conversationId, enabled = true }: UseMessage
       //   }, 500);
       // }
     } catch (error) {
-      console.error('Error loading initial messages:', error);
+      logger.error('Error loading initial messages:', error);
       const errorMessage = error instanceof Error ? error.message : 'Erro ao carregar mensagens';
 
       setState(prev => ({
@@ -179,7 +180,7 @@ export const useMessageHistory = ({ conversationId, enabled = true }: UseMessage
         }));
       }
     } catch (error) {
-      console.error('Error loading more messages:', error);
+      logger.error('Error loading more messages:', error);
       setState(prev => ({ ...prev, isLoadingMore: false }));
 
       toast.error('Erro ao carregar mensagens anteriores', {
@@ -232,7 +233,7 @@ export const useMessageHistory = ({ conversationId, enabled = true }: UseMessage
           }
         }
       } catch (error) {
-        console.error('Error in recursive message loading:', error);
+        logger.error('Error in recursive message loading:', error);
       }
     },
     [conversationId, state.hasMoreMessages, state.isLoadingMore, state.oldestMessageId],

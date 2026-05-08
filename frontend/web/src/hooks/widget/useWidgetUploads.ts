@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { widgetService } from '@/services/widget/widgetService';
 import type { AttachmentUpload } from '@/types/core/attachments';
 import type { MessageItem } from '@/components/widget/MessageList';
+import logger from '@/utils/logger';
 
 type Params = {
   setMessages: Dispatch<SetStateAction<MessageItem[]>>;
@@ -84,7 +85,7 @@ export function useWidgetUploads({ setMessages, getConversationId }: Params) {
         setPendingUploads([]);
       }, 1000);
     } catch (error) {
-      console.error('❌ Widget: Failed to send attachments:', error);
+      logger.error('❌ Widget: Failed to send attachments:', error);
 
       uploads.forEach(upload => {
         updateUploadProgress(upload.id, 0, 'failed', 'Upload failed');

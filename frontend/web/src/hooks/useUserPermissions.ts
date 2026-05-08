@@ -4,6 +4,7 @@ import { useAuthStore } from '@/store/authStore';
 import { usePermissionsConfig } from '@/hooks/usePermissionsConfig';
 import { permissionsService } from '@/services/permissions';
 import { PermissionsContext } from '@/contexts/PermissionsContext';
+import logger from '@/utils/logger';
 
 /**
  * Hook para verificar permissões do usuário logado
@@ -70,7 +71,7 @@ export const useUserPermissions = () => {
         const permissions = await permissionsService.getUserPermissions();
         setUserPermissions(permissions);
       } catch (error) {
-        console.error('Erro ao carregar permissões do usuário:', error);
+        logger.error('Erro ao carregar permissões do usuário:', error);
         setPermissionsError('Erro ao carregar permissões do usuário');
         setUserPermissions([]);
       } finally {
@@ -106,7 +107,7 @@ export const useUserPermissions = () => {
         const permissions = await permissionsService.getAccountPermissions();
         setAccountPermissions(permissions);
       } catch (err) {
-        console.error('Erro ao carregar permissões do account:', err);
+        logger.error('Erro ao carregar permissões do account:', err);
         setPermissionsError('Erro ao carregar permissões do account');
         setAccountPermissions([]);
       } finally {
@@ -157,7 +158,7 @@ export const useUserPermissions = () => {
 
     // Debug log
     if (type === 'account' && !hasPermission) {
-      console.warn(
+      logger.warn(
         `[Permissions] Permissão negada: ${permission}. accountPermissions tem ${permissionsArray.length
         } permissões. Tem ai_agents.read? ${permissionsArray.includes('ai_agents.read')}`,
       );
@@ -248,7 +249,7 @@ export const useUserPermissions = () => {
         const accountPerms = await permissionsService.getAccountPermissions(true);
         setAccountPermissions(accountPerms);
       } catch (err) {
-        console.error('Erro ao recarregar permissões:', err);
+        logger.error('Erro ao recarregar permissões:', err);
         setPermissionsError('Erro ao recarregar permissões');
       } finally {
         setPermissionsLoading(false);

@@ -7,6 +7,7 @@ import {
   CannedResponseFormData,
   CannedResponsesResponse,
 } from '@/types/knowledge';
+import logger from '@/utils/logger';
 
 class CannedResponsesService {
   private get baseUrl(): string {
@@ -19,7 +20,7 @@ class CannedResponsesService {
       const response = await api.get(this.baseUrl, { params });
       return extractResponse<CannedResponse>(response) as CannedResponsesResponse;
     } catch (error) {
-      console.error('Error fetching canned responses:', error);
+      logger.error('Error fetching canned responses:', error);
       throw error;
     }
   }

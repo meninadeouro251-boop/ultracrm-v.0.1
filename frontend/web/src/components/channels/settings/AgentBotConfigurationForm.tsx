@@ -14,6 +14,7 @@ import {
   Badge,
   Switch,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import {
   Bot,
   Trash2,
@@ -191,7 +192,7 @@ export default function AgentBotConfigurationForm({
         setIsFacebookInbox(false);
       }
     } catch (error) {
-      console.error('Error loading agent bot data:', error);
+      logger.error('Error loading agent bot data:', error);
       toast.error(t('settings.agentBotConfiguration.errors.loadError'));
     } finally {
       setIsLoading(false);
@@ -209,7 +210,7 @@ export default function AgentBotConfigurationForm({
       const posts = await InboxesService.getFacebookPosts(inboxId, 50);
       setFacebookPosts(posts as FacebookPost[]);
     } catch (error) {
-      console.error('Error loading Facebook posts:', error);
+      logger.error('Error loading Facebook posts:', error);
       toast.error(t('settings.agentBotConfiguration.errors.loadPostsError'));
       setFacebookPosts([]);
     } finally {
@@ -274,7 +275,7 @@ export default function AgentBotConfigurationForm({
         onUpdate(true);
       }
     } catch (error) {
-      console.error('Error updating agent bot:', error);
+      logger.error('Error updating agent bot:', error);
       toast.error(t('settings.agentBotConfiguration.errors.configureError'));
 
       if (onUpdate) {
@@ -386,7 +387,7 @@ export default function AgentBotConfigurationForm({
         onUpdate(true);
       }
     } catch (error) {
-      console.error('Error disconnecting bot:', error);
+      logger.error('Error disconnecting bot:', error);
       toast.error(t('settings.agentBotConfiguration.errors.disconnectError'));
 
       if (onUpdate) {

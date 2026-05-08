@@ -6,6 +6,7 @@ import { getReconnectService } from '@/services/core';
 import { verifyMfa, logout as authServiceLogout } from '@/services/auth/authService';
 import { profileService } from '@/services/profile/profileService';
 import { markBootstrapPhaseEnd, markBootstrapPhaseStart } from '@/utils/requestMonitor';
+import logger from '@/utils/logger';
 
 interface MfaState {
   required: boolean;
@@ -115,7 +116,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       await authServiceLogout();
     } catch (error) {
-      console.error('Error during logout service call:', error);
+      logger.error('Error during logout service call:', error);
     }
 
     clearUser();
@@ -144,7 +145,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       setMfaState(null);
     } catch (error) {
-      console.error('Erro na verificação MFA:', error);
+      logger.error('Erro na verificação MFA:', error);
       throw error;
     } finally {
       setLoading(false);
@@ -173,7 +174,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser(updatedUser);
       }
     } catch (error) {
-      console.error('Erro ao atualizar dados do usuário:', error);
+      logger.error('Erro ao atualizar dados do usuário:', error);
       await logout();
     }
   };

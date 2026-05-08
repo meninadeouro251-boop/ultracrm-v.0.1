@@ -1,6 +1,7 @@
 import api from '@/services/core/api';
 import { extractData, extractResponse } from '@/utils/apiHelpers';
 import type {
+import logger from '@/utils/logger';
   Team,
   TeamMember,
   TeamFormData,
@@ -22,7 +23,7 @@ const TeamsService = {
 
       return extractResponse<Team>(response) as TeamsResponse;
     } catch (error) {
-      console.error('TeamsService.getTeams error:', error);
+      logger.error('TeamsService.getTeams error:', error);
       throw error;
     }
   },
@@ -35,7 +36,7 @@ const TeamsService = {
       const response = await api.get(`/teams/${teamId}`);
       return extractData<Team>(response);
     } catch (error) {
-      console.error('TeamsService.getTeam error:', error);
+      logger.error('TeamsService.getTeam error:', error);
       throw error;
     }
   },
@@ -48,7 +49,7 @@ const TeamsService = {
       const response = await api.post('/teams', teamData);
       return extractData<TeamResponse>(response);
     } catch (error) {
-      console.error('TeamsService.createTeam error:', error);
+      logger.error('TeamsService.createTeam error:', error);
       throw error;
     }
   },
@@ -61,7 +62,7 @@ const TeamsService = {
       const response = await api.patch(`/teams/${teamId}`, teamData);
       return extractData<TeamResponse>(response);
     } catch (error) {
-      console.error('TeamsService.updateTeam error:', error);
+      logger.error('TeamsService.updateTeam error:', error);
       throw error;
     }
   },
@@ -74,7 +75,7 @@ const TeamsService = {
       const response = await api.delete(`/teams/${teamId}`);
       return extractData<TeamDeleteResponse>(response);
     } catch (error) {
-      console.error('TeamsService.deleteTeam error:', error);
+      logger.error('TeamsService.deleteTeam error:', error);
       throw error;
     }
   },
@@ -88,7 +89,7 @@ const TeamsService = {
       const result = extractResponse<TeamMember>(response);
       return result.data;
     } catch (error) {
-      console.error('TeamsService.getTeamMembers error:', error);
+      logger.error('TeamsService.getTeamMembers error:', error);
       throw error;
     }
   },
@@ -103,7 +104,7 @@ const TeamsService = {
       });
       return extractData<TeamMember[]>(response);
     } catch (error) {
-      console.error('TeamsService.addUsersToTeam error:', error);
+      logger.error('TeamsService.addUsersToTeam error:', error);
       throw error;
     }
   },
@@ -118,7 +119,7 @@ const TeamsService = {
       });
       return extractData<TeamMember[]>(response);
     } catch (error) {
-      console.error('TeamsService.updateTeamUsers error:', error);
+      logger.error('TeamsService.updateTeamUsers error:', error);
       throw error;
     }
   },

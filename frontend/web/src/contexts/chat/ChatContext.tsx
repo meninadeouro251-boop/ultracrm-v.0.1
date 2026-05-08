@@ -9,6 +9,7 @@ import {
   WebSocketProvider,
   useWebSocketContext as useWebSocketContextOriginal,
 } from '@/contexts/chat/WebSocketContext';
+import logger from '@/utils/logger';
 import { UIProvider, useUI as useUIOriginal } from '@/contexts/chat/UIContext';
 import {
   Conversation,
@@ -186,7 +187,7 @@ function useChatIntegration() {
     websocket.registerHandlers({
       onMessageCreated: (message: Message) => {
         if (!message || !message.id || !message.conversation_id) {
-          console.warn('⚠️ WEBSOCKET: Mensagem inválida recebida, ignorando:', message);
+          logger.warn('⚠️ WEBSOCKET: Mensagem inválida recebida, ignorando:', message);
           return;
         }
 
@@ -309,7 +310,7 @@ function useChatIntegration() {
                 }),
               );
             } catch (error) {
-              console.warn('Failed to update read conversation in localStorage:', error);
+              logger.warn('Failed to update read conversation in localStorage:', error);
             }
 
             // Atualizar estado local para garantir que está marcada como lida
@@ -328,7 +329,7 @@ function useChatIntegration() {
                 }),
               );
             } catch (error) {
-              console.warn('Failed to remove read mark from localStorage:', error);
+              logger.warn('Failed to remove read mark from localStorage:', error);
             }
 
             // Incrementar contador de não lidas
@@ -405,7 +406,7 @@ function useChatIntegration() {
                   // Play sound for assigned conversations when conversation is closed
                   setTimeout(() => {
                     playNotificationSound(audioSettings, () => true).catch(error => {
-                      console.error('❌ Error playing notification sound for new message:', error);
+                      logger.error('❌ Error playing notification sound for new message:', error);
                     });
                   }, 100);
                 }
@@ -413,7 +414,7 @@ function useChatIntegration() {
             }
           }
         } else {
-          console.warn('onNewMessage: Invalid conversation data', conversation);
+          logger.warn('onNewMessage: Invalid conversation data', conversation);
         }
       },
 
@@ -481,7 +482,7 @@ function useChatIntegration() {
 
       onConversationUpdated: (conversation: Partial<Conversation> & { id: string }) => {
         if (!conversation || !conversation.id) {
-          console.warn('⚠️ WebSocket: Dados inválidos recebidos', conversation);
+          logger.warn('⚠️ WebSocket: Dados inválidos recebidos', conversation);
           return;
         }
 
@@ -635,7 +636,7 @@ function useChatIntegration() {
           conversations.revealHiddenConversations();
         },
         (error: string) => {
-          console.error('Error loading conversations:', error);
+          logger.error('Error loading conversations:', error);
         },
       );
     },
@@ -651,7 +652,7 @@ function useChatIntegration() {
           // This would need to be handled differently with proper actions
         },
         (error: string) => {
-          console.error('Error in search:', error);
+          logger.error('Error in search:', error);
         },
       );
     },
@@ -738,7 +739,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 export function useChatContext() {
   const context = useContext(ChatContext);
   if (context === undefined) {
-    console.error(
+    logger.error(
       '❌ useChatContext: Context is undefined. This usually means:',
       '\n1. The component is not wrapped in ChatProvider',
       '\n2. The ChatProvider is still mounting',

@@ -8,6 +8,7 @@ import {
   Checkbox,
   Label,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
@@ -81,7 +82,7 @@ const NotionConfigDialog = ({
         });
       }
     } catch (error) {
-      console.error('Error loading Notion configuration:', error);
+      logger.error('Error loading Notion configuration:', error);
       setConfig({
         provider: 'notion',
         username: '',
@@ -100,7 +101,7 @@ const NotionConfigDialog = ({
       const response = await NotionService.discoverTools(agentId);
       setAvailableTools(response.tools || []);
     } catch (error) {
-      console.error('Error loading Notion tools:', error);
+      logger.error('Error loading Notion tools:', error);
       toast.error('Erro ao carregar ferramentas disponíveis');
     } finally {
       setIsLoadingTools(false);
@@ -117,7 +118,7 @@ const NotionConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to Notion:', error);
+      logger.error('Error connecting to Notion:', error);
       toast.error('Erro ao conectar com Notion');
     } finally {
       setIsConnecting(false);
@@ -159,7 +160,7 @@ const NotionConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving Notion configuration:', error);
+      logger.error('Error saving Notion configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -173,7 +174,7 @@ const NotionConfigDialog = ({
       toast.success('Notion desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting Notion:', error);
+      logger.error('Error disconnecting Notion:', error);
       toast.error('Erro ao desconectar Notion');
     }
   };

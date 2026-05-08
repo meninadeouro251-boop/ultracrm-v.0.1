@@ -37,6 +37,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
 import GoogleCalendarService from '@/services/integrations/googleCalendarService';
 import { GoogleCalendarConfig, GoogleCalendarItem } from '@/types/integrations';
+import logger from '@/utils/logger';
 
 interface GoogleCalendarConfigDialogProps {
   open: boolean;
@@ -188,7 +189,7 @@ const GoogleCalendarConfigDialog = ({
       setAvailableCalendars(calendars);
       setConfig((prev) => ({ ...prev, calendars }));
     } catch (error) {
-      console.error('Error loading calendars:', error);
+      logger.error('Error loading calendars:', error);
       toast.error('Erro ao carregar agendas');
     } finally {
       setIsLoadingCalendars(false);
@@ -213,7 +214,7 @@ const GoogleCalendarConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to Google Calendar:', error);
+      logger.error('Error connecting to Google Calendar:', error);
       toast.error('Erro ao conectar com Google Calendar');
     } finally {
       setIsConnecting(false);
@@ -235,7 +236,7 @@ const GoogleCalendarConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving Google Calendar configuration:', error);
+      logger.error('Error saving Google Calendar configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -253,7 +254,7 @@ const GoogleCalendarConfigDialog = ({
       toast.success('Google Calendar desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting Google Calendar:', error);
+      logger.error('Error disconnecting Google Calendar:', error);
       toast.error('Erro ao desconectar Google Calendar');
     }
   };

@@ -9,6 +9,7 @@ import {
   getAccessibleAgents,
   getAgentIntegrations,
 } from '@/services/agents';
+import logger from '@/utils/logger';
 import { Agent, AgentCreate } from '@/types/agents';
 import { toast } from 'sonner';
 import { extractBackendErrorMessage } from '@/utils/agentUtils';
@@ -246,7 +247,7 @@ const AgentEditPage = () => {
       const apiKeysData = await listApiKeys();
       setApiKeys(apiKeysData);
     } catch (error) {
-      console.error('Error loading API keys:', error);
+      logger.error('Error loading API keys:', error);
     }
   }, []);
 
@@ -272,7 +273,7 @@ const AgentEditPage = () => {
 
       setAvailablePipelines(transformedPipelines);
     } catch (error) {
-      console.error('Error loading pipelines:', error);
+      logger.error('Error loading pipelines:', error);
       // Não mostra toast de erro para não incomodar o usuário
       // Os pipelines são opcionais na configuração do agente
     }
@@ -296,7 +297,7 @@ const AgentEditPage = () => {
 
       setAvailableUsers(transformedUsers);
     } catch (error) {
-      console.error('Error loading users:', error);
+      logger.error('Error loading users:', error);
       // Não mostra toast de erro para não incomodar o usuário
     }
   }, []);
@@ -320,7 +321,7 @@ const AgentEditPage = () => {
 
       setAvailableTeams(transformedTeams);
     } catch (error) {
-      console.error('Error loading teams:', error);
+      logger.error('Error loading teams:', error);
       // Não mostra toast de erro para não incomodar o usuário
     }
   }, []);
@@ -341,7 +342,7 @@ const AgentEditPage = () => {
 
       return agentToolsData;
     } catch (error) {
-      console.error('Error loading agent tools:', error);
+      logger.error('Error loading agent tools:', error);
       return [];
     }
   }, []);
@@ -421,7 +422,7 @@ const AgentEditPage = () => {
             try {
               await integrationService.getIntegration(id!, provider);
             } catch (error) {
-              console.error('Error loading external integration:', error);
+              logger.error('Error loading external integration:', error);
             }
 
             config = {
@@ -566,12 +567,12 @@ const AgentEditPage = () => {
 
           setIntegrations(mergedIntegrations);
         } catch (error) {
-          console.error('Error loading backend integrations:', error);
+          logger.error('Error loading backend integrations:', error);
           // Fall back to config integrations only
           setIntegrations(configIntegrations);
         }
       } catch (error) {
-        console.error('Error loading agent:', error);
+        logger.error('Error loading agent:', error);
         toast.error(t('messages.loadError') || 'Error loading agent');
         navigate('/agents/list');
       } finally {
@@ -785,7 +786,7 @@ const AgentEditPage = () => {
       toast.success(t('messages.saveSuccess') || 'Agent saved successfully!', { id: toastId });
       setIsDirty(false);
     } catch (error) {
-      console.error('Error saving agent:', error);
+      logger.error('Error saving agent:', error);
       const errorMessage = extractBackendErrorMessage(error);
       toast.error(t('messages.saveError') || 'Error saving agent', {
         description: errorMessage,

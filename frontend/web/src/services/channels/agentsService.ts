@@ -3,6 +3,7 @@ import { extractData } from '@/utils/apiHelpers';
 import type { AgentChannel } from '@/types/channels/inbox';
 import type { AgentDeleteResponse } from '@/types/agents';
 import type { UsersUserResponse } from '@/types/users';
+import logger from '@/utils/logger';
 
 // Agents Service following Ultra patterns
 const AgentsService = {
@@ -25,10 +26,10 @@ const AgentsService = {
         return data.users;
       }
 
-      console.warn('AgentsService.getAll: Unexpected response structure:', data);
+      logger.warn('AgentsService.getAll: Unexpected response structure:', data);
       return [];
     } catch (error) {
-      console.error('AgentsService.getAll error:', error);
+      logger.error('AgentsService.getAll error:', error);
       return []; // Return empty array on error
     }
   },

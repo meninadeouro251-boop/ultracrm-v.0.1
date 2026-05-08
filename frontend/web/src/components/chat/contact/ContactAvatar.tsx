@@ -11,6 +11,7 @@ import {
   getContactInitials,
   getContactAvatarColor,
 } from '@/utils/chat/avatarHelpers';
+import logger from '@/utils/logger';
 import ChannelIcon from '@/components/channels/ChannelIcon';
 
 // Tipo genérico para qualquer contato com avatar
@@ -133,7 +134,7 @@ const ContactAvatar: React.FC<ContactAvatarProps> = ({
             src={avatarUrl}
             alt={contact?.name || t('contactAvatar.avatarAlt')}
             onError={() => {
-              console.warn(`Failed to load avatar for contact ${contact?.name}:`, avatarUrl);
+              logger.warn(`Failed to load avatar for contact ${contact?.name}:`, avatarUrl);
               setImageError(true);
             }}
             onLoad={() => setImageError(false)}

@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Loader2, CheckCircle, AlertTriangle, Mail } from 'lucide-react';
 import { toast } from 'sonner';
 import oauthCallbackService from '@/services/channels/oauthCallbackService';
+import logger from '@/utils/logger';
 // import { useLanguage } from '@/hooks/useLanguage';
 import logo from '@/assets/ULTRA_LOGO.svg';
 
@@ -60,7 +61,7 @@ export default function MicrosoftCallback() {
         throw new Error(response?.error || 'Erro ao conectar Outlook');
       }
     } catch (error) {
-      console.error('Microsoft callback error:', error);
+      logger.error('Microsoft callback error:', error);
       setStatus('error');
       const errorMessage =
         (error as { response?: { data?: { error?: string } }; message?: string })?.response?.data

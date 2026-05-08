@@ -8,6 +8,7 @@ import {
   Checkbox,
   Label,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
@@ -81,7 +82,7 @@ const PayPalConfigDialog = ({
         });
       }
     } catch (error) {
-      console.error('Error loading PayPal configuration:', error);
+      logger.error('Error loading PayPal configuration:', error);
       setConfig({
         provider: 'paypal',
         username: '',
@@ -100,7 +101,7 @@ const PayPalConfigDialog = ({
       const response = await PayPalService.discoverTools(agentId);
       setAvailableTools(response.tools || []);
     } catch (error) {
-      console.error('Error loading PayPal tools:', error);
+      logger.error('Error loading PayPal tools:', error);
       toast.error('Erro ao carregar ferramentas disponíveis');
     } finally {
       setIsLoadingTools(false);
@@ -117,7 +118,7 @@ const PayPalConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to PayPal:', error);
+      logger.error('Error connecting to PayPal:', error);
       toast.error('Erro ao conectar com PayPal');
     } finally {
       setIsConnecting(false);
@@ -159,7 +160,7 @@ const PayPalConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving PayPal configuration:', error);
+      logger.error('Error saving PayPal configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -173,7 +174,7 @@ const PayPalConfigDialog = ({
       toast.success('PayPal desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting PayPal:', error);
+      logger.error('Error disconnecting PayPal:', error);
       toast.error('Erro ao desconectar PayPal');
     }
   };

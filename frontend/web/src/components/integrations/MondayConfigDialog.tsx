@@ -8,6 +8,7 @@ import {
   Checkbox,
   Label,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
@@ -81,7 +82,7 @@ const MondayConfigDialog = ({
         });
       }
     } catch (error) {
-      console.error('Error loading Monday configuration:', error);
+      logger.error('Error loading Monday configuration:', error);
       setConfig({
         provider: 'monday',
         username: '',
@@ -100,7 +101,7 @@ const MondayConfigDialog = ({
       const response = await MondayService.discoverTools(agentId);
       setAvailableTools(response.tools || []);
     } catch (error) {
-      console.error('Error loading Monday tools:', error);
+      logger.error('Error loading Monday tools:', error);
       toast.error('Erro ao carregar ferramentas disponíveis');
     } finally {
       setIsLoadingTools(false);
@@ -117,7 +118,7 @@ const MondayConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to Monday:', error);
+      logger.error('Error connecting to Monday:', error);
       toast.error('Erro ao conectar com Monday');
     } finally {
       setIsConnecting(false);
@@ -159,7 +160,7 @@ const MondayConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving Monday configuration:', error);
+      logger.error('Error saving Monday configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -173,7 +174,7 @@ const MondayConfigDialog = ({
       toast.success('Monday desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting Monday:', error);
+      logger.error('Error disconnecting Monday:', error);
       toast.error('Erro ao desconectar Monday');
     }
   };

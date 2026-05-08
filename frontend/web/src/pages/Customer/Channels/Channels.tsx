@@ -10,6 +10,7 @@ import {
   DialogTitle,
   Input,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Trash2, Grid3X3, List, Layers } from 'lucide-react';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -154,7 +155,7 @@ export default function Channels() {
       toast.success(t('success.removeSuccess'));
       closeDeleteModal();
     } catch (e: unknown) {
-      console.error('Erro ao remover canal:', e);
+      logger.error('Erro ao remover canal:', e);
       toast.error((e as Error)?.message || t('errors.removeError'));
 
       // Refresh list on error to restore correct state

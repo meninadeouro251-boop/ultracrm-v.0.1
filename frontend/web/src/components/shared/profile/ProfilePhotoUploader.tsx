@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Camera, Upload } from 'lucide-react';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -110,7 +111,7 @@ export default function ProfilePhotoUploader({
       toast.success(t('photoUploader.photoUpdated'));
 
     } catch (error) {
-      console.error('Error cropping photo:', error);
+      logger.error('Error cropping photo:', error);
       toast.error(t('photoUploader.uploadError'));
       } finally {
         setIsUploading(false);

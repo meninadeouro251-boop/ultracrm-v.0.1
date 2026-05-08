@@ -3,6 +3,7 @@ import {
   ChatActionCableConnector,
   ChatEventHandlers,
 } from '@/services/chat/websocket/ChatActionCableConnector';
+import logger from '@/utils/logger';
 import { ConnectionParams } from '@/services/chat/websocket/BaseActionCableConnector';
 
 export interface UseWebSocketOptions {
@@ -35,8 +36,8 @@ export interface UseWebSocketReturn {
  * ```typescript
  * const { connector, isConnected, sendTypingOn } = useWebSocket(userId, token, {
  *   handlers: {
- *     onMessageCreated: (data) => console.log('Nova mensagem:', data),
- *     onTypingOn: (data) => console.log('Usuário digitando:', data)
+ *     onMessageCreated: (data) => logger.debug('Nova mensagem:', data),
+ *     onTypingOn: (data) => logger.debug('Usuário digitando:', data)
  *   }
  * });
  * ```
@@ -65,7 +66,7 @@ export const useWebSocket = (
    */
   const connect = useCallback(() => {
     if (!enabled || !userId || !pubsubToken) {
-      console.warn('⚠️ WebSocket não pode conectar - parâmetros insuficientes:', {
+      logger.warn('⚠️ WebSocket não pode conectar - parâmetros insuficientes:', {
         enabled,
         userId: !!userId,
         pubsubToken: !!pubsubToken,
@@ -111,7 +112,7 @@ export const useWebSocket = (
         originalOnDisconnected();
       };
     } catch (error) {
-      console.error('❌ Erro ao conectar WebSocket:', error);
+      logger.error('❌ Erro ao conectar WebSocket:', error);
       setIsConnected(false);
     }
   }, [enabled, userId, pubsubToken, websocketHost]);
@@ -143,7 +144,7 @@ export const useWebSocket = (
       if (connectorRef.current && isConnected) {
         connectorRef.current.sendTypingOn(conversationId);
       } else {
-        console.warn('⚠️ Não é possível enviar typing_on - WebSocket não conectado');
+        logger.warn('⚠️ Não é possível enviar typing_on - WebSocket não conectado');
       }
     },
     [isConnected],
@@ -157,7 +158,7 @@ export const useWebSocket = (
       if (connectorRef.current && isConnected) {
         connectorRef.current.sendTypingOff(conversationId);
       } else {
-        console.warn('⚠️ Não é possível enviar typing_off - WebSocket não conectado');
+        logger.warn('⚠️ Não é possível enviar typing_off - WebSocket não conectado');
       }
     },
     [isConnected],

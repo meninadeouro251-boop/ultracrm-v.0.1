@@ -10,6 +10,7 @@ import {
   DialogTitle,
   Button,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Key } from 'lucide-react';
 import EmptyState from '@/components/base/EmptyState';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -100,7 +101,7 @@ export default function AccessTokens() {
           loading: { ...prev.loading, list: false },
         }));
       } catch (error) {
-        console.error('Error loading access tokens:', (error as any).response?.data);
+        logger.error('Error loading access tokens:', (error as any).response?.data);
         toast.error(t('messages.loadError'));
         setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
       }
@@ -245,7 +246,7 @@ export default function AccessTokens() {
       setViewTokenModalOpen(true);
       toast.success(t('messages.regenerateSuccess'));
     } catch (error) {
-      console.error('Error regenerating token:', error);
+      logger.error('Error regenerating token:', error);
       toast.error(t('messages.regenerateError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, regenerateToken: false } }));
@@ -283,7 +284,7 @@ export default function AccessTokens() {
       setDeleteDialogOpen(false);
       setTokenToDelete(null);
     } catch (error) {
-      console.error('Error deleting access token:', error);
+      logger.error('Error deleting access token:', error);
       toast.error(t('messages.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -312,7 +313,7 @@ export default function AccessTokens() {
 
       setBulkDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error bulk deleting access tokens:', error);
+      logger.error('Error bulk deleting access tokens:', error);
       toast.error(t('messages.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, bulk: false } }));
@@ -355,7 +356,7 @@ export default function AccessTokens() {
       setTokenModalOpen(false);
       setEditingToken(null);
     } catch (error) {
-      console.error('Error saving access token:', error);
+      logger.error('Error saving access token:', error);
       toast.error(editingToken ? t('messages.updateError') : t('messages.createError'));
     } finally {
       setState(prev => ({
@@ -378,7 +379,7 @@ export default function AccessTokens() {
       await navigator.clipboard.writeText(text);
       toast.success(t('messages.copySuccess'));
     } catch (error) {
-      console.error('Error copying to clipboard:', error);
+      logger.error('Error copying to clipboard:', error);
       toast.error(t('messages.copyError', { item: label }));
     }
   };

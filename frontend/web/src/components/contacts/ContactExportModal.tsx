@@ -11,6 +11,7 @@ import {
   Label,
   Checkbox,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Download, FileSpreadsheet } from 'lucide-react';
 import { BaseFilter as ContactFilter } from '@/types/core';
 
@@ -93,7 +94,7 @@ export default function ContactExportModal({
       await onExport(params);
       onOpenChange(false);
     } catch (error) {
-      console.error('Error exporting contacts:', error);
+      logger.error('Error exporting contacts:', error);
     } finally {
       setExporting(false);
     }

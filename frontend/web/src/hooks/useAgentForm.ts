@@ -1,5 +1,6 @@
 import { useAgentForm as useAgentFormContext } from '@/contexts/AgentFormContext';
 import { AgentCreate } from '@/types/agents';
+import logger from '@/utils/logger';
 
 // Hook principal que combina o contexto com funcionalidades adicionais
 export const useAgentForm = () => {
@@ -72,7 +73,7 @@ export const useAgentForm = () => {
       context.setSubmitting(true);
       return true;
     } catch (error) {
-      console.error('Erro ao submeter formulário:', error);
+      logger.error('Erro ao submeter formulário:', error);
       return false;
     } finally {
       context.setSubmitting(false);

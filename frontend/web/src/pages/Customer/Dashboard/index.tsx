@@ -16,6 +16,7 @@ import DashboardTrendsSection from './components/DashboardTrendsSection';
 import DashboardPerformanceSection from './components/DashboardPerformanceSection';
 import type { DashboardFilterState, DashboardOption } from './components/types';
 import { DashboardTour } from '@/tours';
+import logger from '@/utils/logger';
 
 const ALL_FILTER_VALUE = '__all__';
 
@@ -106,7 +107,7 @@ const CustomerDashboardPage = () => {
       const response = await customerDashboardService.getCustomerDashboard(buildDashboardParams(filters));
       setData(response);
     } catch (err) {
-      console.error('Error loading customer dashboard:', err);
+      logger.error('Error loading customer dashboard:', err);
       setError(t('dashboard.error') || 'Falha ao carregar dashboard');
     } finally {
       setLoading(false);
@@ -132,7 +133,7 @@ const CustomerDashboardPage = () => {
         setInboxes((inboxesResponse.data || []).map(item => ({ id: item.id, name: item.name })));
         setUsers((usersResponse.data || []).map(item => ({ id: item.id, name: item.available_name || item.name })));
       } catch (err) {
-        console.error('Error loading dashboard filter options:', err);
+        logger.error('Error loading dashboard filter options:', err);
       }
     };
 

@@ -16,6 +16,7 @@ import { useWidgetConfig } from '@/hooks/useWidgetConfig';
 import EmailTranscriptButton from '@/components/widget/EmailTranscriptButton';
 import StartNewConversationButton from '@/components/widget/StartNewConversationButton';
 import Toast from '@/components/widget/Toast';
+import logger from '@/utils/logger';
 
 export default function Widget() {
   const { t } = useLanguage('widget');
@@ -265,7 +266,7 @@ export default function Widget() {
   //     await widgetService.sendEmailTranscript(token);
   //     showToast(t('toast.emailTranscriptSuccess'), 'success');
   //   } catch (error) {
-  //     console.error('Email transcript error:', error);
+  //     logger.error('Email transcript error:', error);
   //     showToast(t('toast.emailTranscriptError'), 'error');
   //   }
   // };
@@ -495,7 +496,7 @@ export default function Widget() {
                   setMessagesWithPagination(mappedMessages);
                 }
               } catch (error) {
-                console.warn(
+                logger.warn(
                   'Widget: Failed to load existing messages for identified user:',
                   error,
                 );
@@ -927,7 +928,7 @@ export default function Widget() {
                           }
                         }
                       } catch (error) {
-                        console.warn(
+                        logger.warn(
                           'Widget: Failed to load messages after conversation creation:',
                           error,
                         );
@@ -959,7 +960,7 @@ export default function Widget() {
                   setOnline(Array.isArray(users) ? users.length > 0 : !!users);
                 }
               } catch (e) {
-                console.error('❌ Widget: Error processing message', e);
+                logger.error('❌ Widget: Error processing message', e);
               }
             },
           });
@@ -1156,7 +1157,7 @@ export default function Widget() {
         setPendingUploads([]);
       }, 1000);
     } catch (error) {
-      console.error('❌ Widget: Failed to send attachments:', error);
+      logger.error('❌ Widget: Failed to send attachments:', error);
 
       // Mark all uploads as failed
       uploads.forEach(upload => {
@@ -1230,7 +1231,7 @@ export default function Widget() {
               prev.map(m => (m.id === optimistic.id ? { ...m, status: 'sent' } : m)),
             );
           } catch (err) {
-            console.error('Widget: Failed to send message via HTTP, relying on WebSocket:', err);
+            logger.error('Widget: Failed to send message via HTTP, relying on WebSocket:', err);
             setTimeout(() => {
               setMessages(prev => {
                 const message = prev.find(m => m.id === optimistic.id);
@@ -1243,7 +1244,7 @@ export default function Widget() {
           }
         }
       } catch (e) {
-        console.error('Widget: handleSend error:', e);
+        logger.error('Widget: handleSend error:', e);
         setMessages(prev =>
           prev.map(m =>
             m.id === optimistic.id && m.status === 'sending' ? { ...m, status: 'failed' } : m,
@@ -1375,7 +1376,7 @@ export default function Widget() {
       } catch (apiError) {
         // If HTTP API fails (e.g., CORS), rely on WebSocket events for state transition
         // The WebSocket will handle setting hasStarted when conversation.created event arrives
-        console.warn('Widget: API call failed, relying on WebSocket events:', apiError);
+        logger.warn('Widget: API call failed, relying on WebSocket events:', apiError);
 
         // Fallback: If no WebSocket event arrives within 3 seconds, force transition
         setTimeout(() => {
@@ -1386,7 +1387,7 @@ export default function Widget() {
         }, 3000);
       }
     } catch (error) {
-      console.error('❌ Widget: Error processing pre-chat form:', error);
+      logger.error('❌ Widget: Error processing pre-chat form:', error);
     } finally {
       setIsCreatingConversation(false);
     }
@@ -1552,7 +1553,7 @@ export default function Widget() {
         setHasMoreMessages(false);
       }
     } catch (error) {
-      console.error('❌ Widget: Failed to load older messages:', error);
+      logger.error('❌ Widget: Failed to load older messages:', error);
     } finally {
       setIsLoadingOlderMessages(false);
     }

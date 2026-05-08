@@ -10,6 +10,7 @@ import {
   DialogTitle,
   Button,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Monitor } from 'lucide-react';
 import EmptyState from '@/components/base/EmptyState';
 
@@ -150,7 +151,7 @@ export default function DashboardAppsList({ onBack }: DashboardAppsListProps = {
         }));
       }
     } catch (error) {
-      console.error('Error loading dashboard apps:', error);
+      logger.error('Error loading dashboard apps:', error);
       toast.error(t('dashboardApps.messages.loadError'));
       setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
     }
@@ -243,7 +244,7 @@ export default function DashboardAppsList({ onBack }: DashboardAppsListProps = {
       setDeleteDialogOpen(false);
       setAppToDelete(null);
     } catch (error) {
-      console.error('Error deleting dashboard app:', error);
+      logger.error('Error deleting dashboard app:', error);
       toast.error(t('dashboardApps.messages.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -272,7 +273,7 @@ export default function DashboardAppsList({ onBack }: DashboardAppsListProps = {
 
       setBulkDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error bulk deleting dashboard apps:', error);
+      logger.error('Error bulk deleting dashboard apps:', error);
       toast.error(t('dashboardApps.messages.bulkDeleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, bulk: false } }));
@@ -307,7 +308,7 @@ export default function DashboardAppsList({ onBack }: DashboardAppsListProps = {
       setAppModalOpen(false);
       setEditingApp(null);
     } catch (error) {
-      console.error('Error saving dashboard app:', error);
+      logger.error('Error saving dashboard app:', error);
       toast.error(
         editingApp
           ? t('dashboardApps.messages.updateError')

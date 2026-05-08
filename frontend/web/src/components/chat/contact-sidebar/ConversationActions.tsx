@@ -9,6 +9,7 @@ import { Conversation } from '@/types/chat/api';
 import { useConversations } from '@/hooks/chat/useConversations';
 import { useLanguage } from '@/hooks/useLanguage';
 import type { Label } from '@/types/settings';
+import logger from '@/utils/logger';
 
 interface ConversationActionsProps {
   conversation: Conversation | null;
@@ -34,7 +35,7 @@ const ConversationActions: React.FC<ConversationActionsProps> = ({
       await conversations.updateConversationStatus(conversation.id, newStatus, onFilterReload);
     } catch (error) {
       // Error is already handled in the context with toast
-      console.error('❌ Error updating status:', error);
+      logger.error('❌ Error updating status:', error);
     } finally {
       setIsUpdatingStatus(false);
     }
@@ -48,7 +49,7 @@ const ConversationActions: React.FC<ConversationActionsProps> = ({
       await conversations.updateConversationPriority(conversation.id, newPriority, onFilterReload);
     } catch (error) {
       // Error is already handled in the context with toast
-      console.error('Error updating priority:', error);
+      logger.error('Error updating priority:', error);
     } finally {
       setIsUpdatingPriority(false);
     }
@@ -68,7 +69,7 @@ const ConversationActions: React.FC<ConversationActionsProps> = ({
         toast.success(t('contactSidebar.conversationActions.assignment.unassignedSuccess'));
       }
     } catch (error) {
-      console.error('Error assigning agent:', error);
+      logger.error('Error assigning agent:', error);
       toast.error(t('contactSidebar.conversationActions.assignment.error'));
     } finally {
       setIsAssigning(false);

@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
 import FacebookModerationService from '@/services/channels/facebookModerationService';
 import { FacebookCommentModeration } from '@/types';
+import logger from '@/utils/logger';
 
 interface PendingResponseBannerProps {
   moderation: FacebookCommentModeration;
@@ -27,7 +28,7 @@ export default function PendingResponseBanner({
       toast.success(t('messages.moderation.banner.approved'));
       onModerationUpdated?.();
     } catch (error) {
-      console.error('Error approving moderation:', error);
+      logger.error('Error approving moderation:', error);
       toast.error(t('messages.moderation.banner.approveError'));
     } finally {
       setIsProcessing(false);
@@ -42,7 +43,7 @@ export default function PendingResponseBanner({
       setRejectionReason('');
       onModerationUpdated?.();
     } catch (error) {
-      console.error('Error rejecting moderation:', error);
+      logger.error('Error rejecting moderation:', error);
       toast.error(t('messages.moderation.banner.rejectError'));
     } finally {
       setIsProcessing(false);
@@ -56,7 +57,7 @@ export default function PendingResponseBanner({
       toast.success(t('messages.moderation.banner.regenerated'));
       onModerationUpdated?.();
     } catch (error) {
-      console.error('Error regenerating response:', error);
+      logger.error('Error regenerating response:', error);
       toast.error(t('messages.moderation.banner.regenerateError'));
     } finally {
       setIsProcessing(false);

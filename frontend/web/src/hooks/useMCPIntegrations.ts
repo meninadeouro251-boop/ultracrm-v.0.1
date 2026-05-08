@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { agentIntegrationsService } from '@/services/agents/agentIntegrationsService';
 import type {
+import logger from '@/utils/logger';
   GitHubConfig,
   NotionConfig,
   StripeConfig,
@@ -148,7 +149,7 @@ export function useMCPIntegrations(agentId: string): UseMCPIntegrationsReturn {
       if (configs.supabase)
         setSupabaseConfig(sanitizeConfig(configs.supabase) as unknown as SupabaseConfig);
     } catch (error) {
-      console.error('Error loading all integrations:', error);
+      logger.error('Error loading all integrations:', error);
       setCredentialsConfigured({
         github: false,
         notion: false,

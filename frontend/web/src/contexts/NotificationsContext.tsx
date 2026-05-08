@@ -4,6 +4,7 @@ import notificationsService, { Notification } from '@/services/notifications/Not
 import { useAuth } from '@/contexts/AuthContext';
 import { useGlobalWebSocket } from '@/hooks/useGlobalWebSocket';
 import { playNotificationSound, getAudioSettings } from '@/utils/audioNotificationUtils';
+import logger from '@/utils/logger';
 
 interface NotificationsMeta {
   count: number;
@@ -251,7 +252,7 @@ const NotificationsProviderInner: React.FC<NotificationsProviderProps> = ({ chil
           dispatch({ type: 'SET_UI_FLAGS', payload: { isAllNotificationsLoaded: true } });
         }
       } catch (error) {
-        console.error('Error fetching notifications:', error);
+        logger.error('Error fetching notifications:', error);
       } finally {
         dispatch({ type: 'SET_UI_FLAGS', payload: { isFetching: false } });
       }
@@ -274,7 +275,7 @@ const NotificationsProviderInner: React.FC<NotificationsProviderProps> = ({ chil
           // Prevent websocket/event storms from spamming unread_count while session is invalid.
           unreadCountBlockedUntilRef.current = Date.now() + 30_000;
         }
-        console.error('❌ Error fetching unread count:', error);
+        logger.error('❌ Error fetching unread count:', error);
       } finally {
         unreadCountRequestInFlightRef.current = false;
         dispatch({ type: 'SET_UI_FLAGS', payload: { isUpdatingUnreadCount: false } });
@@ -291,7 +292,7 @@ const NotificationsProviderInner: React.FC<NotificationsProviderProps> = ({ chil
           payload: { id: notification.id, read_at: new Date().toISOString() },
         });
       } catch (error) {
-        console.error('Error marking notification as read:', error);
+        logger.error('Error marking notification as read:', error);
       } finally {
         dispatch({ type: 'SET_UI_FLAGS', payload: { isUpdating: false } });
       }
@@ -304,7 +305,7 @@ const NotificationsProviderInner: React.FC<NotificationsProviderProps> = ({ chil
         await notificationsService.markAsUnread(id);
         dispatch({ type: 'UPDATE_NOTIFICATION', payload: { id, data: { read_at: null } } });
       } catch (error) {
-        console.error('Error marking notification as unread:', error);
+        logger.error('Error marking notification as unread:', error);
       } finally {
         dispatch({ type: 'SET_UI_FLAGS', payload: { isUpdating: false } });
       }
@@ -317,7 +318,7 @@ const NotificationsProviderInner: React.FC<NotificationsProviderProps> = ({ chil
         await notificationsService.markAllAsRead();
         dispatch({ type: 'MARK_ALL_AS_READ' });
       } catch (error) {
-        console.error('Error marking all notifications as read:', error);
+        logger.error('Error marking all notifications as read:', error);
         throw error;
       } finally {
         dispatch({ type: 'SET_UI_FLAGS', payload: { isUpdating: false } });
@@ -331,7 +332,7 @@ const NotificationsProviderInner: React.FC<NotificationsProviderProps> = ({ chil
         await notificationsService.deleteNotification(id);
         dispatch({ type: 'DELETE_NOTIFICATION', payload: id });
       } catch (error) {
-        console.error('Error deleting notification:', error);
+        logger.error('Error deleting notification:', error);
       } finally {
         dispatch({ type: 'SET_UI_FLAGS', payload: { isDeleting: false } });
       }
@@ -352,7 +353,7 @@ const NotificationsProviderInner: React.FC<NotificationsProviderProps> = ({ chil
           dispatch({ type: 'SET_META', payload: { count: unreadNotifications.length } });
         }
       } catch (error) {
-        console.error('Error deleting all notifications:', error);
+        logger.error('Error deleting all notifications:', error);
       } finally {
         dispatch({ type: 'SET_UI_FLAGS', payload: { isDeleting: false } });
       }
@@ -368,7 +369,7 @@ const NotificationsProviderInner: React.FC<NotificationsProviderProps> = ({ chil
           payload: { id, data: { snoozed_until: response.snoozed_until } as any },
         });
       } catch (error) {
-        console.error('Error snoozing notification:', error);
+        logger.error('Error snoozing notification:', error);
       } finally {
         dispatch({ type: 'SET_UI_FLAGS', payload: { isUpdating: false } });
       }
@@ -485,7 +486,7 @@ const NotificationsProviderInner: React.FC<NotificationsProviderProps> = ({ chil
         // Use setTimeout to ensure state is updated before checking
         setTimeout(() => {
           playNotificationSound(audioSettings, checkUnreadConversations).catch(error => {
-            console.error('❌ Error playing notification sound:', error);
+            logger.error('❌ Error playing notification sound:', error);
           });
         }, 100);
       }

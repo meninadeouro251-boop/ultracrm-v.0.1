@@ -1,3 +1,4 @@
+import logger from '@/utils/logger';
 /**
  * Request Monitor Utility
  *
@@ -162,7 +163,7 @@ const isBootstrapMonitorEnabled = () => {
 export const markBootstrapPhaseStart = (phase: string) => {
   if (!isBootstrapMonitorEnabled() || typeof performance === 'undefined') return;
   bootstrapMarks.set(phase, performance.now());
-  console.info(`[Bootstrap] ${phase} started`);
+  logger.info(`[Bootstrap] ${phase} started`);
 };
 
 export const markBootstrapPhaseEnd = (phase: string, details?: Record<string, unknown>) => {
@@ -171,9 +172,9 @@ export const markBootstrapPhaseEnd = (phase: string, details?: Record<string, un
   const durationMs = startedAt ? performance.now() - startedAt : undefined;
 
   if (durationMs !== undefined) {
-    console.info(`[Bootstrap] ${phase} finished in ${durationMs.toFixed(1)}ms`, details || {});
+    logger.info(`[Bootstrap] ${phase} finished in ${durationMs.toFixed(1)}ms`, details || {});
   } else {
-    console.info(`[Bootstrap] ${phase} finished`, details || {});
+    logger.info(`[Bootstrap] ${phase} finished`, details || {});
   }
 };
 

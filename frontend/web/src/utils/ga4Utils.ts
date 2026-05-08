@@ -1,3 +1,4 @@
+import logger from '@/utils/logger';
 /**
  * Google Analytics 4 (GA4) Integration
  *
@@ -48,7 +49,7 @@ export const initGA4 = (): void => {
     script.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`;
     document.head.appendChild(script);
   } catch (error) {
-    console.error('GA4: Initialization failed', error);
+    logger.error('GA4: Initialization failed', error);
   }
 };
 

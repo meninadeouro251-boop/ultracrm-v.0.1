@@ -14,6 +14,7 @@ import {
   AvatarImage,
   AvatarFallback,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Contact } from '@/types/contacts';
 import { contactsService } from '@/services/contacts/contactsService';
 import { Search, Mail, Phone, Building2, User, Loader2 } from 'lucide-react';
@@ -51,7 +52,7 @@ export default function ContactMergeSelectorModal({
       const filteredContacts = response.data.filter((c: Contact) => c.id !== currentContact.id);
       setContacts(filteredContacts);
     } catch (error) {
-      console.error('Error loading contacts:', error);
+      logger.error('Error loading contacts:', error);
       toast.error(t('messages.loadError'));
     } finally {
       setLoading(false);

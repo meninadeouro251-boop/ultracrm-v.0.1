@@ -17,6 +17,7 @@ import { isActionNotSupported } from '@/utils/chat/actionSupport';
 import { Contact, Conversation, ConversationListParams } from '@/types/chat/api';
 import { PaginationMeta } from '@/types/core';
 import { DEFAULT_PAGE_SIZE } from '@/constants/pagination';
+import logger from '@/utils/logger';
 
 export function ConversationsProvider({ children }: { children: React.ReactNode }) {
   const { t } = useLanguage('chat');
@@ -84,7 +85,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
           },
         });
       } catch (error) {
-        console.error('Erro ao carregar conversas da API:', error);
+        logger.error('Erro ao carregar conversas da API:', error);
 
         const errorMessage =
           error instanceof Error
@@ -166,7 +167,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
 
         return conversation;
       } catch (error) {
-        console.error('❌ Erro ao carregar conversa específica:', error);
+        logger.error('❌ Erro ao carregar conversa específica:', error);
 
         const errorMessage =
           error instanceof Error
@@ -219,7 +220,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
               dispatch({ type: 'SET_SELECTED_CONVERSATION_DATA', payload: conversationData });
             }
           } catch (error) {
-            console.error('❌ Erro ao carregar conversa específica:', error);
+            logger.error('❌ Erro ao carregar conversa específica:', error);
           }
         }
 
@@ -256,10 +257,10 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
               }),
             );
           } catch (error) {
-            console.warn('Failed to save read conversation to localStorage:', error);
+            logger.warn('Failed to save read conversation to localStorage:', error);
           }
         } catch (error) {
-          console.error('❌ Erro ao marcar conversa como lida:', error);
+          logger.error('❌ Erro ao marcar conversa como lida:', error);
           // Não bloquear a seleção da conversa por erro de persistência
         }
       }
@@ -284,7 +285,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
         if (response && response.data && response.data.id) {
           dispatch({ type: 'UPDATE_CONVERSATION', payload: response.data });
         } else {
-          console.warn('updateConversationStatus: Invalid response', response);
+          logger.warn('updateConversationStatus: Invalid response', response);
         }
 
         const statusName = t(`contexts.conversations.statusNames.${status}`);
@@ -298,7 +299,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
 
         return response as unknown as Conversation;
       } catch (error) {
-        console.error('Error updating conversation status:', error);
+        logger.error('Error updating conversation status:', error);
         toast.error(t('contexts.conversations.errors.updateStatus'), {
           description:
             error instanceof Error
@@ -323,7 +324,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
         if (response && response.data && response.data.id) {
           dispatch({ type: 'UPDATE_CONVERSATION', payload: response.data });
         } else {
-          console.warn('updateConversationPriority: Invalid response', response);
+          logger.warn('updateConversationPriority: Invalid response', response);
         }
 
         const priorityKey = priority || 'none';
@@ -340,7 +341,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
 
         return response as unknown as Conversation;
       } catch (error) {
-        console.error('Error updating conversation priority:', error);
+        logger.error('Error updating conversation priority:', error);
         toast.error(t('contexts.conversations.errors.updatePriority'), {
           description:
             error instanceof Error
@@ -361,7 +362,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
         if (response && response.data && response.data.id) {
           dispatch({ type: 'UPDATE_CONVERSATION', payload: response.data });
         } else {
-          console.warn('pinConversation: Invalid response', response);
+          logger.warn('pinConversation: Invalid response', response);
         }
 
         toast.success(t('contexts.conversations.success.pinned'));
@@ -379,7 +380,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
           throw error;
         }
 
-        console.error('Error pinning conversation:', error);
+        logger.error('Error pinning conversation:', error);
         toast.error(t('contexts.conversations.errors.pinConversation'), {
           description:
             error instanceof Error
@@ -400,7 +401,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
         if (response && response.data && response.data.id) {
           dispatch({ type: 'UPDATE_CONVERSATION', payload: response.data });
         } else {
-          console.warn('unpinConversation: Invalid response', response);
+          logger.warn('unpinConversation: Invalid response', response);
         }
 
         toast.success(t('contexts.conversations.success.unpinned'));
@@ -418,7 +419,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
           throw error;
         }
 
-        console.error('Error unpinning conversation:', error);
+        logger.error('Error unpinning conversation:', error);
         toast.error(t('contexts.conversations.errors.pinConversation'), {
           description:
             error instanceof Error
@@ -439,7 +440,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
         if (response && response.data && response.data.id) {
           dispatch({ type: 'UPDATE_CONVERSATION', payload: response.data });
         } else {
-          console.warn('archiveConversation: Invalid response', response);
+          logger.warn('archiveConversation: Invalid response', response);
         }
 
         toast.success(t('contexts.conversations.success.archived'));
@@ -457,7 +458,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
           throw error;
         }
 
-        console.error('Error archiving conversation:', error);
+        logger.error('Error archiving conversation:', error);
         toast.error(t('contexts.conversations.errors.archiveConversation'), {
           description:
             error instanceof Error
@@ -478,7 +479,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
         if (response && response.data && response.data.id) {
           dispatch({ type: 'UPDATE_CONVERSATION', payload: response.data });
         } else {
-          console.warn('unarchiveConversation: Invalid response', response);
+          logger.warn('unarchiveConversation: Invalid response', response);
         }
 
         toast.success(t('contexts.conversations.success.unarchived'));
@@ -496,7 +497,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
           throw error;
         }
 
-        console.error('Error unarchiving conversation:', error);
+        logger.error('Error unarchiving conversation:', error);
         toast.error(t('contexts.conversations.errors.archiveConversation'), {
           description:
             error instanceof Error
@@ -516,7 +517,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
   // Direct state manipulation (for WebSocket integration)
   const updateConversation = useCallback((conversation: Conversation) => {
     if (!conversation || !conversation.id) {
-      console.warn('updateConversation: Invalid conversation data', conversation);
+      logger.warn('updateConversation: Invalid conversation data', conversation);
       return;
     }
     dispatch({ type: 'UPDATE_CONVERSATION', payload: conversation });
@@ -601,7 +602,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
 
         toast.success(t('contexts.conversations.success.deleted'));
       } catch (error) {
-        console.error('Error deleting conversation:', error);
+        logger.error('Error deleting conversation:', error);
         toast.error(t('contexts.conversations.errors.deleteConversation'), {
           description:
             error instanceof Error
@@ -627,7 +628,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
 
         toast.success(t('contexts.conversations.success.markedAsRead'));
       } catch (error) {
-        console.error('Error marking conversation as read:', error);
+        logger.error('Error marking conversation as read:', error);
         toast.error(t('contexts.conversations.errors.markAsRead'), {
           description:
             error instanceof Error
@@ -654,7 +655,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
 
         toast.success(t('contexts.conversations.success.markedAsUnread'));
       } catch (error) {
-        console.error('Error marking conversation as unread:', error);
+        logger.error('Error marking conversation as unread:', error);
         toast.error(t('contexts.conversations.errors.markAsUnread'), {
           description:
             error instanceof Error
@@ -679,12 +680,12 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
             payload: updatedConversation as unknown as Conversation,
           });
         } else {
-          console.warn('Invalid updatedConversation', updatedConversation);
+          logger.warn('Invalid updatedConversation', updatedConversation);
         }
 
         toast.success(t('contexts.conversations.success.markedAsResolved'));
       } catch (error) {
-        console.error('Error marking conversation as resolved:', error);
+        logger.error('Error marking conversation as resolved:', error);
         toast.error(t('contexts.conversations.errors.markAsResolved'), {
           description:
             error instanceof Error
@@ -709,12 +710,12 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
             payload: updatedConversation as unknown as Conversation,
           });
         } else {
-          console.warn('Invalid updatedConversation', updatedConversation);
+          logger.warn('Invalid updatedConversation', updatedConversation);
         }
 
         toast.success(t('contexts.conversations.success.markedAsPending'));
       } catch (error) {
-        console.error('Error marking conversation as pending:', error);
+        logger.error('Error marking conversation as pending:', error);
         toast.error(t('contexts.conversations.errors.markAsPending'), {
           description:
             error instanceof Error
@@ -744,7 +745,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
             : t('contexts.conversations.success.agentRemoved'),
         );
       } catch (error) {
-        console.error('Error assigning agent:', error);
+        logger.error('Error assigning agent:', error);
         toast.error(t('contexts.conversations.errors.assignAgent'), {
           description:
             error instanceof Error
@@ -778,7 +779,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
             : t('contexts.conversations.success.teamRemoved'),
         );
       } catch (error) {
-        console.error('Error assigning team:', error);
+        logger.error('Error assigning team:', error);
         toast.error(t('contexts.conversations.errors.assignTeam'), {
           description:
             error instanceof Error
@@ -795,7 +796,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
     try {
       await conversationAPI.addLabels(conversationId, labels);
     } catch (error) {
-      console.error('Error assigning labels:', error);
+      logger.error('Error assigning labels:', error);
       toast.error(t('contexts.conversations.errors.assignLabels'), {
         description:
           error instanceof Error ? error.message : t('contexts.conversations.tryAgainDescription'),
@@ -809,7 +810,7 @@ export function ConversationsProvider({ children }: { children: React.ReactNode 
         dispatch({ type: 'UPDATE_CONVERSATION', payload: refreshed });
       }
     } catch (error) {
-      console.warn('Labels assigned but failed to refresh conversation:', error);
+      logger.warn('Labels assigned but failed to refresh conversation:', error);
     }
 
     toast.success(t('contexts.conversations.success.labelsAssigned'));

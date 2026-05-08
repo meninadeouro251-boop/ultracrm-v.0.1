@@ -10,6 +10,7 @@ import TeamsService from '@/services/teams/teamsService';
 import type { Team } from '@/types/users';
 import { usersService } from '@/services/users';
 import type { User } from '@/types/users';
+import logger from '@/utils/logger';
 
 const AddUsers: React.FC = () => {
   const { t } = useLanguage('teams');
@@ -45,7 +46,7 @@ const AddUsers: React.FC = () => {
       const existingMemberIds = membersResponse.map((m: any) => m.user_id || m.user?.id || m.id).filter(Boolean);
       setSavedUsers(existingMemberIds);
     } catch (error) {
-      console.error('Erro ao carregar dados:', error);
+      logger.error('Erro ao carregar dados:', error);
       toast.error(t('messages.loadDataError'));
       navigate('/settings/teams');
     } finally {
@@ -76,7 +77,7 @@ const AddUsers: React.FC = () => {
       setSelectedUsers([]);
       toast.success(t('messages.usersAddedSuccess'));
     } catch (error) {
-      console.error('Erro ao adicionar usuários:', error);
+      logger.error('Erro ao adicionar usuários:', error);
       toast.error(t('messages.addUsersError'));
     } finally {
       setIsSaving(false);

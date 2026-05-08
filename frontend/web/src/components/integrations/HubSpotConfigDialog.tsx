@@ -8,6 +8,7 @@ import {
   Checkbox,
   Label,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
@@ -81,7 +82,7 @@ const HubSpotConfigDialog = ({
         });
       }
     } catch (error) {
-      console.error('Error loading HubSpot configuration:', error);
+      logger.error('Error loading HubSpot configuration:', error);
       setConfig({
         provider: 'hubspot',
         username: '',
@@ -100,7 +101,7 @@ const HubSpotConfigDialog = ({
       const response = await HubSpotService.discoverTools(agentId);
       setAvailableTools(response.tools || []);
     } catch (error) {
-      console.error('Error loading HubSpot tools:', error);
+      logger.error('Error loading HubSpot tools:', error);
       toast.error('Erro ao carregar ferramentas disponíveis');
     } finally {
       setIsLoadingTools(false);
@@ -117,7 +118,7 @@ const HubSpotConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to HubSpot:', error);
+      logger.error('Error connecting to HubSpot:', error);
       toast.error('Erro ao conectar com HubSpot');
     } finally {
       setIsConnecting(false);
@@ -159,7 +160,7 @@ const HubSpotConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving HubSpot configuration:', error);
+      logger.error('Error saving HubSpot configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -173,7 +174,7 @@ const HubSpotConfigDialog = ({
       toast.success('HubSpot desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting HubSpot:', error);
+      logger.error('Error disconnecting HubSpot:', error);
       toast.error('Erro ao desconectar HubSpot');
     }
   };

@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   GoogleSheetsConfig,
   GoogleSheetsItem,
   GoogleSheetsOAuthResponse,
@@ -18,7 +19,7 @@ const GoogleSheetsService = {
       );
       return data;
     } catch (error) {
-      console.error('GoogleSheetsService.generateAuthorization error:', error);
+      logger.error('GoogleSheetsService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -41,7 +42,7 @@ const GoogleSheetsService = {
       );
       return data;
     } catch (error) {
-      console.error('GoogleSheetsService.completeAuthorization error:', error);
+      logger.error('GoogleSheetsService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -56,7 +57,7 @@ const GoogleSheetsService = {
       );
       return data.spreadsheets || [];
     } catch (error) {
-      console.error('GoogleSheetsService.getSpreadsheets error:', error);
+      logger.error('GoogleSheetsService.getSpreadsheets error:', error);
       throw error;
     }
   },
@@ -75,7 +76,7 @@ const GoogleSheetsService = {
       );
       return data;
     } catch (error) {
-      console.error('GoogleSheetsService.saveConfiguration error:', error);
+      logger.error('GoogleSheetsService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -90,7 +91,7 @@ const GoogleSheetsService = {
       );
       return data;
     } catch (error) {
-      console.error('GoogleSheetsService.disconnect error:', error);
+      logger.error('GoogleSheetsService.disconnect error:', error);
       throw error;
     }
   },

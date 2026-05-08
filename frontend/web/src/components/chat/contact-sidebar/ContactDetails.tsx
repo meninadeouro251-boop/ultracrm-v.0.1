@@ -22,6 +22,7 @@ import {
   Hash,
   Edit,
 } from 'lucide-react';
+import logger from '@/utils/logger';
 
 import { toast } from 'sonner';
 
@@ -96,7 +97,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ contact }) => {
       setContactModalOpen(false);
       setEditingContact(null);
     } catch (error) {
-      console.error('Error saving contact:', error);
+      logger.error('Error saving contact:', error);
       toast.error(t('contactSidebar.contactDetails.actions.updateError'));
     }
   };

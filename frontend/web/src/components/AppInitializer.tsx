@@ -6,6 +6,7 @@ import { useAuthStore } from '@/store/authStore';
 import { tourService } from '@/services/tours/tourService';
 import i18n from '@/i18n/config';
 import LoadingScreen from '@/components/LoadingScreen';
+import logger from '@/utils/logger';
 interface AppInitializerProps {
   children: React.ReactNode;
 }
@@ -80,7 +81,7 @@ const AppInitializer: React.FC<AppInitializerProps> = ({ children }) => {
         setIsInitialized(true);
         setInitError(null);
       } catch (error) {
-        console.error('App initialization failed:', error);
+        logger.error('App initialization failed:', error);
         setInitError(t('base.appInitializer.errorMessage'));
         setIsInitialized(true);
       }
@@ -125,7 +126,7 @@ const AppInitializer: React.FC<AppInitializerProps> = ({ children }) => {
     if (!deferredOptions) return;
 
     initializeAppDataDeferred(deferredOptions).catch(error => {
-      console.warn('Deferred route data initialization failed:', error);
+      logger.warn('Deferred route data initialization failed:', error);
     });
   }, [
     isLoading,

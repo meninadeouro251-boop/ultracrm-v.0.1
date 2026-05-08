@@ -4,6 +4,7 @@ import { extractData } from '@/utils/apiHelpers';
 import type { Account, UpdateAccount, FormDataOptions, AccountUpdateResponse } from '@/types/settings';
 import { extractError } from '@/utils/apiHelpers';
 import { fetchGlobalConfig } from '@/contexts/GlobalConfigContext';
+import logger from '@/utils/logger';
 
 class AccountService {
   async getAccount(): Promise<Account> {
@@ -11,7 +12,7 @@ class AccountService {
       const response = await authApi.get<{ account: Account }>('/account');
       return extractData<Account>(response);
     } catch (error: any) {
-      console.error('Erro ao buscar conta:', error);
+      logger.error('Erro ao buscar conta:', error);
       throw new Error(error?.response?.data?.message || 'Erro ao buscar conta');
     }
   }
@@ -21,7 +22,7 @@ class AccountService {
       const response = await authApi.patch<AccountUpdateResponse>('/account', { account: payload });
       return extractData<Account>(response);
     } catch (error: any) {
-      console.error('Erro ao atualizar conta:', error);
+      logger.error('Erro ao atualizar conta:', error);
       const errorInfo = extractError(error);
       throw new Error(errorInfo.message || 'Erro ao atualizar conta');
     }
@@ -56,7 +57,7 @@ class AccountService {
         labels: getResultData(labelsRes),
       };
     } catch (error: any) {
-      console.error('Erro ao buscar dados do formulário:', error);
+      logger.error('Erro ao buscar dados do formulário:', error);
       // Retornar dados vazios em caso de erro para não quebrar o formulário
       return {
         inboxes: [],
@@ -90,7 +91,7 @@ class AccountService {
         installationName: 'ultra',
       };
     } catch (error: any) {
-      console.error('Erro ao buscar configuração global:', error);
+      logger.error('Erro ao buscar configuração global:', error);
       // Fallback para valores padrão em caso de erro
       return {
         appVersion: import.meta.env.VITE_APP_VERSION || '3.0.0',

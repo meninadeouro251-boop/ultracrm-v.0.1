@@ -4,6 +4,7 @@ import { ReactFlowProvider } from '@xyflow/react';
 import { DnDProvider } from '@/contexts/DnDContext';
 import { BaseFlowCanvas, type BaseFlowCanvasProps } from './BaseFlowCanvas';
 import { BaseNodePanel, type NodeType, type NodeCategory } from './BaseNodePanel';
+import logger from '@/utils/logger';
 
 // Re-exportar os tipos para facilitar o uso
 export type { NodeType, NodeCategory };
@@ -157,7 +158,7 @@ export function BaseFlowEditor({
       await onSave(currentFlowData);
       setHasUnsavedChanges(false);
     } catch (error) {
-      console.error('Erro ao salvar flow:', error);
+      logger.error('Erro ao salvar flow:', error);
     }
   }, [onSave, currentFlowData]);
 
@@ -167,7 +168,7 @@ export function BaseFlowEditor({
     try {
       await onExecute(currentFlowData);
     } catch (error) {
-      console.error('Erro ao executar flow:', error);
+      logger.error('Erro ao executar flow:', error);
     }
   }, [onExecute, currentFlowData]);
 
@@ -177,7 +178,7 @@ export function BaseFlowEditor({
     try {
       await onStop();
     } catch (error) {
-      console.error('Erro ao parar flow:', error);
+      logger.error('Erro ao parar flow:', error);
     }
   }, [onStop]);
 
@@ -189,7 +190,7 @@ export function BaseFlowEditor({
       setHasUnsavedChanges(false);
       setValidationErrors([]);
     } catch (error) {
-      console.error('Erro ao resetar flow:', error);
+      logger.error('Erro ao resetar flow:', error);
     }
   }, [onReset]);
 

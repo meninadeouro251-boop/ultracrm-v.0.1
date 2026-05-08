@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { integrationsService } from '@/services/integrations';
 import { toast } from 'sonner';
+import logger from '@/utils/logger';
 
 interface UseOAuthFlowOptions {
   integrationId: string;
@@ -96,7 +97,7 @@ export function useOAuthFlow(options: UseOAuthFlowOptions): UseOAuthFlowReturn {
     } catch (err: any) {
       const errorMsg = err.message || 'Erro ao iniciar fluxo OAuth';
       setError(errorMsg);
-      console.error('Error initiating OAuth flow:', err);
+      logger.error('Error initiating OAuth flow:', err);
       toast.error(errorMsg);
       onError?.(err);
     }
@@ -120,7 +121,7 @@ export function useOAuthFlow(options: UseOAuthFlowOptions): UseOAuthFlowReturn {
       } catch (err: any) {
         const errorMsg = err.message || 'Erro ao conectar integração';
         setError(errorMsg);
-        console.error('Error exchanging OAuth code:', err);
+        logger.error('Error exchanging OAuth code:', err);
         toast.error(errorMsg);
         onError?.(err);
       } finally {

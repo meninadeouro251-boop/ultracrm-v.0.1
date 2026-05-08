@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   AtlassianConfig,
   AtlassianOAuthResponse,
   AtlassianConnectionResponse,
@@ -17,7 +18,7 @@ const AtlassianService = {
       );
       return data;
     } catch (error) {
-      console.error('AtlassianService.generateAuthorization error:', error);
+      logger.error('AtlassianService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -40,7 +41,7 @@ const AtlassianService = {
       );
       return data;
     } catch (error) {
-      console.error('AtlassianService.completeAuthorization error:', error);
+      logger.error('AtlassianService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -58,7 +59,7 @@ const AtlassianService = {
       if (error.response?.status === 404) {
         return null;
       }
-      console.error('AtlassianService.getConfiguration error:', error);
+      logger.error('AtlassianService.getConfiguration error:', error);
       throw error;
     }
   },
@@ -77,7 +78,7 @@ const AtlassianService = {
       );
       return data;
     } catch (error) {
-      console.error('AtlassianService.saveConfiguration error:', error);
+      logger.error('AtlassianService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -92,7 +93,7 @@ const AtlassianService = {
       );
       return data;
     } catch (error) {
-      console.error('AtlassianService.disconnect error:', error);
+      logger.error('AtlassianService.disconnect error:', error);
       throw error;
     }
   },
@@ -108,7 +109,7 @@ const AtlassianService = {
       );
       return data;
     } catch (error) {
-      console.error('AtlassianService.discoverTools error:', error);
+      logger.error('AtlassianService.discoverTools error:', error);
       throw error;
     }
   },

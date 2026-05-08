@@ -2,6 +2,7 @@ import React from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 import { Button } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -24,7 +25,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    logger.error('ErrorBoundary caught an error:', error, errorInfo);
   }
 
   handleRetry = () => {

@@ -24,6 +24,7 @@ import { listTools, listToolCategories } from '@/services/agents';
 import type { Tool, ToolCategory } from '@/types/ai';
 import { isValidUUID } from '@/utils/agentUtils';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 // Extensão do tipo Tool para incluir configuração
 type ConfiguredTool = Tool & {
@@ -72,7 +73,7 @@ const ToolsDialog = ({ open, onOpenChange, onSelectTools, editingTool }: ToolsDi
       setAvailableTools(toolsResponse.tools || []);
       setToolCategories(categoriesResponse || []);
     } catch (err) {
-      console.error('Error loading tools:', err);
+      logger.error('Error loading tools:', err);
       setError(t('messages.loadingTools'));
     } finally {
       setIsLoading(false);

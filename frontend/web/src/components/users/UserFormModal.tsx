@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { toast } from 'sonner';
 import usersService from '@/services/users/usersService';
 import useRoles from '@/hooks/useRoles';
@@ -157,7 +158,7 @@ export default function UserFormModal({ isOpen, onClose, user, onSuccess }: User
       onSuccess();
       onClose();
     } catch (error) {
-      console.error('Erro ao salvar usuário:', error);
+      logger.error('Erro ao salvar usuário:', error);
       toast.error(t('form.messages.saveError'));
     } finally {
       setLoading(false);

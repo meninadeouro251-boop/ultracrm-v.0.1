@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
   Badge,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import {
   ArrowLeft,
   Plus,
@@ -106,7 +107,7 @@ export default function PipelineKanban() {
       setPipeline(pipelineData);
       setStages(pipelineData.stages || []);
     } catch (error) {
-      console.error('Error loading pipeline data:', error);
+      logger.error('Error loading pipeline data:', error);
       toast.error(t('kanban.messages.loadDataError'));
     } finally {
       setLoading(false);
@@ -120,7 +121,7 @@ export default function PipelineKanban() {
       const pipelinesData = response.data || [];
       setAllPipelines(pipelinesData);
     } catch (error) {
-      console.error('Error loading pipelines:', error);
+      logger.error('Error loading pipelines:', error);
     }
   }, []);
 
@@ -170,7 +171,7 @@ export default function PipelineKanban() {
       await loadPipelineData();
       toast.success(t('kanban.messages.itemMoved'));
     } catch (error) {
-      console.error('Error moving item:', error);
+      logger.error('Error moving item:', error);
       toast.error(t('kanban.messages.itemMoveError'));
     } finally {
       setDraggedItem(null);
@@ -230,7 +231,7 @@ export default function PipelineKanban() {
       // Reload pipeline data to reflect changes
       await loadPipelineData();
     } catch (error) {
-      console.error('Error updating pipeline:', error);
+      logger.error('Error updating pipeline:', error);
       toast.error(t('messages.updateError'));
     } finally {
       setIsUpdatingPipeline(false);
@@ -251,7 +252,7 @@ export default function PipelineKanban() {
       setShowDeletePipelineModal(false);
       navigate('/pipelines');
     } catch (error) {
-      console.error('Error deleting pipeline:', error);
+      logger.error('Error deleting pipeline:', error);
       toast.error(t('messages.deleteError'));
     } finally {
       setIsDeletingPipeline(false);
@@ -277,7 +278,7 @@ export default function PipelineKanban() {
       // Reload pipeline data to reflect changes
       await loadPipelineData();
     } catch (error) {
-      console.error('Error reordering stages:', error);
+      logger.error('Error reordering stages:', error);
       toast.error(t('kanban.messages.stageReorderError'));
     } finally {
       setIsReorderingStages(false);
@@ -296,7 +297,7 @@ export default function PipelineKanban() {
       // Reload pipeline data to show new stage
       await loadPipelineData();
     } catch (error) {
-      console.error('Error creating stage:', error);
+      logger.error('Error creating stage:', error);
       toast.error(t('kanban.messages.stageCreateError'));
     } finally {
       setIsCreatingStage(false);
@@ -332,7 +333,7 @@ export default function PipelineKanban() {
       // Reload pipeline data to reflect changes
       await loadPipelineData();
     } catch (error) {
-      console.error('Error removing item from pipeline:', error);
+      logger.error('Error removing item from pipeline:', error);
       toast.error(t('kanban.messages.itemRemoveError'));
     } finally {
       setIsRemovingItem(false);
@@ -371,7 +372,7 @@ export default function PipelineKanban() {
       // Reload pipeline data to reflect changes
       await loadPipelineData();
     } catch (error) {
-      console.error('Error updating item:', error);
+      logger.error('Error updating item:', error);
       toast.error(t('kanban.messages.itemUpdateError'));
     } finally {
       setIsEditingItem(false);
@@ -408,7 +409,7 @@ export default function PipelineKanban() {
       // Reload pipeline data to reflect changes
       await loadPipelineData();
     } catch (error) {
-      console.error('Error updating stage:', error);
+      logger.error('Error updating stage:', error);
       toast.error(t('kanban.messages.stageUpdateError'));
     } finally {
       setIsEditingStage(false);
@@ -432,7 +433,7 @@ export default function PipelineKanban() {
       // Reload pipeline data to reflect changes
       await loadPipelineData();
     } catch (error) {
-      console.error('Error deleting stage:', error);
+      logger.error('Error deleting stage:', error);
       toast.error(t('kanban.messages.stageDeleteError'));
     } finally {
       setIsDeletingStage(false);

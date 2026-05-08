@@ -14,6 +14,7 @@ import {
   ApiKeyModelsResponse,
   AgentListResponse,
 } from '@/types/agents';
+import logger from '@/utils/logger';
 import { processAgentData } from '@/utils/agentUtils';
 import { extractData, buildPaginationParams, extractResponse } from '@/utils/apiHelpers';
 
@@ -150,7 +151,7 @@ class AgentsService {
     try {
       return await this.listAgents(page, pageSize);
     } catch (error) {
-      console.error('Error getting accessible agents:', error);
+      logger.error('Error getting accessible agents:', error);
       throw error;
     }
   }

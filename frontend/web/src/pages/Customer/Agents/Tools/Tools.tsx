@@ -17,6 +17,7 @@ import ToolsPagination from '@/components/tools/ToolsPagination';
 import ToolDetails from '@/components/tools/ToolDetails';
 import ToolsFilter from '@/components/tools/ToolsFilter';
 import { DEFAULT_PAGE_SIZE } from '@/constants/pagination';
+import logger from '@/utils/logger';
 
 const INITIAL_STATE: ToolsState = {
   tools: [],
@@ -92,7 +93,7 @@ export default function Tools() {
           loading: { ...prev.loading, list: false },
         }));
       } catch (error) {
-        console.error('Error loading tools:', error);
+        logger.error('Error loading tools:', error);
         toast.error(t('errors.loadError'));
         setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
       }
@@ -159,7 +160,7 @@ export default function Tools() {
     try {
       await loadTools({ skip: 0 });
     } catch (error) {
-      console.error('Error applying filters:', error);
+      logger.error('Error applying filters:', error);
       toast.error(t('errors.applyFiltersError'));
     }
   };

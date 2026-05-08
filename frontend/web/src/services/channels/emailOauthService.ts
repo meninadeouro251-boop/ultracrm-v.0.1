@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type { EmailOAuthConfig, EmailChannel, EmailChannelPayload } from '@/types/channels/inbox';
+import logger from '@/utils/logger';
 
 const EmailOauthService = {
   /**
@@ -10,7 +11,7 @@ const EmailOauthService = {
       const { data } = await api.post(`/google/authorization`, { email });
       return data;
     } catch (error) {
-      console.error('EmailOauthService.generateGoogleAuthorization error:', error);
+      logger.error('EmailOauthService.generateGoogleAuthorization error:', error);
       throw error;
     }
   },
@@ -26,7 +27,7 @@ const EmailOauthService = {
       });
       return data;
     } catch (error) {
-      console.error('EmailOauthService.completeGoogleAuth error:', error);
+      logger.error('EmailOauthService.completeGoogleAuth error:', error);
       throw error;
     }
   },
@@ -39,7 +40,7 @@ const EmailOauthService = {
       const { data } = await api.post(`/microsoft/authorization`, { email });
       return data;
     } catch (error) {
-      console.error('EmailOauthService.generateMicrosoftAuthorization error:', error);
+      logger.error('EmailOauthService.generateMicrosoftAuthorization error:', error);
       throw error;
     }
   },
@@ -55,7 +56,7 @@ const EmailOauthService = {
       });
       return data;
     } catch (error) {
-      console.error('EmailOauthService.completeMicrosoftAuth error:', error);
+      logger.error('EmailOauthService.completeMicrosoftAuth error:', error);
       throw error;
     }
   },
@@ -68,7 +69,7 @@ const EmailOauthService = {
       const { data } = await api.post(`/inboxes`, payload);
       return data;
     } catch (error) {
-      console.error('EmailOauthService.createEmailChannel error:', error);
+      logger.error('EmailOauthService.createEmailChannel error:', error);
       throw error;
     }
   },
@@ -91,7 +92,7 @@ const EmailOauthService = {
       const { data } = await api.post(`/email/validate`, config);
       return data;
     } catch (error) {
-      console.error('EmailOauthService.validateEmailConfig error:', error);
+      logger.error('EmailOauthService.validateEmailConfig error:', error);
       return { valid: false, error: (error as Error).message };
     }
   },

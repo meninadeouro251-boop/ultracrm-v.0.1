@@ -1,4 +1,5 @@
 import lamejs from '@breezystack/lamejs';
+import logger from '@/utils/logger';
 
 const writeString = (view: DataView, offset: number, string: string): void => {
   for (let i = 0; i < string.length; i++) {
@@ -121,7 +122,7 @@ export const convertToMp3 = async (audioBlob: Blob, bitrate: number = 128): Prom
 
     return mp3Blob;
   } catch (error) {
-    console.error('🎵 [MP3] Erro na conversão:', error);
+    logger.error('🎵 [MP3] Erro na conversão:', error);
     throw new Error('Conversion to MP3 failed.');
   }
 };

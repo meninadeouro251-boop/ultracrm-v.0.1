@@ -11,6 +11,7 @@ import {
   Input,
   Checkbox,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Search, Code, Tag, Plus, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { listCustomTools } from '@/services/agents/customToolsService';
@@ -77,7 +78,7 @@ const CustomToolsSelectionDialog = ({
         const tools = await listCustomTools({ skip: 0, limit: 100 });
         setCustomTools(tools);
       } catch (error) {
-        console.error('Error loading custom tools:', error);
+        logger.error('Error loading custom tools:', error);
         setCustomTools([]);
         hasLoadedRef.current = false;
       } finally {

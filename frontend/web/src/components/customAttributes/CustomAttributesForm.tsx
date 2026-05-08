@@ -20,6 +20,7 @@ import { Plus, X, Settings, Pencil, Check, Loader2 } from 'lucide-react';
 import { customAttributesService } from '@/services/customAttributes/customAttributesService';
 import { CustomAttributeDefinition, AttributeModel } from '@/types/settings';
 import { toast } from 'sonner';
+import logger from '@/utils/logger';
 
 export type CustomAttributesMode = 'form' | 'editable';
 
@@ -102,7 +103,7 @@ export default function CustomAttributesForm({
           const errorKey = translationKeys.loadError || 'contactSidebar.customAttributes.loadError';
           toast.error(t(errorKey));
         } else {
-          console.error('Error loading custom attributes:', error);
+          logger.error('Error loading custom attributes:', error);
         }
       } finally {
         setLoading(false);

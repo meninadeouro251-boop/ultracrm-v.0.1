@@ -11,6 +11,7 @@ import {
   Input,
   Checkbox,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Search, Server, Tag, Clock, RotateCcw, Plus, Wand } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { listCustomMcpServers } from '@/services/agents';
@@ -76,7 +77,7 @@ const CustomMCPDialog = ({
         const servers = await listCustomMcpServers({ skip: 0, limit: 100 });
         setCustomMCPServers(servers);
       } catch (error) {
-        console.error('Error loading custom MCP servers:', error);
+        logger.error('Error loading custom MCP servers:', error);
         setCustomMCPServers([]);
         hasLoadedRef.current = false; // Allow retry on error
       } finally {

@@ -10,6 +10,7 @@ import {
   Settings,
   X,
 } from 'lucide-react';
+import logger from '@/utils/logger';
 import NotificationItem from './NotificationItem';
 import { useNavigate } from 'react-router-dom';
 import { useNotifications } from '@/contexts/NotificationsContext';
@@ -66,7 +67,7 @@ export default function NotificationPanel({
         onClose();
       }
     } catch (error) {
-      console.error('Error opening notification:', error);
+      logger.error('Error opening notification:', error);
     }
   };
 
@@ -74,7 +75,7 @@ export default function NotificationPanel({
     try {
       await actions.markAllAsRead();
     } catch (error) {
-      console.error('Error marking all as read:', error);
+      logger.error('Error marking all as read:', error);
     }
   };
 

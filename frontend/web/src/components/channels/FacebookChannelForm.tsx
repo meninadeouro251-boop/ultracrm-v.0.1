@@ -4,6 +4,7 @@ import { useGlobalConfig } from '@/contexts/GlobalConfigContext';
 import ChannelsService from '@/services/channels/channelsService';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 // Facebook SDK types
 declare global {
@@ -39,7 +40,7 @@ export default function FacebookChannelForm({ onSuccess, onCancel }: FacebookCha
 
   async function loadFBsdk() {
     if (!config.fbAppId) {
-      console.error('[Facebook Messenger SDK] fbAppId is missing from config!');
+      logger.error('[Facebook Messenger SDK] fbAppId is missing from config!');
       throw new Error('Facebook App ID not configured');
     }
 
@@ -60,7 +61,7 @@ export default function FacebookChannelForm({ onSuccess, onCancel }: FacebookCha
             version: config.fbApiVersion || 'v21.0',
           });
         } catch (error) {
-          console.error('[Facebook Messenger SDK] Error reinitializing:', error);
+          logger.error('[Facebook Messenger SDK] Error reinitializing:', error);
           throw error;
         }
       }
@@ -88,7 +89,7 @@ export default function FacebookChannelForm({ onSuccess, onCancel }: FacebookCha
             window.fbSDKLoaded = true;
             resolve();
           } catch (error) {
-            console.error('[Facebook Messenger SDK] Error during FB.init:', error);
+            logger.error('[Facebook Messenger SDK] Error during FB.init:', error);
             reject(error);
           }
         };
@@ -124,7 +125,7 @@ export default function FacebookChannelForm({ onSuccess, onCancel }: FacebookCha
           window.fbSDKLoaded = true;
           resolve();
         } catch (error) {
-          console.error('[Facebook Messenger SDK] Error during FB.init:', error);
+          logger.error('[Facebook Messenger SDK] Error during FB.init:', error);
           reject(error);
         }
       };
@@ -135,7 +136,7 @@ export default function FacebookChannelForm({ onSuccess, onCancel }: FacebookCha
       script.async = true;
       script.defer = true;
       script.onerror = () => {
-        console.error('[Facebook Messenger SDK] Failed to load Facebook SDK script');
+        logger.error('[Facebook Messenger SDK] Failed to load Facebook SDK script');
         reject(new Error('ScriptLoaderError'));
       };
       document.head.appendChild(script);
@@ -158,7 +159,7 @@ export default function FacebookChannelForm({ onSuccess, onCancel }: FacebookCha
       setLoadingMessage(t('connectingToFacebook'));
       tryFBLogin();
     } catch (error: any) {
-      console.error('[Facebook Login] Error loading Facebook SDK:', error);
+      logger.error('[Facebook Login] Error loading Facebook SDK:', error);
       setHasError(true);
       setErrorMessage(error?.message || t('errors.sdkNotLoaded'));
       setIsLoading(false);
@@ -234,7 +235,7 @@ export default function FacebookChannelForm({ onSuccess, onCancel }: FacebookCha
         setInboxName(availablePages[0].name);
       }
     } catch (e: any) {
-      console.error('Error fetching pages:', e);
+      logger.error('Error fetching pages:', e);
       setHasError(true);
       setErrorMessage(e?.message || t('errors.fetchPagesError'));
       setIsLoading(false);

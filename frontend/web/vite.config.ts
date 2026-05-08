@@ -10,10 +10,13 @@ export default defineConfig({
     tailwindcss(),
   ],
   build: {
-    // Reduce chunking to minimize requests via ngrok
     rollupOptions: {
       output: {
-        manualChunks: undefined, // Disable auto chunking
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['@ultraapi/design-system', 'lucide-react', 'sonner'],
+          state: ['zustand', 'axios'],
+        },
       },
     },
   },
@@ -37,7 +40,7 @@ export default defineConfig({
     host: true, // Listen on all addresses
     port: 5173,
     strictPort: true,
-    allowedHosts: true, // Allow all hosts (like ultralution-hub)
+    allowedHosts: ['localhost', '127.0.0.1', '.ultralution-hub.com'],
     cors: true, // Enable CORS for ngrok
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -45,8 +48,7 @@ export default defineConfig({
       'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     },
     hmr: {
-      // Reduce HMR overhead via ngrok
-      overlay: false, // Disable error overlay
+      overlay: true,
     },
     fs: {
       // Reduce file system requests
@@ -54,7 +56,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    // Pre-bundle these to avoid dynamic imports via ngrok
     include: [
       'react',
       'react-dom',
@@ -64,8 +65,6 @@ export default defineConfig({
       'sonner',
       'zustand',
     ],
-    // Force optimization on start
-    force: true,
   },
   // Reduce module transformation in dev
   esbuild: {

@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from '
 import { api } from '@/services/core';
 import { setupService } from '@/services/setup/setupService';
 import { initClarity } from '@/utils/clarityUtils';
+import logger from '@/utils/logger';
 
 export interface GlobalConfig {
   fbAppId?: string;
@@ -61,7 +62,7 @@ export const fetchGlobalConfig = async (): Promise<GlobalConfig> => {
       globalConfigCache = data;
       return data;
     } catch (e) {
-      console.error('[GlobalConfig] Failed to load from /api/v1/global_config', e);
+      logger.error('[GlobalConfig] Failed to load from /api/v1/global_config', e);
       globalConfigCache = {};
       return {};
     } finally {

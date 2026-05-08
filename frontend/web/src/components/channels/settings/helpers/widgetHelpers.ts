@@ -1,5 +1,6 @@
 // Types for Widget Builder
 import i18n from '@/i18n/config';
+import logger from '@/utils/logger';
 export interface WidgetConfig {
   websiteName: string;
   welcomeHeading: string;
@@ -223,7 +224,7 @@ export const loadWidgetSettings = (
     try {
       return JSON.parse(saved);
     } catch (error) {
-      console.error('Error parsing saved widget settings:', error);
+      logger.error('Error parsing saved widget settings:', error);
     }
   }
 

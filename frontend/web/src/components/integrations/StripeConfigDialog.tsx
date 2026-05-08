@@ -8,6 +8,7 @@ import {
   Checkbox,
   Label,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
@@ -81,7 +82,7 @@ const StripeConfigDialog = ({
         });
       }
     } catch (error) {
-      console.error('Error loading Stripe configuration:', error);
+      logger.error('Error loading Stripe configuration:', error);
       setConfig({
         provider: 'stripe',
         username: '',
@@ -100,7 +101,7 @@ const StripeConfigDialog = ({
       const response = await StripeService.discoverTools(agentId);
       setAvailableTools(response.tools || []);
     } catch (error) {
-      console.error('Error loading Stripe tools:', error);
+      logger.error('Error loading Stripe tools:', error);
       toast.error('Erro ao carregar ferramentas disponíveis');
     } finally {
       setIsLoadingTools(false);
@@ -117,7 +118,7 @@ const StripeConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to Stripe:', error);
+      logger.error('Error connecting to Stripe:', error);
       toast.error('Erro ao conectar com Stripe');
     } finally {
       setIsConnecting(false);
@@ -159,7 +160,7 @@ const StripeConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving Stripe configuration:', error);
+      logger.error('Error saving Stripe configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -173,7 +174,7 @@ const StripeConfigDialog = ({
       toast.success('Stripe desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting Stripe:', error);
+      logger.error('Error disconnecting Stripe:', error);
       toast.error('Erro ao desconectar Stripe');
     }
   };

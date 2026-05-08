@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Integration } from '@/types/integrations';
 import { integrationsService } from '@/services/integrations';
 import { toast } from 'sonner';
+import logger from '@/utils/logger';
 
 interface UseIntegrationsOptions {
   autoLoad?: boolean;
@@ -36,7 +37,7 @@ export function useIntegrations(options: UseIntegrationsOptions = {}): UseIntegr
     } catch (err) {
       const errorMessage = 'Erro ao carregar integrações';
       setError(errorMessage);
-      console.error('Error loading integrations:', err);
+      logger.error('Error loading integrations:', err);
       toast.error(errorMessage);
     } finally {
       setLoading(false);
@@ -69,7 +70,7 @@ export function useIntegrations(options: UseIntegrationsOptions = {}): UseIntegr
         // Reload integrations
         await loadIntegrations();
       } catch (err) {
-        console.error('Error toggling integration:', err);
+        logger.error('Error toggling integration:', err);
         toast.error('Erro ao alterar status da integração');
         throw err;
       }
@@ -133,7 +134,7 @@ export function useIntegrations(options: UseIntegrationsOptions = {}): UseIntegr
         prev.map(integration => (integration.id === id ? response : integration)),
       );
     } catch (err) {
-      console.error('Error refreshing integration:', err);
+      logger.error('Error refreshing integration:', err);
       toast.error('Erro ao atualizar integração');
       throw err;
     }

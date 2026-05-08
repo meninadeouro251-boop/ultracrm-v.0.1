@@ -14,6 +14,7 @@ import {
   Textarea,
   Switch,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Plus, X, Settings } from 'lucide-react';
 import { customAttributesService } from '@/services/customAttributes/customAttributesService';
 import {
@@ -217,7 +218,7 @@ export default function PipelineCustomAttributesForm({
         hasLoadedRef.current = true;
         loadContextRef.current = contextKey;
       } catch (error) {
-        console.error('Error loading custom attributes:', error);
+        logger.error('Error loading custom attributes:', error);
       } finally {
         setLoading(false);
       }

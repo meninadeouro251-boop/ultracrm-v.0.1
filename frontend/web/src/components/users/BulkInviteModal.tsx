@@ -10,6 +10,7 @@ import {
   Alert,
   AlertDescription,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { toast } from 'sonner';
 import usersService from '@/services/users/usersService';
 import { Loader2, CheckCircle, XCircle, Mail } from 'lucide-react';
@@ -72,7 +73,7 @@ export default function BulkInviteModal({ isOpen, onClose, onSuccess }: BulkInvi
         toast.error(t('bulkInvite.messages.allFailed', { count: failedCount }));
       }
     } catch (error: any) {
-      console.error('Erro no convite em massa:', error);
+      logger.error('Erro no convite em massa:', error);
       toast.error(error.message || t('bulkInvite.messages.sendError'));
     } finally {
       setLoading(false);

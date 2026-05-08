@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { contactsService } from '@/services/contacts';
 import type { Contact } from '@/types/contacts';
+import logger from '@/utils/logger';
 
 interface UseContactsConversationsOptions {
   contacts: Contact[];
@@ -60,7 +61,7 @@ export function useContactsConversations({
                 conversationIds: conversations.map(c => String(c.id)),
               };
             } catch (err) {
-              console.error(`Error loading conversations for contact ${contact.id}:`, err);
+              logger.error(`Error loading conversations for contact ${contact.id}:`, err);
               return {
                 contactId: contact.id,
                 conversationIds: [],
@@ -82,7 +83,7 @@ export function useContactsConversations({
         setConversationsMap(newMap);
       } catch (err) {
         setError(err instanceof Error ? err : new Error('Failed to load contacts conversations'));
-        console.error('Error loading contacts conversations:', err);
+        logger.error('Error loading contacts conversations:', err);
       } finally {
         setIsLoading(false);
       }

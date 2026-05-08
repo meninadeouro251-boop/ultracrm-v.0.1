@@ -5,6 +5,7 @@ import { chatService } from '@/services/chat/chatService';
 import { extractMessagesData } from '@/utils/chat/responseHelpers';
 import { Attachment, Message, MessageSender, MessageTypeValue } from '@/types/chat/api';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 interface MessagesState {
   // Messages per conversation
@@ -466,7 +467,7 @@ export function MessagesProvider({ children }: { children: React.ReactNode }) {
 
         // Verificar se a resposta existe
         if (!response) {
-          console.warn('API response is empty or malformed');
+          logger.warn('API response is empty or malformed');
           dispatch({
             type: 'SET_MESSAGES',
             payload: {
@@ -530,7 +531,7 @@ export function MessagesProvider({ children }: { children: React.ReactNode }) {
         });
 
         if (!response) {
-          console.warn('Load More: API response is empty');
+          logger.warn('Load More: API response is empty');
           dispatch({
             type: 'SET_LOAD_MORE_LOADING',
             payload: { conversationId, loading: false },

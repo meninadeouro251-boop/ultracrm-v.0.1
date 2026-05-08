@@ -5,6 +5,7 @@ import { Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue }
 import { Plus, Loader2 } from 'lucide-react';
 import HierarchicalTaskItem from './HierarchicalTaskItem';
 import type { PipelineTask } from '@/types/analytics';
+import logger from '@/utils/logger';
 
 interface PipelineTasksListProps {
   pipelineId: string;
@@ -77,7 +78,7 @@ const PipelineTasksList = forwardRef<PipelineTasksListRef, PipelineTasksListProp
     }
   }, [pendingCount, overdueCount, ref]);
 
-  console.log('tasks', tasks);
+  logger.debug('tasks', tasks);
   // Filter tasks - only root tasks (hierarchy handled by HierarchicalTaskItem)
   const filteredTasks = tasks
     .filter(task => !task.parent_task_id) // Only root tasks

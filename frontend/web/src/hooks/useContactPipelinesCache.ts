@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { contactsService } from '@/services/contacts';
+import logger from '@/utils/logger';
 
 interface ContactPipelineInfo {
   pipeline: {
@@ -85,7 +86,7 @@ export function useContactPipelinesCache(contactId: string) {
 
           return data as ContactPipelineInfo[];
         } catch (err) {
-          console.error('Error loading contact pipelines:', err);
+          logger.error('Error loading contact pipelines:', err);
           setError(err instanceof Error ? err : new Error('Failed to load pipelines'));
           setPipelines([]);
           return [];
@@ -104,7 +105,7 @@ export function useContactPipelinesCache(contactId: string) {
         setPipelines(data);
         setError(null);
       } catch (err) {
-        console.error('Error loading contact pipelines:', err);
+        logger.error('Error loading contact pipelines:', err);
         setError(err instanceof Error ? err : new Error('Failed to load pipelines'));
         setPipelines([]);
       } finally {

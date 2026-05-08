@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
   Badge,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import {
   Server,
   Plus,
@@ -49,7 +50,7 @@ const McpServers = () => {
         const data = await listMCPServers({ skip, limit });
         setServers(data);
       } catch (error) {
-        console.error('Erro ao carregar servidores MCP:', error);
+        logger.error('Erro ao carregar servidores MCP:', error);
         setError(t('mcpServers.messages.loadError'));
         toast.error(t('mcpServers.messages.loadError'));
       } finally {
@@ -307,17 +308,17 @@ const McpServers = () => {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
                             <DropdownMenuItem
-                              onClick={() => console.log('Ver detalhes', server.id)}
+                              onClick={() => logger.debug('Ver detalhes', server.id)}
                             >
                               <Eye className="h-4 w-4" />
                               <span>{t('table.actions.viewDetails')}</span>
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => console.log('Editar', server.id)}>
+                            <DropdownMenuItem onClick={() => logger.debug('Editar', server.id)}>
                               <Edit className="h-4 w-4" />
                               <span>{t('table.actions.edit')}</span>
                             </DropdownMenuItem>
                             <DropdownMenuItem
-                              onClick={() => console.log('Excluir', server.id)}
+                              onClick={() => logger.debug('Excluir', server.id)}
                               className="text-destructive focus:text-destructive"
                             >
                               <Trash2 className="h-4 w-4" />

@@ -19,6 +19,114 @@ jobs:
       - name: Validate docker-compose.yml
         run: docker compose config --quiet
 
+  frontend-lint:
+    name: Frontend Lint
+    runs-on: ubuntu-latest
+    if: ${{ secrets.NPM_TOKEN != '' }}
+    defaults:
+      run:
+        working-directory: frontend/web
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/web/package-lock.json
+
+      - name: Configure private registry
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+  frontend-typecheck:
+    name: Frontend Typecheck
+    runs-on: ubuntu-latest
+    if: ${{ secrets.NPM_TOKEN != '' }}
+    defaults:
+      run:
+        working-directory: frontend/web
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/web/package-lock.json
+
+      - name: Configure private registry
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+  frontend-build:
+    name: Frontend Build
+    runs-on: ubuntu-latest
+    if: ${{ secrets.NPM_TOKEN != '' }}
+    defaults:
+      run:
+        working-directory: frontend/web
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/web/package-lock.json
+
+      - name: Configure private registry
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+  frontend-test:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    if: ${{ secrets.NPM_TOKEN != '' }}
+    defaults:
+      run:
+        working-directory: frontend/web
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/web/package-lock.json
+
+      - name: Configure private registry
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test
+        run: npm run test
+
   lint-dockerfiles:
     name: Lint Dockerfiles
     runs-on: ubuntu-latest

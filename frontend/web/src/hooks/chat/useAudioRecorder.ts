@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import { toast } from 'sonner';
+import logger from '@/utils/logger';
 
 export interface AudioRecordingData {
   blob: Blob;
@@ -267,7 +268,7 @@ export const useAudioRecorder = (options?: UseAudioRecorderOptions): UseAudioRec
       };
 
       mediaRecorder.onerror = event => {
-        console.error('Erro na gravação:', event);
+        logger.error('Erro na gravação:', event);
         toast.error('Erro durante a gravação de áudio');
         stopRecording();
       };
@@ -299,7 +300,7 @@ export const useAudioRecorder = (options?: UseAudioRecorderOptions): UseAudioRec
       // Iniciar monitoramento
       monitorAudioLevel();
     } catch (error) {
-      console.error('Erro ao acessar microfone:', error);
+      logger.error('Erro ao acessar microfone:', error);
       toast.error('Erro ao acessar o microfone. Verifique as permissões.');
 
       // LIBERAR TRAVA EM CASO DE ERRO

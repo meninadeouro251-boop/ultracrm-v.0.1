@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { cannedResponsesService } from '@/services/cannedResponses/cannedResponsesService';
 import type { CannedResponse } from '@/types/knowledge';
+import logger from '@/utils/logger';
 
 interface UseCannedResponsesOptions {
   enabled?: boolean;
@@ -42,7 +43,7 @@ export const useCannedResponses = ({
       const response = await cannedResponsesService.getCannedResponses();
       setCannedResponses(response.data);
     } catch (err) {
-      console.error('Error loading canned responses:', err);
+      logger.error('Error loading canned responses:', err);
       setError('Erro ao carregar respostas prontas');
       setCannedResponses([]);
     } finally {

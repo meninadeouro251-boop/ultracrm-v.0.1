@@ -3,6 +3,7 @@ import { useChatContext } from '@/contexts/chat/ChatContext';
 import { BaseFilter } from '@/types/core';
 import { convertBaseFiltersToConversationFilters } from '@/utils/chat/filterAdapters';
 import { saveConversationFilters, clearConversationFilters } from '@/utils/storage/filtersStorage';
+import logger from '@/utils/logger';
 
 export const useFilterHandlers = () => {
   const { conversations, filters } = useChatContext();
@@ -25,7 +26,7 @@ export const useFilterHandlers = () => {
           },
           error => {
             // Erro - mostrar mensagem e rejeitar promise
-            console.error('❌ Erro ao aplicar filtros:', error);
+            logger.error('❌ Erro ao aplicar filtros:', error);
             reject(error);
           },
         );
@@ -42,7 +43,7 @@ export const useFilterHandlers = () => {
       // 🎯 FILTRO PADRÃO: Carregar apenas conversas abertas ao limpar filtros
       await conversations.loadConversations({ status: 'open' });
     } catch (error) {
-      console.error('❌ Erro inesperado ao limpar filtros:', error);
+      logger.error('❌ Erro inesperado ao limpar filtros:', error);
     }
   }, [conversations]);
 
@@ -57,7 +58,7 @@ export const useFilterHandlers = () => {
             conversations.setConversations(conversationsResult, pagination);
           },
           error => {
-            console.error('❌ Erro ao recarregar filtros:', error);
+            logger.error('❌ Erro ao recarregar filtros:', error);
           },
         );
       }
@@ -69,7 +70,7 @@ export const useFilterHandlers = () => {
             conversations.setConversations(conversationsResult, pagination);
           },
           error => {
-            console.error('❌ Erro ao recarregar busca:', error);
+            logger.error('❌ Erro ao recarregar busca:', error);
           },
         );
       }
@@ -78,7 +79,7 @@ export const useFilterHandlers = () => {
         await conversations.loadConversations({ status: 'open' });
       }
     } catch (error) {
-      console.error('❌ Erro inesperado ao recarregar filtros:', error);
+      logger.error('❌ Erro inesperado ao recarregar filtros:', error);
     }
   }, [filters, conversations]);
 

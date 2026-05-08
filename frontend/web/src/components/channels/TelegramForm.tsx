@@ -5,6 +5,7 @@ import { MessageSquare, Key, Shield, Bot } from 'lucide-react';
 import InboxesService from '@/services/channels/inboxesService';
 import type { TelegramChannelPayload } from '@/types/channels/inbox';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 interface TelegramFormProps {
   onSuccess: (channelId: string) => void;
@@ -58,7 +59,7 @@ const TelegramForm: React.FC<TelegramFormProps> = ({ onSuccess, onBack }) => {
       toast.success(t('newChannel.forms.telegramForm.success.created'));
       onSuccess(result.data.id);
     } catch (error) {
-      console.error('Erro ao criar canal Telegram:', error);
+      logger.error('Erro ao criar canal Telegram:', error);
       toast.error(t('newChannel.forms.telegramForm.errors.createError'));
     } finally {
       setIsLoading(false);

@@ -3,6 +3,7 @@ import { pipelinesService } from '@/services/pipelines/pipelinesService';
 import type { Pipeline, PipelineStage } from '@/types/analytics';
 import type { PaginationMeta } from '@/types/core';
 import { DEFAULT_PAGE_SIZE } from '@/constants/pagination';
+import logger from '@/utils/logger';
 
 // Helper types for API responses
 interface ApiResponseWithPayload {
@@ -262,12 +263,12 @@ export const enrichConversationsWithPipelineData = async (
             });
           }
         } catch (error) {
-          console.error(`Failed to fetch pipeline data for pipeline ${pipelineId}:`, error);
+          logger.error(`Failed to fetch pipeline data for pipeline ${pipelineId}:`, error);
         }
       }),
     );
   } catch (error) {
-    console.error('Error enriching conversations with pipeline data:', error);
+    logger.error('Error enriching conversations with pipeline data:', error);
   }
 
   // Enrich conversations with pipeline data

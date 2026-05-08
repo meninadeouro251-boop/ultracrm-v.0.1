@@ -9,6 +9,7 @@ import {
   getOAuthAccounts,
   createOAuthApplication,
 } from '@/services/auth/oauthService';
+import logger from '@/utils/logger';
 import type { OAuthAccount } from '@/types/auth';
 
 interface OAuthParams {
@@ -139,7 +140,7 @@ export const OAuthLogin: React.FC = () => {
       const loginUrl = `/login?returnUrl=${encodeURIComponent(targetUrl)}`;
       navigate(loginUrl);
     } catch (err) {
-      console.error('❌ OAuth: Failed to redirect to login:', err);
+      logger.error('❌ OAuth: Failed to redirect to login:', err);
       setError(t('login.errors.failedToRedirect'));
     }
   };

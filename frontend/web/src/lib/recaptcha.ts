@@ -1,3 +1,4 @@
+import logger from '@/utils/logger';
 declare global {
   interface Window {
     grecaptcha: {
@@ -84,13 +85,13 @@ export class RecaptchaService {
             const token = await window.grecaptcha.execute(this.siteKey, { action });
             resolve(token);
           } catch (error) {
-            console.error('reCAPTCHA execution error:', error);
+            logger.error('reCAPTCHA execution error:', error);
             reject(error);
           }
         });
       });
     } catch (error) {
-      console.error('reCAPTCHA error:', error);
+      logger.error('reCAPTCHA error:', error);
       return null;
     }
   }

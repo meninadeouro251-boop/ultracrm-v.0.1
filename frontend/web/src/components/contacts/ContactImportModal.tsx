@@ -10,6 +10,7 @@ import {
   Button,
   Label,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Upload, Trash2, FileText, Download } from 'lucide-react';
 
 interface ContactImportModalProps {
@@ -65,7 +66,7 @@ export default function ContactImportModal({
       handleRemoveFile();
       onOpenChange(false);
     } catch (error) {
-      console.error('Error importing contacts:', error);
+      logger.error('Error importing contacts:', error);
     } finally {
       setUploading(false);
     }

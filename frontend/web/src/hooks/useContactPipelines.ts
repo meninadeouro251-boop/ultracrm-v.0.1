@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { pipelinesService } from '@/services/pipelines';
 import type { Pipeline, PipelineStage, PipelineItem } from '@/types/analytics';
+import logger from '@/utils/logger';
 
 interface PipelineData {
   pipeline: Pipeline;
@@ -56,7 +57,7 @@ export function useContactPipelines({ pipelineIds, enabled = true }: UseContactP
               },
             };
           } catch (err) {
-            console.error(`Error loading pipeline ${pipelineId}:`, err);
+            logger.error(`Error loading pipeline ${pipelineId}:`, err);
             return null;
           }
         });
@@ -73,7 +74,7 @@ export function useContactPipelines({ pipelineIds, enabled = true }: UseContactP
         setPipelinesData(dataMap);
       } catch (err) {
         setError(err instanceof Error ? err : new Error('Failed to load pipelines data'));
-        console.error('Error loading pipelines data:', err);
+        logger.error('Error loading pipelines data:', err);
       } finally {
         setIsLoading(false);
       }

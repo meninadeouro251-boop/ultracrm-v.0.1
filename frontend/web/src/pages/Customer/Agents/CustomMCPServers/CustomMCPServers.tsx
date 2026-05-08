@@ -12,6 +12,7 @@ import {
   DialogTitle,
   Button,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Grid3X3, List, TestTube } from 'lucide-react';
 import EmptyState from '@/components/base/EmptyState';
 import {
@@ -110,7 +111,7 @@ export default function CustomMCPServers() {
           loading: { ...prev.loading, list: false },
         }));
       } catch (error) {
-        console.error('Error loading Custom MCP servers:', error);
+        logger.error('Error loading Custom MCP servers:', error);
         toast.error(t('errors.loadError'));
         setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
       }
@@ -172,7 +173,7 @@ export default function CustomMCPServers() {
     try {
       await loadServers({ skip: 0 });
     } catch (error) {
-      console.error('Error applying filters:', error);
+      logger.error('Error applying filters:', error);
       toast.error(t('errors.applyFiltersError'));
     }
   };
@@ -265,7 +266,7 @@ export default function CustomMCPServers() {
         );
       }
     } catch (error) {
-      console.error('Error testing Custom MCP server:', error);
+      logger.error('Error testing Custom MCP server:', error);
       toast.error(t('errors.testError'));
     } finally {
       setTestingServer(null);
@@ -289,7 +290,7 @@ export default function CustomMCPServers() {
       setDeleteDialogOpen(false);
       setServerToDelete(null);
     } catch (error) {
-      console.error('Error deleting Custom MCP server:', error);
+      logger.error('Error deleting Custom MCP server:', error);
       toast.error(t('errors.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -329,7 +330,7 @@ export default function CustomMCPServers() {
       setServerModalOpen(false);
       setEditingServer(null);
     } catch (error) {
-      console.error('Error saving Custom MCP server:', error);
+      logger.error('Error saving Custom MCP server:', error);
       toast.error(editingServer ? t('errors.updateError') : t('errors.saveError'));
     } finally {
       setState(prev => ({

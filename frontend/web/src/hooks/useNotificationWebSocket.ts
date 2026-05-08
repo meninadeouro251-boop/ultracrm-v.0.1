@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useAuthStore } from '@/store/authStore';
+import logger from '@/utils/logger';
 
 interface WebSocketMessage {
   event: string;
@@ -60,7 +61,7 @@ export const useNotificationWebSocket = (callbacks: NotificationWebSocketProps) 
           break;
       }
     } catch (error) {
-      console.error('Error parsing WebSocket message:', error);
+      logger.error('Error parsing WebSocket message:', error);
     }
   };
 
@@ -104,10 +105,10 @@ export const useNotificationWebSocket = (callbacks: NotificationWebSocketProps) 
       };
 
       websocketRef.current.onerror = error => {
-        console.error('WebSocket error:', error);
+        logger.error('WebSocket error:', error);
       };
     } catch (error) {
-      console.error('Error connecting to WebSocket:', error);
+      logger.error('Error connecting to WebSocket:', error);
     }
   };
 

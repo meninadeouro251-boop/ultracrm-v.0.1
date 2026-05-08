@@ -22,6 +22,7 @@ import { Edit, Eye, Key, Plus, Trash2, X, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { ApiKey, ApiKeyCreate, ApiKeyUpdate } from '@/types/agents';
 import { createApiKey, listApiKeys, updateApiKey, deleteApiKey } from '@/services/agents';
+import logger from '@/utils/logger';
 
 interface ApiKeysModalProps {
   open: boolean;
@@ -73,7 +74,7 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
       const keys = await listApiKeys();
       setApiKeys(keys);
     } catch (error) {
-      console.error('Erro ao carregar chaves API:', error);
+      logger.error('Erro ao carregar chaves API:', error);
       toast.error(t('messages.loadError'));
     } finally {
       setLoading(false);
@@ -155,7 +156,7 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
         onApiKeysChange();
       }
     } catch (error) {
-      console.error('Erro ao salvar chave API:', error);
+      logger.error('Erro ao salvar chave API:', error);
       toast.error(t('messages.saveError'));
     } finally {
       setLoading(false);
@@ -180,7 +181,7 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
         onApiKeysChange();
       }
     } catch (error) {
-      console.error('Erro ao deletar chave API:', error);
+      logger.error('Erro ao deletar chave API:', error);
       toast.error(t('messages.deleteError'));
     } finally {
       setLoading(false);

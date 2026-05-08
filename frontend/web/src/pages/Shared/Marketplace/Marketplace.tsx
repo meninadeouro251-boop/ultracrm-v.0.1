@@ -12,6 +12,7 @@ import {
   Filter,
   X,
 } from 'lucide-react';
+import logger from '@/utils/logger';
 import { toast } from 'sonner';
 
 interface MarketplaceProduct {
@@ -108,7 +109,7 @@ const Marketplace = () => {
       const allTags = mockProducts.flatMap(product => product.tags);
       setAvailableTags([...new Set(allTags)]);
     } catch (error) {
-      console.error('Error loading products:', error);
+      logger.error('Error loading products:', error);
       toast.error(t('messages.loadError'));
     } finally {
       setLoading(false);

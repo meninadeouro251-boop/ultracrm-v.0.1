@@ -12,6 +12,7 @@ import {
   Checkbox,
   ScrollArea,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import {
   Search,
   Users,
@@ -127,7 +128,7 @@ export default function AgentToolsDialog({
       setAvailableAgents(filteredAgents);
       setFilteredAgents(filteredAgents);
     } catch (err) {
-      console.error('Error loading agents:', err);
+      logger.error('Error loading agents:', err);
       setError(t('subAgents.loadError'));
     } finally {
       setIsLoading(false);

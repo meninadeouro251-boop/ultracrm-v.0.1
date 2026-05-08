@@ -7,6 +7,7 @@ import {
   CardDescription,
   Button,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Settings, Save, Loader2, AlertCircle } from 'lucide-react';
 import integrationService from '@/services/agents/integrationService';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -114,7 +115,7 @@ const ExternalAgentConfig = ({
 
       onChange(newData);
     } catch (error) {
-      console.error('Error loading integration:', error);
+      logger.error('Error loading integration:', error);
     } finally {
       setIsLoading(false);
     }
@@ -309,7 +310,7 @@ const ExternalAgentConfig = ({
         config,
       });
     } catch (error) {
-      console.error('Error saving integration:', error);
+      logger.error('Error saving integration:', error);
     } finally {
       setIsSaving(false);
     }

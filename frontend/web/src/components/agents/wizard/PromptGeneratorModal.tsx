@@ -9,6 +9,7 @@ import {
   Label,
   Textarea,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Sparkles, Loader2, Wand2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { openaiService } from '@/services/integrations/openaiService';
@@ -179,7 +180,7 @@ const PromptGeneratorModal = ({
         });
       }
     } catch (error) {
-      console.error('Error generating prompt:', error);
+      logger.error('Error generating prompt:', error);
       const errorMessage =
         error instanceof Error ? error.message : t('wizard.promptGenerator.messages.error');
       toast.error(errorMessage);
@@ -220,7 +221,7 @@ const PromptGeneratorModal = ({
         });
       }
     } catch (error) {
-      console.error('Error reviewing prompt:', error);
+      logger.error('Error reviewing prompt:', error);
       const errorMessage =
         error instanceof Error ? error.message : t('wizard.promptGenerator.messages.reviewError');
       toast.error(errorMessage);

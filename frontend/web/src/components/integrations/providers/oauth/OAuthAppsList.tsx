@@ -11,6 +11,7 @@ import {
   Button,
   Card,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Key, Copy } from 'lucide-react';
 import EmptyState from '@/components/base/EmptyState';
 
@@ -148,7 +149,7 @@ export default function OAuthAppsList({ onBack }: OAuthAppsListProps = {}) {
         }));
       }
     } catch (error) {
-      console.error('Error loading OAuth apps:', error);
+      logger.error('Error loading OAuth apps:', error);
       toast.error(t('oauth.messages.deleteError'));
       setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
     }
@@ -251,7 +252,7 @@ export default function OAuthAppsList({ onBack }: OAuthAppsListProps = {}) {
       setDeleteDialogOpen(false);
       setAppToDelete(null);
     } catch (error) {
-      console.error('Error deleting OAuth app:', error);
+      logger.error('Error deleting OAuth app:', error);
       toast.error(t('oauth.messages.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -280,7 +281,7 @@ export default function OAuthAppsList({ onBack }: OAuthAppsListProps = {}) {
 
       setBulkDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error bulk deleting OAuth apps:', error);
+      logger.error('Error bulk deleting OAuth apps:', error);
       toast.error(t('oauth.messages.bulkDeleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, bulk: false } }));
@@ -315,7 +316,7 @@ export default function OAuthAppsList({ onBack }: OAuthAppsListProps = {}) {
       setAppModalOpen(false);
       setEditingApp(null);
     } catch (error) {
-      console.error('Error saving OAuth app:', error);
+      logger.error('Error saving OAuth app:', error);
       toast.error(editingApp ? t('oauth.messages.updateError') : t('oauth.messages.createError'));
     } finally {
       setState(prev => ({

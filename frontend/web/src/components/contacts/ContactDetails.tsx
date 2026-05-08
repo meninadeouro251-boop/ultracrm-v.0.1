@@ -38,6 +38,7 @@ import {
   GitBranch,
   Merge,
 } from 'lucide-react';
+import logger from '@/utils/logger';
 // import { ScheduledActionsList } from '@/components/scheduledActions';
 import { Contact } from '@/types/contacts';
 import ContactAvatar from '@/components/chat/contact/ContactAvatar';
@@ -162,7 +163,7 @@ export default function ContactDetails({
         onContactUpdated();
       }
     } catch (error) {
-      console.error('Error merging contacts:', error);
+      logger.error('Error merging contacts:', error);
       toast.error(t('messages.mergeError'));
     } finally {
       setMerging(false);

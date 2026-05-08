@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Integration } from '@/types/integrations';
 import { integrationsService } from '@/services/integrations';
 import { toast } from 'sonner';
+import logger from '@/utils/logger';
 
 interface UseIntegrationDetailsOptions {
   integrationId: string;
@@ -95,7 +96,7 @@ export function useIntegrationDetails(
             configData = genericConfig || null;
           } catch (err) {
             // Configuration may not exist yet
-            console.error('No configuration found for integration:', integrationId, err);
+            logger.error('No configuration found for integration:', integrationId, err);
           }
       }
 
@@ -103,7 +104,7 @@ export function useIntegrationDetails(
     } catch (err) {
       const errorMessage = 'Erro ao carregar detalhes da integração';
       setError(errorMessage);
-      console.error('Error loading integration details:', err);
+      logger.error('Error loading integration details:', err);
       toast.error(errorMessage);
     } finally {
       setLoading(false);
@@ -149,7 +150,7 @@ export function useIntegrationDetails(
         toast.success('Configuração atualizada com sucesso');
         await loadDetails(); // Reload to get updated data
       } catch (err) {
-        console.error('Error updating configuration:', err);
+        logger.error('Error updating configuration:', err);
         toast.error('Erro ao atualizar configuração');
         throw err;
       } finally {
@@ -173,7 +174,7 @@ export function useIntegrationDetails(
       toast.success('Integração desconectada com sucesso');
       await loadDetails();
     } catch (err) {
-      console.error('Error disconnecting integration:', err);
+      logger.error('Error disconnecting integration:', err);
       toast.error('Erro ao desconectar integração');
       throw err;
     }
@@ -192,7 +193,7 @@ export function useIntegrationDetails(
         await loadDetails();
       }
     } catch (err) {
-      console.error('Error reconnecting integration:', err);
+      logger.error('Error reconnecting integration:', err);
       toast.error('Erro ao reconectar integração');
       throw err;
     }
@@ -205,7 +206,7 @@ export function useIntegrationDetails(
       await integrationsService.testIntegration(integrationId);
       toast.success('Teste de conexão realizado com sucesso');
     } catch (err) {
-      console.error('Error testing integration:', err);
+      logger.error('Error testing integration:', err);
       toast.error('Erro ao testar conexão');
       throw err;
     }

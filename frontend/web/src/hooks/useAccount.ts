@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { accountService } from '../services/account/accountService';
 import type { Account, AccountFeatures } from '@/types/settings';
 import { useAuthStore } from '@/store/authStore';
+import logger from '@/utils/logger';
 
 interface UseAccountReturn {
   account: Account | null;
@@ -64,7 +65,7 @@ export function useAccount(): UseAccountReturn {
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Erro ao carregar conta';
       setError(errorMessage);
-      console.error('Erro ao carregar conta:', err);
+      logger.error('Erro ao carregar conta:', err);
     } finally {
       setLoading(false);
     }

@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@ultraapi/design-system/dropdown-menu';
+import logger from '@/utils/logger';
 import {
   MoreVertical,
   Settings,
@@ -69,7 +70,7 @@ const ConversationActionsDropdown: React.FC<ConversationActionsDropdownProps> = 
       await conversations.updateConversationStatus(conversation.id, newStatus, onFilterReload);
       setOpen(false);
     } catch (error) {
-      console.error('❌ Error updating status:', error);
+      logger.error('❌ Error updating status:', error);
     } finally {
       setIsUpdatingStatus(false);
     }
@@ -81,7 +82,7 @@ const ConversationActionsDropdown: React.FC<ConversationActionsDropdownProps> = 
       await conversations.updateConversationPriority(conversation.id, newPriority, onFilterReload);
       setOpen(false);
     } catch (error) {
-      console.error('Error updating priority:', error);
+      logger.error('Error updating priority:', error);
     } finally {
       setIsUpdatingPriority(false);
     }
@@ -100,7 +101,7 @@ const ConversationActionsDropdown: React.FC<ConversationActionsDropdownProps> = 
       }
       setOpen(false);
     } catch (error) {
-      console.error('Error pinning conversation:', error);
+      logger.error('Error pinning conversation:', error);
     } finally {
       setIsUpdatingPin(false);
     }
@@ -116,7 +117,7 @@ const ConversationActionsDropdown: React.FC<ConversationActionsDropdownProps> = 
       }
       setOpen(false);
     } catch (error) {
-      console.error('Error archiving conversation:', error);
+      logger.error('Error archiving conversation:', error);
     } finally {
       setIsUpdatingArchive(false);
     }

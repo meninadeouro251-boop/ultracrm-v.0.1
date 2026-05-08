@@ -14,6 +14,7 @@ import {
   SelectValue,
   Slider,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Play, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -107,7 +108,7 @@ const ElevenLabsConfigDialog = ({
           setConfig((prev) => ({ ...prev, voice: voices[0].voice_id }));
         }
       } catch (error) {
-        console.error('Error fetching ElevenLabs voices:', error);
+        logger.error('Error fetching ElevenLabs voices:', error);
         setVoicesError(true);
         setAvailablultraices([]);
       } finally {
@@ -225,7 +226,7 @@ const ElevenLabsConfigDialog = ({
                   size="icon"
                   onClick={() => {
                     // TODO: Implementar preview da voz
-                    console.log('Preview voice:', config.voice);
+                    logger.debug('Preview voice:', config.voice);
                   }}
                   disabled={!config.voice || loadingVoices}
                 >

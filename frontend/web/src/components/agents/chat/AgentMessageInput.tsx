@@ -4,6 +4,7 @@ import { Send, Paperclip, X, Image, FileText, File, Loader2 } from 'lucide-react
 import { useLanguage } from '@/hooks/useLanguage';
 import { formatFileSize, isImageFile, type FileData } from '@/utils/fileUtils';
 import { toast } from 'sonner';
+import logger from '@/utils/logger';
 
 interface AgentMessageInputProps {
   onSendMessage: (content: string, files?: FileData[]) => Promise<void>;
@@ -82,7 +83,7 @@ export function AgentMessageInput({
           preview_url: previewUrl,
         });
       } catch (error) {
-        console.error('Error processing file:', error);
+        logger.error('Error processing file:', error);
         toast.error(`Erro ao processar arquivo ${file.name}`);
       }
     }

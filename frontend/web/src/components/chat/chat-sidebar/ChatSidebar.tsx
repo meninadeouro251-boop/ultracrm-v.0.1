@@ -9,6 +9,7 @@ import {
   ContextMenuItem,
   ContextMenuSeparator,
 } from '@ultraapi/design-system/context-menu';
+import logger from '@/utils/logger';
 import {
   Search,
   Filter,
@@ -608,7 +609,7 @@ const ChatSidebar = ({
             {searchInput ? (
               <NoConversations
                 searchTerm={searchInput}
-                onCreateNew={() => console.log('Create new conversation')}
+                onCreateNew={() => logger.debug('Create new conversation')}
               />
             ) : (
               <div className="py-8">

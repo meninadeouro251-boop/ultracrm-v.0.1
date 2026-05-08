@@ -11,6 +11,7 @@ import {
   Button,
   Label,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Upload, X } from 'lucide-react';
 import { MACRO_ACTION_TYPES } from '@/types/automation';
 
@@ -76,7 +77,7 @@ export default function MacroActionRow({
 
       handleParamsChange([blobId]);
     } catch (error) {
-      console.error('Erro ao fazer upload:', error);
+      logger.error('Erro ao fazer upload:', error);
     } finally {
       setUploadingFile(false);
     }

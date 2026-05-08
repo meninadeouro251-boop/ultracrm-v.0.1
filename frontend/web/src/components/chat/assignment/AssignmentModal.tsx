@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@ultraapi/design-system/dialog';
+import logger from '@/utils/logger';
 import { Button } from '@ultraapi/design-system/button';
 import { Input } from '@ultraapi/design-system/input';
 import { Badge } from '@ultraapi/design-system/badge';
@@ -96,7 +97,7 @@ const AssignmentModal: React.FC<AssignmentModalProps> = ({
       await onConfirm(selectedIds);
       onClose();
     } catch (error) {
-      console.error('Error in assignment:', error);
+      logger.error('Error in assignment:', error);
     } finally {
       setIsSubmitting(false);
     }

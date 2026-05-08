@@ -21,6 +21,7 @@ import { Plus, Trash2, GripVertical, Loader2, X, Users } from 'lucide-react';
 import { CreatePipelineData, PipelineStage } from '@/types/analytics';
 import TeamsService from '@/services/teams/teamsService';
 import { Team } from '@/types/users/teams';
+import logger from '@/utils/logger';
 
 interface StageFormData {
   name: string;
@@ -199,7 +200,7 @@ export default function CreatePipelineModal({
       setTeamsLoading(true);
       TeamsService.getTeams({ page: 1, per_page: 100, sort: 'name', order: 'asc' })
         .then(response => setTeams(response.data))
-        .catch(err => console.error('Error loading teams:', err))
+        .catch(err => logger.error('Error loading teams:', err))
         .finally(() => setTeamsLoading(false));
     }
     if (formData.visibility !== 'team') {

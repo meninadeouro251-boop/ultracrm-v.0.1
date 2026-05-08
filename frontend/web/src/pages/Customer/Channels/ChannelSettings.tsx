@@ -10,6 +10,7 @@ import {
   TabsTrigger,
   Textarea,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import {
   ArrowLeft,
   Save,
@@ -425,7 +426,7 @@ export default function ChannelSettings() {
         portal_id: data.help_center?.id,
       });
     } catch (error) {
-      console.error('Error loading channel data:', error);
+      logger.error('Error loading channel data:', error);
       toast.error(t('settings.errors.loadError'));
     } finally {
       setIsLoading(false);
@@ -479,7 +480,7 @@ export default function ChannelSettings() {
       await loadChannelData();
       toast.success(t('settings.success.saveSuccess'));
     } catch (error) {
-      console.error('Error saving channel settings:', error);
+      logger.error('Error saving channel settings:', error);
       toast.error(t('settings.errors.saveError'));
     } finally {
       setIsSaving(false);
@@ -509,7 +510,7 @@ export default function ChannelSettings() {
       setFormData(prev => ({ ...prev, avatar_url: undefined }));
       toast.success(t('settings.success.avatarDeleteSuccess'));
     } catch (error) {
-      console.error('Error deleting avatar:', error);
+      logger.error('Error deleting avatar:', error);
       toast.error(t('settings.errors.avatarDeleteError'));
     }
   };
@@ -678,7 +679,7 @@ export default function ChannelSettings() {
                             toast.success(t('settings.success.senderUpdateSuccess'));
                             await loadChannelData(); // Refresh data
                           } catch (error) {
-                            console.error('Erro ao atualizar configurações do remetente:', error);
+                            logger.error('Erro ao atualizar configurações do remetente:', error);
                             toast.error(t('settings.errors.senderUpdateError'));
                           }
                         }}
@@ -721,7 +722,7 @@ export default function ChannelSettings() {
                                 toast.success(t('settings.configuration.email.success.updated'));
                                 await loadChannelData();
                               } catch (error) {
-                                console.error('Error updating email signature:', error);
+                                logger.error('Error updating email signature:', error);
                                 toast.error(t('settings.configuration.email.errors.updateError'));
                               } finally {
                                 setIsSavingSignature(false);
@@ -864,7 +865,7 @@ export default function ChannelSettings() {
                 onUpdate={success => {
                   if (success) {
                     // Optionally refresh inbox data or show success feedback
-                    console.log('Agent bot configuration updated successfully');
+                    logger.debug('Agent bot configuration updated successfully');
                   }
                 }}
               />}
@@ -881,7 +882,7 @@ export default function ChannelSettings() {
                     toast.success(t('settings.success.configUpdateSuccess'));
                     await loadChannelData(); // Refresh data
                   } catch (error) {
-                    console.error('Erro ao atualizar configuração:', error);
+                    logger.error('Erro ao atualizar configuração:', error);
                     toast.error(t('settings.errors.configUpdateError'));
                   }
                 }}

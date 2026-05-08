@@ -8,6 +8,7 @@ import {
   Checkbox,
   Label,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
@@ -81,7 +82,7 @@ const AtlassianConfigDialog = ({
         });
       }
     } catch (error) {
-      console.error('Error loading Atlassian configuration:', error);
+      logger.error('Error loading Atlassian configuration:', error);
       setConfig({
         provider: 'atlassian',
         username: '',
@@ -100,7 +101,7 @@ const AtlassianConfigDialog = ({
       const response = await AtlassianService.discoverTools(agentId);
       setAvailableTools(response.tools || []);
     } catch (error) {
-      console.error('Error loading Atlassian tools:', error);
+      logger.error('Error loading Atlassian tools:', error);
       toast.error('Erro ao carregar ferramentas disponíveis');
     } finally {
       setIsLoadingTools(false);
@@ -117,7 +118,7 @@ const AtlassianConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to Atlassian:', error);
+      logger.error('Error connecting to Atlassian:', error);
       toast.error('Erro ao conectar com Atlassian');
     } finally {
       setIsConnecting(false);
@@ -159,7 +160,7 @@ const AtlassianConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving Atlassian configuration:', error);
+      logger.error('Error saving Atlassian configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -173,7 +174,7 @@ const AtlassianConfigDialog = ({
       toast.success('Atlassian desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting Atlassian:', error);
+      logger.error('Error disconnecting Atlassian:', error);
       toast.error('Erro ao desconectar Atlassian');
     }
   };

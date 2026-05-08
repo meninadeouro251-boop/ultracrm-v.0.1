@@ -11,6 +11,7 @@ import {
   DialogTitle,
   Button,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Grid3X3, List, Users as UsersIcon } from 'lucide-react';
 import EmptyState from '@/components/base/EmptyState';
 
@@ -127,7 +128,7 @@ export default function Users() {
           loading: { ...prev.loading, list: false },
         }));
       } catch (error) {
-        console.error('Error loading users:', error);
+        logger.error('Error loading users:', error);
         toast.error(t('messages.loadError'));
         setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
       }
@@ -197,7 +198,7 @@ export default function Users() {
     try {
       await loadUsers({ page: 1 });
     } catch (error) {
-      console.error('Error applying filters:', error);
+      logger.error('Error applying filters:', error);
       toast.error(t('messages.filterError'));
     }
   };
@@ -327,7 +328,7 @@ export default function Users() {
       setDeleteDialogOpen(false);
       setUserToDelete(null);
     } catch (error) {
-      console.error('Error deleting user:', error);
+      logger.error('Error deleting user:', error);
       toast.error(t('messages.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -354,7 +355,7 @@ export default function Users() {
 
       setBulkDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error bulk deleting users:', error);
+      logger.error('Error bulk deleting users:', error);
       toast.error(t('messages.bulkDeleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, bulk: false } }));

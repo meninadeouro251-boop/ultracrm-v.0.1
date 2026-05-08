@@ -1,3 +1,4 @@
+import logger from '@/utils/logger';
 /**
  * Utility functions for playing notification sounds
  */
@@ -69,7 +70,7 @@ export const getAudioSettings = (): AudioSettings => {
       return audioSettingsCache!;
     }
   } catch (error) {
-    console.error('Error loading audio settings:', error);
+    logger.error('Error loading audio settings:', error);
   }
 
   // Default settings
@@ -95,7 +96,7 @@ export const saveAudioSettings = (settings: Partial<AudioSettings>): void => {
     localStorage.setItem('audio_notification_settings', JSON.stringify(updated));
     audioSettingsCache = updated;
   } catch (error) {
-    console.error('Error saving audio settings:', error);
+    logger.error('Error saving audio settings:', error);
   }
 };
 
@@ -165,12 +166,12 @@ export const playNotificationSound = async (
       generateTone(audioSettings.notification_tone);
     }
   } catch (error) {
-    console.error('Error playing notification sound:', error);
+    logger.error('Error playing notification sound:', error);
     // Fallback to generated tone
     try {
       generateTone(audioSettings.notification_tone);
     } catch (fallbackError) {
-      console.error('Error generating fallback tone:', fallbackError);
+      logger.error('Error generating fallback tone:', fallbackError);
     }
   }
 };
@@ -202,12 +203,12 @@ export const playNotificationSoundPreview = async (tone: NotificationTone): Prom
       generateTone(tone);
     }
   } catch (error) {
-    console.error('Error playing notification sound preview:', error);
+    logger.error('Error playing notification sound preview:', error);
     // Fallback to generated tone
     try {
       generateTone(tone);
     } catch (fallbackError) {
-      console.error('Error generating fallback tone:', fallbackError);
+      logger.error('Error generating fallback tone:', fallbackError);
     }
   }
 };

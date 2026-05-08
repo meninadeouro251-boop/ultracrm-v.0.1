@@ -10,6 +10,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@ultraapi/design-system/alert-dialog';
+import logger from '@/utils/logger';
 import { ScrollArea } from '@ultraapi/design-system/scroll-area';
 import { Play, Loader2, Zap } from 'lucide-react';
 import { toast } from 'sonner';
@@ -40,7 +41,7 @@ const MacrosList: React.FC<MacrosListProps> = ({ conversationId, onMacroExecuted
       const response = await macrosService.getMacros();
       setMacros(response.data || []);
     } catch (error) {
-      console.error('Error loading macros:', error);
+      logger.error('Error loading macros:', error);
       toast.error(t('contactSidebar.macros.loading'));
     } finally {
       setIsLoading(false);
@@ -65,7 +66,7 @@ const MacrosList: React.FC<MacrosListProps> = ({ conversationId, onMacroExecuted
       toast.success(t('contactSidebar.macros.executeSuccess', { name: selectedMacro.name }));
       onMacroExecuted?.();
     } catch (error) {
-      console.error('Error executing macro:', error);
+      logger.error('Error executing macro:', error);
       toast.error(t('contactSidebar.macros.executeError', { name: selectedMacro.name }));
     } finally {
       setExecutingMacro(null);

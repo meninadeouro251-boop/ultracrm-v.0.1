@@ -3,6 +3,7 @@ import { useAuth } from './AuthContext';
 import { useAuthStore } from '@/store/authStore';
 import { permissionsService } from '@/services/permissions';
 import type { ResourceActionsResponse } from '@/types/auth';
+import logger from '@/utils/logger';
 
 interface PermissionsContextValue {
   // Permissões
@@ -70,7 +71,7 @@ export const PermissionsProvider: React.FC<PermissionsProviderProps> = ({ childr
         const config = await permissionsService.getResourceActions();
         setResourceActions(config);
       } catch (err) {
-        console.error('Error loading permissions config:', err);
+        logger.error('Error loading permissions config:', err);
       } finally {
         setConfigLoading(false);
       }
@@ -100,7 +101,7 @@ export const PermissionsProvider: React.FC<PermissionsProviderProps> = ({ childr
         const permissions = await permissionsService.getUserPermissions();
         setUserPermissions(permissions);
       } catch (error) {
-        console.error('Erro ao carregar permissões do usuário:', error);
+        logger.error('Erro ao carregar permissões do usuário:', error);
         setError('Erro ao carregar permissões do usuário');
         setUserPermissions([]);
       } finally {
@@ -143,7 +144,7 @@ export const PermissionsProvider: React.FC<PermissionsProviderProps> = ({ childr
 
         setAccountPermissions(permissions);
       } catch (error) {
-        console.error('Erro ao carregar permissões do account:', error);
+        logger.error('Erro ao carregar permissões do account:', error);
         setError('Erro ao carregar permissões do account');
         setAccountPermissions([]);
       } finally {

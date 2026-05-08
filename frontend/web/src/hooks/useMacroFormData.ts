@@ -3,6 +3,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import TeamsService from '@/services/teams/teamsService';
 import UsersService from '@/services/users/usersService';
 import { labelsService } from '@/services/contacts/labelsService';
+import logger from '@/utils/logger';
 
 interface MacroFormDataOptions {
   agents: Array<{ id: string; name: string; email?: string }>;
@@ -87,7 +88,7 @@ export const useMacroFormData = () => {
 
       setOptions(newOptions);
     } catch (err) {
-      console.error('Erro ao carregar dados do formulário de macro:', err);
+      logger.error('Erro ao carregar dados do formulário de macro:', err);
       setError('Erro ao carregar dados do formulário');
     } finally {
       setLoading(false);

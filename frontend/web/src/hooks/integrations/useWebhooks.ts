@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Webhook, WebhookFormData } from '@/types/integrations';
 import { webhooksService } from '@/services/integrations';
 import { toast } from 'sonner';
+import logger from '@/utils/logger';
 
 interface UseWebhooksOptions {
   autoLoad?: boolean;
@@ -35,7 +36,7 @@ export function useWebhooks(options: UseWebhooksOptions = {}): UseWebhooksReturn
     } catch (err) {
       const errorMessage = 'Erro ao carregar webhooks';
       setError(errorMessage);
-      console.error('Error loading webhooks:', err);
+      logger.error('Error loading webhooks:', err);
       toast.error(errorMessage);
     } finally {
       setLoading(false);
@@ -49,7 +50,7 @@ export function useWebhooks(options: UseWebhooksOptions = {}): UseWebhooksReturn
         toast.success('Webhook criado com sucesso');
         await loadWebhooks(); // Reload list
       } catch (err) {
-        console.error('Error creating webhook:', err);
+        logger.error('Error creating webhook:', err);
         toast.error('Erro ao criar webhook');
         throw err;
       }
@@ -64,7 +65,7 @@ export function useWebhooks(options: UseWebhooksOptions = {}): UseWebhooksReturn
         toast.success('Webhook atualizado com sucesso');
         await loadWebhooks(); // Reload list
       } catch (err) {
-        console.error('Error updating webhook:', err);
+        logger.error('Error updating webhook:', err);
         toast.error('Erro ao atualizar webhook');
         throw err;
       }
@@ -79,7 +80,7 @@ export function useWebhooks(options: UseWebhooksOptions = {}): UseWebhooksReturn
         toast.success('Webhook excluído com sucesso');
         await loadWebhooks(); // Reload list
       } catch (err) {
-        console.error('Error deleting webhook:', err);
+        logger.error('Error deleting webhook:', err);
         toast.error('Erro ao excluir webhook');
         throw err;
       }
@@ -92,7 +93,7 @@ export function useWebhooks(options: UseWebhooksOptions = {}): UseWebhooksReturn
       await webhooksService.testWebhook(id);
       toast.success('Teste de webhook enviado com sucesso');
     } catch (err) {
-      console.error('Error testing webhook:', err);
+      logger.error('Error testing webhook:', err);
       toast.error('Erro ao testar webhook');
       throw err;
     }

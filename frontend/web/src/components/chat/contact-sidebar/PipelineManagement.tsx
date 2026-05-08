@@ -12,6 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@ultraapi/design-system/alert-dialog';
+import logger from '@/utils/logger';
 import { Loader2, GitBranch, Trash2, Save, AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
 import { pipelinesService } from '@/services/pipelines/pipelinesService';
@@ -93,7 +94,7 @@ const PipelineManagement: React.FC<PipelineManagementProps> = ({
 
         setAvailableStages(selectedPipeline?.stages || []);
       } catch (error) {
-        console.error('Error loading stages:', error);
+        logger.error('Error loading stages:', error);
         setAvailableStages([]);
       }
     };
@@ -160,7 +161,7 @@ const PipelineManagement: React.FC<PipelineManagementProps> = ({
       await loadData();
       onPipelineUpdated?.();
     } catch (error) {
-      console.error('Error updating pipeline:', error);
+      logger.error('Error updating pipeline:', error);
       toast.error(t('contactSidebar.pipeline.saveError'));
     } finally {
       setIsSaving(false);
@@ -187,7 +188,7 @@ const PipelineManagement: React.FC<PipelineManagementProps> = ({
       setCurrentPipeline(null);
       onPipelineUpdated?.();
     } catch (error) {
-      console.error('Error removing from pipeline:', error);
+      logger.error('Error removing from pipeline:', error);
       toast.error(t('contactSidebar.pipeline.removeError'));
     } finally {
       setIsSaving(false);

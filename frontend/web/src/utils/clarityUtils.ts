@@ -1,3 +1,4 @@
+import logger from '@/utils/logger';
 /**
  * Microsoft Clarity Analytics Integration
  *
@@ -50,7 +51,7 @@ export const initClarity = (configProjectId?: string | null): void => {
       }
     })(window, document, 'clarity', 'script', projectId);
   } catch (error) {
-    console.error('Clarity: Initialization failed', error);
+    logger.error('Clarity: Initialization failed', error);
   }
 };
 

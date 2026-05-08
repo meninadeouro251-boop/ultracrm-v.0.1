@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { MessageSquare, Info, Settings, Eye } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -114,7 +115,7 @@ export default function PreChatForm({
 
       toast.success('Configurações do formulário pré-chat atualizadas com sucesso!');
     } catch (error) {
-      console.error('Error updating pre-chat form:', error);
+      logger.error('Error updating pre-chat form:', error);
       toast.error('Erro ao atualizar configurações do formulário pré-chat');
     } finally {
       setIsUpdating(false);

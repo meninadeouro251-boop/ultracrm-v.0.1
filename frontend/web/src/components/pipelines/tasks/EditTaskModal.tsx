@@ -20,6 +20,7 @@ import {
 import { Loader2 } from 'lucide-react';
 import type { UpdateTaskData, PipelineTask } from '@/types/analytics';
 import type { User } from '@/types/users';
+import logger from '@/utils/logger';
 
 interface EditTaskModalProps {
   open: boolean;
@@ -62,7 +63,7 @@ export default function EditTaskModal({
           // Format to YYYY-MM-DDTHH:mm
           formattedDueDate = date.toISOString().slice(0, 16);
         } catch (e) {
-          console.error('Error formatting due date:', e);
+          logger.error('Error formatting due date:', e);
         }
       }
 

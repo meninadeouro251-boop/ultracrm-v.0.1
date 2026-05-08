@@ -11,6 +11,7 @@ import {
   DialogTitle,
   Button,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Settings } from 'lucide-react';
 import EmptyState from '@/components/base/EmptyState';
 
@@ -94,7 +95,7 @@ export default function Macros() {
           loading: { ...prev.loading, list: false },
         }));
       } catch (error) {
-        console.error('Error loading macros:', error);
+        logger.error('Error loading macros:', error);
         toast.error(t('messages.loadError'));
         setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
       }
@@ -248,7 +249,7 @@ export default function Macros() {
       setDeleteDialogOpen(false);
       setMacroToDelete(null);
     } catch (error) {
-      console.error('Error deleting macro:', error);
+      logger.error('Error deleting macro:', error);
       toast.error(t('messages.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -275,7 +276,7 @@ export default function Macros() {
 
       setBulkDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error bulk deleting macros:', error);
+      logger.error('Error bulk deleting macros:', error);
       toast.error(t('messages.bulkDeleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));

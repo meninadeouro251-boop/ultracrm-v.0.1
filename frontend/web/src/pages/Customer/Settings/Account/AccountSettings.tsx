@@ -12,6 +12,7 @@ import {
   Button,
   Switch,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { toast } from 'sonner';
 import { useUserPermissions } from '@/hooks/useUserPermissions';
 import BaseHeader from '@/components/base/BaseHeader';
@@ -140,7 +141,7 @@ export default function AccountSettings() {
         autoResolveEnabled: !!settings.auto_resolve_after,
       });
     } catch (error) {
-      console.error('Erro ao carregar dados da conta:', error);
+      logger.error('Erro ao carregar dados da conta:', error);
       toast.error(t('messages.error.loadFailed'));
     } finally {
       setLoading(false);
@@ -202,7 +203,7 @@ export default function AccountSettings() {
       toast.success(t('messages.success.generalUpdated'));
       await loadAccountData(); // Recarregar dados
     } catch (error: unknown) {
-      console.error('Erro ao salvar:', error);
+      logger.error('Erro ao salvar:', error);
       toast.error((error as Error).message || t('messages.error.saveFailed'));
     } finally {
       setSaving(false);

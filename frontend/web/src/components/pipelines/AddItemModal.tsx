@@ -22,6 +22,7 @@ import { ConversationForModal, PipelineStage } from '@/types/analytics';
 import { pipelinesService } from '@/services/pipelines';
 import { toast } from 'sonner';
 import { Contact } from '@/types/contacts';
+import logger from '@/utils/logger';
 
 interface Item {
   id: string;
@@ -114,7 +115,7 @@ export default function AddItemModal({
 
       setAvailableItems(data as Item[]);
     } catch (error) {
-      console.error('Error loading items:', error);
+      logger.error('Error loading items:', error);
       toast.error(t('addItem.loadError'));
       setAvailableItems([]);
     } finally {
@@ -159,7 +160,7 @@ export default function AddItemModal({
       onItemAdded();
       onOpenChange(false);
     } catch (error) {
-      console.error('Error adding item:', error);
+      logger.error('Error adding item:', error);
 
       // Handle error messages
       let errorMessage = t('addItem.error');

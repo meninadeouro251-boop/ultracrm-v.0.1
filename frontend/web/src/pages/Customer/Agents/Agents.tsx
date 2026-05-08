@@ -15,6 +15,7 @@ import { exportAsJson, generateExportFilename } from '@/utils/exportUtils';
 import { useDarkMode } from '@/hooks/useDarkMode';
 import type { PaginationMeta } from '@/types/core';
 import { DEFAULT_PAGE_SIZE } from '@/constants/pagination';
+import logger from '@/utils/logger';
 
 interface AgentsState {
   agents: Agent[];
@@ -105,7 +106,7 @@ const Agentes = () => {
           loading: false,
         }));
       } catch (error) {
-        console.error('Erro ao carregar agentes:', error);
+        logger.error('Erro ao carregar agentes:', error);
         toast.error(t('loadError'));
         setState(prev => ({ ...prev, loading: false }));
       } finally {
@@ -142,7 +143,7 @@ const Agentes = () => {
         throw new Error('Export failed');
       }
     } catch (error) {
-      console.error('Erro ao exportar agentes:', error);
+      logger.error('Erro ao exportar agentes:', error);
       toast.error(t('export.error'), {
         description: t('export.errorDesc'),
       });
@@ -198,7 +199,7 @@ const Agentes = () => {
       setDeleteDialogOpen(false);
       setAgentToDelete(null);
     } catch (error) {
-      console.error('Erro ao deletar agente:', error);
+      logger.error('Erro ao deletar agente:', error);
       toast.error(t('loadError'));
     } finally {
       setIsDeleting(false);

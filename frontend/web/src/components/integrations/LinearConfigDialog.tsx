@@ -8,6 +8,7 @@ import {
   Checkbox,
   Label,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
@@ -81,7 +82,7 @@ const LinearConfigDialog = ({
         });
       }
     } catch (error) {
-      console.error('Error loading Linear configuration:', error);
+      logger.error('Error loading Linear configuration:', error);
       setConfig({
         provider: 'linear',
         username: '',
@@ -100,7 +101,7 @@ const LinearConfigDialog = ({
       const response = await LinearService.discoverTools(agentId);
       setAvailableTools(response.tools || []);
     } catch (error) {
-      console.error('Error loading Linear tools:', error);
+      logger.error('Error loading Linear tools:', error);
       toast.error('Erro ao carregar ferramentas disponíveis');
     } finally {
       setIsLoadingTools(false);
@@ -117,7 +118,7 @@ const LinearConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to Linear:', error);
+      logger.error('Error connecting to Linear:', error);
       toast.error('Erro ao conectar com Linear');
     } finally {
       setIsConnecting(false);
@@ -159,7 +160,7 @@ const LinearConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving Linear configuration:', error);
+      logger.error('Error saving Linear configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -173,7 +174,7 @@ const LinearConfigDialog = ({
       toast.success('Linear desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting Linear:', error);
+      logger.error('Error disconnecting Linear:', error);
       toast.error('Erro ao desconectar Linear');
     }
   };

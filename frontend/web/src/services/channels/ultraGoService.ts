@@ -1,6 +1,7 @@
 import api from '@/services/core/api';
 import { extractData } from '@/utils/apiHelpers';
 import type {
+import logger from '@/utils/logger';
   UltraGoConnectionParams,
   UltraGoAuthorizationResponse
 } from '@/types/channels/inbox';
@@ -34,7 +35,7 @@ const ultraGoService = {
       // Ultra Go retorna {"status":"ok"}
       return data.status === 'ok';
     } catch (error) {
-      console.error('Ultra Go health check failed:', error);
+      logger.error('Ultra Go health check failed:', error);
       return false;
     }
   },

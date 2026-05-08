@@ -4,6 +4,7 @@ import { sendChatMessage } from '@/services/agents/chatService';
 import { toast } from 'sonner';
 import { FileData } from '@/utils/fileUtils';
 import { ChatMessage, ChatSession } from '@/types';
+import logger from '@/utils/logger';
 
 interface AgentChatContextValue {
   // State
@@ -50,7 +51,7 @@ export function AgentChatProvider({ children, agentId }: AgentChatProviderProps)
       const validSessions = sessions.filter(session => session && session.id);
       setSessions(validSessions);
     } catch (error) {
-      console.error('Error loading sessions:', error);
+      logger.error('Error loading sessions:', error);
       toast.error('Erro ao carregar sessões');
       // Clear sessions on error to avoid showing stale data
       setSessions([]);
@@ -98,7 +99,7 @@ export function AgentChatProvider({ children, agentId }: AgentChatProviderProps)
         }
       }
 
-      console.error('Error loading messages:', lastError);
+      logger.error('Error loading messages:', lastError);
       toast.error('Erro ao carregar mensagens. Tente novamente.');
     } finally {
       setIsLoading(false);
@@ -119,11 +120,11 @@ export function AgentChatProvider({ children, agentId }: AgentChatProviderProps)
         // Reload sessions list to include the new session
         await loadSessions();
       } else {
-        console.error('No session_id returned from backend');
+        logger.error('No session_id returned from backend');
         toast.error('Erro ao criar sessão: ID não retornado');
       }
     } catch (error: any) {
-      console.error('Error creating session:', error);
+      logger.error('Error creating session:', error);
       const errorMessage = error?.response?.data?.detail || error?.message || 'Erro ao criar sessão';
       toast.error(errorMessage);
     } finally {
@@ -143,7 +144,7 @@ export function AgentChatProvider({ children, agentId }: AgentChatProviderProps)
       }
       toast.success('Sessão deletada com sucesso');
     } catch (error: any) {
-      console.error('Error deleting session:', error);
+      logger.error('Error deleting session:', error);
       // If session not found (404), remove it from the list anyway
       if (error?.response?.status === 404) {
         setSessions(prev => prev.filter(s => s.id !== sessionId));
@@ -227,10 +228,10 @@ export function AgentChatProvider({ children, agentId }: AgentChatProviderProps)
         });
         loadSessions();
       } else {
-        console.warn('No message_history in response, keeping temporary message');
+        logger.warn('No message_history in response, keeping temporary message');
       }
     } catch (error: any) {
-      console.error('Error sending message:', error);
+      logger.error('Error sending message:', error);
       setMessages(prev => prev.filter(msg => msg.id !== tempUserMessage.id));
       const errorDetail =
         error?.response?.data?.error?.message ||

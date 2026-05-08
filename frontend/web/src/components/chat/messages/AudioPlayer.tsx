@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@ultraapi/design-system/button';
 import { Play, Pause, Volume2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 interface AudioPlayerProps {
   src: string;
@@ -58,7 +59,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, filename, className = ''
 
     const handleError = () => {
       setIsLoading(false);
-      console.error('Erro ao carregar áudio');
+      logger.error('Erro ao carregar áudio');
     };
 
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);

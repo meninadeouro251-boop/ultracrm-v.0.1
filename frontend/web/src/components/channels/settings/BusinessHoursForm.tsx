@@ -11,6 +11,7 @@ import {
   SelectValue,
   Textarea,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Clock, Info, AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -107,7 +108,7 @@ export default function BusinessHoursForm({
 
       toast.success(t('settings.businessHours.success.updated'));
     } catch (error) {
-      console.error('Error updating business hours:', error);
+      logger.error('Error updating business hours:', error);
       toast.error(t('settings.businessHours.errors.updateError'));
     } finally {
       setIsUpdating(false);
