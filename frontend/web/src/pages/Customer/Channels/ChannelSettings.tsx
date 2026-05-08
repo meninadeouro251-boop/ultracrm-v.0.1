@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
-import logger from '@/utils/logger';
   Card,
   CardContent,
   Button,
@@ -11,6 +10,7 @@ import logger from '@/utils/logger';
   TabsTrigger,
   Textarea,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import {
   ArrowLeft,
   Save,

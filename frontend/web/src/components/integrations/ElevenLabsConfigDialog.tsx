@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -15,6 +14,7 @@ import logger from '@/utils/logger';
   SelectValue,
   Slider,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Play, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 

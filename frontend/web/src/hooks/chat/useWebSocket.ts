@@ -1,9 +1,9 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import {
-import logger from '@/utils/logger';
   ChatActionCableConnector,
   ChatEventHandlers,
 } from '@/services/chat/websocket/ChatActionCableConnector';
+import logger from '@/utils/logger';
 import { ConnectionParams } from '@/services/chat/websocket/BaseActionCableConnector';
 
 export interface UseWebSocketOptions {

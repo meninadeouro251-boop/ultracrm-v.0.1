@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Button } from '@ultraapi/design-system/button';
 import { Badge } from '@ultraapi/design-system/badge';
 import {
-import logger from '@/utils/logger';
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -11,6 +10,7 @@ import logger from '@/utils/logger';
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@ultraapi/design-system/dropdown-menu';
+import logger from '@/utils/logger';
 import {
   MoreVertical,
   Settings,

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -28,6 +27,7 @@ import TeamsService from '@/services/teams/teamsService';
 import { Team } from '@/types/users/teams';
 import { LocalAttributeDefinition, LocalAttributeDefinitionPayload } from '@/types/pipelines/localAttributeDefinition';
 import PipelineCustomAttributes from './PipelineCustomAttributes';
+import logger from '@/utils/logger';
 
 interface EditPipelineModalProps {
   open: boolean;

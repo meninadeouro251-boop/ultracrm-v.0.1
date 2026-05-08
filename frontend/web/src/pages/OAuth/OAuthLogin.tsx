@@ -6,10 +6,10 @@ import { AlertCircle, ExternalLink, Loader2 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   getOAuthAccounts,
   createOAuthApplication,
 } from '@/services/auth/oauthService';
+import logger from '@/utils/logger';
 import type { OAuthAccount } from '@/types/auth';
 
 interface OAuthParams {

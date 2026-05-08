@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import {
-import logger from '@/utils/logger';
   Button,
   Input,
   Select,
@@ -16,6 +15,7 @@ import logger from '@/utils/logger';
   CardHeader,
   CardTitle,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { ArrowLeft, Save } from 'lucide-react';
 import EmailEditorComponent, { EditorRef } from 'react-email-editor';
 import { useLanguage } from '@/hooks/useLanguage';

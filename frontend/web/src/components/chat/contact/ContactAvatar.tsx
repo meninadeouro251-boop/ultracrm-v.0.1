@@ -7,11 +7,11 @@ import { MessageCircle } from 'lucide-react';
 import { Contact } from '@/types/chat/api';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   getContactAvatarUrl,
   getContactInitials,
   getContactAvatarColor,
 } from '@/utils/chat/avatarHelpers';
+import logger from '@/utils/logger';
 import ChannelIcon from '@/components/channels/ChannelIcon';
 
 // Tipo genérico para qualquer contato com avatar

@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import {
-import logger from '@/utils/logger';
   Card,
   CardContent,
   CardHeader,
@@ -8,6 +7,7 @@ import logger from '@/utils/logger';
   CardDescription,
   Button,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Settings, Save, Loader2, AlertCircle } from 'lucide-react';
 import integrationService from '@/services/agents/integrationService';
 import { useLanguage } from '@/hooks/useLanguage';

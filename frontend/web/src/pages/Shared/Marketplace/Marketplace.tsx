@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Button, Card, CardContent, Badge, Input } from '@ultraapi/design-system';
 import {
-import logger from '@/utils/logger';
   Package,
   Search,
   Star,
@@ -13,6 +12,7 @@ import logger from '@/utils/logger';
   Filter,
   X,
 } from 'lucide-react';
+import logger from '@/utils/logger';
 import { toast } from 'sonner';
 
 interface MarketplaceProduct {

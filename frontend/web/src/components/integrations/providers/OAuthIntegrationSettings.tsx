@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -12,6 +11,7 @@ import logger from '@/utils/logger';
   Button,
   Card,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Settings, LucideIcon } from 'lucide-react';
 
 import { integrationsService } from '@/services/integrations';

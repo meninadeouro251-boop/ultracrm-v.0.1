@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Input,
   Label,
   Textarea,
@@ -13,6 +12,7 @@ import logger from '@/utils/logger';
   Button,
   Switch,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { toast } from 'sonner';
 import { useUserPermissions } from '@/hooks/useUserPermissions';
 import BaseHeader from '@/components/base/BaseHeader';

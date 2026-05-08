@@ -12,13 +12,13 @@ import { TaskConfigData } from '@/components/ai_agents/Forms/TaskConfigForm';
 import { ExternalAgentConfigData } from '@/components/agents/ExternalAgentConfig';
 import { ToolsConfigData } from '@/components/ai_agents/Forms/ToolsConfigForm';
 import {
-import logger from '@/utils/logger';
   getAgent,
   updateAgent,
   createAgent,
   listApiKeys,
   getAccessibleAgents,
 } from '@/services/agents';
+import logger from '@/utils/logger';
 import { ApiKey, AgentCreate, Agent } from '@/types/agents';
 import { CustomTool } from '@/types/ai';
 import { extractBackendErrorMessage } from '@/utils/agentUtils';

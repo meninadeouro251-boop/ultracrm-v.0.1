@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@ultraapi/design-system/button';
 import {
-import logger from '@/utils/logger';
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -11,6 +10,7 @@ import logger from '@/utils/logger';
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@ultraapi/design-system/alert-dialog';
+import logger from '@/utils/logger';
 import { ScrollArea } from '@ultraapi/design-system/scroll-area';
 import { Play, Loader2, Zap } from 'lucide-react';
 import { toast } from 'sonner';

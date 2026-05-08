@@ -10,12 +10,12 @@ import { useNavigate } from 'react-router-dom';
 import { useUserPermissions } from '@/hooks/useUserPermissions';
 import TeamsService from '@/services/teams/teamsService';
 import {
-import logger from '@/utils/logger';
   Team,
   TeamsState,
   TeamsListParams,
   TeamFormData,
 } from '@/types/users';
+import logger from '@/utils/logger';
 
 import {
   TeamCard,

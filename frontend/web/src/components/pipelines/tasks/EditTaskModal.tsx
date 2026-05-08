@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -21,6 +20,7 @@ import logger from '@/utils/logger';
 import { Loader2 } from 'lucide-react';
 import type { UpdateTaskData, PipelineTask } from '@/types/analytics';
 import type { User } from '@/types/users';
+import logger from '@/utils/logger';
 
 interface EditTaskModalProps {
   open: boolean;

@@ -1,13 +1,13 @@
 import api from '@/services/core/api';
 import { extractData, extractResponse } from '@/utils/apiHelpers';
 import {
-import logger from '@/utils/logger';
   CannedResponse,
   CannedResponseResponse,
   CannedResponseDeleteResponse,
   CannedResponseFormData,
   CannedResponsesResponse,
 } from '@/types/knowledge';
+import logger from '@/utils/logger';
 
 class CannedResponsesService {
   private get baseUrl(): string {

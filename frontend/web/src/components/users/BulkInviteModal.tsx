@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -11,6 +10,7 @@ import logger from '@/utils/logger';
   Alert,
   AlertDescription,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { toast } from 'sonner';
 import usersService from '@/services/users/usersService';
 import { Loader2, CheckCircle, XCircle, Mail } from 'lucide-react';

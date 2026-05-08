@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -14,6 +13,7 @@ import logger from '@/utils/logger';
   SelectTrigger,
   SelectValue,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { toast } from 'sonner';
 import usersService from '@/services/users/usersService';
 import useRoles from '@/hooks/useRoles';

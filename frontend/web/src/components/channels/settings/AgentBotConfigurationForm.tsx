@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-import logger from '@/utils/logger';
   Card,
   CardContent,
   Button,
@@ -15,6 +14,7 @@ import logger from '@/utils/logger';
   Badge,
   Switch,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import {
   Bot,
   Trash2,

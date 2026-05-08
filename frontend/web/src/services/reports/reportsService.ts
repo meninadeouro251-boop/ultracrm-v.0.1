@@ -1,7 +1,6 @@
 import api from '@/services/core/api';
 import { extractData } from '@/utils/apiHelpers';
 import {
-import logger from '@/utils/logger';
   ConversationMetric,
   AgentStatus,
   HeatmapData,
@@ -18,6 +17,7 @@ import logger from '@/utils/logger';
   AgentSummaryReport,
   LabelSummaryReport
 } from '@/types/analytics';
+import logger from '@/utils/logger';
 
 class ReportsService {
   // Get conversation metrics (overview stats) - Using live_reports API v2

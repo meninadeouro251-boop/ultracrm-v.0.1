@@ -4,7 +4,6 @@ import { useUserPermissions } from '@/hooks/useUserPermissions';
 import { useLanguage } from '@/hooks/useLanguage';
 import { AgentsCustomMCPsTour } from '@/tours';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -13,6 +12,7 @@ import logger from '@/utils/logger';
   DialogTitle,
   Button,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Grid3X3, List, TestTube } from 'lucide-react';
 import EmptyState from '@/components/base/EmptyState';
 import {

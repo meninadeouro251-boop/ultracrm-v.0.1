@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -38,6 +37,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
 import GoogleCalendarService from '@/services/integrations/googleCalendarService';
 import { GoogleCalendarConfig, GoogleCalendarItem } from '@/types/integrations';
+import logger from '@/utils/logger';
 
 interface GoogleCalendarConfigDialogProps {
   open: boolean;

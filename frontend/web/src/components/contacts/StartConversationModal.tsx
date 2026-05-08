@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -26,6 +25,7 @@ import { conversationAPI } from '@/services/conversations';
 import MessageTemplateService from '@/services/channels/messageTemplatesService';
 import { MessageTemplate } from '@/types/channels/inbox';
 import { ConversationCreateData } from '@/types/chat/api';
+import logger from '@/utils/logger';
 
 interface StartConversationModalProps {
   open: boolean;

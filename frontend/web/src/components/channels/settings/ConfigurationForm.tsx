@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Card,
   CardContent,
   Input,
@@ -35,6 +34,7 @@ import {
 import { UltraApiService, ZapiService } from '@/services/channels/channelConfigurationService';
 import BaileysService from '@/services/channels/baileysService';
 import InboxesService from '@/services/channels/inboxesService';
+import logger from '@/utils/logger';
 
 interface ConfigurationFormProps {
   inboxId: string;

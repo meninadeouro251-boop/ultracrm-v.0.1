@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-import logger from '@/utils/logger';
   Button,
   Input,
   Label,
@@ -37,6 +36,7 @@ import { type Locale } from '@/i18n/config';
 import { useGlobalConfig } from '@/contexts/GlobalConfigContext';
 
 import logo from '@/assets/ULTRA_LOGO.svg';
+import logger from '@/utils/logger';
 
 export const Auth: React.FC = () => {
   const { login: authLogin, mfaState, verifyMfaCode, clearMfaState, setMfaRequired } = useAuth();

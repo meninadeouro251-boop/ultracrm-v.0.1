@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Button,
   Dialog,
   DialogContent,
@@ -23,6 +22,7 @@ import { Edit, Eye, Key, Plus, Trash2, X, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { ApiKey, ApiKeyCreate, ApiKeyUpdate } from '@/types/agents';
 import { createApiKey, listApiKeys, updateApiKey, deleteApiKey } from '@/services/agents';
+import logger from '@/utils/logger';
 
 interface ApiKeysModalProps {
   open: boolean;

@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -13,6 +12,7 @@ import logger from '@/utils/logger';
   Checkbox,
   ScrollArea,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import {
   Search,
   Users,

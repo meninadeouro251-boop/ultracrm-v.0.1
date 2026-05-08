@@ -1,6 +1,5 @@
 import ultraaiApi from '@/services/core/apiUltraAI';
 import {
-import logger from '@/utils/logger';
   Agent,
   AgentCreate,
   Folder,
@@ -15,6 +14,7 @@ import logger from '@/utils/logger';
   ApiKeyModelsResponse,
   AgentListResponse,
 } from '@/types/agents';
+import logger from '@/utils/logger';
 import { processAgentData } from '@/utils/agentUtils';
 import { extractData, buildPaginationParams, extractResponse } from '@/utils/apiHelpers';
 

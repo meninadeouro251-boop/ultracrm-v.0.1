@@ -3,13 +3,13 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   getAgent,
   updateAgent,
   listApiKeys,
   getAccessibleAgents,
   getAgentIntegrations,
 } from '@/services/agents';
+import logger from '@/utils/logger';
 import { Agent, AgentCreate } from '@/types/agents';
 import { toast } from 'sonner';
 import { extractBackendErrorMessage } from '@/utils/agentUtils';

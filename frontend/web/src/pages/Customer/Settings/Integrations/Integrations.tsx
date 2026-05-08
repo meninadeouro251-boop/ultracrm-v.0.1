@@ -3,7 +3,6 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useNavigate } from 'react-router-dom';
 import { SettingsIntegrationsTour } from '@/tours';
 import {
-import logger from '@/utils/logger';
   Card,
   Badge,
   Input,
@@ -13,6 +12,7 @@ import logger from '@/utils/logger';
   TabsTrigger,
   Skeleton,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Search, Puzzle, Grid3X3 } from 'lucide-react';
 import EmptyState from '@/components/base/EmptyState';
 import BaseHeader from '@/components/base/BaseHeader';

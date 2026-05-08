@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Button,
   Input,
   Label,
@@ -15,6 +14,7 @@ import logger from '@/utils/logger';
   Textarea,
   Switch,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Plus, X, Settings } from 'lucide-react';
 import { customAttributesService } from '@/services/customAttributes/customAttributesService';
 import {

@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -15,6 +14,7 @@ import logger from '@/utils/logger';
   AvatarImage,
   AvatarFallback,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Contact } from '@/types/contacts';
 import { contactsService } from '@/services/contacts/contactsService';
 import { Search, Mail, Phone, Building2, User, Loader2 } from 'lucide-react';

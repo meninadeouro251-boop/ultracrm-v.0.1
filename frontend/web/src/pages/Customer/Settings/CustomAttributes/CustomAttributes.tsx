@@ -3,7 +3,6 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { SettingsCustomAttributesTour } from '@/tours';
 import { toast } from 'sonner';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -16,6 +15,7 @@ import logger from '@/utils/logger';
   TabsList,
   TabsTrigger,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Settings } from 'lucide-react';
 import EmptyState from '@/components/base/EmptyState';
 

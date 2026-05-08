@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
-import logger from '@/utils/logger';
   Card,
   CardContent,
   Button,
@@ -10,6 +9,7 @@ import logger from '@/utils/logger';
   SelectTrigger,
   SelectValue,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { MessageSquare, Info, Settings, Eye } from 'lucide-react';
 import { toast } from 'sonner';
 

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Button,
   Input,
   Label,
@@ -21,6 +20,7 @@ import { Plus, X, Settings, Pencil, Check, Loader2 } from 'lucide-react';
 import { customAttributesService } from '@/services/customAttributes/customAttributesService';
 import { CustomAttributeDefinition, AttributeModel } from '@/types/settings';
 import { toast } from 'sonner';
+import logger from '@/utils/logger';
 
 export type CustomAttributesMode = 'form' | 'editable';
 

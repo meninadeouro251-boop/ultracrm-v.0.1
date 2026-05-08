@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -23,6 +22,7 @@ import { ConversationForModal, PipelineStage } from '@/types/analytics';
 import { pipelinesService } from '@/services/pipelines';
 import { toast } from 'sonner';
 import { Contact } from '@/types/contacts';
+import logger from '@/utils/logger';
 
 interface Item {
   id: string;

@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
-import logger from '@/utils/logger';
   Button,
   Badge,
   Card,
@@ -27,6 +26,7 @@ import { Maximize2, Save, X, ArrowDown, List, Search, Edit, PenTool, Loader2 } f
 import { listAgents } from '@/services/agents';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Agent } from '@/types/agents';
+import logger from '@/utils/logger';
 
 type AgentPageMode = 'create' | 'edit' | 'view';
 

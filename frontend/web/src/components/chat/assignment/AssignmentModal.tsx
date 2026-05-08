@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -8,6 +7,7 @@ import logger from '@/utils/logger';
   DialogHeader,
   DialogTitle,
 } from '@ultraapi/design-system/dialog';
+import logger from '@/utils/logger';
 import { Button } from '@ultraapi/design-system/button';
 import { Input } from '@ultraapi/design-system/input';
 import { Badge } from '@ultraapi/design-system/badge';

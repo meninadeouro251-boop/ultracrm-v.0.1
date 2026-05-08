@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
-import logger from '@/utils/logger';
   Button,
   Badge,
   Card,
@@ -12,6 +11,7 @@ import logger from '@/utils/logger';
   Label,
   ScrollArea,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Search, X, Users, Plus, Check, Loader2 } from 'lucide-react';
 import { listAgents } from '@/services/agents';
 import { useLanguage } from '@/hooks/useLanguage';

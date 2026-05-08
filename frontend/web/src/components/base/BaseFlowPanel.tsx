@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-import logger from '@/utils/logger';
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   Button,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

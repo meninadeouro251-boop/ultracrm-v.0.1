@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -15,6 +14,7 @@ import logger from '@/utils/logger';
   AccordionItem,
   AccordionTrigger,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Search } from 'lucide-react';
 import type { AccessToken, AccessTokenFormData } from '@/types/auth';
 import { useUserPermissions } from '@/hooks/useUserPermissions';

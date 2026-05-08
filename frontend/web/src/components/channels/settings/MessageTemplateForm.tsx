@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import {
-import logger from '@/utils/logger';
   Button,
   Input,
   Select,
@@ -47,6 +46,7 @@ import MessageTemplateService, {
 } from '@/services/channels/messageTemplatesService';
 import { TemplatePreview } from './TemplatePreview';
 import { MessageTemplate, TemplateFormData } from '@/types';
+import logger from '@/utils/logger';
 
 interface MessageTemplateFormProps {
   inboxId: string;

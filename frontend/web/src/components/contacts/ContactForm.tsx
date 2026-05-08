@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Button,
   Input,
   Label,
@@ -16,6 +15,7 @@ import logger from '@/utils/logger';
   Separator,
   Switch,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import {
   User,
   MapPin,

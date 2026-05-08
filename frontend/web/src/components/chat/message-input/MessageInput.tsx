@@ -4,12 +4,12 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Button } from '@ultraapi/design-system/button';
 import { Card, CardContent } from '@ultraapi/design-system/card';
 import {
-import logger from '@/utils/logger';
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@ultraapi/design-system/tooltip';
+import logger from '@/utils/logger';
 import {
   Send,
   Mic,

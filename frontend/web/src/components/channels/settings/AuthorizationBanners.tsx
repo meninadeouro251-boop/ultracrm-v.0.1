@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, CardContent, Badge } from '@ultraapi/design-system';
 import {
-import logger from '@/utils/logger';
   AlertTriangle,
   RefreshCw,
   Facebook,
@@ -10,6 +9,7 @@ import logger from '@/utils/logger';
   MessageSquare,
   CheckCircle,
 } from 'lucide-react';
+import logger from '@/utils/logger';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
 import { useGlobalConfig } from '@/contexts/GlobalConfigContext';

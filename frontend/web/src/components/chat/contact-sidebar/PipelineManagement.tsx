@@ -3,7 +3,6 @@ import { Button } from '@ultraapi/design-system/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@ultraapi/design-system/select';
 import { Label } from '@ultraapi/design-system/label';
 import {
-import logger from '@/utils/logger';
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -13,6 +12,7 @@ import logger from '@/utils/logger';
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@ultraapi/design-system/alert-dialog';
+import logger from '@/utils/logger';
 import { Loader2, GitBranch, Trash2, Save, AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
 import { pipelinesService } from '@/services/pipelines/pipelinesService';

@@ -6,10 +6,10 @@ import { ConversationsProvider } from '@/contexts/chat/ConversationsContext';
 import { useConversations as useConversationsOriginal } from '@/hooks/chat/useConversations';
 import { FiltersProvider, useFilters as useFiltersOriginal } from '@/contexts/chat/FiltersContext';
 import {
-import logger from '@/utils/logger';
   WebSocketProvider,
   useWebSocketContext as useWebSocketContextOriginal,
 } from '@/contexts/chat/WebSocketContext';
+import logger from '@/utils/logger';
 import { UIProvider, useUI as useUIOriginal } from '@/contexts/chat/UIContext';
 import {
   Conversation,

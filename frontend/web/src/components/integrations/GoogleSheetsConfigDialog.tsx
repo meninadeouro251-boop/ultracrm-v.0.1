@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -15,6 +14,7 @@ import logger from '@/utils/logger';
   SelectValue,
   Switch,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Sheet, CheckSquare, Edit3, FilePlus, Loader2, Settings } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';

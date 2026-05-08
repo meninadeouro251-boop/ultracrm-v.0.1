@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -30,6 +29,7 @@ import {
   isSupportedPayloadChannel,
   type ChannelOption,
 } from './scheduledActionChannelUtils';
+import logger from '@/utils/logger';
 
 interface ScheduleActionModalProps {
   open: boolean;

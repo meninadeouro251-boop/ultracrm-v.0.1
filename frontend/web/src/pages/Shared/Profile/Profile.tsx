@@ -1,6 +1,5 @@
 import { useState, ChangeEvent, useEffect, useCallback } from 'react';
 import {
-import logger from '@/utils/logger';
   Button,
   Tabs,
   TabsContent,
@@ -44,6 +43,7 @@ import { getAudioSettings, playNotificationSoundPreview } from '@/utils/audioNot
 import { getModifierKey } from '@/utils/platform';
 import { normalizeAvatarUrl } from '@/utils/avatarUrl';
 import { ProfilePhotoUploader, TwoFactorSetup } from '@/components/shared/profile';
+import logger from '@/utils/logger';
 
 const Profile = () => {
   const { user, refreshUser, logout } = useAuth();

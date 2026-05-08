@@ -1,7 +1,6 @@
 import apiAuth from '@/services/core/apiAuth';
 import { extractData } from '@/utils/apiHelpers';
 import {
-import logger from '@/utils/logger';
   LoginRequest,
   LoginResponse,
   LoginData,
@@ -15,6 +14,7 @@ import logger from '@/utils/logger';
   ProfileUpdateData,
   PasswordChangeData,
 } from '@/types/auth';
+import logger from '@/utils/logger';
 import { useAuthStore } from '@/store/authStore';
 
 const processApiResponse = (response: any): LoginResponse => {

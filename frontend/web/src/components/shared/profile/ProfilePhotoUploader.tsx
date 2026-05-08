@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import {
-import logger from '@/utils/logger';
   Button,
   Avatar,
   AvatarFallback,
@@ -11,6 +10,7 @@ import logger from '@/utils/logger';
   DialogHeader,
   DialogTitle,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Camera, Upload } from 'lucide-react';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';

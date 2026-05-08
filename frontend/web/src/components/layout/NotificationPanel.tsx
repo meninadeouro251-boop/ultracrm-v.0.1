@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Button } from '@ultraapi/design-system';
 import {
-import logger from '@/utils/logger';
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
@@ -11,6 +10,7 @@ import logger from '@/utils/logger';
   Settings,
   X,
 } from 'lucide-react';
+import logger from '@/utils/logger';
 import NotificationItem from './NotificationItem';
 import { useNavigate } from 'react-router-dom';
 import { useNotifications } from '@/contexts/NotificationsContext';

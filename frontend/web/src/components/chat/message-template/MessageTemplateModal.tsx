@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
 } from '@ultraapi/design-system/dialog';
+import logger from '@/utils/logger';
 import MessageTemplateService from '@/services/channels/messageTemplatesService';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';

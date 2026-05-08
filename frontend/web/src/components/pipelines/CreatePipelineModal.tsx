@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -22,6 +21,7 @@ import { Plus, Trash2, GripVertical, Loader2, X, Users } from 'lucide-react';
 import { CreatePipelineData, PipelineStage } from '@/types/analytics';
 import TeamsService from '@/services/teams/teamsService';
 import { Team } from '@/types/users/teams';
+import logger from '@/utils/logger';
 
 interface StageFormData {
   name: string;

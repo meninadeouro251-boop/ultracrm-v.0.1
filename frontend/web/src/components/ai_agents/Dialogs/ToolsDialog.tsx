@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -25,6 +24,7 @@ import { listTools, listToolCategories } from '@/services/agents';
 import type { Tool, ToolCategory } from '@/types/ai';
 import { isValidUUID } from '@/utils/agentUtils';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 // Extensão do tipo Tool para incluir configuração
 type ConfiguredTool = Tool & {

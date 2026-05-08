@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -12,6 +11,7 @@ import logger from '@/utils/logger';
   Input,
   Checkbox,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Search, Code, Tag, Plus, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { listCustomTools } from '@/services/agents/customToolsService';

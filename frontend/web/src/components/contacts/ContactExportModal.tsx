@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -12,6 +11,7 @@ import logger from '@/utils/logger';
   Label,
   Checkbox,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Download, FileSpreadsheet } from 'lucide-react';
 import { BaseFilter as ContactFilter } from '@/types/core';
 

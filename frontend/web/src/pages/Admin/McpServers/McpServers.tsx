@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-import logger from '@/utils/logger';
   Button,
   Table,
   TableBody,
@@ -14,6 +13,7 @@ import logger from '@/utils/logger';
   DropdownMenuTrigger,
   Badge,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import {
   Server,
   Plus,

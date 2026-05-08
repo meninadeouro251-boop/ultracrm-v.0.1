@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Select,
   SelectContent,
   SelectItem,
@@ -12,6 +11,7 @@ import logger from '@/utils/logger';
   Button,
   Label,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Upload, X } from 'lucide-react';
 import { MACRO_ACTION_TYPES } from '@/types/automation';
 

@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react';
 import { toast } from 'sonner';
 import { 
-import logger from '@/utils/logger';
   fetchRolePermissions, 
   deleteRolePermission 
 } from '@/services/rbac';
+import logger from '@/utils/logger';
 import { RolePermission } from '@/types/auth';
 
 interface UsePermissionsReturn {

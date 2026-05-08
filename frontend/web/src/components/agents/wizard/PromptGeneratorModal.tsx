@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -10,6 +9,7 @@ import logger from '@/utils/logger';
   Label,
   Textarea,
 } from '@ultraapi/design-system';
+import logger from '@/utils/logger';
 import { Sparkles, Loader2, Wand2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { openaiService } from '@/services/integrations/openaiService';

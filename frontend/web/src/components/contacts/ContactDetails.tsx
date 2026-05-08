@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -39,6 +38,7 @@ import {
   GitBranch,
   Merge,
 } from 'lucide-react';
+import logger from '@/utils/logger';
 // import { ScheduledActionsList } from '@/components/scheduledActions';
 import { Contact } from '@/types/contacts';
 import ContactAvatar from '@/components/chat/contact/ContactAvatar';

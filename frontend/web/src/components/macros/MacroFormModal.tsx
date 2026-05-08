@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -22,6 +21,7 @@ import { toast } from 'sonner';
 import { Macro, MACRO_ACTION_TYPES } from '@/types/automation';
 import { macrosService } from '@/services/macros';
 import MacroActionRow from './MacroActionRow';
+import logger from '@/utils/logger';
 
 interface MacroFormModalProps {
   isOpen: boolean;

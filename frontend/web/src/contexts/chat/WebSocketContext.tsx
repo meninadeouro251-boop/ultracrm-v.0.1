@@ -5,7 +5,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Message, Conversation, MessageSender, MessageTypeValue, Attachment } from '@/types/chat/api';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
-import logger from '@/utils/logger';
   MessageCreatedEvent,
   MessageUpdatedEvent,
   ConversationCreatedEvent,
@@ -15,6 +14,7 @@ import logger from '@/utils/logger';
   PresenceUpdateEvent,
   ConversationReadEvent,
 } from '@/services/chat/websocket/ChatActionCableConnector';
+import logger from '@/utils/logger';
 import { normalizeToUnixSeconds } from '@/utils/time/timeHelpers';
 
 /**

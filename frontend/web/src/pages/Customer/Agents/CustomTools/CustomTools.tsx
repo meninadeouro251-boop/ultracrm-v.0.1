@@ -9,7 +9,6 @@ import EmptyState from '@/components/base/EmptyState';
 import { CustomTool, CustomToolsState, CustomToolFormData, CustomToolsListParams } from '@/types/ai';
 import { BaseFilter, AppliedFilter } from '@/types/core';
 import {
-import logger from '@/utils/logger';
   CustomToolCard,
   CustomToolsHeader,
   CustomToolsTable,
@@ -18,6 +17,7 @@ import logger from '@/utils/logger';
   CustomToolDetails,
   CustomToolsFilter,
 } from '@/components/customTools';
+import logger from '@/utils/logger';
 import {
   listCustomTools,
   createCustomTool,

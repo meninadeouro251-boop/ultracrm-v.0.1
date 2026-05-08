@@ -9,7 +9,6 @@ import { contactsService } from '@/services/contacts/contactsService';
 import { Button } from '@ultraapi/design-system/button';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@ultraapi/design-system/card';
 import {
-import logger from '@/utils/logger';
   User,
   Phone,
   Mail,
@@ -23,6 +22,7 @@ import logger from '@/utils/logger';
   Hash,
   Edit,
 } from 'lucide-react';
+import logger from '@/utils/logger';
 
 import { toast } from 'sonner';
 
