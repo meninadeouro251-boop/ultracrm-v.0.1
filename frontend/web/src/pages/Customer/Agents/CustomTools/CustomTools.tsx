@@ -9,6 +9,7 @@ import EmptyState from '@/components/base/EmptyState';
 import { CustomTool, CustomToolsState, CustomToolFormData, CustomToolsListParams } from '@/types/ai';
 import { BaseFilter, AppliedFilter } from '@/types/core';
 import {
+import logger from '@/utils/logger';
   CustomToolCard,
   CustomToolsHeader,
   CustomToolsTable,
@@ -83,7 +84,7 @@ export default function CustomTools() {
           loading: { ...prev.loading, list: false },
         }));
       } catch (error) {
-        console.error('Error loading custom tools:', error);
+        logger.error('Error loading custom tools:', error);
         toast.error(getErrorMessage(error as Error, t('errors.loadError')));
         setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
       }
@@ -142,7 +143,7 @@ export default function CustomTools() {
     try {
       await loadTools({ skip: 0 });
     } catch (error) {
-      console.error('Error applying filters:', error);
+      logger.error('Error applying filters:', error);
       toast.error(getErrorMessage(error as Error, t('errors.applyFiltersError')));
     }
   };
@@ -232,7 +233,7 @@ export default function CustomTools() {
         toast.error(t('test.failed', { error: result.test_result.error || t('test.unknownError') }));
       }
     } catch (error) {
-      console.error('Error testing custom tool:', error);
+      logger.error('Error testing custom tool:', error);
       toast.error(getErrorMessage(error as Error, t('errors.testError')));
     } finally {
       setTestingTool(null);
@@ -258,7 +259,7 @@ export default function CustomTools() {
       setDeleteDialogOpen(false);
       setToolToDelete(null);
     } catch (error) {
-      console.error('Error deleting custom tool:', error);
+      logger.error('Error deleting custom tool:', error);
       toast.error(t('errors.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -302,7 +303,7 @@ export default function CustomTools() {
       setToolModalOpen(false);
       setEditingTool(null);
     } catch (error) {
-      console.error('Error saving custom tool:', error);
+      logger.error('Error saving custom tool:', error);
       toast.error(editingTool ? t('errors.updateError') : t('errors.createError'));
     } finally {
       setState(prev => ({

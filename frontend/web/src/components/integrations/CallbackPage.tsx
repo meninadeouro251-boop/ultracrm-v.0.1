@@ -7,6 +7,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import i18n from '@/i18n/config';
 import logo from '@/assets/ULTRA_LOGO.svg';
 import { cn } from '@/lib/utils';
+import logger from '@/utils/logger';
 
 interface CallbackPageProps {
   integrationName: string;
@@ -71,7 +72,7 @@ export default function CallbackPage({ integrationName, onCallback, onSuccess, r
         agentIdFromState = payload.agent_id;
       } catch (e) {
         // Some integrations use different state structures - let onCallback handle it
-        console.warn('Could not decode state, callback will handle it:', e);
+        logger.warn('Could not decode state, callback will handle it:', e);
       }
 
       // Call the provided callback function
@@ -101,7 +102,7 @@ export default function CallbackPage({ integrationName, onCallback, onSuccess, r
         throw new Error(response.error || t('callback.error.connectionError', { name: integrationName }));
       }
     } catch (error: any) {
-      console.error(`${integrationName} callback error:`, error);
+      logger.error(`${integrationName} callback error:`, error);
       setStatus('error');
       const errorMsg = error.message || t('callback.error.processingError', { name: integrationName });
       setMessage(errorMsg);

@@ -20,6 +20,7 @@ import { pipelinesService } from '@/services/pipelines';
 import type { Pipeline } from '@/types/analytics';
 
 import { Contact, Conversation } from '@/types/chat/api';
+import logger from '@/utils/logger';
 
 interface ContactSidebarProps {
   isOpen: boolean;
@@ -115,7 +116,7 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({
       const pipelines = await pipelinesService.getPipelinesByConversation(conversation.id);
       setConversationPipelines(pipelines);
     } catch (error) {
-      console.error('Error loading conversation pipelines:', error);
+      logger.error('Error loading conversation pipelines:', error);
       setConversationPipelines([]);
     } finally {
       setIsLoadingPipelines(false);

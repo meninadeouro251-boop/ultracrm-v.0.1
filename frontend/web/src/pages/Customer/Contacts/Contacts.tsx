@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -123,12 +124,12 @@ export default function Contacts() {
           loading: { ...prev.loading, list: false },
         }));
       } catch (error) {
-        console.error('Error loading contacts:', error);
+        logger.error('Error loading contacts:', error);
 
         // Se erro 403 ou 404, marcar como erro e não tentar novamente
         const axiosError = error as AxiosError;
         if (axiosError?.response?.status === 403 || axiosError?.response?.status === 404) {
-          console.error('Account not found or without permission. Stopping contact attempts.');
+          logger.error('Account not found or without permission. Stopping contact attempts.');
         }
 
         toast.error(t('messages.loadError'));
@@ -173,7 +174,7 @@ export default function Contacts() {
           loading: { ...prev.loading, list: false },
         }));
       } catch (error) {
-        console.error('Error searching contacts:', error);
+        logger.error('Error searching contacts:', error);
         toast.error(t('messages.searchError'));
         setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
       }
@@ -203,7 +204,7 @@ export default function Contacts() {
         setDetailsModalOpen(true);
       } catch (error) {
         if (cancelled) return;
-        console.error('Error loading contact from route:', error);
+        logger.error('Error loading contact from route:', error);
         toast.error(t('errors.loadContact'));
       }
     };
@@ -337,7 +338,7 @@ export default function Contacts() {
         loading: { ...prev.loading, list: false },
       }));
     } catch (error) {
-      console.error('Error applying filters:', error);
+      logger.error('Error applying filters:', error);
       toast.error(t('messages.filterError'));
       setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
     }
@@ -385,7 +386,7 @@ export default function Contacts() {
         loading: { ...prev.loading, list: false },
       }));
     } catch (error) {
-      console.error('Error applying filters with pagination:', error);
+      logger.error('Error applying filters with pagination:', error);
       toast.error(t('messages.filterError'));
       setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
     }
@@ -529,7 +530,7 @@ export default function Contacts() {
       // Refresh the list
       loadContacts();
     } catch (error: unknown) {
-      console.error('Error importing contacts:', error);
+      logger.error('Error importing contacts:', error);
       const errorMessage =
         (error as { response?: { data?: { message?: string } } })?.response?.data?.message ||
         t('messages.importError');
@@ -569,7 +570,7 @@ export default function Contacts() {
       await contactsService.exportContacts(exportPayload);
       toast.success(t('messages.exportQueued'));
     } catch (error: unknown) {
-      console.error('Error exporting contacts:', error);
+      logger.error('Error exporting contacts:', error);
       const errorMessage =
         (error as { response?: { data?: { message?: string } } })?.response?.data?.message ||
         t('messages.exportError');
@@ -595,7 +596,7 @@ export default function Contacts() {
       setDeleteDialogOpen(false);
       setContactToDelete(null);
     } catch (error) {
-      console.error('Error deleting contact:', error);
+      logger.error('Error deleting contact:', error);
       
       const errorMessage = extractError(error).message;
       toast.error(errorMessage);
@@ -620,7 +621,7 @@ export default function Contacts() {
 
       setBulkDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error bulk deleting contacts:', error);
+      logger.error('Error bulk deleting contacts:', error);
       toast.error(t('messages.bulkDeleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, bulk: false } }));
@@ -646,7 +647,7 @@ export default function Contacts() {
       setMergeModalOpen(false);
       setContactsToMerge([]);
     } catch (error) {
-      console.error('Error merging contacts:', error);
+      logger.error('Error merging contacts:', error);
       toast.error(t('messages.mergeError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, bulk: false } }));
@@ -700,7 +701,7 @@ export default function Contacts() {
         loadContacts();
       }
     } catch (error) {
-      console.error('Error saving contact:', error);
+      logger.error('Error saving contact:', error);
       toast.error(editingContact ? t('messages.updateError') : t('messages.createError'));
     } finally {
       setState(prev => ({
@@ -714,7 +715,7 @@ export default function Contacts() {
   const handleConversationCreated = (conversationId: string) => {
     toast.success(t('messages.conversationStarted'));
     // TODO: Navigate to conversation
-    console.log('Navigate to conversation:', conversationId);
+    logger.debug('Navigate to conversation:', conversationId);
   };
 
   // Handle modal close
@@ -981,7 +982,7 @@ export default function Contacts() {
             setDetailsContact(response);
             setDetailsModalOpen(true);
           } catch (error) {
-            console.error('Error loading contact:', error);
+            logger.error('Error loading contact:', error);
             toast.error(t('errors.loadContact'));
           }
         }}

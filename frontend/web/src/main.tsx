@@ -1,3 +1,4 @@
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import "@ultraapi/design-system/styles";
 import './styles/globals.css';
@@ -12,8 +13,8 @@ initTheme();
 // Inicialização do Google Analytics 4
 initGA4();
 
-// ⚡ OTIMIZAÇÃO: StrictMode removido para evitar duplicação de requests
-// Em desenvolvimento, StrictMode executa useEffect 2x para detectar problemas
 createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
     <App />
+  </React.StrictMode>
 );

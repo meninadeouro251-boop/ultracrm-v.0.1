@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -98,7 +99,7 @@ export default function EditPipelineModal({
       setTeamsLoading(true);
       TeamsService.getTeams({ page: 1, per_page: 100, sort: 'name', order: 'asc' })
         .then(response => setTeams(response.data))
-        .catch(err => console.error('Error loading teams:', err))
+        .catch(err => logger.error('Error loading teams:', err))
         .finally(() => setTeamsLoading(false));
     }
     if (formData.visibility !== 'team') {

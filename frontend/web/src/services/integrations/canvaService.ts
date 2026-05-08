@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   CanvaConfig,
   CanvaOAuthResponse,
   CanvaConnectionResponse,
@@ -17,7 +18,7 @@ const CanvaService = {
       );
       return data;
     } catch (error) {
-      console.error('CanvaService.generateAuthorization error:', error);
+      logger.error('CanvaService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -40,7 +41,7 @@ const CanvaService = {
       );
       return data;
     } catch (error) {
-      console.error('CanvaService.completeAuthorization error:', error);
+      logger.error('CanvaService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -61,7 +62,7 @@ const CanvaService = {
           return null;
         }
       }
-      console.error('CanvaService.getConfiguration error:', error);
+      logger.error('CanvaService.getConfiguration error:', error);
       throw error;
     }
   },
@@ -80,7 +81,7 @@ const CanvaService = {
       );
       return data;
     } catch (error) {
-      console.error('CanvaService.saveConfiguration error:', error);
+      logger.error('CanvaService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -95,7 +96,7 @@ const CanvaService = {
       );
       return data;
     } catch (error) {
-      console.error('CanvaService.disconnect error:', error);
+      logger.error('CanvaService.disconnect error:', error);
       throw error;
     }
   },
@@ -111,7 +112,7 @@ const CanvaService = {
       );
       return data;
     } catch (error) {
-      console.error('CanvaService.discoverTools error:', error);
+      logger.error('CanvaService.discoverTools error:', error);
       throw error;
     }
   },

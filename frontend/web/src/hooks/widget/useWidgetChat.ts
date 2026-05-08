@@ -13,6 +13,7 @@ import { postParent } from '@/utils/widget/postParent';
 import { mapAndRegisterMessages } from '@/utils/widget/messages';
 
 import type {
+import logger from '@/utils/logger';
   WidgetConfig,
   CurrentUser,
   Campaign,
@@ -375,7 +376,7 @@ export function useWidgetChat() {
               timestamp: new Date().toISOString(),
             });
           } catch (e) {
-            console.error('[WIDGET_DEBUG] Bootstrap STEP 6.1 - ERROR fetching conversations:', e);
+            logger.error('[WIDGET_DEBUG] Bootstrap STEP 6.1 - ERROR fetching conversations:', e);
           }
 
           if (!activeConversation?.id) {
@@ -456,7 +457,7 @@ export function useWidgetChat() {
 
             setHasStarted(true);
           } catch (e) {
-            console.error('[WIDGET_DEBUG] Bootstrap STEP 6.3 - ERROR loading messages:', e);
+            logger.error('[WIDGET_DEBUG] Bootstrap STEP 6.3 - ERROR loading messages:', e);
             // mesmo sem msgs, conversa existe -> considera started
             setHasStarted(true);
           }
@@ -666,7 +667,7 @@ export function useWidgetChat() {
           prev.map(m => (m.id === optimistic.id ? { ...m, status: 'sent' } : m)),
         );
       } catch (e) {
-        console.error('❌ Widget: handleSend error:', e);
+        logger.error('❌ Widget: handleSend error:', e);
         setMessages(prev =>
           prev.map(m =>
             m.id === optimistic.id && m.status === 'sending'
@@ -751,7 +752,7 @@ export function useWidgetChat() {
 
         setHasStarted(true);
       } catch (apiError) {
-        console.warn('Widget: API call failed, relying on WebSocket events:', apiError);
+        logger.warn('Widget: API call failed, relying on WebSocket events:', apiError);
 
         setTimeout(() => {
           if (!hasStarted && isCreatingConversation) {
@@ -761,7 +762,7 @@ export function useWidgetChat() {
         }, 3000);
       }
     } catch (error) {
-      console.error('❌ Widget: Error processing pre-chat form:', error);
+      logger.error('❌ Widget: Error processing pre-chat form:', error);
     } finally {
       setIsCreatingConversation(false);
     }
@@ -861,7 +862,7 @@ export function useWidgetChat() {
         setHasMoreMessages(false);
       }
     } catch (error) {
-      console.error('❌ Widget: Failed to load older messages:', error);
+      logger.error('❌ Widget: Failed to load older messages:', error);
     } finally {
       isLoadingOlderMessagesRef.current = false;
       setIsLoadingOlderMessages(false);

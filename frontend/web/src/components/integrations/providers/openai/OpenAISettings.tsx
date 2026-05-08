@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -45,7 +46,7 @@ export default function OpenAISettings({ onBack }: OpenAISettingsProps = {}) {
       const hookData = await integrationsService.getOpenAIHook();
       setHook(hookData);
     } catch (error) {
-      console.error('Error loading OpenAI hook:', error);
+      logger.error('Error loading OpenAI hook:', error);
       toast.error(t('openai.settings.messages.loadError'));
     } finally {
       setLoading(prev => ({ ...prev, get: false }));
@@ -89,7 +90,7 @@ export default function OpenAISettings({ onBack }: OpenAISettingsProps = {}) {
       // Close modal
       setConfigModalOpen(false);
     } catch (error) {
-      console.error('Error saving OpenAI config:', error);
+      logger.error('Error saving OpenAI config:', error);
       toast.error(
         hook
           ? t('openai.settings.messages.updateError')
@@ -114,7 +115,7 @@ export default function OpenAISettings({ onBack }: OpenAISettingsProps = {}) {
       setHook(null);
       setDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error deleting OpenAI hook:', error);
+      logger.error('Error deleting OpenAI hook:', error);
       toast.error(t('openai.settings.messages.deleteError'));
     } finally {
       setLoading(prev => ({ ...prev, delete: false }));

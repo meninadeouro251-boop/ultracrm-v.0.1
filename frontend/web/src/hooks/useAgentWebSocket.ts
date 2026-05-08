@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
+import logger from '@/utils/logger';
 
 interface FileData {
   filename: string;
@@ -87,7 +88,7 @@ export function useAgentWebSocket({
             try {
               eventObj = JSON.parse(data.message);
             } catch (e) {
-              console.warn('[WebSocket] data.message is not valid JSON:', data.message);
+              logger.warn('[WebSocket] data.message is not valid JSON:', data.message);
             }
           }
           onEvent(eventObj);
@@ -96,16 +97,16 @@ export function useAgentWebSocket({
           onTurnComplete();
         }
       } catch (err) {
-        console.error('[WebSocket] Error processing message:', err, event.data);
+        logger.error('[WebSocket] Error processing message:', err, event.data);
       }
     };
 
     ws.onerror = err => {
-      console.error('[WebSocket] connection error:', err);
+      logger.error('[WebSocket] connection error:', err);
     };
 
     ws.onclose = event => {
-      console.warn('[WebSocket] connection closed:', event);
+      logger.warn('[WebSocket] connection closed:', event);
     };
   }, [agentId, externalId, userId, jwt, apiKey, onEvent, onTurnComplete, pendingMessage]);
 
@@ -127,7 +128,7 @@ export function useAgentWebSocket({
           wsRef.current.send(JSON.stringify({ message: msg }));
         }
       } else {
-        console.warn('[WebSocket] unable to send message, connection not open.');
+        logger.warn('[WebSocket] unable to send message, connection not open.');
         setPendingMessage({ message: msg, files });
         openWebSocket();
       }

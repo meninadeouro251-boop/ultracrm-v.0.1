@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -77,7 +78,7 @@ const CustomToolsSelectionDialog = ({
         const tools = await listCustomTools({ skip: 0, limit: 100 });
         setCustomTools(tools);
       } catch (error) {
-        console.error('Error loading custom tools:', error);
+        logger.error('Error loading custom tools:', error);
         setCustomTools([]);
         hasLoadedRef.current = false;
       } finally {

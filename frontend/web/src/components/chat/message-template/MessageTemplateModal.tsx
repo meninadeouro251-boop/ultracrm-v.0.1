@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -85,7 +86,7 @@ const MessageTemplateModal: React.FC<MessageTemplateModalProps> = ({
         setProccessOpenDialog(true);
       } catch (error) {
         if (cancelled) return;
-        console.error('Error loading templates:', error);
+        logger.error('Error loading templates:', error);
         toast.error(t('messageTemplates.errors.loadError'));
       } finally {
         if (!cancelled) {
@@ -127,7 +128,7 @@ const MessageTemplateModal: React.FC<MessageTemplateModalProps> = ({
       setProccessOpenDialog(false);
       onClose();
     } catch (error) {
-      console.error('[MessageTemplateModal] Error sending template message:', error);
+      logger.error('[MessageTemplateModal] Error sending template message:', error);
       toast.error(t('messageTemplates.errors.sendError'));
     } finally {
       setIsLoading(false);

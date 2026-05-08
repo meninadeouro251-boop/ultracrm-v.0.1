@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -81,7 +82,7 @@ const CanvaConfigDialog = ({
         });
       }
     } catch (error) {
-      console.error('Error loading Canva configuration:', error);
+      logger.error('Error loading Canva configuration:', error);
       setConfig({
         provider: 'canva',
         username: '',
@@ -100,7 +101,7 @@ const CanvaConfigDialog = ({
       const response = await CanvaService.discoverTools(agentId);
       setAvailableTools(response.tools || []);
     } catch (error) {
-      console.error('Error loading Canva tools:', error);
+      logger.error('Error loading Canva tools:', error);
       toast.error('Erro ao carregar ferramentas disponíveis');
     } finally {
       setIsLoadingTools(false);
@@ -117,7 +118,7 @@ const CanvaConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to Canva:', error);
+      logger.error('Error connecting to Canva:', error);
       toast.error('Erro ao conectar com Canva');
     } finally {
       setIsConnecting(false);
@@ -159,7 +160,7 @@ const CanvaConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving Canva configuration:', error);
+      logger.error('Error saving Canva configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -173,7 +174,7 @@ const CanvaConfigDialog = ({
       toast.success('Canva desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting Canva:', error);
+      logger.error('Error disconnecting Canva:', error);
       toast.error('Erro ao desconectar Canva');
     }
   };

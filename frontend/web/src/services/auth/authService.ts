@@ -1,6 +1,7 @@
 import apiAuth from '@/services/core/apiAuth';
 import { extractData } from '@/utils/apiHelpers';
 import {
+import logger from '@/utils/logger';
   LoginRequest,
   LoginResponse,
   LoginData,
@@ -136,7 +137,7 @@ export const validateToken = async (): Promise<UserResponse> => {
     } catch (refreshError) {
       // Se o refresh falhar, continuar para validate - pode haver cookie válido
       // Não fazer throw aqui para permitir que validate seja tentado
-      console.debug('Refresh token failed, continuing with validate:', refreshError);
+      logger.debug('Refresh token failed, continuing with validate:', refreshError);
     }
   }
 

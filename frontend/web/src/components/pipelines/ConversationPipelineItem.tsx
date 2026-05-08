@@ -6,6 +6,7 @@ import { pipelinesService } from '@/services/pipelines';
 import PipelineItemCard from './PipelineItemCard';
 import EditItemModal from './EditItemModal';
 import { toast } from 'sonner';
+import logger from '@/utils/logger';
 
 interface ConversationPipelineItemProps {
   conversationId?: string;
@@ -73,7 +74,7 @@ export default function ConversationPipelineItem({
       setPipelineItems((prev) => prev.filter((i) => i.id !== item.id));
       onPipelineUpdated?.();
     } catch (error) {
-      console.error('Error removing item:', error);
+      logger.error('Error removing item:', error);
       toast.error(t('kanban.messages.itemRemoveError'));
     }
   };
@@ -108,7 +109,7 @@ export default function ConversationPipelineItem({
       toast.success(t('kanban.messages.itemUpdated'));
       handleItemUpdated();
     } catch (error) {
-      console.error('Error updating item:', error);
+      logger.error('Error updating item:', error);
       toast.error(t('kanban.messages.itemUpdateError'));
     } finally {
       setIsUpdatingItem(false);

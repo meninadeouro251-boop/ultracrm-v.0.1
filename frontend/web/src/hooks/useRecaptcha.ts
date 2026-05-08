@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { recaptchaService } from '@/lib/recaptcha';
 import { useGlobalConfig } from '@/contexts/GlobalConfigContext';
+import logger from '@/utils/logger';
 
 export interface UseRecaptchaOptions {
   autoLoad?: boolean;
@@ -44,7 +45,7 @@ export function useRecaptcha(options: UseRecaptchaOptions = {}): UseRecaptchaRet
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to load reCAPTCHA';
       setError(errorMessage);
-      console.error('Error loading reCAPTCHA:', errorMessage);
+      logger.error('Error loading reCAPTCHA:', errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -67,7 +68,7 @@ export function useRecaptcha(options: UseRecaptchaOptions = {}): UseRecaptchaRet
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'Failed to execute reCAPTCHA';
         setError(errorMessage);
-        console.error('Error executing reCAPTCHA:', errorMessage);
+        logger.error('Error executing reCAPTCHA:', errorMessage);
         return null;
       }
     },

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -51,7 +52,7 @@ export default function ContactMergeSelectorModal({
       const filteredContacts = response.data.filter((c: Contact) => c.id !== currentContact.id);
       setContacts(filteredContacts);
     } catch (error) {
-      console.error('Error loading contacts:', error);
+      logger.error('Error loading contacts:', error);
       toast.error(t('messages.loadError'));
     } finally {
       setLoading(false);

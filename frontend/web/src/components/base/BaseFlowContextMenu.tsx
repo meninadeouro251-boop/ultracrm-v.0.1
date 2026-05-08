@@ -3,6 +3,7 @@ import { Copy, Trash2, Settings, type LucideIcon } from "lucide-react";
 import { useCallback } from "react";
 import { useLanguage } from '@/hooks/useLanguage';
 import { cn } from "@/lib/utils";
+import logger from '@/utils/logger';
 
 // Tipos para ações do menu
 export interface ContextMenuAction {
@@ -59,7 +60,7 @@ export function BaseFlowContextMenu({
 
     const node = getNode(nodeId);
     if (!node) {
-      console.error(`Node with id ${nodeId} not found.`);
+      logger.error(`Node with id ${nodeId} not found.`);
       return;
     }
 

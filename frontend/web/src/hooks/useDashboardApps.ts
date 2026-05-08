@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { integrationsService } from '@/services/integrations';
 import { DashboardApp } from '@/types/integrations';
+import logger from '@/utils/logger';
 
 interface UseDashboardAppsOptions {
   /**
@@ -76,7 +77,7 @@ export function useDashboardApps(options: UseDashboardAppsOptions = {}) {
       dashboardAppsCache = sidebarApps;
       setApps(sidebarApps);
     } catch (err) {
-      console.error('Error loading dashboard apps:', err);
+      logger.error('Error loading dashboard apps:', err);
       setError(err as Error);
       setApps([]);
       dashboardAppsCache = null;

@@ -1,6 +1,7 @@
 import api from '@/services/core/api';
 import { extractData } from '@/utils/apiHelpers';
 import {
+import logger from '@/utils/logger';
   ConversationMetric,
   AgentStatus,
   HeatmapData,
@@ -134,7 +135,7 @@ class ReportsService {
 
       return [];
     } catch (error) {
-      console.error('Error fetching heatmap data:', error);
+      logger.error('Error fetching heatmap data:', error);
       return [];
     }
   }
@@ -220,7 +221,7 @@ class ExtendedReportsService extends ReportsService {
 
       return extractData<any>(response);
     } catch (error) {
-      console.error('Error fetching report summary:', error);
+      logger.error('Error fetching report summary:', error);
       throw error;
     }
   }
@@ -250,7 +251,7 @@ class ExtendedReportsService extends ReportsService {
 
       return extractData<any>(response);
     } catch (error) {
-      console.error(`Error fetching report data for metric ${metric}:`, error);
+      logger.error(`Error fetching report data for metric ${metric}:`, error);
       throw error;
     }
   }
@@ -272,7 +273,7 @@ class ExtendedReportsService extends ReportsService {
 
       return extractData<any>(response);
     } catch (error) {
-      console.error('Error fetching agent summary reports:', error);
+      logger.error('Error fetching agent summary reports:', error);
       throw error;
     }
   }
@@ -304,7 +305,7 @@ class ExtendedReportsService extends ReportsService {
 
       return extractData<any>(response);
     } catch (error) {
-      console.error(`Error fetching agent report data for metric ${metric}:`, error);
+      logger.error(`Error fetching agent report data for metric ${metric}:`, error);
       throw error;
     }
   }
@@ -334,7 +335,7 @@ class ExtendedReportsService extends ReportsService {
 
       return extractData<any>(response);
     } catch (error) {
-      console.error('Error fetching agent report summary:', error);
+      logger.error('Error fetching agent report summary:', error);
       throw error;
     }
   }
@@ -356,7 +357,7 @@ class ExtendedReportsService extends ReportsService {
 
       return extractData<any>(response);
     } catch (error) {
-      console.error('Error fetching label summary reports:', error);
+      logger.error('Error fetching label summary reports:', error);
       throw error;
     }
   }
@@ -388,7 +389,7 @@ class ExtendedReportsService extends ReportsService {
 
       return extractData<any>(response);
     } catch (error) {
-      console.error(`Error fetching label report data for metric ${metric}:`, error);
+      logger.error(`Error fetching label report data for metric ${metric}:`, error);
       throw error;
     }
   }
@@ -418,7 +419,7 @@ class ExtendedReportsService extends ReportsService {
 
       return extractData<any>(response);
     } catch (error) {
-      console.error('Error fetching label report summary:', error);
+      logger.error('Error fetching label report summary:', error);
       throw error;
     }
   }
@@ -461,7 +462,7 @@ class ExtendedReportsService extends ReportsService {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Error downloading conversation reports:', error);
+      logger.error('Error downloading conversation reports:', error);
       throw error;
     }
   }

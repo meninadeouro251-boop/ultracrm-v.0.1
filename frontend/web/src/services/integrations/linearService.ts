@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   LinearConfig,
   LinearOAuthResponse,
   LinearConnectionResponse,
@@ -17,7 +18,7 @@ const LinearService = {
       );
       return data;
     } catch (error) {
-      console.error('LinearService.generateAuthorization error:', error);
+      logger.error('LinearService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -40,7 +41,7 @@ const LinearService = {
       );
       return data;
     } catch (error) {
-      console.error('LinearService.completeAuthorization error:', error);
+      logger.error('LinearService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -58,7 +59,7 @@ const LinearService = {
       if (error.response?.status === 404) {
         return null;
       }
-      console.error('LinearService.getConfiguration error:', error);
+      logger.error('LinearService.getConfiguration error:', error);
       throw error;
     }
   },
@@ -77,7 +78,7 @@ const LinearService = {
       );
       return data;
     } catch (error) {
-      console.error('LinearService.saveConfiguration error:', error);
+      logger.error('LinearService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -92,7 +93,7 @@ const LinearService = {
       );
       return data;
     } catch (error) {
-      console.error('LinearService.disconnect error:', error);
+      logger.error('LinearService.disconnect error:', error);
       throw error;
     }
   },
@@ -108,7 +109,7 @@ const LinearService = {
       );
       return data;
     } catch (error) {
-      console.error('LinearService.discoverTools error:', error);
+      logger.error('LinearService.discoverTools error:', error);
       throw error;
     }
   },

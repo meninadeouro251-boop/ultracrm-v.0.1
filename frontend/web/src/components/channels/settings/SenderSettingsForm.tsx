@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button, Input, Card, CardContent } from '@ultraapi/design-system';
 import { User, Building } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 interface SenderNamePreviewProps {
   senderNameType: 'friendly' | 'professional';
@@ -173,7 +174,7 @@ const SenderSettingsForm: React.FC<SenderSettingsFormProps> = ({
         business_name: businessName,
       });
     } catch (error) {
-      console.error(t('settings.senderSettings.errors.updateSenderTypeError'), error);
+      logger.error(t('settings.senderSettings.errors.updateSenderTypeError'), error);
     } finally {
       setIsUpdating(false);
     }
@@ -192,7 +193,7 @@ const SenderSettingsForm: React.FC<SenderSettingsFormProps> = ({
       });
       setShowBusinessNameInput(false);
     } catch (error) {
-      console.error(t('settings.senderSettings.errors.saveBusinessNameError'), error);
+      logger.error(t('settings.senderSettings.errors.saveBusinessNameError'), error);
     } finally {
       setIsUpdating(false);
     }

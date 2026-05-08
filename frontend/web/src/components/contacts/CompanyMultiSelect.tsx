@@ -3,6 +3,7 @@ import { Input, Label, Badge, Checkbox } from '@ultraapi/design-system';
 import { Building2, X, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { contactsService } from '@/services/contacts';
+import logger from '@/utils/logger';
 
 interface CompanyMultiSelectProps {
   selectedCompanyIds: string[];
@@ -28,7 +29,7 @@ export default function CompanyMultiSelect({
         const response = await contactsService.getCompaniesList();
         setCompanies(response);
       } catch (error) {
-        console.error('Error loading companies:', error);
+        logger.error('Error loading companies:', error);
       } finally {
         setLoading(false);
       }

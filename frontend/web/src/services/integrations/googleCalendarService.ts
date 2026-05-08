@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   GoogleCalendarConfig,
   GoogleCalendarItem,
   GoogleCalendarOAuthResponse,
@@ -18,7 +19,7 @@ const GoogleCalendarService = {
       );
       return data;
     } catch (error) {
-      console.error('GoogleCalendarService.generateAuthorization error:', error);
+      logger.error('GoogleCalendarService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -41,7 +42,7 @@ const GoogleCalendarService = {
       );
       return data;
     } catch (error) {
-      console.error('GoogleCalendarService.completeAuthorization error:', error);
+      logger.error('GoogleCalendarService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -56,7 +57,7 @@ const GoogleCalendarService = {
       );
       return data.calendars || [];
     } catch (error) {
-      console.error('GoogleCalendarService.getCalendars error:', error);
+      logger.error('GoogleCalendarService.getCalendars error:', error);
       throw error;
     }
   },
@@ -75,7 +76,7 @@ const GoogleCalendarService = {
       );
       return data;
     } catch (error) {
-      console.error('GoogleCalendarService.saveConfiguration error:', error);
+      logger.error('GoogleCalendarService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -90,7 +91,7 @@ const GoogleCalendarService = {
       );
       return data;
     } catch (error) {
-      console.error('GoogleCalendarService.disconnect error:', error);
+      logger.error('GoogleCalendarService.disconnect error:', error);
       throw error;
     }
   },
@@ -113,7 +114,7 @@ const GoogleCalendarService = {
       );
       return data;
     } catch (error) {
-      console.error('GoogleCalendarService.checkAvailability error:', error);
+      logger.error('GoogleCalendarService.checkAvailability error:', error);
       throw error;
     }
   },
@@ -140,7 +141,7 @@ const GoogleCalendarService = {
       );
       return data;
     } catch (error) {
-      console.error('GoogleCalendarService.createEvent error:', error);
+      logger.error('GoogleCalendarService.createEvent error:', error);
       throw error;
     }
   },

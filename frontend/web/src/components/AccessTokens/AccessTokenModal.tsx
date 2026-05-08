@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -103,7 +104,7 @@ export default function AccessTokenModal({
       
       setCategorizedPermissions(categorized);
     } catch (error) {
-      console.error('Error loading permissions:', error);
+      logger.error('Error loading permissions:', error);
       setScopesError(t('permissions.loadError'));
       setCategorizedPermissions({});
     } finally {

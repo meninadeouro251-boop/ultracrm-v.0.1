@@ -8,6 +8,7 @@ import { usePermissions } from '@/contexts/PermissionsContext';
 
 import { useDebounce } from '../../../hooks/useDebounce';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 // Hooks customizados
 import { useConversationHandlers } from '@/hooks/chat/useConversationHandlers';
@@ -172,7 +173,7 @@ const Chat = () => {
       // Se erro 403 ou 404, marcar como erro e não tentar novamente
       const axiosError = error as AxiosError;
       if (axiosError?.response?.status === 403 || axiosError?.response?.status === 404) {
-        console.error(`Sem permissão. Parando tentativas.`);
+        logger.error(`Sem permissão. Parando tentativas.`);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -220,7 +221,7 @@ const Chat = () => {
       debouncedSearchTerm,
       () => {},
       error => {
-        console.error('Search error:', error);
+        logger.error('Search error:', error);
       },
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -286,7 +287,7 @@ const Chat = () => {
                 return;
               }
             } catch (error) {
-              console.error('❌ Erro ao carregar conversa específica:', error);
+              logger.error('❌ Erro ao carregar conversa específica:', error);
               return;
             }
           }
@@ -371,7 +372,7 @@ const Chat = () => {
 
       // A mensagem é automaticamente adicionada ao Context via ADD_MESSAGE
     } catch (error) {
-      console.error('Error sending message:', error);
+      logger.error('Error sending message:', error);
       // O toast já é mostrado no CrmChatContext
       throw error; // Re-throw para que o MessageInput possa tratar
     }
@@ -379,7 +380,7 @@ const Chat = () => {
 
   const handleRetryMessage = (messageId: string) => {
     // TODO: Implementar retry específico para uma mensagem via Context
-    console.log('Retry message:', messageId);
+    logger.debug('Retry message:', messageId);
   };
 
   // 🎯 CONVERSATION HANDLERS: Usar handlers dos hooks customizados
@@ -524,7 +525,7 @@ const Chat = () => {
         isManualNavigationRef.current = false;
       }, 100);
     } catch (error) {
-      console.error('Error deleting conversation:', error);
+      logger.error('Error deleting conversation:', error);
       // Error is already handled in the context with toast
     }
   };
@@ -540,7 +541,7 @@ const Chat = () => {
         selectedIds,
       );
     } catch (error) {
-      console.error('Error in assignment:', error);
+      logger.error('Error in assignment:', error);
       throw error; // Re-throw to let modal handle it
     }
   };

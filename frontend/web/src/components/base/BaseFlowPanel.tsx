@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+import logger from '@/utils/logger';
   Card,
   CardContent,
   CardHeader,
@@ -261,7 +262,7 @@ export function usePanelState({
       }
       setHasChanges(false);
     } catch (error) {
-      console.error('Erro ao salvar:', error);
+      logger.error('Erro ao salvar:', error);
     } finally {
       setIsLoading(false);
     }

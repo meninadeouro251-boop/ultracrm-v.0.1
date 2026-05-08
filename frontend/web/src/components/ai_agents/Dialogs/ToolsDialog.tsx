@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -72,7 +73,7 @@ const ToolsDialog = ({ open, onOpenChange, onSelectTools, editingTool }: ToolsDi
       setAvailableTools(toolsResponse.tools || []);
       setToolCategories(categoriesResponse || []);
     } catch (err) {
-      console.error('Error loading tools:', err);
+      logger.error('Error loading tools:', err);
       setError(t('messages.loadingTools'));
     } finally {
       setIsLoading(false);

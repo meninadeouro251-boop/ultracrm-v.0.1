@@ -7,6 +7,7 @@ import { MessageCircle } from 'lucide-react';
 import { Contact } from '@/types/chat/api';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   getContactAvatarUrl,
   getContactInitials,
   getContactAvatarColor,
@@ -133,7 +134,7 @@ const ContactAvatar: React.FC<ContactAvatarProps> = ({
             src={avatarUrl}
             alt={contact?.name || t('contactAvatar.avatarAlt')}
             onError={() => {
-              console.warn(`Failed to load avatar for contact ${contact?.name}:`, avatarUrl);
+              logger.warn(`Failed to load avatar for contact ${contact?.name}:`, avatarUrl);
               setImageError(true);
             }}
             onLoad={() => setImageError(false)}

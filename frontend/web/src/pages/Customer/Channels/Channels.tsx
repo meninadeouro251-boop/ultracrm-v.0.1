@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import {
+import logger from '@/utils/logger';
   Button,
   Skeleton,
   Dialog,
@@ -154,7 +155,7 @@ export default function Channels() {
       toast.success(t('success.removeSuccess'));
       closeDeleteModal();
     } catch (e: unknown) {
-      console.error('Erro ao remover canal:', e);
+      logger.error('Erro ao remover canal:', e);
       toast.error((e as Error)?.message || t('errors.removeError'));
 
       // Refresh list on error to restore correct state

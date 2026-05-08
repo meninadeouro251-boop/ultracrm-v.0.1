@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
+import logger from '@/utils/logger';
   Button,
   Input,
   Label,
@@ -244,7 +245,7 @@ export const Auth: React.FC = () => {
         navigate('/', { replace: true });
       }
     } catch (error) {
-      console.error('Erro ao fazer login:', error);
+      logger.error('Erro ao fazer login:', error);
       const apiError = error as ApiError;
       const errorMessage =
         apiError?.response?.data?.message ||
@@ -281,7 +282,7 @@ export const Auth: React.FC = () => {
       toast.success(t('auth.register.registrationSuccessful'));
       setActiveTab('login');
     } catch (error) {
-      console.error('Erro ao fazer cadastro:', error);
+      logger.error('Erro ao fazer cadastro:', error);
       const apiError = error as ApiError;
       const errorMessage =
         apiError?.response?.data?.message ||
@@ -315,7 +316,7 @@ export const Auth: React.FC = () => {
       toast.success(t('auth.forgotPassword.emailSent'));
       setActiveTab('login');
     } catch (error) {
-      console.error('Erro ao enviar email de recuperação:', error);
+      logger.error('Erro ao enviar email de recuperação:', error);
       const apiError = error as ApiError & {
         response?: {
           status?: number;

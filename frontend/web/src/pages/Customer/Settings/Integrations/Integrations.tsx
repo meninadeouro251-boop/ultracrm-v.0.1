@@ -3,6 +3,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useNavigate } from 'react-router-dom';
 import { SettingsIntegrationsTour } from '@/tours';
 import {
+import logger from '@/utils/logger';
   Card,
   Badge,
   Input,
@@ -82,7 +83,7 @@ export default function Integrations() {
       const response = await integrationsService.getIntegrations();
       setIntegrations(response.data);
     } catch (error) {
-      console.error('Error loading integrations:', error);
+      logger.error('Error loading integrations:', error);
       toast.error(t('messages.loadError'));
     } finally {
       setLoading(false);
@@ -139,7 +140,7 @@ export default function Integrations() {
       // Reload integrations
       await loadIntegrations();
     } catch (error) {
-      console.error('Error toggling integration:', error);
+      logger.error('Error toggling integration:', error);
       toast.error(t('messages.toggleError'));
     } finally {
       setProcessingId(null);

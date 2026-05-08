@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -111,7 +112,7 @@ export default function Pipelines() {
           loading: { ...prev.loading, list: false },
         }));
       } catch (error) {
-        console.error('Error loading pipelines:', error);
+        logger.error('Error loading pipelines:', error);
         toast.error(t('messages.loadError'));
         setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
       }
@@ -179,7 +180,7 @@ export default function Pipelines() {
       );
       loadPipelines();
     } catch (error) {
-      console.error('Error toggling pipeline status:', error);
+      logger.error('Error toggling pipeline status:', error);
       toast.error(t('messages.toggleError'));
     }
   };
@@ -195,7 +196,7 @@ export default function Pipelines() {
       toast.success(t('messages.setAsDefaultSuccess'));
       loadPipelines();
     } catch (error) {
-      console.error('Error setting pipeline as default:', error);
+      logger.error('Error setting pipeline as default:', error);
       toast.error(t('messages.setAsDefaultError'));
     }
   };
@@ -221,7 +222,7 @@ export default function Pipelines() {
 
       setCreateModalOpen(false);
     } catch (error) {
-      console.error('Error creating pipeline:', error);
+      logger.error('Error creating pipeline:', error);
       toast.error(t('messages.createError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, create: false } }));
@@ -241,7 +242,7 @@ export default function Pipelines() {
       setEditModalOpen(false);
       setEditingPipeline(null);
     } catch (error) {
-      console.error('Error updating pipeline:', error);
+      logger.error('Error updating pipeline:', error);
       toast.error(t('messages.updateError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, update: false } }));
@@ -261,7 +262,7 @@ export default function Pipelines() {
       setDeleteDialogOpen(false);
       setPipelineToDelete(null);
     } catch (error) {
-      console.error('Error deleting pipeline:', error);
+      logger.error('Error deleting pipeline:', error);
       toast.error(t('messages.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -288,7 +289,7 @@ export default function Pipelines() {
       setDuplicateModalOpen(false);
       setPipelineToDuplicate(null);
     } catch (error) {
-      console.error('Error duplicating pipeline:', error);
+      logger.error('Error duplicating pipeline:', error);
       toast.error(t('messages.duplicateError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, duplicate: false } }));

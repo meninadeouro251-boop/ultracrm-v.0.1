@@ -1,3 +1,4 @@
+import logger from '@/utils/logger';
 /**
  * Exporta dados como arquivo JSON para download
  * @param data Os dados para exportar
@@ -49,7 +50,7 @@ export function exportAsJson(
 
     return true;
   } catch (error) {
-    console.error('Erro ao exportar JSON:', error);
+    logger.error('Erro ao exportar JSON:', error);
     return false;
   }
 }

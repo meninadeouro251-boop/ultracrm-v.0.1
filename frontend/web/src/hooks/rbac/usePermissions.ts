@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { toast } from 'sonner';
 import { 
+import logger from '@/utils/logger';
   fetchRolePermissions, 
   deleteRolePermission 
 } from '@/services/rbac';
@@ -91,7 +92,7 @@ export const usePermissions = (): UsePermissionsReturn => {
       
       setStats({ total, system, custom, with_permissions });
     } catch (error) {
-      console.error('Error loading role permissions:', error);
+      logger.error('Error loading role permissions:', error);
       toast.error('Erro ao carregar permissões de função');
     } finally {
       updateLoading('list', false);
@@ -116,7 +117,7 @@ export const usePermissions = (): UsePermissionsReturn => {
       toast.success(`Permissões da função "${permission.role.name}" removidas com sucesso`);
       
     } catch (error) {
-      console.error('Error deleting role permissions:', error);
+      logger.error('Error deleting role permissions:', error);
       toast.error('Erro ao remover permissões da função');
       throw error;
     } finally {
@@ -141,7 +142,7 @@ export const usePermissions = (): UsePermissionsReturn => {
       clearSelection();
       
     } catch (error) {
-      console.error('Error bulk deleting role permissions:', error);
+      logger.error('Error bulk deleting role permissions:', error);
       toast.error('Erro ao excluir permissões de função');
       throw error;
     } finally {

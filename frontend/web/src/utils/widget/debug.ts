@@ -1,3 +1,4 @@
+import logger from '@/utils/logger';
 const DEBUG_KEY = 'ultra_widget_debug';
 
 
@@ -32,7 +33,7 @@ function safe(obj: unknown) {
 export function wdebug(event: string, payload?: unknown) {
   if (!isDebugEnabled()) return;
   // usa debug pra não poluir
-  console.debug(`${event}`, safe(payload));
+  logger.debug(`${event}`, safe(payload));
 }
 
 export function enableWidgetDebug() {

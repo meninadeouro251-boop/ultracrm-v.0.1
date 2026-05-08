@@ -4,6 +4,7 @@ import { useChatContext } from '@/contexts/chat/ChatContext';
 import { usePermissions } from '@/contexts/PermissionsContext';
 import { Conversation } from '@/types/chat/api';
 import { isActionNotSupported } from '@/utils/chat/actionSupport';
+import logger from '@/utils/logger';
 
 export const useConversationHandlers = () => {
   const { can } = usePermissions();
@@ -14,7 +15,7 @@ export const useConversationHandlers = () => {
       try {
         await conversations.markAsRead(conversation.id);
       } catch (error) {
-        console.error('Error marking as read:', error);
+        logger.error('Error marking as read:', error);
       }
     },
     [conversations],
@@ -25,7 +26,7 @@ export const useConversationHandlers = () => {
       try {
         await conversations.markAsUnread(conversation.id);
       } catch (error) {
-        console.error('Error marking as unread:', error);
+        logger.error('Error marking as unread:', error);
       }
     },
     [conversations],
@@ -36,7 +37,7 @@ export const useConversationHandlers = () => {
       try {
         await conversations.updateConversationStatus(conversation.id, 'resolved', onReload);
       } catch (error) {
-        console.error('❌ Error marking as resolved:', error);
+        logger.error('❌ Error marking as resolved:', error);
       }
     },
     [conversations],
@@ -47,7 +48,7 @@ export const useConversationHandlers = () => {
       try {
         await conversations.updateConversationStatus(conversation.id, 'pending', onReload);
       } catch (error) {
-        console.error('❌ Error marking as pending:', error);
+        logger.error('❌ Error marking as pending:', error);
       }
     },
     [conversations],
@@ -58,7 +59,7 @@ export const useConversationHandlers = () => {
       try {
         await conversations.updateConversationStatus(conversation.id, 'open', onReload);
       } catch (error) {
-        console.error('❌ Error marking as open:', error);
+        logger.error('❌ Error marking as open:', error);
       }
     },
     [conversations],
@@ -69,7 +70,7 @@ export const useConversationHandlers = () => {
       try {
         await conversations.updateConversationStatus(conversation.id, 'snoozed', onReload);
       } catch (error) {
-        console.error('❌ Error marking as snoozed:', error);
+        logger.error('❌ Error marking as snoozed:', error);
       }
     },
     [conversations],
@@ -84,7 +85,7 @@ export const useConversationHandlers = () => {
       try {
         await conversations.updateConversationPriority(conversation.id, priority, onReload);
       } catch (error) {
-        console.error('❌ Error updating priority:', error);
+        logger.error('❌ Error updating priority:', error);
       }
     },
     [conversations],
@@ -98,7 +99,7 @@ export const useConversationHandlers = () => {
         if (isActionNotSupported(error)) {
           return;
         }
-        console.error('❌ Error pinning conversation:', error);
+        logger.error('❌ Error pinning conversation:', error);
       }
     },
     [conversations],
@@ -112,7 +113,7 @@ export const useConversationHandlers = () => {
         if (isActionNotSupported(error)) {
           return;
         }
-        console.error('❌ Error unpinning conversation:', error);
+        logger.error('❌ Error unpinning conversation:', error);
       }
     },
     [conversations],
@@ -126,7 +127,7 @@ export const useConversationHandlers = () => {
         if (isActionNotSupported(error)) {
           return;
         }
-        console.error('❌ Error archiving conversation:', error);
+        logger.error('❌ Error archiving conversation:', error);
       }
     },
     [conversations],
@@ -140,7 +141,7 @@ export const useConversationHandlers = () => {
         if (isActionNotSupported(error)) {
           return;
         }
-        console.error('❌ Error unarchiving conversation:', error);
+        logger.error('❌ Error unarchiving conversation:', error);
       }
     },
     [conversations],

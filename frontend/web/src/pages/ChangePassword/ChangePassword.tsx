@@ -11,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useLanguage } from '@/hooks/useLanguage';
 
 import logo from '@/assets/ULTRA_LOGO.svg';
+import logger from '@/utils/logger';
 
 const ChangePassword = () => {
   const { t } = useLanguage('changePassword');
@@ -56,7 +57,7 @@ const ChangePassword = () => {
     setIsLoading(true);
 
     setTimeout(() => {
-      console.log('Form data:', data);
+      logger.debug('Form data:', data);
       localStorage.setItem('token', 'teste1');
       navigate('/');
       setIsLoading(false);

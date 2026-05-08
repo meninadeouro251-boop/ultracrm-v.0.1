@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useAuthStore } from '@/store/authStore';
 import { applySetupInterceptor } from '@/services/core/setupInterceptor';
+import logger from '@/utils/logger';
 
 // Criar instância do axios específica para a API do Agent Processor
 const agentProcessorApi = axios.create({
@@ -31,7 +32,7 @@ agentProcessorApi.interceptors.response.use(
       error?.response?.data?.message ||
       error?.message ||
       'Unknown error';
-    console.error('Agent Processor API Error:', detail, { status: error?.response?.status });
+    logger.error('Agent Processor API Error:', detail, { status: error?.response?.status });
     return Promise.reject(error);
   },
 );

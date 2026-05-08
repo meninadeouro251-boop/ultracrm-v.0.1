@@ -1,6 +1,7 @@
 import api from '@/services/core/api';
 import { AgentBot } from '@/components/channels/settings/helpers/agentBotHelpers';
 import type {
+import logger from '@/utils/logger';
   AgentBotsResponse,
   AgentBotResponse,
   ChannelAccessTokenResponse,
@@ -21,7 +22,7 @@ const AgentBotsService = {
 
       return result;
     } catch (error) {
-      console.error('AgentBotsService.getAll error:', error);
+      logger.error('AgentBotsService.getAll error:', error);
       return [];
     }
   },
@@ -33,7 +34,7 @@ const AgentBotsService = {
 
       return data.data || data;
     } catch (error) {
-      console.error('AgentBotsService.getById error:', error);
+      logger.error('AgentBotsService.getById error:', error);
       return null;
     }
   },
@@ -53,7 +54,7 @@ const AgentBotsService = {
 
       return data.data || data;
     } catch (error) {
-      console.error('AgentBotsService.create error:', error);
+      logger.error('AgentBotsService.create error:', error);
       throw error;
     }
   },
@@ -69,7 +70,7 @@ const AgentBotsService = {
 
       return data.data || data;
     } catch (error) {
-      console.error('AgentBotsService.update error:', error);
+      logger.error('AgentBotsService.update error:', error);
       throw error;
     }
   },
@@ -80,7 +81,7 @@ const AgentBotsService = {
       await api.delete(`/agent_bots/${botId}`);
       return true;
     } catch (error) {
-      console.error('AgentBotsService.delete error:', error);
+      logger.error('AgentBotsService.delete error:', error);
       throw error;
     }
   },
@@ -91,7 +92,7 @@ const AgentBotsService = {
       await api.delete(`/agent_bots/${botId}/avatar`);
       return true;
     } catch (error) {
-      console.error('AgentBotsService.deleteAvatar error:', error);
+      logger.error('AgentBotsService.deleteAvatar error:', error);
       throw error;
     }
   },
@@ -105,7 +106,7 @@ const AgentBotsService = {
 
       return data.access_token;
     } catch (error) {
-      console.error('AgentBotsService.resetAccessToken error:', error);
+      logger.error('AgentBotsService.resetAccessToken error:', error);
       throw error;
     }
   },
@@ -122,7 +123,7 @@ const AgentBotsService = {
 
       return agentBot || null;
     } catch (error) {
-      console.error('AgentBotsService.getInboxAgentBot error:', error);
+      logger.error('AgentBotsService.getInboxAgentBot error:', error);
       return null;
     }
   },
@@ -156,7 +157,7 @@ const AgentBotsService = {
 
       return null;
     } catch (error) {
-      console.error('AgentBotsService.getInboxAgentBotConfiguration error:', error);
+      logger.error('AgentBotsService.getInboxAgentBotConfiguration error:', error);
       return null;
     }
   },
@@ -240,7 +241,7 @@ const AgentBotsService = {
 
       return true;
     } catch (error) {
-      console.error('AgentBotsService.setInboxAgentBot error:', error);
+      logger.error('AgentBotsService.setInboxAgentBot error:', error);
       throw error;
     }
   },
@@ -254,7 +255,7 @@ const AgentBotsService = {
 
       return true;
     } catch (error) {
-      console.error('AgentBotsService.disconnectInboxBot error:', error);
+      logger.error('AgentBotsService.disconnectInboxBot error:', error);
       throw error;
     }
   },

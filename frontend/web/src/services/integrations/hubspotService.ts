@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   HubSpotConfig,
   HubSpotOAuthResponse,
   HubSpotConnectionResponse,
@@ -17,7 +18,7 @@ const HubSpotService = {
       );
       return data;
     } catch (error) {
-      console.error('HubSpotService.generateAuthorization error:', error);
+      logger.error('HubSpotService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -40,7 +41,7 @@ const HubSpotService = {
       );
       return data;
     } catch (error) {
-      console.error('HubSpotService.completeAuthorization error:', error);
+      logger.error('HubSpotService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -58,7 +59,7 @@ const HubSpotService = {
       if (error.response?.status === 404) {
         return null;
       }
-      console.error('HubSpotService.getConfiguration error:', error);
+      logger.error('HubSpotService.getConfiguration error:', error);
       throw error;
     }
   },
@@ -77,7 +78,7 @@ const HubSpotService = {
       );
       return data;
     } catch (error) {
-      console.error('HubSpotService.saveConfiguration error:', error);
+      logger.error('HubSpotService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -92,7 +93,7 @@ const HubSpotService = {
       );
       return data;
     } catch (error) {
-      console.error('HubSpotService.disconnect error:', error);
+      logger.error('HubSpotService.disconnect error:', error);
       throw error;
     }
   },
@@ -108,7 +109,7 @@ const HubSpotService = {
       );
       return data;
     } catch (error) {
-      console.error('HubSpotService.discoverTools error:', error);
+      logger.error('HubSpotService.discoverTools error:', error);
       throw error;
     }
   },

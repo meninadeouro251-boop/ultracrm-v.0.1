@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -45,7 +46,7 @@ export default function BMSSettings({ onBack }: BMSSettingsProps = {}) {
       const hookData = (await integrationsService.getIntegrationHook('bms')) as BMSHook | null;
       setHook(hookData);
     } catch (error) {
-      console.error('Error loading BMS hook:', error);
+      logger.error('Error loading BMS hook:', error);
       toast.error(t('bms.messages.loadError'));
     } finally {
       setLoading(prev => ({ ...prev, get: false }));
@@ -89,7 +90,7 @@ export default function BMSSettings({ onBack }: BMSSettingsProps = {}) {
       // Close modal
       setConfigModalOpen(false);
     } catch (error) {
-      console.error('Error saving BMS config:', error);
+      logger.error('Error saving BMS config:', error);
       toast.error(hook ? t('bms.messages.updateError') : t('bms.messages.createError'));
     } finally {
       setLoading(prev => ({ ...prev, create: false, update: false }));
@@ -110,7 +111,7 @@ export default function BMSSettings({ onBack }: BMSSettingsProps = {}) {
       setHook(null);
       setDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error deleting BMS hook:', error);
+      logger.error('Error deleting BMS hook:', error);
       toast.error(t('bms.messages.deleteError'));
     } finally {
       setLoading(prev => ({ ...prev, delete: false }));

@@ -9,6 +9,7 @@ import type { User } from '@/types/users';
 import type { Inbox } from '@/types/channels/inbox';
 import type { Label } from '@/types/settings';
 import type { Team } from '@/types/users';
+import logger from '@/utils/logger';
 
 interface AppDataState {
   // Data
@@ -99,7 +100,7 @@ export const useAppDataStore = create<AppDataState>((set, get) => ({
         lastFetchTimestamps: { ...state.lastFetchTimestamps, account: now }
       });
     } catch (error) {
-      console.error('Failed to fetch account:', error);
+      logger.error('Failed to fetch account:', error);
       set({ isLoadingAccount: false });
       throw error;
     }
@@ -123,7 +124,7 @@ export const useAppDataStore = create<AppDataState>((set, get) => ({
         lastFetchTimestamps: { ...state.lastFetchTimestamps, agents: now }
       });
     } catch (error) {
-      console.error('Failed to fetch agents:', error);
+      logger.error('Failed to fetch agents:', error);
       set({ isLoadingAgents: false });
       throw error;
     }
@@ -147,7 +148,7 @@ export const useAppDataStore = create<AppDataState>((set, get) => ({
         lastFetchTimestamps: { ...state.lastFetchTimestamps, inboxes: now }
       });
     } catch (error) {
-      console.error('Failed to fetch inboxes:', error);
+      logger.error('Failed to fetch inboxes:', error);
       set({ isLoadingInboxes: false });
       throw error;
     }
@@ -171,7 +172,7 @@ export const useAppDataStore = create<AppDataState>((set, get) => ({
         lastFetchTimestamps: { ...state.lastFetchTimestamps, labels: now }
       });
     } catch (error) {
-      console.error('Failed to fetch labels:', error);
+      logger.error('Failed to fetch labels:', error);
       set({ isLoadingLabels: false });
       throw error;
     }
@@ -195,7 +196,7 @@ export const useAppDataStore = create<AppDataState>((set, get) => ({
         lastFetchTimestamps: { ...state.lastFetchTimestamps, teams: now }
       });
     } catch (error) {
-      console.error('Failed to fetch teams:', error);
+      logger.error('Failed to fetch teams:', error);
       set({ isLoadingTeams: false });
       throw error;
     }

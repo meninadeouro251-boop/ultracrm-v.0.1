@@ -1,5 +1,6 @@
 import { actionCableService } from './websocket/actionCableService';
 import { useAuthStore } from '@/store/authStore';
+import logger from '@/utils/logger';
 
 export class ReconnectService {
   private isOnline = true;
@@ -77,7 +78,7 @@ export class ReconnectService {
       // try {
       //   await validityCheck();
       // } catch (error) {
-      //   console.error('ReconnectService.reconnectServices error:', error);
+      //   logger.error('ReconnectService.reconnectServices error:', error);
       //   return;
       // }
 
@@ -100,7 +101,7 @@ export class ReconnectService {
       window.dispatchEvent(new CustomEvent('Ultra:reconnected'));
 
     } catch (error) {
-      console.error('ReconnectService.reconnectServices error:', error);
+      logger.error('ReconnectService.reconnectServices error:', error);
       // Schedule another reconnect attempt
       this.scheduleReconnect(10000); // Try again in 10 seconds
     }
@@ -138,7 +139,7 @@ export class ReconnectService {
         throw new Error('Health check failed');
       }
     } catch (error) {
-      console.error('ReconnectService.checkAndReconnect error:', error);
+      logger.error('ReconnectService.checkAndReconnect error:', error);
       this.scheduleReconnect();
     }
   }

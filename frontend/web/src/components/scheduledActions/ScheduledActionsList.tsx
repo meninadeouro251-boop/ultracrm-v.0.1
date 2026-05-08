@@ -5,6 +5,7 @@ import { scheduledActionsService } from '@/services/scheduledActions/scheduledAc
 import { ScheduleActionModal } from './ScheduleActionModal';
 import { useLanguage } from '@/hooks/useLanguage';
 import { ScheduledAction } from '@/types/automation';
+import logger from '@/utils/logger';
 
 interface ScheduledActionsListProps {
   contactId: string;
@@ -61,7 +62,7 @@ export function ScheduledActionsList({ contactId }: ScheduledActionsListProps) {
       const data = await scheduledActionsService.listByContact(contactId);
       setActions(sortActions(data));
     } catch (error) {
-      console.error('Error loading scheduled actions:', error);
+      logger.error('Error loading scheduled actions:', error);
     } finally {
       setLoading(false);
     }
@@ -101,7 +102,7 @@ export function ScheduledActionsList({ contactId }: ScheduledActionsListProps) {
       await scheduledActionsService.cancel(actionId);
       await loadActions();
     } catch (error) {
-      console.error('Error cancelling action:', error);
+      logger.error('Error cancelling action:', error);
     }
   };
 

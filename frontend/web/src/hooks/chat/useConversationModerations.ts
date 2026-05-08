@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import FacebookModerationService from '@/services/channels/facebookModerationService';
 import { FacebookCommentModeration } from '@/types/channels/inbox';
+import logger from '@/utils/logger';
 
 interface UseConversationModerationsProps {
   conversationId: string | null;
@@ -58,7 +59,7 @@ export function useConversationModerations({
       setModerations(response.data || []);
       lastLoadedRef.current = { conversationId, loadedAt: Date.now() };
     } catch (err) {
-      console.error('Error loading conversation moderations:', err);
+      logger.error('Error loading conversation moderations:', err);
       setError(err instanceof Error ? err : new Error('Failed to load moderations'));
       setModerations([]);
     } finally {

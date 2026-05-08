@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import {
+import logger from '@/utils/logger';
   Button,
   Input,
   Select,
@@ -519,7 +520,7 @@ const MessageTemplateForm: React.FC<MessageTemplateFormProps> = ({
       const response = await MessageTemplateService.getTemplates(inboxId);
       setTemplates(response.data);
     } catch (error) {
-      console.error(t('settings.messageTemplates.errors.loadError'), error);
+      logger.error(t('settings.messageTemplates.errors.loadError'), error);
       toast.error(t('settings.messageTemplates.errors.loadError'));
     } finally {
       setIsLoading(false);
@@ -571,7 +572,7 @@ const MessageTemplateForm: React.FC<MessageTemplateFormProps> = ({
       toast.success(t('settings.messageTemplates.success.syncSuccess'));
       await loadTemplates();
     } catch (error) {
-      console.error(t('settings.messageTemplates.errors.syncError'), error);
+      logger.error(t('settings.messageTemplates.errors.syncError'), error);
       toast.error(t('settings.messageTemplates.errors.syncError'));
     } finally {
       setIsSyncing(false);
@@ -585,7 +586,7 @@ const MessageTemplateForm: React.FC<MessageTemplateFormProps> = ({
       await loadTemplates();
       onUpdate?.();
     } catch (error) {
-      console.error(t('settings.messageTemplates.errors.createError'), error);
+      logger.error(t('settings.messageTemplates.errors.createError'), error);
       toast.error(t('settings.messageTemplates.errors.createError'));
     }
   };
@@ -604,7 +605,7 @@ const MessageTemplateForm: React.FC<MessageTemplateFormProps> = ({
       await loadTemplates();
       onUpdate?.();
     } catch (error) {
-      console.error(t('settings.messageTemplates.errors.updateError'), error);
+      logger.error(t('settings.messageTemplates.errors.updateError'), error);
       toast.error(t('settings.messageTemplates.errors.updateError'));
     }
   };
@@ -618,7 +619,7 @@ const MessageTemplateForm: React.FC<MessageTemplateFormProps> = ({
       await loadTemplates();
       onUpdate?.();
     } catch (error) {
-      console.error(t('settings.messageTemplates.errors.deleteError'), error);
+      logger.error(t('settings.messageTemplates.errors.deleteError'), error);
       toast.error(t('settings.messageTemplates.errors.deleteError'));
     } finally {
       setShowDeleteConfirm(false);

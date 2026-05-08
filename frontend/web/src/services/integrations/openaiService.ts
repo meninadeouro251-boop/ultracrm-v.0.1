@@ -1,6 +1,7 @@
 import { api } from '@/services/core';
 import type { ProcessEventOptions, ProcessEventResponse } from '@/types/integrations';
 import { extractData } from '@/utils/apiHelpers';
+import logger from '@/utils/logger';
 
 /**
  * OpenAI service for processing AI events like rephrase, summarize, etc.
@@ -84,7 +85,7 @@ class OpenAIService {
 
       return message;
     } catch (error: unknown) {
-      console.error('[OpenAI Service] Error processing event:', error);
+      logger.error('[OpenAI Service] Error processing event:', error);
 
       // Extract error message from response
       const axiosError = error as { response?: { data?: { error?: string | { message?: string } } } };

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -81,7 +82,7 @@ const GitHubConfigDialog = ({
         });
       }
     } catch (error) {
-      console.error('Error loading GitHub configuration:', error);
+      logger.error('Error loading GitHub configuration:', error);
       setConfig({
         provider: 'github',
         username: '',
@@ -100,7 +101,7 @@ const GitHubConfigDialog = ({
       const response = await GitHubService.discoverTools(agentId);
       setAvailableTools(response.tools || []);
     } catch (error) {
-      console.error('Error loading GitHub tools:', error);
+      logger.error('Error loading GitHub tools:', error);
       toast.error('Erro ao carregar ferramentas disponíveis');
     } finally {
       setIsLoadingTools(false);
@@ -117,7 +118,7 @@ const GitHubConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to GitHub:', error);
+      logger.error('Error connecting to GitHub:', error);
       toast.error('Erro ao conectar com GitHub');
     } finally {
       setIsConnecting(false);
@@ -159,7 +160,7 @@ const GitHubConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving GitHub configuration:', error);
+      logger.error('Error saving GitHub configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -173,7 +174,7 @@ const GitHubConfigDialog = ({
       toast.success('GitHub desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting GitHub:', error);
+      logger.error('Error disconnecting GitHub:', error);
       toast.error('Erro ao desconectar GitHub');
     }
   };

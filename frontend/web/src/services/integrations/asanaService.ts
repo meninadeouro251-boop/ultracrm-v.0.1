@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   AsanaConfig,
   AsanaOAuthResponse,
   AsanaConnectionResponse,
@@ -17,7 +18,7 @@ const AsanaService = {
       );
       return data;
     } catch (error) {
-      console.error('AsanaService.generateAuthorization error:', error);
+      logger.error('AsanaService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -40,7 +41,7 @@ const AsanaService = {
       );
       return data;
     } catch (error) {
-      console.error('AsanaService.completeAuthorization error:', error);
+      logger.error('AsanaService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -58,7 +59,7 @@ const AsanaService = {
       if (error.response?.status === 404) {
         return null;
       }
-      console.error('AsanaService.getConfiguration error:', error);
+      logger.error('AsanaService.getConfiguration error:', error);
       throw error;
     }
   },
@@ -77,7 +78,7 @@ const AsanaService = {
       );
       return data;
     } catch (error) {
-      console.error('AsanaService.saveConfiguration error:', error);
+      logger.error('AsanaService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -92,7 +93,7 @@ const AsanaService = {
       );
       return data;
     } catch (error) {
-      console.error('AsanaService.disconnect error:', error);
+      logger.error('AsanaService.disconnect error:', error);
       throw error;
     }
   },
@@ -108,7 +109,7 @@ const AsanaService = {
       );
       return data;
     } catch (error) {
-      console.error('AsanaService.discoverTools error:', error);
+      logger.error('AsanaService.discoverTools error:', error);
       throw error;
     }
   },

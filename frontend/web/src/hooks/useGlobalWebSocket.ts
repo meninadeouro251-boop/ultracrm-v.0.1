@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { ChatActionCableConnector, type ChatEventHandlers, type ConnectionParams } from '@/services/chat';
+import logger from '@/utils/logger';
 
 interface GlobalWebSocketHandlers {
   onMessageCreated?: (data: unknown) => void;
@@ -69,7 +70,7 @@ export const useGlobalWebSocket = (handlers: GlobalWebSocketHandlers) => {
       );
 
     } catch (error) {
-      console.error('❌ Global WebSocket: Error connecting', error);
+      logger.error('❌ Global WebSocket: Error connecting', error);
     }
   }, [user?.id, user?.pubsub_token]);
 

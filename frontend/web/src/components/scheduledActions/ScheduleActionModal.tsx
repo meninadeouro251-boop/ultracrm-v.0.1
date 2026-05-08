@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -82,7 +83,7 @@ export function ScheduleActionModal({
         setAvailableInboxes(getMessagingInboxes(inboxes));
 
       } catch (error) {
-        console.error('Error fetching inboxes:', error);
+        logger.error('Error fetching inboxes:', error);
       } finally {
         setLoadingInboxes(false);
       }
@@ -137,7 +138,7 @@ export function ScheduleActionModal({
       });
       setContactSearchResults(response.data || []);
     } catch (error) {
-      console.error('Error searching contacts:', error);
+      logger.error('Error searching contacts:', error);
       setContactSearchResults([]);
     } finally {
       setLoadingContacts(false);
@@ -326,7 +327,7 @@ export function ScheduleActionModal({
 
       onClose();
     } catch (error) {
-      console.error('Error saving scheduled action:', error);
+      logger.error('Error saving scheduled action:', error);
       if (error instanceof Error && error.message.includes('422')) {
         const errorData = JSON.parse(error.message);
         if (errorData.errors) {

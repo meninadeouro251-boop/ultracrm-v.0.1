@@ -2,6 +2,7 @@ import { useState, useCallback, useRef } from 'react';
 import { toast } from 'sonner';
 import { contactEventsService } from '@/services/contacts/contactEventsService';
 import type {
+import logger from '@/utils/logger';
   ContactEvent,
   ContactEventsQueryParams,
   ContactEventStats,
@@ -57,7 +58,7 @@ export function useContactEvents() {
   const loadContactEvents = useCallback(
     async (contactId: string, params: ContactEventsQueryParams = {}) => {
       if (!contactId) {
-        console.warn('Missing contactId for loading events');
+        logger.warn('Missing contactId for loading events');
         return null;
       }
 
@@ -93,7 +94,7 @@ export function useContactEvents() {
 
         return response;
       } catch (error) {
-        console.error('❌ ContactEvents: Error loading events:', error);
+        logger.error('❌ ContactEvents: Error loading events:', error);
         toast.error('Erro ao carregar eventos do contato');
         setState(prev => ({ ...prev, loading: { ...prev.loading, events: false } }));
         return null;
@@ -105,7 +106,7 @@ export function useContactEvents() {
   // Load contact event statistics
   const loadContactEventStats = useCallback(async (contactId: string, days: number = 30) => {
     if (!contactId) {
-      console.warn('Missing contactId for loading stats');
+      logger.warn('Missing contactId for loading stats');
       return null;
     }
 
@@ -125,7 +126,7 @@ export function useContactEvents() {
 
       return response;
     } catch (error) {
-      console.error('❌ ContactEvents: Error loading stats:', error);
+      logger.error('❌ ContactEvents: Error loading stats:', error);
       toast.error('Erro ao carregar estatísticas de eventos');
       setState(prev => ({ ...prev, loading: { ...prev.loading, stats: false } }));
       return null;
@@ -162,7 +163,7 @@ export function useContactEvents() {
 
         return response;
       } catch (error) {
-        console.error('❌ ContactEvents: Error loading recent events:', error);
+        logger.error('❌ ContactEvents: Error loading recent events:', error);
         toast.error('Erro ao carregar eventos recentes');
         setState(prev => ({ ...prev, loading: { ...prev.loading, recent: false } }));
         return null;

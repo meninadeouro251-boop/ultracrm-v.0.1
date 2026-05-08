@@ -9,67 +9,77 @@ import PermissionRoute from './PermissionRoute';
 
 import MainLayout from '@/components/layout/MainLayout';
 
-// Páginas públicas
-import Auth from '@/pages/Auth';
-import EmailConfirmation from '@/components/auth/EmailConfirmation';
-import ResetPassword from '@/components/auth/ResetPassword';
-import InstagramCallback from '@/pages/InstagramCallback';
-import GoogleCallback from '@/pages/GoogleCallback';
-import GoogleCalendarCallback from '@/pages/GoogleCalendarCallback';
-import GoogleSheetsCallback from '@/pages/GoogleSheetsCallback';
-import GitHubCallback from '@/pages/GitHubCallback';
-import NotionCallback from '@/pages/NotionCallback';
-import StripeCallback from '@/pages/StripeCallback';
-import LinearCallback from '@/pages/LinearCallback';
-import MondayCallback from '@/pages/MondayCallback';
-import AtlassianCallback from '@/pages/AtlassianCallback';
-import MicrosoftCallback from '@/pages/MicrosoftCallback';
-import SurveyResponse from '@/pages/Public/Survey/SurveyResponse';
+const PageLoader = () => (
+  <div className="flex items-center justify-center h-full">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+  </div>
+);
 
-// Páginas customer
-import Dashboard from '@/pages/Customer/Dashboard';
-import Agents from '@/pages/Customer/Agents';
-import AgentEditPage from '@/pages/Customer/Agents/Agent/AgentEditPage';
-import MCPServers from '@/pages/Customer/Agents/MCPServers';
-import CustomMCPServers from '@/pages/Customer/Agents/CustomMCPServers';
-import Tools from '@/pages/Customer/Agents/Tools';
-import CustomTools from '@/pages/Customer/Agents/CustomTools';
-import Contacts from '@/pages/Customer/Contacts';
-import ScheduledActions from '@/pages/Customer/Contacts/ScheduledActions';
-import { Channels, ChannelSettings, NewChannel } from '@/pages/Customer/Channels';
+// --- Lazy-loaded pages (code splitting) ---
+
+// Public pages
+const Auth = React.lazy(() => import('@/pages/Auth'));
+const EmailConfirmation = React.lazy(() => import('@/components/auth/EmailConfirmation'));
+const ResetPassword = React.lazy(() => import('@/components/auth/ResetPassword'));
+const InstagramCallback = React.lazy(() => import('@/pages/InstagramCallback'));
+const GoogleCallback = React.lazy(() => import('@/pages/GoogleCallback'));
+const GoogleCalendarCallback = React.lazy(() => import('@/pages/GoogleCalendarCallback'));
+const GoogleSheetsCallback = React.lazy(() => import('@/pages/GoogleSheetsCallback'));
+const GitHubCallback = React.lazy(() => import('@/pages/GitHubCallback'));
+const NotionCallback = React.lazy(() => import('@/pages/NotionCallback'));
+const StripeCallback = React.lazy(() => import('@/pages/StripeCallback'));
+const LinearCallback = React.lazy(() => import('@/pages/LinearCallback'));
+const MondayCallback = React.lazy(() => import('@/pages/MondayCallback'));
+const AtlassianCallback = React.lazy(() => import('@/pages/AtlassianCallback'));
+const MicrosoftCallback = React.lazy(() => import('@/pages/MicrosoftCallback'));
+const AsanaCallback = React.lazy(() => import('@/pages/AsanaCallback'));
+const HubSpotCallback = React.lazy(() => import('@/pages/HubSpotCallback'));
+const PayPalCallback = React.lazy(() => import('@/pages/PayPalCallback'));
+const CanvaCallback = React.lazy(() => import('@/pages/CanvaCallback'));
+const SupabaseCallback = React.lazy(() => import('@/pages/SupabaseCallback'));
+const SurveyResponse = React.lazy(() => import('@/pages/Public/Survey/SurveyResponse'));
+
+// Customer pages
+const Dashboard = React.lazy(() => import('@/pages/Customer/Dashboard'));
+const Agents = React.lazy(() => import('@/pages/Customer/Agents'));
+const AgentEditPage = React.lazy(() => import('@/pages/Customer/Agents/Agent/AgentEditPage'));
+const MCPServers = React.lazy(() => import('@/pages/Customer/Agents/MCPServers'));
+const CustomMCPServers = React.lazy(() => import('@/pages/Customer/Agents/CustomMCPServers'));
+const Tools = React.lazy(() => import('@/pages/Customer/Agents/Tools'));
+const CustomTools = React.lazy(() => import('@/pages/Customer/Agents/CustomTools'));
+const Contacts = React.lazy(() => import('@/pages/Customer/Contacts'));
+const ScheduledActions = React.lazy(() => import('@/pages/Customer/Contacts/ScheduledActions'));
 const ChatPage = React.lazy(() => import('@/pages/Customer/Chat/ChatPage'));
+const Pipelines = React.lazy(() => import('@/pages/Customer/Pipelines/Pipelines'));
+const PipelineKanban = React.lazy(() => import('@/pages/Customer/Pipelines/PipelineKanban'));
+const AccountSettings = React.lazy(() => import('@/pages/Customer/Settings/Account').then(m => ({ default: m.AccountSettings })));
+const Teams = React.lazy(() => import('@/pages/Customer/Settings/Teams/Teams'));
+const AddUsers = React.lazy(() => import('@/pages/Customer/Settings/Teams').then(m => ({ default: m.AddUsers })));
+const Users = React.lazy(() => import('@/pages/Customer/Settings/Users'));
+const Labels = React.lazy(() => import('@/pages/Customer/Settings/Labels'));
+const CustomAttributes = React.lazy(() => import('@/pages/Customer/Settings/CustomAttributes'));
+const CannedResponses = React.lazy(() => import('@/pages/Customer/Settings/CannedResponses'));
+const Macros = React.lazy(() => import('@/pages/Customer/Settings/Macros').then(m => ({ default: m.Macros })));
+const Integrations = React.lazy(() => import('@/pages/Customer/Settings/Integrations').then(m => ({ default: m.Integrations })));
+const EmailTemplateEditor = React.lazy(() => import('@/pages/Customer/Settings/EmailTemplateEditor'));
+const WebhooksPage = React.lazy(() => import('@/pages/Customer/Settings/Integrations/WebhooksPage'));
+const OAuthAppsPage = React.lazy(() => import('@/pages/Customer/Settings/Integrations/OAuthAppsPage'));
+const DashboardAppsPage = React.lazy(() => import('@/pages/Customer/Settings/Integrations/DashboardAppsPage'));
+const AccessTokens = React.lazy(() => import('@/pages/Customer/Settings/AccessTokens/AccessTokens'));
+const SlackIntegrationPage = React.lazy(() => import('@/pages/Customer/Settings/Integrations/SlackIntegrationPage'));
+const OpenAIPage = React.lazy(() => import('@/pages/Customer/Settings/Integrations/OpenAIPage'));
+const BMSPage = React.lazy(() => import('@/pages/Customer/Settings/Integrations/BMSPage'));
+const LeadSquaredPage = React.lazy(() => import('@/pages/Customer/Settings/Integrations/LeadSquaredPage'));
+const HubSpotPage = React.lazy(() => import('@/pages/Customer/Settings/Integrations/HubSpotPage'));
+const ShopifyPage = React.lazy(() => import('@/pages/Customer/Settings/Integrations/ShopifyPage'));
+const LinearPage = React.lazy(() => import('@/pages/Customer/Settings/Integrations/LinearPage'));
+const DashboardAppPage = React.lazy(() => import('@/pages/Customer/DashboardApp'));
+const Channels = React.lazy(() => import('@/pages/Customer/Channels').then(m => ({ default: m.Channels })));
+const ChannelSettings = React.lazy(() => import('@/pages/Customer/Channels').then(m => ({ default: m.ChannelSettings })));
+const NewChannel = React.lazy(() => import('@/pages/Customer/Channels').then(m => ({ default: m.NewChannel })));
 
-// import Automation from '../pages/Customer/Automation';
-// import AutomationFlowEditor from '../pages/Customer/Automation/AutomationFlowEditor';
-import Pipelines from '@/pages/Customer/Pipelines/Pipelines';
-import PipelineKanban from '@/pages/Customer/Pipelines/PipelineKanban';
-import { AccountSettings } from '@/pages/Customer/Settings/Account';
-import Teams from '@/pages/Customer/Settings/Teams/Teams';
-import { AddUsers } from '@/pages/Customer/Settings/Teams';
-import Users from '@/pages/Customer/Settings/Users';
-import Labels from '@/pages/Customer/Settings/Labels';
-import CustomAttributes from '@/pages/Customer/Settings/CustomAttributes';
-import CannedResponses from '@/pages/Customer/Settings/CannedResponses';
-import { Macros } from '@/pages/Customer/Settings/Macros';
-import { Integrations } from '@/pages/Customer/Settings/Integrations';
-import EmailTemplateEditor from '@/pages/Customer/Settings/EmailTemplateEditor';
-import WebhooksPage from '../pages/Customer/Settings/Integrations/WebhooksPage';
-import OAuthAppsPage from '../pages/Customer/Settings/Integrations/OAuthAppsPage';
-import DashboardAppsPage from '../pages/Customer/Settings/Integrations/DashboardAppsPage';
-import AccessTokens from '../pages/Customer/Settings/AccessTokens/AccessTokens';
-import SlackIntegrationPage from '../pages/Customer/Settings/Integrations/SlackIntegrationPage';
-import OpenAIPage from '../pages/Customer/Settings/Integrations/OpenAIPage';
-import BMSPage from '../pages/Customer/Settings/Integrations/BMSPage';
-import LeadSquaredPage from '../pages/Customer/Settings/Integrations/LeadSquaredPage';
-import HubSpotPage from '../pages/Customer/Settings/Integrations/HubSpotPage';
-import ShopifyPage from '../pages/Customer/Settings/Integrations/ShopifyPage';
-import LinearPage from '../pages/Customer/Settings/Integrations/LinearPage';
-import DashboardAppPage from '../pages/Customer/DashboardApp';
-// import { Overview, Conversations } from '../pages/Customer/Reports';
-// import * as Reports from '../pages/Customer/Reports';
-
-// Páginas admin
-import AdminSettingsLayout from '@/pages/Admin/Settings';
+// Admin pages
+const AdminSettingsLayout = React.lazy(() => import('@/pages/Admin/Settings'));
 const SmtpConfig = React.lazy(() => import('@/pages/Admin/Settings/SmtpConfig'));
 const StorageConfig = React.lazy(() => import('@/pages/Admin/Settings/StorageConfig'));
 const SocialLoginConfig = React.lazy(() => import('@/pages/Admin/Settings/SocialLoginConfig'));
@@ -79,1185 +89,240 @@ const IntegrationsConfig = React.lazy(() => import('@/pages/Admin/Settings/Integ
 const InboundEmailConfig = React.lazy(() => import('@/pages/Admin/Settings/InboundEmailConfig'));
 const FrontendRuntimeConfig = React.lazy(() => import('@/pages/Admin/Settings/FrontendRuntimeConfig'));
 
-// Página de tutoriais
-import Tutorials from '@/pages/Customer/Tutorials';
+const Tutorials = React.lazy(() => import('@/pages/Customer/Tutorials'));
 
-// Páginas compartilhadas
-import Documentation from '@/pages/Shared/Documentation';
-import Marketplace from '@/pages/Shared/Marketplace';
-import Profile from '@/pages/Shared/Profile';
+const Documentation = React.lazy(() => import('@/pages/Shared/Documentation'));
+const Marketplace = React.lazy(() => import('@/pages/Shared/Marketplace'));
+const Profile = React.lazy(() => import('@/pages/Shared/Profile'));
 
-// Página de setup inicial
-import Setup from '@/pages/Setup/Setup';
-import OnboardingPage from '@/pages/Setup/OnboardingPage';
+const Setup = React.lazy(() => import('@/pages/Setup/Setup'));
+const OnboardingPage = React.lazy(() => import('@/pages/Setup/OnboardingPage'));
 
-// Outras páginas
-import NotFound from '@/pages/NotFound';
-import Unauthorized from '@/pages/Unauthorized';
-import Widget from '@/pages/Widget';
-import AsanaCallback from '@/pages/AsanaCallback';
-import HubSpotCallback from '@/pages/HubSpotCallback';
-import PayPalCallback from '@/pages/PayPalCallback';
-import CanvaCallback from '@/pages/CanvaCallback';
-import SupabaseCallback from '@/pages/SupabaseCallback';
-// import ChangePassword from '../pages/ChangePassword';
+const NotFound = React.lazy(() => import('@/pages/NotFound'));
+const Unauthorized = React.lazy(() => import('@/pages/Unauthorized'));
+const Widget = React.lazy(() => import('@/pages/Widget'));
 
-const ChatRouteElement = (
+// --- Helper components ---
+
+const SuspenseWrap: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <Suspense fallback={<PageLoader />}>{children}</Suspense>
+);
+
+const ProtectedPage: React.FC<{
+  resource: string;
+  action: string;
+  children: React.ReactNode;
+}> = ({ resource, action, children }) => (
   <PrivateRoute>
     <CustomerRoute>
       <MainLayout>
-        <PermissionRoute resource="conversations" action="read">
-          <Suspense
-            fallback={<div className="flex items-center justify-center h-full">Carregando...</div>}
-          >
-            <ChatPage />
-          </Suspense>
+        <PermissionRoute resource={resource} action={action}>
+          <SuspenseWrap>{children}</SuspenseWrap>
         </PermissionRoute>
       </MainLayout>
     </CustomerRoute>
   </PrivateRoute>
 );
 
+const ChatRouteElement = (
+  <ProtectedPage resource="conversations" action="read">
+    <ChatPage />
+  </ProtectedPage>
+);
+
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <RouterGuard>
-        <Routes>
-          {/* Redirecionamento inteligente da raiz baseado no tipo de usuário */}
-          <Route
-            path="/"
-            element={
-              <PrivateRoute>
-                <SmartRedirect />
-              </PrivateRoute>
-            }
-          />
-
-          {/* Rotas públicas */}
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <Auth />
-              </PublicRoute>
-            }
-          />
-
-          <Route
-            path="/auth/confirm-email"
-            element={
-              <PublicRoute>
-                <EmailConfirmation />
-              </PublicRoute>
-            }
-          />
-
-          <Route
-            path="/auth/confirmation"
-            element={
-              <PublicRoute>
-                <EmailConfirmation />
-              </PublicRoute>
-            }
-          />
-
-          <Route
-            path="/auth/reset-password"
-            element={
-              <PublicRoute>
-                <ResetPassword />
-              </PublicRoute>
-            }
-          />
-
-          <Route
-            path="/auth/password/edit"
-            element={
-              <PublicRoute>
-                <ResetPassword />
-              </PublicRoute>
-            }
-          />
-
-          {/* Instagram OAuth Callback */}
-          <Route
-            path="/instagram/callback"
-            element={
-              <PublicRoute>
-                <InstagramCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Google OAuth Callback */}
-          <Route
-            path="/google/callback"
-            element={
-              <PublicRoute>
-                <GoogleCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Google Calendar OAuth Callback */}
-          <Route
-            path="/google-calendar/callback"
-            element={
-              <PublicRoute>
-                <GoogleCalendarCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Google Sheets OAuth Callback */}
-          <Route
-            path="/google-sheets/callback"
-            element={
-              <PublicRoute>
-                <GoogleSheetsCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* GitHub OAuth Callback */}
-          <Route
-            path="/github/callback"
-            element={
-              <PublicRoute>
-                <GitHubCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Notion OAuth Callback */}
-          <Route
-            path="/notion/callback"
-            element={
-              <PublicRoute>
-                <NotionCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Stripe OAuth Callback */}
-          <Route
-            path="/stripe/callback"
-            element={
-              <PublicRoute>
-                <StripeCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Linear OAuth Callback */}
-          <Route
-            path="/linear/callback"
-            element={
-              <PublicRoute>
-                <LinearCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Monday OAuth Callback */}
-          <Route
-            path="/monday/callback"
-            element={
-              <PublicRoute>
-                <MondayCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Atlassian OAuth Callback */}
-          <Route
-            path="/atlassian/callback"
-            element={
-              <PublicRoute>
-                <AtlassianCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Asana OAuth Callback */}
-          <Route
-            path="/asana/callback"
-            element={
-              <PublicRoute>
-                <AsanaCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* HubSpot OAuth Callback */}
-          <Route
-            path="/hubspot/callback"
-            element={
-              <PublicRoute>
-                <HubSpotCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* PayPal OAuth Callback */}
-          <Route
-            path="/paypal/callback"
-            element={
-              <PublicRoute>
-                <PayPalCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Canva OAuth Callback */}
-          <Route
-            path="/canva/callback"
-            element={
-              <PublicRoute>
-                <CanvaCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Supabase OAuth Callback */}
-          <Route
-            path="/supabase/callback"
-            element={
-              <PublicRoute>
-                <SupabaseCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* Microsoft OAuth Callback */}
-          <Route
-            path="/microsoft/callback"
-            element={
-              <PublicRoute>
-                <MicrosoftCallback />
-              </PublicRoute>
-            }
-          />
-
-          {/* <Route path="/change-password" element={<ChangePassword />} /> */}
-
-          {/* Public widget route (for website embeds) */}
-          <Route
-            path="/widget"
-            element={
-              <PublicRoute>
-                <Widget />
-              </PublicRoute>
-            }
-          />
-
-          {/* Public survey response route (CSAT surveys) */}
-          <Route
-            path="/survey/responses/:uuid"
-            element={
-              <PublicRoute>
-                <SurveyResponse />
-              </PublicRoute>
-            }
-          />
-
-          {/* Rota de Setup Inicial */}
-          <Route path="/setup" element={<Setup />} />
-          <Route path="/setup/onboarding" element={<OnboardingPage />} />
-
-          <Route
-            path="/contacts"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="contacts" action="read">
-                      <Contacts />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/contacts/:contactId"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="contacts" action="read">
-                      <Contacts />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/contacts/scheduled-actions"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="contacts" action="read">
-                      <ScheduledActions />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/pipelines"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="pipelines" action="read">
-                      <Pipelines />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/pipelines/:pipelineId"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="pipelines" action="read">
-                      <PipelineKanban />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          {/* <Route
-            path="/automation"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="automations" action="read">
-                      <Automation />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/automation/:id/flow"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <PermissionRoute resource="automations" action="update">
-                    <AutomationFlowEditor />
-                  </PermissionRoute>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          /> */}
-
-          <Route
-            path="/settings/account"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="accounts" action="read">
-                      <AccountSettings />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/users"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="users" action="read">
-                      <Users />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/teams"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="teams" action="read">
-                      <Teams />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/teams/:teamId/add-users"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="teams" action="create">
-                      <AddUsers />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/labels"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="labels" action="read">
-                      <Labels />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/attributes"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="custom_attribute_definitions" action="read">
-                      <CustomAttributes />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/canned-responses"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="canned_responses" action="read">
-                      <CannedResponses />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/macros"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="macros" action="read">
-                      <Macros />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/integrations"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="integrations" action="read">
-                      <Integrations />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          {/* Redirecionamentos das rotas antigas de settings para agents */}
-          <Route
-            path="/settings/custom-tools"
-            element={<Navigate to="/agents/custom-tools" replace />}
-          />
-
-          <Route
-            path="/settings/custom-mcp-servers"
-            element={<Navigate to="/agents/custom-mcp-servers" replace />}
-          />
-
-          <Route
-            path="/settings/integrations/webhooks"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="webhooks" action="read">
-                      <WebhooksPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/integrations/oauth-apps"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="oauth_applications" action="read">
-                      <OAuthAppsPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/integrations/dashboard-apps"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="dashboard_apps" action="read">
-                      <DashboardAppsPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/integrations/slack"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="integrations" action="read">
-                      <SlackIntegrationPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/settings/integrations/openai"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="integrations" action="read">
-                      <OpenAIPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/settings/integrations/bms"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="integrations" action="read">
-                      <BMSPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/settings/integrations/leadsquared"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="integrations" action="read">
-                      <LeadSquaredPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/settings/integrations/hubspot"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="integrations" action="read">
-                      <HubSpotPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/settings/integrations/shopify"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="integrations" action="read">
-                      <ShopifyPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/settings/integrations/linear"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="integrations" action="read">
-                      <LinearPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          {/* Dynamic Dashboard Apps Routes */}
-          <Route
-            path="/dashboard-app/:appId"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="integrations" action="read">
-                      <DashboardAppPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/access-tokens"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="access_tokens" action="read">
-                      <AccessTokens />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/integrations/:integrationId"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="integrations" action="read">
-                      <div className="p-6">
-                        <div className="h-full flex items-center justify-center">
-                          <div className="text-center">
-                            <h2 className="text-2xl font-bold mb-2">🔧 Configuração</h2>
-                            <p className="text-muted-foreground">
-                              Página de configuração em desenvolvimento
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          {/* Reports Routes */}
-          {/* <Route
-            path="/reports/overview"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="reports" action="read">
-                      <Overview />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/reports/conversations"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="reports" action="read">
-                      <Conversations />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/reports/users"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="reports" action="read">
-                      <Reports.Agents />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/reports/labels"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="reports" action="read">
-                      <Reports.Labels />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          /> */}
-          <Route
-            path="/bots"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="bots" action="read">
-                      <div className="flex items-center justify-center h-full">
-                        <div className="text-center">
-                          <h2 className="text-2xl font-bold mb-2">🤖 Bots</h2>
-                          <p className="text-muted-foreground">Página em desenvolvimento</p>
-                        </div>
-                      </div>
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/channels"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="channels" action="read">
-                      <Channels />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/channels/new"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="channels" action="create">
-                      <NewChannel />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/channels/:id/settings"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="channels" action="create">
-                      <ChannelSettings />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/settings/email-template-editor"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="message_templates" action="create">
-                      <EmailTemplateEditor />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/reports"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="reports" action="read">
-                      <div className="flex items-center justify-center h-full">
-                        <div className="text-center">
-                          <h2 className="text-2xl font-bold mb-2">📊 Relatórios</h2>
-                          <p className="text-muted-foreground">Página em desenvolvimento</p>
-                        </div>
-                      </div>
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          {/* Rota principal de agents redireciona para /agents/list */}
-          <Route path="/agents" element={<Navigate to="/agents/list" replace />} />
-
-          {/* Lista de agentes */}
-          <Route
-            path="/agents/list"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="ai_agents" action="read">
-                      <Agents />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/agents/new"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="ai_agents" action="create">
-                      <Agents />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/agents/:id/edit"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="ai_agents" action="update">
-                      <AgentEditPage />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/agents/management"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="ai_agents" action="read">
-                      <Agents />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/agents/mcp-servers"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="ai_mcp_servers" action="read">
-                      <MCPServers />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/agents/custom-mcp-servers"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="ai_custom_mcp_servers" action="read">
-                      <CustomMCPServers />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/agents/tools"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="ai_tools" action="read">
-                      <Tools />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/agents/custom-tools"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="ai_custom_tools" action="read">
-                      <CustomTools />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="dashboard" action="read">
-                      <Dashboard />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          <Route path="/conversations" element={ChatRouteElement} />
-
-          <Route path="/conversations/:conversationId" element={ChatRouteElement} />
-
-          {/* Tutoriais */}
-          <Route
-            path="/tutorials"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <Tutorials />
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          />
-
-          {/* Rotas específicas de canais foram integradas no fluxo unificado do NewChannel */}
-          {/* Meta e WhatsApp Cloud agora são parte do componente NewChannel */}
-
-          {/* Admin Settings Routes */}
-          <Route
-            path="/settings/admin"
-            element={
-              <PrivateRoute>
-                <CustomerRoute>
-                  <MainLayout>
-                    <PermissionRoute resource="installation_configs" action="manage">
-                      <AdminSettingsLayout />
-                    </PermissionRoute>
-                  </MainLayout>
-                </CustomerRoute>
-              </PrivateRoute>
-            }
-          >
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            {/* Smart root redirect */}
             <Route
-              path="email"
+              path="/"
               element={
-                <Suspense fallback={<div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></div>}>
-                  <SmtpConfig />
-                </Suspense>
+                <PrivateRoute>
+                  <SmartRedirect />
+                </PrivateRoute>
               }
             />
-            <Route
-              path="storage"
-              element={
-                <Suspense fallback={<div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></div>}>
-                  <StorageConfig />
-                </Suspense>
-              }
-            />
-            <Route
-              path="social-login"
-              element={
-                <Suspense fallback={<div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></div>}>
-                  <SocialLoginConfig />
-                </Suspense>
-              }
-            />
-            <Route
-              path="channels"
-              element={
-                <Suspense fallback={<div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></div>}>
-                  <ChannelConfig />
-                </Suspense>
-              }
-            />
-            <Route
-              path="openai"
-              element={
-                <Suspense fallback={<div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></div>}>
-                  <OpenAIConfig />
-                </Suspense>
-              }
-            />
-            <Route
-              path="integrations"
-              element={
-                <Suspense fallback={<div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></div>}>
-                  <IntegrationsConfig />
-                </Suspense>
-              }
-            />
-            <Route
-              path="inbound-email"
-              element={
-                <Suspense fallback={<div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></div>}>
-                  <InboundEmailConfig />
-                </Suspense>
-              }
-            />
-            <Route
-              path="frontend-runtime"
-              element={
-                <Suspense fallback={<div className="flex items-center justify-center h-full"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></div>}>
-                  <FrontendRuntimeConfig />
-                </Suspense>
-              }
-            />
-          </Route>
 
-          {/* Rotas Compartilhadas */}
-          <Route
-            path="/documentation"
-            element={
+            {/* Public routes */}
+            <Route path="/login" element={<PublicRoute><SuspenseWrap><Auth /></SuspenseWrap></PublicRoute>} />
+            <Route path="/auth/confirm-email" element={<PublicRoute><SuspenseWrap><EmailConfirmation /></SuspenseWrap></PublicRoute>} />
+            <Route path="/auth/confirmation" element={<PublicRoute><SuspenseWrap><EmailConfirmation /></SuspenseWrap></PublicRoute>} />
+            <Route path="/auth/reset-password" element={<PublicRoute><SuspenseWrap><ResetPassword /></SuspenseWrap></PublicRoute>} />
+            <Route path="/auth/password/edit" element={<PublicRoute><SuspenseWrap><ResetPassword /></SuspenseWrap></PublicRoute>} />
+
+            {/* OAuth Callbacks */}
+            <Route path="/instagram/callback" element={<PublicRoute><SuspenseWrap><InstagramCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/google/callback" element={<PublicRoute><SuspenseWrap><GoogleCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/google-calendar/callback" element={<PublicRoute><SuspenseWrap><GoogleCalendarCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/google-sheets/callback" element={<PublicRoute><SuspenseWrap><GoogleSheetsCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/github/callback" element={<PublicRoute><SuspenseWrap><GitHubCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/notion/callback" element={<PublicRoute><SuspenseWrap><NotionCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/stripe/callback" element={<PublicRoute><SuspenseWrap><StripeCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/linear/callback" element={<PublicRoute><SuspenseWrap><LinearCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/monday/callback" element={<PublicRoute><SuspenseWrap><MondayCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/atlassian/callback" element={<PublicRoute><SuspenseWrap><AtlassianCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/asana/callback" element={<PublicRoute><SuspenseWrap><AsanaCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/hubspot/callback" element={<PublicRoute><SuspenseWrap><HubSpotCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/paypal/callback" element={<PublicRoute><SuspenseWrap><PayPalCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/canva/callback" element={<PublicRoute><SuspenseWrap><CanvaCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/supabase/callback" element={<PublicRoute><SuspenseWrap><SupabaseCallback /></SuspenseWrap></PublicRoute>} />
+            <Route path="/microsoft/callback" element={<PublicRoute><SuspenseWrap><MicrosoftCallback /></SuspenseWrap></PublicRoute>} />
+
+            {/* Public widget & survey */}
+            <Route path="/widget" element={<PublicRoute><SuspenseWrap><Widget /></SuspenseWrap></PublicRoute>} />
+            <Route path="/survey/responses/:uuid" element={<PublicRoute><SuspenseWrap><SurveyResponse /></SuspenseWrap></PublicRoute>} />
+
+            {/* Setup routes */}
+            <Route path="/setup" element={<SuspenseWrap><Setup /></SuspenseWrap>} />
+            <Route path="/setup/onboarding" element={<SuspenseWrap><OnboardingPage /></SuspenseWrap>} />
+
+            {/* Contacts */}
+            <Route path="/contacts" element={<ProtectedPage resource="contacts" action="read"><Contacts /></ProtectedPage>} />
+            <Route path="/contacts/:contactId" element={<ProtectedPage resource="contacts" action="read"><Contacts /></ProtectedPage>} />
+            <Route path="/contacts/scheduled-actions" element={<ProtectedPage resource="contacts" action="read"><ScheduledActions /></ProtectedPage>} />
+
+            {/* Pipelines */}
+            <Route path="/pipelines" element={<ProtectedPage resource="pipelines" action="read"><Pipelines /></ProtectedPage>} />
+            <Route path="/pipelines/:pipelineId" element={<ProtectedPage resource="pipelines" action="read"><PipelineKanban /></ProtectedPage>} />
+
+            {/* Settings */}
+            <Route path="/settings/account" element={<ProtectedPage resource="accounts" action="read"><AccountSettings /></ProtectedPage>} />
+            <Route path="/settings/users" element={<ProtectedPage resource="users" action="read"><Users /></ProtectedPage>} />
+            <Route path="/settings/teams" element={<ProtectedPage resource="teams" action="read"><Teams /></ProtectedPage>} />
+            <Route path="/settings/teams/:teamId/add-users" element={<ProtectedPage resource="teams" action="create"><AddUsers /></ProtectedPage>} />
+            <Route path="/settings/labels" element={<ProtectedPage resource="labels" action="read"><Labels /></ProtectedPage>} />
+            <Route path="/settings/attributes" element={<ProtectedPage resource="custom_attribute_definitions" action="read"><CustomAttributes /></ProtectedPage>} />
+            <Route path="/settings/canned-responses" element={<ProtectedPage resource="canned_responses" action="read"><CannedResponses /></ProtectedPage>} />
+            <Route path="/settings/macros" element={<ProtectedPage resource="macros" action="read"><Macros /></ProtectedPage>} />
+            <Route path="/settings/integrations" element={<ProtectedPage resource="integrations" action="read"><Integrations /></ProtectedPage>} />
+
+            {/* Redirects from old settings paths to agents */}
+            <Route path="/settings/custom-tools" element={<Navigate to="/agents/custom-tools" replace />} />
+            <Route path="/settings/custom-mcp-servers" element={<Navigate to="/agents/custom-mcp-servers" replace />} />
+
+            {/* Integration sub-pages */}
+            <Route path="/settings/integrations/webhooks" element={<ProtectedPage resource="webhooks" action="read"><WebhooksPage /></ProtectedPage>} />
+            <Route path="/settings/integrations/oauth-apps" element={<ProtectedPage resource="oauth_applications" action="read"><OAuthAppsPage /></ProtectedPage>} />
+            <Route path="/settings/integrations/dashboard-apps" element={<ProtectedPage resource="dashboard_apps" action="read"><DashboardAppsPage /></ProtectedPage>} />
+            <Route path="/settings/integrations/slack" element={<ProtectedPage resource="integrations" action="read"><SlackIntegrationPage /></ProtectedPage>} />
+            <Route path="/settings/integrations/openai" element={<ProtectedPage resource="integrations" action="read"><OpenAIPage /></ProtectedPage>} />
+            <Route path="/settings/integrations/bms" element={<ProtectedPage resource="integrations" action="read"><BMSPage /></ProtectedPage>} />
+            <Route path="/settings/integrations/leadsquared" element={<ProtectedPage resource="integrations" action="read"><LeadSquaredPage /></ProtectedPage>} />
+            <Route path="/settings/integrations/hubspot" element={<ProtectedPage resource="integrations" action="read"><HubSpotPage /></ProtectedPage>} />
+            <Route path="/settings/integrations/shopify" element={<ProtectedPage resource="integrations" action="read"><ShopifyPage /></ProtectedPage>} />
+            <Route path="/settings/integrations/linear" element={<ProtectedPage resource="integrations" action="read"><LinearPage /></ProtectedPage>} />
+            <Route path="/settings/integrations/:integrationId" element={<ProtectedPage resource="integrations" action="read">
+              <div className="p-6">
+                <div className="h-full flex items-center justify-center">
+                  <div className="text-center">
+                    <h2 className="text-2xl font-bold mb-2">Configuracao</h2>
+                    <p className="text-muted-foreground">Pagina de configuracao em desenvolvimento</p>
+                  </div>
+                </div>
+              </div>
+            </ProtectedPage>} />
+
+            {/* Dashboard Apps */}
+            <Route path="/dashboard-app/:appId" element={<ProtectedPage resource="integrations" action="read"><DashboardAppPage /></ProtectedPage>} />
+
+            {/* Access Tokens */}
+            <Route path="/settings/access-tokens" element={<ProtectedPage resource="access_tokens" action="read"><AccessTokens /></ProtectedPage>} />
+
+            {/* Email Template Editor */}
+            <Route path="/settings/email-template-editor" element={<ProtectedPage resource="message_templates" action="create"><EmailTemplateEditor /></ProtectedPage>} />
+
+            {/* Reports placeholder */}
+            <Route path="/reports" element={<ProtectedPage resource="reports" action="read">
+              <div className="flex items-center justify-center h-full">
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold mb-2">Relatorios</h2>
+                  <p className="text-muted-foreground">Pagina em desenvolvimento</p>
+                </div>
+              </div>
+            </ProtectedPage>} />
+
+            {/* Bots placeholder */}
+            <Route path="/bots" element={<ProtectedPage resource="bots" action="read">
+              <div className="flex items-center justify-center h-full">
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold mb-2">Bots</h2>
+                  <p className="text-muted-foreground">Pagina em desenvolvimento</p>
+                </div>
+              </div>
+            </ProtectedPage>} />
+
+            {/* Channels */}
+            <Route path="/channels" element={<ProtectedPage resource="channels" action="read"><Channels /></ProtectedPage>} />
+            <Route path="/channels/new" element={<ProtectedPage resource="channels" action="create"><NewChannel /></ProtectedPage>} />
+            <Route path="/channels/:id/settings" element={<ProtectedPage resource="channels" action="create"><ChannelSettings /></ProtectedPage>} />
+
+            {/* Agents */}
+            <Route path="/agents" element={<Navigate to="/agents/list" replace />} />
+            <Route path="/agents/list" element={<ProtectedPage resource="ai_agents" action="read"><Agents /></ProtectedPage>} />
+            <Route path="/agents/new" element={<ProtectedPage resource="ai_agents" action="create"><Agents /></ProtectedPage>} />
+            <Route path="/agents/:id/edit" element={<ProtectedPage resource="ai_agents" action="update"><AgentEditPage /></ProtectedPage>} />
+            <Route path="/agents/management" element={<ProtectedPage resource="ai_agents" action="read"><Agents /></ProtectedPage>} />
+            <Route path="/agents/mcp-servers" element={<ProtectedPage resource="ai_mcp_servers" action="read"><MCPServers /></ProtectedPage>} />
+            <Route path="/agents/custom-mcp-servers" element={<ProtectedPage resource="ai_custom_mcp_servers" action="read"><CustomMCPServers /></ProtectedPage>} />
+            <Route path="/agents/tools" element={<ProtectedPage resource="ai_tools" action="read"><Tools /></ProtectedPage>} />
+            <Route path="/agents/custom-tools" element={<ProtectedPage resource="ai_custom_tools" action="read"><CustomTools /></ProtectedPage>} />
+
+            {/* Dashboard */}
+            <Route path="/dashboard" element={<ProtectedPage resource="dashboard" action="read"><Dashboard /></ProtectedPage>} />
+
+            {/* Conversations / Chat */}
+            <Route path="/conversations" element={ChatRouteElement} />
+            <Route path="/conversations/:conversationId" element={ChatRouteElement} />
+
+            {/* Tutorials */}
+            <Route path="/tutorials" element={
               <PrivateRoute>
-                <MainLayout>
-                  <Documentation />
-                </MainLayout>
+                <CustomerRoute>
+                  <MainLayout>
+                    <SuspenseWrap><Tutorials /></SuspenseWrap>
+                  </MainLayout>
+                </CustomerRoute>
               </PrivateRoute>
-            }
-          />
+            } />
 
-          <Route
-            path="/marketplace"
-            element={
-              <PrivateRoute>
-                <MainLayout>
-                  <Marketplace />
-                </MainLayout>
-              </PrivateRoute>
-            }
-          />
+            {/* Admin Settings */}
+            <Route
+              path="/settings/admin"
+              element={
+                <PrivateRoute>
+                  <CustomerRoute>
+                    <MainLayout>
+                      <PermissionRoute resource="installation_configs" action="manage">
+                        <SuspenseWrap><AdminSettingsLayout /></SuspenseWrap>
+                      </PermissionRoute>
+                    </MainLayout>
+                  </CustomerRoute>
+                </PrivateRoute>
+              }
+            >
+              <Route path="email" element={<SuspenseWrap><SmtpConfig /></SuspenseWrap>} />
+              <Route path="storage" element={<SuspenseWrap><StorageConfig /></SuspenseWrap>} />
+              <Route path="social-login" element={<SuspenseWrap><SocialLoginConfig /></SuspenseWrap>} />
+              <Route path="channels" element={<SuspenseWrap><ChannelConfig /></SuspenseWrap>} />
+              <Route path="openai" element={<SuspenseWrap><OpenAIConfig /></SuspenseWrap>} />
+              <Route path="integrations" element={<SuspenseWrap><IntegrationsConfig /></SuspenseWrap>} />
+              <Route path="inbound-email" element={<SuspenseWrap><InboundEmailConfig /></SuspenseWrap>} />
+              <Route path="frontend-runtime" element={<SuspenseWrap><FrontendRuntimeConfig /></SuspenseWrap>} />
+            </Route>
 
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute>
-                <MainLayout>
-                  <Profile />
-                </MainLayout>
-              </PrivateRoute>
-            }
-          />
+            {/* Shared routes */}
+            <Route path="/documentation" element={<PrivateRoute><MainLayout><SuspenseWrap><Documentation /></SuspenseWrap></MainLayout></PrivateRoute>} />
+            <Route path="/marketplace" element={<PrivateRoute><MainLayout><SuspenseWrap><Marketplace /></SuspenseWrap></MainLayout></PrivateRoute>} />
+            <Route path="/profile" element={<PrivateRoute><MainLayout><SuspenseWrap><Profile /></SuspenseWrap></MainLayout></PrivateRoute>} />
 
-          {/* Rota 403 - Sem permissão */}
-          <Route
-            path="/unauthorized"
-            element={
-              <PrivateRoute>
-                <Unauthorized />
-              </PrivateRoute>
-            }
-          />
-
-          {/* Rota 404 - Página não encontrada */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+            {/* Error routes */}
+            <Route path="/unauthorized" element={<PrivateRoute><SuspenseWrap><Unauthorized /></SuspenseWrap></PrivateRoute>} />
+            <Route path="*" element={<SuspenseWrap><NotFound /></SuspenseWrap>} />
+          </Routes>
+        </Suspense>
       </RouterGuard>
     </BrowserRouter>
   );

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -179,7 +180,7 @@ const PromptGeneratorModal = ({
         });
       }
     } catch (error) {
-      console.error('Error generating prompt:', error);
+      logger.error('Error generating prompt:', error);
       const errorMessage =
         error instanceof Error ? error.message : t('wizard.promptGenerator.messages.error');
       toast.error(errorMessage);
@@ -220,7 +221,7 @@ const PromptGeneratorModal = ({
         });
       }
     } catch (error) {
-      console.error('Error reviewing prompt:', error);
+      logger.error('Error reviewing prompt:', error);
       const errorMessage =
         error instanceof Error ? error.message : t('wizard.promptGenerator.messages.reviewError');
       toast.error(errorMessage);

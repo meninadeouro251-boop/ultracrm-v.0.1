@@ -1,6 +1,7 @@
 import api from '@/services/core/api';
 import { extractData } from '@/utils/apiHelpers';
 import type { InboxMembersUpdateResponse, AgentChannel } from '@/types/channels/inbox';
+import logger from '@/utils/logger';
 
 // Inbox Members Service following Ultra patterns
 const InboxMembersService = {
@@ -14,7 +15,7 @@ const InboxMembersService = {
       const data = extractData<AgentChannel[]>(response);
       return Array.isArray(data) ? data : [];
     } catch (error) {
-      console.error('InboxMembersService.get error:', error);
+      logger.error('InboxMembersService.get error:', error);
       return []; // Return empty array on error
     }
   },

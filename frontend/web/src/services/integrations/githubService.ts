@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   GitHubConfig,
   GitHubOAuthResponse,
   GitHubConnectionResponse,
@@ -17,7 +18,7 @@ const GitHubService = {
       );
       return data;
     } catch (error) {
-      console.error('GitHubService.generateAuthorization error:', error);
+      logger.error('GitHubService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -40,7 +41,7 @@ const GitHubService = {
       );
       return data;
     } catch (error) {
-      console.error('GitHubService.completeAuthorization error:', error);
+      logger.error('GitHubService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -61,7 +62,7 @@ const GitHubService = {
           return null;
         }
       }
-      console.error('GitHubService.getConfiguration error:', error);
+      logger.error('GitHubService.getConfiguration error:', error);
       throw error;
     }
   },
@@ -80,7 +81,7 @@ const GitHubService = {
       );
       return data;
     } catch (error) {
-      console.error('GitHubService.saveConfiguration error:', error);
+      logger.error('GitHubService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -95,7 +96,7 @@ const GitHubService = {
       );
       return data;
     } catch (error) {
-      console.error('GitHubService.disconnect error:', error);
+      logger.error('GitHubService.disconnect error:', error);
       throw error;
     }
   },
@@ -111,7 +112,7 @@ const GitHubService = {
       );
       return data;
     } catch (error) {
-      console.error('GitHubService.discoverTools error:', error);
+      logger.error('GitHubService.discoverTools error:', error);
       throw error;
     }
   },

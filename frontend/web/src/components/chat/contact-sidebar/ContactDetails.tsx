@@ -9,6 +9,7 @@ import { contactsService } from '@/services/contacts/contactsService';
 import { Button } from '@ultraapi/design-system/button';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@ultraapi/design-system/card';
 import {
+import logger from '@/utils/logger';
   User,
   Phone,
   Mail,
@@ -96,7 +97,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ contact }) => {
       setContactModalOpen(false);
       setEditingContact(null);
     } catch (error) {
-      console.error('Error saving contact:', error);
+      logger.error('Error saving contact:', error);
       toast.error(t('contactSidebar.contactDetails.actions.updateError'));
     }
   };

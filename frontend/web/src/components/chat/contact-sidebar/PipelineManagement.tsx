@@ -3,6 +3,7 @@ import { Button } from '@ultraapi/design-system/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@ultraapi/design-system/select';
 import { Label } from '@ultraapi/design-system/label';
 import {
+import logger from '@/utils/logger';
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -93,7 +94,7 @@ const PipelineManagement: React.FC<PipelineManagementProps> = ({
 
         setAvailableStages(selectedPipeline?.stages || []);
       } catch (error) {
-        console.error('Error loading stages:', error);
+        logger.error('Error loading stages:', error);
         setAvailableStages([]);
       }
     };
@@ -160,7 +161,7 @@ const PipelineManagement: React.FC<PipelineManagementProps> = ({
       await loadData();
       onPipelineUpdated?.();
     } catch (error) {
-      console.error('Error updating pipeline:', error);
+      logger.error('Error updating pipeline:', error);
       toast.error(t('contactSidebar.pipeline.saveError'));
     } finally {
       setIsSaving(false);
@@ -187,7 +188,7 @@ const PipelineManagement: React.FC<PipelineManagementProps> = ({
       setCurrentPipeline(null);
       onPipelineUpdated?.();
     } catch (error) {
-      console.error('Error removing from pipeline:', error);
+      logger.error('Error removing from pipeline:', error);
       toast.error(t('contactSidebar.pipeline.removeError'));
     } finally {
       setIsSaving(false);

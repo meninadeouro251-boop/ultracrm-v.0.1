@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
+import logger from '@/utils/logger';
   Card,
   CardContent,
   Button,
@@ -186,7 +187,7 @@ export default function WidgetBuilderForm({ inboxId, inbox, onUpdate }: WidgetBu
 
       toast.success(t('settings.widgetBuilder.success.updateSuccess'));
     } catch (error) {
-      console.error('Error updating widget:', error);
+      logger.error('Error updating widget:', error);
       toast.error(t('settings.widgetBuilder.errors.updateError'));
     } finally {
       setIsUpdating(false);
@@ -483,7 +484,7 @@ export default function WidgetBuilderForm({ inboxId, inbox, onUpdate }: WidgetBu
                             await navigator.clipboard.writeText(widgetScript);
                             toast.success(t('settings.widgetBuilder.widgetCode.copySuccess') || 'Code copied to clipboard!');
                           } catch (error) {
-                            console.error('Failed to copy code:', error);
+                            logger.error('Failed to copy code:', error);
                             toast.error(t('settings.widgetBuilder.widgetCode.copyError') || 'Failed to copy code');
                           }
                         }}
@@ -512,7 +513,7 @@ export default function WidgetBuilderForm({ inboxId, inbox, onUpdate }: WidgetBu
                             await navigator.clipboard.writeText(widgetIframeEmbed);
                             toast.success('Iframe code copied to clipboard!');
                           } catch (error) {
-                            console.error('Failed to copy iframe code:', error);
+                            logger.error('Failed to copy iframe code:', error);
                             toast.error('Failed to copy iframe code');
                           }
                         }}

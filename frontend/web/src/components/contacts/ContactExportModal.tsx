@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -93,7 +94,7 @@ export default function ContactExportModal({
       await onExport(params);
       onOpenChange(false);
     } catch (error) {
-      console.error('Error exporting contacts:', error);
+      logger.error('Error exporting contacts:', error);
     } finally {
       setExporting(false);
     }

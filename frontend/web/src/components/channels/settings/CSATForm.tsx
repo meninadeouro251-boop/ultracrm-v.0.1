@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
+import logger from '@/utils/logger';
   Card,
   CardContent,
   Button,
@@ -131,7 +132,7 @@ export default function CSATForm({
         const labelsData = response.data || [];
         setLabels(labelsData);
       } catch (error) {
-        console.error('Error loading labels:', error);
+        logger.error('Error loading labels:', error);
         toast.error(t('settings.csat.errors.loadLabelsError'));
         setLabels([]);
       }
@@ -148,7 +149,7 @@ export default function CSATForm({
         const pipelinesData = response.data || [];
         setPipelines(pipelinesData);
       } catch (error) {
-        console.error('Error loading pipelines:', error);
+        logger.error('Error loading pipelines:', error);
         setPipelines([]);
       }
     };
@@ -166,7 +167,7 @@ export default function CSATForm({
       const stagesData = response.data || [];
       setAvailableStages(prev => ({ ...prev, [pipelineId]: stagesData }));
     } catch (error) {
-      console.error('Error loading stages:', error);
+      logger.error('Error loading stages:', error);
       toast.error(t('settings.csat.errors.loadStagesError', { default: 'Error loading pipeline stages' }));
       throw error;
     }
@@ -311,7 +312,7 @@ export default function CSATForm({
 
       toast.success(t('settings.csat.success.updated'));
     } catch (error) {
-      console.error('Error updating CSAT settings:', error);
+      logger.error('Error updating CSAT settings:', error);
       toast.error(t('settings.csat.errors.updateError'));
     } finally {
       setIsUpdating(false);

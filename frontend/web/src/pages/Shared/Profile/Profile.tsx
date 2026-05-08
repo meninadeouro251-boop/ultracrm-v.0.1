@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, useEffect, useCallback } from 'react';
 import {
+import logger from '@/utils/logger';
   Button,
   Tabs,
   TabsContent,
@@ -178,7 +179,7 @@ const Profile = () => {
             }));
           }
         } catch (error) {
-          console.error('Error fetching profile:', error);
+          logger.error('Error fetching profile:', error);
           // Fallback para dados do contexto se a API falhar
           setUserData(prev => ({
             ...prev,
@@ -208,7 +209,7 @@ const Profile = () => {
         const allAvailableFlags = [...new Set([...availableEmailFlags, ...availablePushFlags])];
         const availableTypes = allAvailableFlags.map(flag => extractNotificationType(flag));
 
-        console.log('📧 [Profile] Notification settings loaded:', {
+        logger.debug('📧 [Profile] Notification settings loaded:', {
           all_email_flags: settings.all_email_flags,
           all_push_flags: settings.all_push_flags,
           selected_email_flags: settings.selected_email_flags,
@@ -230,7 +231,7 @@ const Profile = () => {
           available_types: availableTypes,
         }));
       } catch (error) {
-        console.error('Error fetching notification settings:', error);
+        logger.error('Error fetching notification settings:', error);
         // Manter valores padrão se houver erro
       }
     };
@@ -388,7 +389,7 @@ const Profile = () => {
         toast.success(t('notifications.profileUpdated'));
       }
     } catch (error) {
-      console.error('Profile update error:', error);
+      logger.error('Profile update error:', error);
       toast.error(t('notifications.profileUpdateError'));
     } finally {
       setIsLoading(false);
@@ -429,7 +430,7 @@ const Profile = () => {
         password_confirmation: '',
       });
     } catch (error) {
-      console.error('Password change error:', error);
+      logger.error('Password change error:', error);
       toast.error(t('notifications.passwordChangeError'));
     } finally {
       setIsLoading(false);
@@ -609,7 +610,7 @@ const Profile = () => {
   ) => {
     // Verificar se o tipo está disponível
     if (!notificationSettings.available_types.includes(setting)) {
-      console.warn(`Notification type "${setting}" is not available`);
+      logger.warn(`Notification type "${setting}" is not available`);
       return;
     }
 
@@ -645,7 +646,7 @@ const Profile = () => {
       const emailFlags = settingsToFlags(updatedSettings.email_notifications, 'email');
       const pushFlags = settingsToFlags(updatedSettings.push_notifications, 'push');
 
-      console.log('📧 [Profile] Updating notification settings:', {
+      logger.debug('📧 [Profile] Updating notification settings:', {
         emailFlags,
         pushFlags,
         setting,
@@ -659,7 +660,7 @@ const Profile = () => {
 
       toast.success(t('notifications.updated'));
     } catch (error) {
-      console.error('Error updating notification settings:', error);
+      logger.error('Error updating notification settings:', error);
       toast.error(t('notifications.settingsUpdateError') || 'Error updating notification settings');
 
       // Reverter mudança em caso de erro
@@ -688,7 +689,7 @@ const Profile = () => {
       saveAudioSettings(updatedSettings);
       toast.success(t('audio.updated'));
     } catch (error) {
-      console.error('Error saving audio settings:', error);
+      logger.error('Error saving audio settings:', error);
       toast.error('Error saving audio settings');
     }
   };

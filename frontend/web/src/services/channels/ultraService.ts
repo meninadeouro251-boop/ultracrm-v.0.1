@@ -1,6 +1,7 @@
 import api from '@/services/core/api';
 import { extractData } from '@/utils/apiHelpers';
 import type {
+import logger from '@/utils/logger';
   UltraConnectionParams,
   UltraAuthorizationResponse
 } from '@/types/channels/inbox';
@@ -34,7 +35,7 @@ const ultraService = {
       // Ultra API retorna {"status":200,...}
       return data.status === 200;
     } catch (error) {
-      console.error('Ultra API health check failed:', error);
+      logger.error('Ultra API health check failed:', error);
       return false;
     }
   },

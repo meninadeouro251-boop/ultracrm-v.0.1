@@ -3,6 +3,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { SettingsLabelsTour } from '@/tours';
 import { toast } from 'sonner';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -88,7 +89,7 @@ export default function Labels() {
         loading: { ...prev.loading, list: false },
       }));
     } catch (error) {
-      console.error('Error loading labels:', error);
+      logger.error('Error loading labels:', error);
       toast.error(t('messages.loadError'));
       setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
     }
@@ -209,7 +210,7 @@ export default function Labels() {
       setDeleteDialogOpen(false);
       setLabelToDelete(null);
     } catch (error) {
-      console.error('Error deleting label:', error);
+      logger.error('Error deleting label:', error);
       toast.error(t('messages.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -239,7 +240,7 @@ export default function Labels() {
 
       setBulkDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error bulk deleting labels:', error);
+      logger.error('Error bulk deleting labels:', error);
       toast.error(t('messages.bulkDeleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, bulk: false } }));
@@ -286,7 +287,7 @@ export default function Labels() {
       setLabelModalOpen(false);
       setEditingLabel(null);
     } catch (error) {
-      console.error('Error saving label:', error);
+      logger.error('Error saving label:', error);
       toast.error(editingLabel ? t('messages.updateError') : t('messages.createError'));
     } finally {
       setState(prev => ({

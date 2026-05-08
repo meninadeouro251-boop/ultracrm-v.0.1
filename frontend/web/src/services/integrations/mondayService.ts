@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   MondayConfig,
   MondayOAuthResponse,
   MondayConnectionResponse,
@@ -17,7 +18,7 @@ const MondayService = {
       );
       return data;
     } catch (error) {
-      console.error('MondayService.generateAuthorization error:', error);
+      logger.error('MondayService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -40,7 +41,7 @@ const MondayService = {
       );
       return data;
     } catch (error) {
-      console.error('MondayService.completeAuthorization error:', error);
+      logger.error('MondayService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -58,7 +59,7 @@ const MondayService = {
       if (error.response?.status === 404) {
         return null;
       }
-      console.error('MondayService.getConfiguration error:', error);
+      logger.error('MondayService.getConfiguration error:', error);
       throw error;
     }
   },
@@ -77,7 +78,7 @@ const MondayService = {
       );
       return data;
     } catch (error) {
-      console.error('MondayService.saveConfiguration error:', error);
+      logger.error('MondayService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -92,7 +93,7 @@ const MondayService = {
       );
       return data;
     } catch (error) {
-      console.error('MondayService.disconnect error:', error);
+      logger.error('MondayService.disconnect error:', error);
       throw error;
     }
   },
@@ -108,7 +109,7 @@ const MondayService = {
       );
       return data;
     } catch (error) {
-      console.error('MondayService.discoverTools error:', error);
+      logger.error('MondayService.discoverTools error:', error);
       throw error;
     }
   },

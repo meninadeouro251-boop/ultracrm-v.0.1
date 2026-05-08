@@ -4,6 +4,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { pipelineTasksService } from '@/services/pipelines/pipelineTasksService';
 
 import type {
+import logger from '@/utils/logger';
   PipelineTask,
   CreateTaskData,
   UpdateTaskData,
@@ -44,7 +45,7 @@ export function usePipelineTasks({
       );
       setTasks(response.data || []);
     } catch (error) {
-      console.error('Error loading tasks:', error);
+      logger.error('Error loading tasks:', error);
       toast.error(t('tasks.messages.loadError'));
       setTasks([]);
     } finally {
@@ -72,7 +73,7 @@ export function usePipelineTasks({
         toast.success(t('tasks.messages.createSuccess'));
         return newTask;
       } catch (error) {
-        console.error('Error creating task:', error);
+        logger.error('Error creating task:', error);
         toast.error(t('tasks.messages.createError'));
         return null;
       } finally {
@@ -95,7 +96,7 @@ export function usePipelineTasks({
         toast.success(t('tasks.messages.updateSuccess'));
         return updatedTask;
       } catch (error) {
-        console.error('Error updating task:', error);
+        logger.error('Error updating task:', error);
         toast.error(t('tasks.messages.updateError'));
         return null;
       } finally {
@@ -118,7 +119,7 @@ export function usePipelineTasks({
         toast.success(t('tasks.messages.deleteSuccess'));
         return true;
       } catch (error) {
-        console.error('Error deleting task:', error);
+        logger.error('Error deleting task:', error);
         toast.error(t('tasks.messages.deleteError'));
         return false;
       } finally {
@@ -140,7 +141,7 @@ export function usePipelineTasks({
         toast.success(t('tasks.messages.completeSuccess'));
         return completedTask;
       } catch (error) {
-        console.error('Error completing task:', error);
+        logger.error('Error completing task:', error);
         toast.error(t('tasks.messages.completeError'));
         return null;
       }
@@ -160,7 +161,7 @@ export function usePipelineTasks({
         toast.success(t('tasks.messages.cancelSuccess'));
         return cancelledTask;
       } catch (error) {
-        console.error('Error cancelling task:', error);
+        logger.error('Error cancelling task:', error);
         toast.error(t('tasks.messages.cancelError'));
         return null;
       }
@@ -180,7 +181,7 @@ export function usePipelineTasks({
         toast.success(t('tasks.messages.reopenSuccess'));
         return reopenedTask;
       } catch (error) {
-        console.error('Error reopening task:', error);
+        logger.error('Error reopening task:', error);
         toast.error(t('tasks.messages.reopenError'));
         return null;
       }
@@ -215,7 +216,7 @@ export function usePipelineTasks({
         toast.success(t('tasks.messages.moveSuccess'));
         return movedTask;
       } catch (error) {
-        console.error('Error moving task:', error);
+        logger.error('Error moving task:', error);
         toast.error(t('tasks.messages.moveError'));
         return null;
       }

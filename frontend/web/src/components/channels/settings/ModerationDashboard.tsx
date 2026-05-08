@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
+import logger from '@/utils/logger';
   Card,
   CardContent,
   Button,
@@ -79,7 +80,7 @@ export default function ModerationDashboard({ conversationId }: ModerationDashbo
       setModerations(response.data || []);
       setMeta(response.meta.pagination as PaginationMeta);
     } catch (error) {
-      console.error('Error loading moderations:', error);
+      logger.error('Error loading moderations:', error);
       toast.error(t('settings.moderation.errors.loadError'));
     } finally {
       setIsLoading(false);
@@ -99,7 +100,7 @@ export default function ModerationDashboard({ conversationId }: ModerationDashbo
       toast.success(t('settings.moderation.success.approved'));
       await loadModerations(meta.page);
     } catch (error) {
-      console.error('Error approving moderation:', error);
+      logger.error('Error approving moderation:', error);
       toast.error(t('settings.moderation.errors.approveError'));
     } finally {
       setIsProcessing(null);
@@ -120,7 +121,7 @@ export default function ModerationDashboard({ conversationId }: ModerationDashbo
       });
       await loadModerations(meta.page);
     } catch (error) {
-      console.error('Error rejecting moderation:', error);
+      logger.error('Error rejecting moderation:', error);
       toast.error(t('settings.moderation.errors.rejectError'));
     } finally {
       setIsProcessing(null);
@@ -135,7 +136,7 @@ export default function ModerationDashboard({ conversationId }: ModerationDashbo
       toast.success(t('settings.moderation.success.regenerated'));
       await loadModerations(meta.page);
     } catch (error) {
-      console.error('Error regenerating response:', error);
+      logger.error('Error regenerating response:', error);
       toast.error(t('settings.moderation.errors.regenerateError'));
     } finally {
       setIsProcessing(null);

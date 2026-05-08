@@ -10,6 +10,7 @@ import AIActionsModal from './AIActionsModal';
 import AIResultModal from './AIResultModal';
 import { AI_ACTIONS, AI_ACTIONS_NO_DRAFT, AIActionType } from '@/types/chat/ai-assistance';
 import { hasVisibleMessageContent } from '@/utils/chat/aiAssistanceMessage';
+import logger from '@/utils/logger';
 
 interface AIAssistanceButtonProps {
   currentMessage?: string;
@@ -122,7 +123,7 @@ const AIAssistanceButton: React.FC<AIAssistanceButtonProps> = ({
         setGeneratedContent(result);
       }
     } catch (error: unknown) {
-      console.error('Error processing AI action:', error);
+      logger.error('Error processing AI action:', error);
       const errorMessage =
         error instanceof Error ? error.message : t('aiAssistance.errors.processError');
       toast.error(errorMessage);

@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Button } from '@ultraapi/design-system/button';
 import { Card, CardContent } from '@ultraapi/design-system/card';
 import {
+import logger from '@/utils/logger';
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -280,7 +281,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
               audioFile = new File([mp3Blob], fileName, { type: 'audio/mp3' });
             }
           } catch (conversionError) {
-            console.error('Erro ao converter áudio:', conversionError);
+            logger.error('Erro ao converter áudio:', conversionError);
             toast.warning(t('messageInput.audio.conversionWarning'), {
               description: t('messageInput.audio.conversionWarningDescription'),
             });
@@ -300,7 +301,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
         setIsRecordingAudio(false);
         toast.success(t('messageInput.audio.sentSuccess'));
       } catch (error) {
-        console.error('Erro ao enviar áudio:', error);
+        logger.error('Erro ao enviar áudio:', error);
         toast.error(t('messageInput.audio.sendError'));
       } finally {
         setIsSending(false);
@@ -349,7 +350,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
         setShowTemplatesModal(false);
         toast.success(t('messageTemplates.success.sent'));
       } catch (error) {
-        console.error('Error sending WhatsApp template:', error);
+        logger.error('Error sending WhatsApp template:', error);
         toast.error(t('messageTemplates.errors.sendError'));
       } finally {
         setIsSending(false);
@@ -418,7 +419,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
         richEditorRef.current?.focus();
       }, 0);
     } catch (error) {
-      console.error('Error sending message:', error);
+      logger.error('Error sending message:', error);
     } finally {
       setIsSending(false);
       setUploadProgress({});

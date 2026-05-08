@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -114,7 +115,7 @@ export default function AddItemModal({
 
       setAvailableItems(data as Item[]);
     } catch (error) {
-      console.error('Error loading items:', error);
+      logger.error('Error loading items:', error);
       toast.error(t('addItem.loadError'));
       setAvailableItems([]);
     } finally {
@@ -159,7 +160,7 @@ export default function AddItemModal({
       onItemAdded();
       onOpenChange(false);
     } catch (error) {
-      console.error('Error adding item:', error);
+      logger.error('Error adding item:', error);
 
       // Handle error messages
       let errorMessage = t('addItem.error');

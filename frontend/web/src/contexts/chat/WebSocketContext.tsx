@@ -5,6 +5,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Message, Conversation, MessageSender, MessageTypeValue, Attachment } from '@/types/chat/api';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   MessageCreatedEvent,
   MessageUpdatedEvent,
   ConversationCreatedEvent,
@@ -232,7 +233,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
           // Canonical conversation id (UUID from backend)
           const conversationId = String(data.conversation?.id ?? data.conversation_id ?? '');
           if (!data || !data.id || !conversationId) {
-            console.warn('⚠️ WEBSOCKET: Evento message.created inválido, ignorando:', data);
+            logger.warn('⚠️ WEBSOCKET: Evento message.created inválido, ignorando:', data);
             return;
           }
 
@@ -297,7 +298,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
         onMessageUpdated: useCallback((data: MessageUpdatedEvent) => {
           const conversationId = String(data.conversation?.id ?? data.conversation_id ?? '');
           if (!data || !data.id || !conversationId) {
-            console.warn('⚠️ WEBSOCKET: Evento message.updated inválido, ignorando:', data);
+            logger.warn('⚠️ WEBSOCKET: Evento message.updated inválido, ignorando:', data);
             return;
           }
 
@@ -480,7 +481,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
 
         onConversationUpdated: useCallback((data: ConversationUpdatedEvent) => {
           if (!data || !data.id) {
-            console.warn('WebSocketContext: Invalid conversation data received', data);
+            logger.warn('WebSocketContext: Invalid conversation data received', data);
             return;
           }
 

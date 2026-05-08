@@ -5,6 +5,7 @@ import { Activity, Clock, Filter, RefreshCw, ChevronDown, ChevronUp } from 'luci
 import { useContactEvents } from '@/hooks/useContactEvents';
 import ContactEventCard from './ContactEventCard';
 import type { ContactEventsQueryParams, EventType } from '@/types/notifications';
+import logger from '@/utils/logger';
 
 interface ContactEventsTimelineProps {
   contactId: string;
@@ -95,13 +96,13 @@ export default function ContactEventsTimeline({
   // Expand all events
   const expandAll = () => {
     // TODO: Implement expand all functionality
-    console.log('Expand all events');
+    logger.debug('Expand all events');
   };
 
   // Collapse all events
   const collapseAll = () => {
     // TODO: Implement collapse all functionality
-    console.log('Collapse all events');
+    logger.debug('Collapse all events');
   };
 
   if (loading.events && events.length === 0) {

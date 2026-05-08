@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
+import logger from '@/utils/logger';
   Button,
   Badge,
   Card,
@@ -74,7 +75,7 @@ const SubAgentsForm = ({
       const filteredAgents = response.data.filter((agent: any) => agent.id !== editingAgentId);
       setAvailableAgents(filteredAgents);
     } catch (err) {
-      console.error('Error loading agents:', err);
+      logger.error('Error loading agents:', err);
       setError(t('subAgents.loadError'));
     } finally {
       setIsLoading(false);

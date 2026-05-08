@@ -7,6 +7,7 @@ import { FormField } from '../../shared/FormField';
 import { FormSection } from '../../shared/FormSection';
 import { sanitizeInboxName } from '@/utils/sanitizeName';
 import { PhoneInput } from '@/components/shared/PhoneInput';
+import logger from '@/utils/logger';
 
 // FB in window
 declare global {
@@ -85,13 +86,13 @@ export const CloudWhatsappForm = ({ form, onFormChange, canFB }: CloudWhatsappFo
             setIsLoading(false);
           } else if (data.event === 'ERROR') {
             const { error_message } = data.data;
-            console.error('Error', error_message);
+            logger.error('Error', error_message);
             toast.error(error_message || t('cloudWhatsappForm.errors.connectionFailed'));
             setIsLoading(false);
           }
         }
       } catch (error) {
-        console.error('Error parsing event data:', error);
+        logger.error('Error parsing event data:', error);
       }
     };
 
@@ -207,7 +208,7 @@ export const CloudWhatsappForm = ({ form, onFormChange, canFB }: CloudWhatsappFo
 
       toast.success(t('cloudWhatsappForm.success.dataObtained'));
     } catch (error: any) {
-      console.error('Error in handleConnectionSuccess:', error);
+      logger.error('Error in handleConnectionSuccess:', error);
       toast.error(
         error?.response?.data?.error ||
         error.message ||

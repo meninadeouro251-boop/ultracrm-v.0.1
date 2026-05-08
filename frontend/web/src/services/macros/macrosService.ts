@@ -2,6 +2,7 @@ import api from '@/services/core/api';
 import { extractData, extractResponse } from '@/utils/apiHelpers';
 import authApi from '@/services/core/apiAuth';
 import type {
+import logger from '@/utils/logger';
   Macro,
   MacrosResponse,
   MacroResponse,
@@ -95,7 +96,7 @@ class MacrosService {
         customAttributes: [], // TODO: Implementar busca de custom attributes se necessário
       };
     } catch (error: any) {
-      console.error('Erro ao buscar dados do formulário:', error);
+      logger.error('Erro ao buscar dados do formulário:', error);
       // Retornar dados vazios em caso de erro para não quebrar o formulário
       return {
         inboxes: [],

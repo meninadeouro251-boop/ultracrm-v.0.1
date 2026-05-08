@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   StripeConfig,
   StripeOAuthResponse,
   StripeConnectionResponse,
@@ -17,7 +18,7 @@ const StripeService = {
       );
       return data;
     } catch (error) {
-      console.error('StripeService.generateAuthorization error:', error);
+      logger.error('StripeService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -40,7 +41,7 @@ const StripeService = {
       );
       return data;
     } catch (error) {
-      console.error('StripeService.completeAuthorization error:', error);
+      logger.error('StripeService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -61,7 +62,7 @@ const StripeService = {
           return null;
         }
       }
-      console.error('StripeService.getConfiguration error:', error);
+      logger.error('StripeService.getConfiguration error:', error);
       throw error;
     }
   },
@@ -80,7 +81,7 @@ const StripeService = {
       );
       return data;
     } catch (error) {
-      console.error('StripeService.saveConfiguration error:', error);
+      logger.error('StripeService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -95,7 +96,7 @@ const StripeService = {
       );
       return data;
     } catch (error) {
-      console.error('StripeService.disconnect error:', error);
+      logger.error('StripeService.disconnect error:', error);
       throw error;
     }
   },
@@ -111,7 +112,7 @@ const StripeService = {
       );
       return data;
     } catch (error) {
-      console.error('StripeService.discoverTools error:', error);
+      logger.error('StripeService.discoverTools error:', error);
       throw error;
     }
   },

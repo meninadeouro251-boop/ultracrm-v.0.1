@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   PayPalConfig,
   PayPalOAuthResponse,
   PayPalConnectionResponse,
@@ -17,7 +18,7 @@ const PayPalService = {
       );
       return data;
     } catch (error) {
-      console.error('PayPalService.generateAuthorization error:', error);
+      logger.error('PayPalService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -40,7 +41,7 @@ const PayPalService = {
       );
       return data;
     } catch (error) {
-      console.error('PayPalService.completeAuthorization error:', error);
+      logger.error('PayPalService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -58,7 +59,7 @@ const PayPalService = {
       if (error.response?.status === 404) {
         return null;
       }
-      console.error('PayPalService.getConfiguration error:', error);
+      logger.error('PayPalService.getConfiguration error:', error);
       throw error;
     }
   },
@@ -77,7 +78,7 @@ const PayPalService = {
       );
       return data;
     } catch (error) {
-      console.error('PayPalService.saveConfiguration error:', error);
+      logger.error('PayPalService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -92,7 +93,7 @@ const PayPalService = {
       );
       return data;
     } catch (error) {
-      console.error('PayPalService.disconnect error:', error);
+      logger.error('PayPalService.disconnect error:', error);
       throw error;
     }
   },
@@ -108,7 +109,7 @@ const PayPalService = {
       );
       return data;
     } catch (error) {
-      console.error('PayPalService.discoverTools error:', error);
+      logger.error('PayPalService.discoverTools error:', error);
       throw error;
     }
   },

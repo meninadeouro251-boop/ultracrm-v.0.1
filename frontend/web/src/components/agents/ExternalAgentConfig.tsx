@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import {
+import logger from '@/utils/logger';
   Card,
   CardContent,
   CardHeader,
@@ -114,7 +115,7 @@ const ExternalAgentConfig = ({
 
       onChange(newData);
     } catch (error) {
-      console.error('Error loading integration:', error);
+      logger.error('Error loading integration:', error);
     } finally {
       setIsLoading(false);
     }
@@ -309,7 +310,7 @@ const ExternalAgentConfig = ({
         config,
       });
     } catch (error) {
-      console.error('Error saving integration:', error);
+      logger.error('Error saving integration:', error);
     } finally {
       setIsSaving(false);
     }

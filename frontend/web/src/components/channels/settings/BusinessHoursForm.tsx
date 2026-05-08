@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
+import logger from '@/utils/logger';
   Card,
   CardContent,
   Button,
@@ -107,7 +108,7 @@ export default function BusinessHoursForm({
 
       toast.success(t('settings.businessHours.success.updated'));
     } catch (error) {
-      console.error('Error updating business hours:', error);
+      logger.error('Error updating business hours:', error);
       toast.error(t('settings.businessHours.errors.updateError'));
     } finally {
       setIsUpdating(false);

@@ -4,6 +4,7 @@ import { Download } from 'lucide-react';
 import { toast } from 'sonner';
 import { Attachment } from '@/types/chat/api';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 // Ícones preenchidos customizados
 const PlayFilled = ({ className }: { className?: string }) => (
@@ -352,7 +353,7 @@ const MessageAudio: React.FC<MessageAudioProps> = ({ attachments }) => {
       }
 
       audio.play().catch(error => {
-        console.error('Erro ao reproduzir áudio:', error);
+        logger.error('Erro ao reproduzir áudio:', error);
         toast.error(t('messages.messageAudio.playbackError'), {
           description: t('messages.messageAudio.playbackErrorDescription'),
         });

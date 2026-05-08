@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -96,7 +97,7 @@ const AssignmentModal: React.FC<AssignmentModalProps> = ({
       await onConfirm(selectedIds);
       onClose();
     } catch (error) {
-      console.error('Error in assignment:', error);
+      logger.error('Error in assignment:', error);
     } finally {
       setIsSubmitting(false);
     }

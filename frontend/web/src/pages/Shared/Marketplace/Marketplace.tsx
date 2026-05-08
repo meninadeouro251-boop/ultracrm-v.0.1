@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Button, Card, CardContent, Badge, Input } from '@ultraapi/design-system';
 import {
+import logger from '@/utils/logger';
   Package,
   Search,
   Star,
@@ -108,7 +109,7 @@ const Marketplace = () => {
       const allTags = mockProducts.flatMap(product => product.tags);
       setAvailableTags([...new Set(allTags)]);
     } catch (error) {
-      console.error('Error loading products:', error);
+      logger.error('Error loading products:', error);
       toast.error(t('messages.loadError'));
     } finally {
       setLoading(false);

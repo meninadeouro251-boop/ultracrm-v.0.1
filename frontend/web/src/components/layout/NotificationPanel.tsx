@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Button } from '@ultraapi/design-system';
 import {
+import logger from '@/utils/logger';
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
@@ -66,7 +67,7 @@ export default function NotificationPanel({
         onClose();
       }
     } catch (error) {
-      console.error('Error opening notification:', error);
+      logger.error('Error opening notification:', error);
     }
   };
 
@@ -74,7 +75,7 @@ export default function NotificationPanel({
     try {
       await actions.markAllAsRead();
     } catch (error) {
-      console.error('Error marking all as read:', error);
+      logger.error('Error marking all as read:', error);
     }
   };
 

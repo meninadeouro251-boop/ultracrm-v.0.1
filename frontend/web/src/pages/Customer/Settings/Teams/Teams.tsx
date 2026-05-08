@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserPermissions } from '@/hooks/useUserPermissions';
 import TeamsService from '@/services/teams/teamsService';
 import {
+import logger from '@/utils/logger';
   Team,
   TeamsState,
   TeamsListParams,
@@ -118,7 +119,7 @@ export default function Teams() {
           }));
         }
       } catch (error) {
-        console.error('Error loading teams:', error);
+        logger.error('Error loading teams:', error);
         toast.error(t('messages.loadError'));
         setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
       }
@@ -244,7 +245,7 @@ export default function Teams() {
       setDeleteDialogOpen(false);
       setTeamToDelete(null);
     } catch (error) {
-      console.error('Error deleting team:', error);
+      logger.error('Error deleting team:', error);
       toast.error(t('messages.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -271,7 +272,7 @@ export default function Teams() {
 
       setBulkDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error bulk deleting teams:', error);
+      logger.error('Error bulk deleting teams:', error);
       toast.error(t('messages.bulkDeleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, bulk: false } }));
@@ -303,7 +304,7 @@ export default function Teams() {
       setTeamModalOpen(false);
       setEditingTeam(null);
     } catch (error) {
-      console.error('Error saving team:', error);
+      logger.error('Error saving team:', error);
       toast.error(editingTeam ? t('messages.updateError') : t('messages.createError'));
     } finally {
       setState(prev => ({

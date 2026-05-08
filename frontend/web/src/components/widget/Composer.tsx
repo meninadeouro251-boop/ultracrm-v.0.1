@@ -5,6 +5,7 @@ import { EmojiPickerComponent } from './EmojiPicker';
 import { ResizableTextarea, ResizableTextareaRef } from './ResizableTextarea';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Loader2, Send } from 'lucide-react';
+import logger from '@/utils/logger';
 
 interface ComposerProps {
   onSend: (text: string) => void | Promise<void>;
@@ -38,7 +39,7 @@ const Composer: React.FC<ComposerProps> = ({
       onTyping?.(false);
       setIsSending(false);
     } catch (error) {
-      console.error('Error sending message:', error);
+      logger.error('Error sending message:', error);
       setIsSending(false);
     }
   };

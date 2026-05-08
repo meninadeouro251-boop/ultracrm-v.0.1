@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import {
+import logger from '@/utils/logger';
   Button,
   Input,
   Select,
@@ -109,7 +110,7 @@ const EmailTemplateEditor: React.FC = () => {
           }
         })
         .catch(error => {
-          console.error('Error loading template:', error);
+          logger.error('Error loading template:', error);
           toast.error(t('settings.messageTemplates.errors.loadError'));
         })
         .finally(() => {
@@ -129,7 +130,7 @@ const EmailTemplateEditor: React.FC = () => {
         // Legacy HTML content - cannot load into editor
         // Show warning and mark as legacy HTML
         setIsLegacyHtml(true);
-        console.warn('Template contains HTML (legacy format). Cannot load into visual editor.');
+        logger.warn('Template contains HTML (legacy format). Cannot load into visual editor.');
         toast.warning(
           t('settings.messageTemplates.editor.legacyHtmlWarning') ||
             'Este template foi criado com HTML. Você pode editá-lo visualmente agora.',
@@ -146,7 +147,7 @@ const EmailTemplateEditor: React.FC = () => {
           }
         } catch (error) {
           // Invalid JSON - start with empty editor
-          console.warn('Content is not valid JSON design:', error);
+          logger.warn('Content is not valid JSON design:', error);
           toast.warning(
             t('settings.messageTemplates.editor.invalidContentWarning') ||
               'Não foi possível carregar o conteúdo. Editor iniciado vazio.',
@@ -199,7 +200,7 @@ const EmailTemplateEditor: React.FC = () => {
               navigate(-1); // Go back
             })
             .catch(error => {
-              console.error('Error creating template:', error);
+              logger.error('Error creating template:', error);
               toast.error(t('settings.messageTemplates.errors.createError'));
             })
             .finally(() => {
@@ -218,7 +219,7 @@ const EmailTemplateEditor: React.FC = () => {
               navigate(-1); // Go back
             })
             .catch(error => {
-              console.error('Error updating template:', error);
+              logger.error('Error updating template:', error);
               toast.error(t('settings.messageTemplates.errors.updateError'));
             })
             .finally(() => {
@@ -227,7 +228,7 @@ const EmailTemplateEditor: React.FC = () => {
         }
       });
     } catch (error) {
-      console.error('Error exporting HTML:', error);
+      logger.error('Error exporting HTML:', error);
       toast.error(t('settings.messageTemplates.editor.exportError'));
       setIsSaving(false);
     }

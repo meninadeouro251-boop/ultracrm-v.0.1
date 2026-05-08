@@ -1,6 +1,7 @@
 import api from '@/services/core/api';
 import { extractData, extractResponse } from '@/utils/apiHelpers';
 import {
+import logger from '@/utils/logger';
   CannedResponse,
   CannedResponseResponse,
   CannedResponseDeleteResponse,
@@ -19,7 +20,7 @@ class CannedResponsesService {
       const response = await api.get(this.baseUrl, { params });
       return extractResponse<CannedResponse>(response) as CannedResponsesResponse;
     } catch (error) {
-      console.error('Error fetching canned responses:', error);
+      logger.error('Error fetching canned responses:', error);
       throw error;
     }
   }

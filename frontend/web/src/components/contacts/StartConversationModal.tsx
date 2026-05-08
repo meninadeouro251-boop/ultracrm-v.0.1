@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -88,7 +89,7 @@ export default function StartConversationModal({
         setSelectedInboxId(firstAvailable.id.toString());
       }
     } catch (error) {
-      console.error('Error loading contactable inboxes:', error);
+      logger.error('Error loading contactable inboxes:', error);
       setAvailableInboxes([]);
     } finally {
       setLoadingInboxes(false);
@@ -128,7 +129,7 @@ export default function StartConversationModal({
 
       setMessageTemplate(approvedTemplates);
     } catch (error) {
-      console.error('Error loading templates:', error);
+      logger.error('Error loading templates:', error);
       setMessageTemplate([]);
     } finally {
       setLoadingTemplates(false);
@@ -279,7 +280,7 @@ export default function StartConversationModal({
         setTemplateParams({});
       }
     } catch (error) {
-      console.error('Error creating conversation:', error);
+      logger.error('Error creating conversation:', error);
     } finally {
       setLoading(false);
     }

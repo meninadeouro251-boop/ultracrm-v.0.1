@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -50,7 +51,7 @@ export default function OAuthIntegrationSettings({
       const integration = await integrationsService.getIntegration(integrationId);
       setIntegration(integration);
     } catch (error) {
-      console.error(`Error loading ${integrationId} integration:`, error);
+      logger.error(`Error loading ${integrationId} integration:`, error);
       toast.error(t('oauthSettings.messages.loadError', { name: displayName }));
     } finally {
       setLoading(prev => ({ ...prev, get: false }));
@@ -97,7 +98,7 @@ export default function OAuthIntegrationSettings({
       await loadIntegration();
       setDeleteDialogOpen(false);
     } catch (error) {
-      console.error(`Error disconnecting ${integrationId}:`, error);
+      logger.error(`Error disconnecting ${integrationId}:`, error);
       toast.error(t('oauthSettings.messages.disconnectError', { name: displayName }));
     } finally {
       setLoading(prev => ({ ...prev, delete: false }));

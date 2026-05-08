@@ -1,5 +1,6 @@
 import { ConversationsState, ConversationsAction } from '@/types/chat/conversations';
 import { Conversation } from '@/types/chat/api';
+import logger from '@/utils/logger';
 
 // Helper para verificar se uma conversa foi marcada como lida no localStorage
 const getReadConversationsFromStorage = (): Record<string, boolean> => {
@@ -10,7 +11,7 @@ const getReadConversationsFromStorage = (): Record<string, boolean> => {
       return parsed.readConversations || {};
     }
   } catch (error) {
-    console.warn('Failed to load read conversations from localStorage:', error);
+    logger.warn('Failed to load read conversations from localStorage:', error);
   }
   return {};
 };
@@ -25,7 +26,7 @@ const saveReadConversationsToStorage = (readConversations: Record<string, boolea
       readConversations,
     }));
   } catch (error) {
-    console.warn('Failed to save read conversations to localStorage:', error);
+    logger.warn('Failed to save read conversations to localStorage:', error);
   }
 };
 
@@ -205,7 +206,7 @@ export function conversationsReducer(
     case 'UPDATE_CONVERSATION': {
       // Verificar se payload é válido
       if (!action.payload || !action.payload.id) {
-        console.warn('UPDATE_CONVERSATION: Invalid payload', action.payload);
+        logger.warn('UPDATE_CONVERSATION: Invalid payload', action.payload);
         return state;
       }
 
@@ -312,7 +313,7 @@ export function conversationsReducer(
     case 'ADD_CONVERSATION': {
       // Verificar se payload é válido
       if (!action.payload || !action.payload.id) {
-        console.warn('ADD_CONVERSATION: Invalid payload', action.payload);
+        logger.warn('ADD_CONVERSATION: Invalid payload', action.payload);
         return state;
       }
 
@@ -429,7 +430,7 @@ export function conversationsReducer(
           readConversations,
         }));
       } catch (error) {
-        console.warn('Failed to remove read mark from localStorage:', error);
+        logger.warn('Failed to remove read mark from localStorage:', error);
       }
 
       return {

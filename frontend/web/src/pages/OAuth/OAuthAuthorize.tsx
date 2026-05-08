@@ -6,6 +6,7 @@ import { AlertCircle, Loader2 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/hooks/useLanguage';
 import { createOAuthAuthorization } from '@/services/auth/oauthService';
+import logger from '@/utils/logger';
 
 interface OAuthParams {
   client_id: string;
@@ -88,7 +89,7 @@ export const OAuthAuthorize: React.FC = () => {
       window.location.href = callbackUrl.toString();
 
     } catch (err: any) {
-      console.error('❌ OAuth Authorization Error:', err);
+      logger.error('❌ OAuth Authorization Error:', err);
       setError(`${t('authorize.errors.authorizationFailed')} ${err.message || err}`);
       setIsLoading(false);
     }

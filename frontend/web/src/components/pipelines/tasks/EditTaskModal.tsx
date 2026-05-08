@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -62,7 +63,7 @@ export default function EditTaskModal({
           // Format to YYYY-MM-DDTHH:mm
           formattedDueDate = date.toISOString().slice(0, 16);
         } catch (e) {
-          console.error('Error formatting due date:', e);
+          logger.error('Error formatting due date:', e);
         }
       }
 

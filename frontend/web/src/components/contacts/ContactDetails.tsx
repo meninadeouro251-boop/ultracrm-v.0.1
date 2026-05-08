@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -162,7 +163,7 @@ export default function ContactDetails({
         onContactUpdated();
       }
     } catch (error) {
-      console.error('Error merging contacts:', error);
+      logger.error('Error merging contacts:', error);
       toast.error(t('messages.mergeError'));
     } finally {
       setMerging(false);

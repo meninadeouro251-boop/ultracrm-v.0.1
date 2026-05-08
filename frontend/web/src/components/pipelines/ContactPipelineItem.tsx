@@ -6,6 +6,7 @@ import { pipelinesService } from '@/services/pipelines';
 import PipelineItemCard from './PipelineItemCard';
 import EditItemModal from './EditItemModal';
 import { toast } from 'sonner';
+import logger from '@/utils/logger';
 
 interface ContactPipelineItemProps {
   contactId?: string;
@@ -61,7 +62,7 @@ export default function ContactPipelineItem({
       setPipelineStagesMap(stagesMap);
       setPipelinesMap(pipelinesMapData);
     } catch (error) {
-      console.error('Error loading pipeline items:', error);
+      logger.error('Error loading pipeline items:', error);
     } finally {
       setIsLoading(false);
     }
@@ -84,7 +85,7 @@ export default function ContactPipelineItem({
       setPipelineItems((prev) => prev.filter((i) => i.id !== item.id));
       onPipelineUpdated?.();
     } catch (error) {
-      console.error('Error removing item:', error);
+      logger.error('Error removing item:', error);
       toast.error(t('kanban.messages.itemRemoveError'));
     }
   };
@@ -119,7 +120,7 @@ export default function ContactPipelineItem({
       toast.success(t('kanban.messages.itemUpdated'));
       handleItemUpdated();
     } catch (error) {
-      console.error('Error updating item:', error);
+      logger.error('Error updating item:', error);
       toast.error(t('kanban.messages.itemUpdateError'));
     } finally {
       setIsUpdatingItem(false);

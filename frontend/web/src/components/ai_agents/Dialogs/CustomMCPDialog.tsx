@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -76,7 +77,7 @@ const CustomMCPDialog = ({
         const servers = await listCustomMcpServers({ skip: 0, limit: 100 });
         setCustomMCPServers(servers);
       } catch (error) {
-        console.error('Error loading custom MCP servers:', error);
+        logger.error('Error loading custom MCP servers:', error);
         setCustomMCPServers([]);
         hasLoadedRef.current = false; // Allow retry on error
       } finally {

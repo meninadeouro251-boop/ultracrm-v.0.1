@@ -6,6 +6,7 @@ import { AlertCircle, ExternalLink, Loader2 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   getOAuthAccounts,
   createOAuthApplication,
 } from '@/services/auth/oauthService';
@@ -139,7 +140,7 @@ export const OAuthLogin: React.FC = () => {
       const loginUrl = `/login?returnUrl=${encodeURIComponent(targetUrl)}`;
       navigate(loginUrl);
     } catch (err) {
-      console.error('❌ OAuth: Failed to redirect to login:', err);
+      logger.error('❌ OAuth: Failed to redirect to login:', err);
       setError(t('login.errors.failedToRedirect'));
     }
   };

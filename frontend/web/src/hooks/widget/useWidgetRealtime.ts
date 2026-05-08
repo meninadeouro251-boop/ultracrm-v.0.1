@@ -9,6 +9,7 @@ import { transformMessage, mapAndRegisterMessages } from '@/utils/widget/message
 
 import type { MessageItem } from '@/components/widget/MessageList';
 import type { ConversationStatus } from '@/types/settings/widgetConfig';
+import logger from '@/utils/logger';
 
 type UseWidgetRealtimeParams = {
   pubsubToken: string | null;
@@ -333,7 +334,7 @@ export function useWidgetRealtime({
                   setMessagesWithPagination(mappedMessages);
                 }
               } catch (error) {
-                console.warn(
+                logger.warn(
                   'Widget: Failed to load messages after conversation creation:',
                   error,
                 );
@@ -350,7 +351,7 @@ export function useWidgetRealtime({
             setOnline(Array.isArray(users) ? users.length > 0 : !!users);
           }
         } catch (e) {
-          console.error('❌ Widget: Error processing message', e);
+          logger.error('❌ Widget: Error processing message', e);
         }
       },
     });

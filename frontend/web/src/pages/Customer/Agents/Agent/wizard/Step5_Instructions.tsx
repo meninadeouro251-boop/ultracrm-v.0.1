@@ -6,6 +6,7 @@ import { useGlobalConfig } from '@/contexts/GlobalConfigContext';
 import { openaiService } from '@/services/integrations/openaiService';
 import { toast } from 'sonner';
 import PromptGeneratorModal from '@/components/agents/wizard/PromptGeneratorModal';
+import logger from '@/utils/logger';
 
 interface Step5Props {
   data: { instruction: string };
@@ -59,7 +60,7 @@ const Step5_Instructions = ({ data, onChange, onNext, onBack }: Step5Props) => {
         toast.success(t('wizard.promptGenerator.messages.reviewSuccess'));
       }
     } catch (error) {
-      console.error('Error reviewing prompt:', error);
+      logger.error('Error reviewing prompt:', error);
       const errorMessage = error instanceof Error ? error.message : t('wizard.promptGenerator.messages.reviewError');
       toast.error(errorMessage);
     } finally {

@@ -3,6 +3,7 @@ import { UserResponse, UISettings, UserTour } from '@/types/auth';
 import { validateToken } from '@/services/auth/authService';
 import { tourService } from '@/services/tours/tourService';
 import { useAppDataStore } from './appDataStore';
+import logger from '@/utils/logger';
 
 interface ImpersonationData {
   adminUser: UserResponse;
@@ -119,7 +120,7 @@ export const useAuthStore = create<AuthState>((set, get) => {
         try {
           await useAppDataStore.getState().initializeAppData();
         } catch (error) {
-          console.error('Failed to initialize app data after validity check:', error);
+          logger.error('Failed to initialize app data after validity check:', error);
         }
       } catch (error: unknown) {
         const apiError = error as { response?: { status?: number } };
@@ -178,14 +179,14 @@ export const useAuthStore = create<AuthState>((set, get) => {
     markTourCompleted: (tourKey) => {
       set(state => ({ tours: { ...state.tours, [tourKey]: 'completed' as const } }));
       tourService.completeTour(tourKey, 'completed').catch(err => {
-        console.error('Failed to persist tour completion:', err);
+        logger.error('Failed to persist tour completion:', err);
       });
     },
 
     markTourSkipped: (tourKey) => {
       set(state => ({ tours: { ...state.tours, [tourKey]: 'skipped' as const } }));
       tourService.completeTour(tourKey, 'skipped').catch(err => {
-        console.error('Failed to persist tour skip:', err);
+        logger.error('Failed to persist tour skip:', err);
       });
     },
 
@@ -195,7 +196,7 @@ export const useAuthStore = create<AuthState>((set, get) => {
         return { tours: rest };
       });
       tourService.resetTour(tourKey).catch(err => {
-        console.error('Failed to reset tour:', err);
+        logger.error('Failed to reset tour:', err);
       });
     },
 

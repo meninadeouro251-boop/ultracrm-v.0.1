@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -113,7 +114,7 @@ export default function WebhooksList({ onBack }: WebhooksListProps = {}) {
         loading: { ...prev.loading, list: false },
       }));
     } catch (error) {
-      console.error('Error loading webhooks:', error);
+      logger.error('Error loading webhooks:', error);
       toast.error(t('webhooks.messages.loadError'));
       setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
     }
@@ -189,7 +190,7 @@ export default function WebhooksList({ onBack }: WebhooksListProps = {}) {
       await webhooksService.testWebhook(webhook.id);
       toast.success(t('webhooks.messages.testSuccess'));
     } catch (error) {
-      console.error('Error testing webhook:', error);
+      logger.error('Error testing webhook:', error);
       toast.error(t('webhooks.messages.testError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, test: false } }));
@@ -217,7 +218,7 @@ export default function WebhooksList({ onBack }: WebhooksListProps = {}) {
       setDeleteDialogOpen(false);
       setWebhookToDelete(null);
     } catch (error) {
-      console.error('Error deleting webhook:', error);
+      logger.error('Error deleting webhook:', error);
       toast.error(t('webhooks.messages.deleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, delete: false } }));
@@ -243,7 +244,7 @@ export default function WebhooksList({ onBack }: WebhooksListProps = {}) {
 
       setBulkDeleteDialogOpen(false);
     } catch (error) {
-      console.error('Error bulk deleting webhooks:', error);
+      logger.error('Error bulk deleting webhooks:', error);
       toast.error(t('webhooks.messages.bulkDeleteError'));
     } finally {
       setState(prev => ({ ...prev, loading: { ...prev.loading, bulk: false } }));
@@ -275,7 +276,7 @@ export default function WebhooksList({ onBack }: WebhooksListProps = {}) {
       setWebhookModalOpen(false);
       setEditingWebhook(null);
     } catch (error) {
-      console.error('Error saving webhook:', error);
+      logger.error('Error saving webhook:', error);
       toast.error(
         editingWebhook ? t('webhooks.messages.updateError') : t('webhooks.messages.createError'),
       );

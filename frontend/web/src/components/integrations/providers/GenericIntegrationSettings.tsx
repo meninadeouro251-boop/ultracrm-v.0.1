@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -62,7 +63,7 @@ export default function GenericIntegrationSettings({
       const hookData = await integrationsService.getIntegrationHook(appId);
       setHook(hookData);
     } catch (error) {
-      console.error(`Error loading ${appId} hook:`, error);
+      logger.error(`Error loading ${appId} hook:`, error);
       toast.error(t('genericSettings.messages.loadError', { name: displayName }));
     } finally {
       setLoading(prev => ({ ...prev, get: false }));
@@ -106,7 +107,7 @@ export default function GenericIntegrationSettings({
       // Close modal
       setConfigModalOpen(false);
     } catch (error) {
-      console.error(`Error saving ${appId} config:`, error);
+      logger.error(`Error saving ${appId} config:`, error);
       toast.error(
         hook
           ? t('genericSettings.messages.updateError', { name: displayName })
@@ -131,7 +132,7 @@ export default function GenericIntegrationSettings({
       setHook(null);
       setDeleteDialogOpen(false);
     } catch (error) {
-      console.error(`Error deleting ${appId} hook:`, error);
+      logger.error(`Error deleting ${appId} hook:`, error);
       toast.error(t('genericSettings.messages.deleteError', { name: displayName }));
     } finally {
       setLoading(prev => ({ ...prev, delete: false }));

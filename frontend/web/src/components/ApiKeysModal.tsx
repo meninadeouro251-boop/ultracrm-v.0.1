@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Button,
   Dialog,
   DialogContent,
@@ -73,7 +74,7 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
       const keys = await listApiKeys();
       setApiKeys(keys);
     } catch (error) {
-      console.error('Erro ao carregar chaves API:', error);
+      logger.error('Erro ao carregar chaves API:', error);
       toast.error(t('messages.loadError'));
     } finally {
       setLoading(false);
@@ -155,7 +156,7 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
         onApiKeysChange();
       }
     } catch (error) {
-      console.error('Erro ao salvar chave API:', error);
+      logger.error('Erro ao salvar chave API:', error);
       toast.error(t('messages.saveError'));
     } finally {
       setLoading(false);
@@ -180,7 +181,7 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
         onApiKeysChange();
       }
     } catch (error) {
-      console.error('Erro ao deletar chave API:', error);
+      logger.error('Erro ao deletar chave API:', error);
       toast.error(t('messages.deleteError'));
     } finally {
       setLoading(false);

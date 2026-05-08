@@ -1,5 +1,6 @@
 import ultraaiApi from '@/services/core/apiUltraAI';
 import {
+import logger from '@/utils/logger';
   Agent,
   AgentCreate,
   Folder,
@@ -150,7 +151,7 @@ class AgentsService {
     try {
       return await this.listAgents(page, pageSize);
     } catch (error) {
-      console.error('Error getting accessible agents:', error);
+      logger.error('Error getting accessible agents:', error);
       throw error;
     }
   }

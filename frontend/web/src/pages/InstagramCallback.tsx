@@ -6,6 +6,7 @@ import oauthCallbackService from '@/services/channels/oauthCallbackService';
 import { useLanguage } from '@/hooks/useLanguage';
 
 import logo from '@/assets/ULTRA_LOGO.svg';
+import logger from '@/utils/logger';
 
 export default function InstagramCallback() {
   const { t } = useLanguage('instagram');
@@ -58,7 +59,7 @@ export default function InstagramCallback() {
         throw new Error(response?.error || t('callback.errorMessage'));
       }
     } catch (error) {
-      console.error('Instagram callback error:', error);
+      logger.error('Instagram callback error:', error);
       setStatus('error');
       const errorMessage =
         (error as { response?: { data?: { error?: string } }; message?: string })?.response?.data

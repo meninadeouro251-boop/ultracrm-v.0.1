@@ -1,4 +1,5 @@
 import { createConsumer, Consumer, Subscription } from '@rails/actioncable';
+import logger from '@/utils/logger';
 
 const PRESENCE_INTERVAL = 20000; // 20 segundos
 const RECONNECT_INTERVAL = 1000; // 1 segundo
@@ -88,7 +89,7 @@ export class BaseActionCableConnector {
         },
       );
     } catch (error) {
-      console.error('❌ Erro ao criar subscription:', error);
+      logger.error('❌ Erro ao criar subscription:', error);
       this.initReconnectTimer();
     }
   }
@@ -111,7 +112,7 @@ export class BaseActionCableConnector {
       try {
         this.events[event](data);
       } catch (error) {
-        console.error(`❌ Erro ao processar evento ${event}:`, error);
+        logger.error(`❌ Erro ao processar evento ${event}:`, error);
       }
     }
   };
@@ -149,7 +150,7 @@ export class BaseActionCableConnector {
    */
   protected checkConnection(): void {
     if (!this.consumer) {
-      console.warn('⚠️ Consumer não disponível');
+      logger.warn('⚠️ Consumer não disponível');
       this.initReconnectTimer();
       return;
     }
@@ -235,7 +236,7 @@ export class BaseActionCableConnector {
     if (this.subscription) {
       this.subscription.perform(action, data);
     } else {
-      console.warn('⚠️ Não é possível performar action - subscription não disponível');
+      logger.warn('⚠️ Não é possível performar action - subscription não disponível');
     }
   }
 

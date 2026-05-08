@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { usersService } from '@/services/users';
 import type { User } from '@/types/users';
+import logger from '@/utils/logger';
 
 export function useAccountUsers() {
   const [users, setUsers] = useState<User[]>([]);
@@ -21,7 +22,7 @@ export function useAccountUsers() {
         setUsers(userData);
       }
     } catch (err) {
-      console.error('Error loading account users:', err);
+      logger.error('Error loading account users:', err);
       setError(err instanceof Error ? err.message : 'Erro ao carregar usuários');
       setUsers([]);
     } finally {

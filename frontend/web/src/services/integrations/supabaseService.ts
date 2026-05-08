@@ -1,5 +1,6 @@
 import api from '@/services/core/api';
 import type {
+import logger from '@/utils/logger';
   SupabaseConfig,
   SupabaseOAuthResponse,
   SupabaseConnectionResponse,
@@ -17,7 +18,7 @@ const SupabaseService = {
       );
       return data;
     } catch (error) {
-      console.error('SupabaseService.generateAuthorization error:', error);
+      logger.error('SupabaseService.generateAuthorization error:', error);
       throw error;
     }
   },
@@ -40,7 +41,7 @@ const SupabaseService = {
       );
       return data;
     } catch (error) {
-      console.error('SupabaseService.completeAuthorization error:', error);
+      logger.error('SupabaseService.completeAuthorization error:', error);
       throw error;
     }
   },
@@ -61,7 +62,7 @@ const SupabaseService = {
           return null;
         }
       }
-      console.error('SupabaseService.getConfiguration error:', error);
+      logger.error('SupabaseService.getConfiguration error:', error);
       throw error;
     }
   },
@@ -80,7 +81,7 @@ const SupabaseService = {
       );
       return data;
     } catch (error) {
-      console.error('SupabaseService.saveConfiguration error:', error);
+      logger.error('SupabaseService.saveConfiguration error:', error);
       throw error;
     }
   },
@@ -95,7 +96,7 @@ const SupabaseService = {
       );
       return data;
     } catch (error) {
-      console.error('SupabaseService.disconnect error:', error);
+      logger.error('SupabaseService.disconnect error:', error);
       throw error;
     }
   },
@@ -111,7 +112,7 @@ const SupabaseService = {
       );
       return data;
     } catch (error) {
-      console.error('SupabaseService.discoverTools error:', error);
+      logger.error('SupabaseService.discoverTools error:', error);
       throw error;
     }
   },

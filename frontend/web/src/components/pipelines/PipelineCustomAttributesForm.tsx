@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Button,
   Input,
   Label,
@@ -217,7 +218,7 @@ export default function PipelineCustomAttributesForm({
         hasLoadedRef.current = true;
         loadContextRef.current = contextKey;
       } catch (error) {
-        console.error('Error loading custom attributes:', error);
+        logger.error('Error loading custom attributes:', error);
       } finally {
         setLoading(false);
       }

@@ -2,6 +2,7 @@ import { extractData, extractResponse } from '@/utils/apiHelpers';
 import api from '../core/api';
 import authApi from '@/services/core/apiAuth';
 import type {
+import logger from '@/utils/logger';
   AutomationRule,
   AutomationCondition,
   AutomationAction,
@@ -19,7 +20,7 @@ class AutomationService {
       const response = await api.get('/automation_rules');
       return extractResponse<AutomationRule>(response) as AutomationsResponse;
     } catch (error: any) {
-      console.error('Erro ao buscar automações:', error);
+      logger.error('Erro ao buscar automações:', error);
       throw new Error(error?.response?.data?.message || 'Erro ao buscar automações');
     }
   }
@@ -29,7 +30,7 @@ class AutomationService {
       const response = await api.get(`/automation_rules/${id}`);
       return extractData<AutomationResponse>(response);
     } catch (error: any) {
-      console.error('Erro ao buscar automação:', error);
+      logger.error('Erro ao buscar automação:', error);
       throw new Error(error?.response?.data?.message || 'Erro ao buscar automação');
     }
   }
@@ -61,7 +62,7 @@ class AutomationService {
 
       return extractData<AutomationResponse>(response);
     } catch (error: any) {
-      console.error('Erro ao criar automação:', error);
+      logger.error('Erro ao criar automação:', error);
 
       if (error?.response?.data?.error) {
         // Tratar erros de validação do backend
@@ -103,7 +104,7 @@ class AutomationService {
 
       return extractData<AutomationResponse>(response);
     } catch (error: any) {
-      console.error('Erro ao atualizar automação:', error);
+      logger.error('Erro ao atualizar automação:', error);
 
       if (error?.response?.data?.error) {
         // Tratar erros de validação do backend
@@ -126,7 +127,7 @@ class AutomationService {
       const response = await api.delete(`/automation_rules/${id}`);
       return extractData<AutomationDeleteResponse>(response);
     } catch (error: any) {
-      console.error('Erro ao excluir automação:', error);
+      logger.error('Erro ao excluir automação:', error);
       throw new Error(error?.response?.data?.message || 'Erro ao excluir automação');
     }
   }
@@ -136,7 +137,7 @@ class AutomationService {
       const response = await api.post(`/automation_rules/${id}/clone`);
       return extractData<AutomationResponse>(response);
     } catch (error: any) {
-      console.error('Erro ao clonar automação:', error);
+      logger.error('Erro ao clonar automação:', error);
       throw new Error(error?.response?.data?.message || 'Erro ao clonar automação');
     }
   }
@@ -181,7 +182,7 @@ class AutomationService {
         customAttributes: [], // TODO: Implementar busca de custom attributes se necessário
       };
     } catch (error: any) {
-      console.error('Erro ao buscar dados do formulário:', error);
+      logger.error('Erro ao buscar dados do formulário:', error);
       // Retornar dados vazios em caso de erro para não quebrar o formulário
       return {
         inboxes: [],
@@ -208,7 +209,7 @@ class AutomationService {
 
       return extractData<string>(response);
     } catch (error: any) {
-      console.error('Erro ao fazer upload do arquivo:', error);
+      logger.error('Erro ao fazer upload do arquivo:', error);
       throw new Error(error?.response?.data?.message || 'Erro ao fazer upload do arquivo');
     }
   }
@@ -272,7 +273,7 @@ class AutomationService {
 
       return result;
     } catch (error) {
-      console.error('Erro ao extrair dados do flow:', error);
+      logger.error('Erro ao extrair dados do flow:', error);
       return {};
     }
   }
@@ -294,13 +295,13 @@ class AutomationService {
         if (action) {
           actions.push(action);
         } else {
-          console.warn(`⚠️ Falha ao converter node: ${node.type} (${node.id})`);
+          logger.warn(`⚠️ Falha ao converter node: ${node.type} (${node.id})`);
         }
       });
 
       return actions;
     } catch (error) {
-      console.error('❌ Erro ao extrair actions do flow:', error);
+      logger.error('❌ Erro ao extrair actions do flow:', error);
       return [];
     }
   }
@@ -495,11 +496,11 @@ class AutomationService {
           };
 
         default:
-          console.warn(`Tipo de node desconhecido: ${nodeType}`);
+          logger.warn(`Tipo de node desconhecido: ${nodeType}`);
           return null;
       }
     } catch (error) {
-      console.error(`Erro ao converter node ${node.id} para action:`, error);
+      logger.error(`Erro ao converter node ${node.id} para action:`, error);
       return null;
     }
   }

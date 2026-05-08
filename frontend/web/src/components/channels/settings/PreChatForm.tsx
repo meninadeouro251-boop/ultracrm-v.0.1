@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
+import logger from '@/utils/logger';
   Card,
   CardContent,
   Button,
@@ -114,7 +115,7 @@ export default function PreChatForm({
 
       toast.success('Configurações do formulário pré-chat atualizadas com sucesso!');
     } catch (error) {
-      console.error('Error updating pre-chat form:', error);
+      logger.error('Error updating pre-chat form:', error);
       toast.error('Erro ao atualizar configurações do formulário pré-chat');
     } finally {
       setIsUpdating(false);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -157,7 +158,7 @@ export default function UserFormModal({ isOpen, onClose, user, onSuccess }: User
       onSuccess();
       onClose();
     } catch (error) {
-      console.error('Erro ao salvar usuário:', error);
+      logger.error('Erro ao salvar usuário:', error);
       toast.error(t('form.messages.saveError'));
     } finally {
       setLoading(false);

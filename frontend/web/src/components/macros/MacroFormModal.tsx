@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -98,7 +99,7 @@ export default function MacroFormModal({ isOpen, onClose, macro, onSuccess }: Ma
       const data = await macrosService.getFormData();
       setFormDataOptions(data);
     } catch (error) {
-      console.error('Erro ao carregar dados do formulário:', error);
+      logger.error('Erro ao carregar dados do formulário:', error);
     }
   };
 
@@ -163,7 +164,7 @@ export default function MacroFormModal({ isOpen, onClose, macro, onSuccess }: Ma
       onSuccess();
       onClose();
     } catch (error) {
-      console.error('Error saving macro:', error);
+      logger.error('Error saving macro:', error);
       toast.error(isEditing ? t('messages.updateError') : t('messages.createError'));
     } finally {
       setLoading(false);

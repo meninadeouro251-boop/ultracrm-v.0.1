@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -81,7 +82,7 @@ const AsanaConfigDialog = ({
         });
       }
     } catch (error) {
-      console.error('Error loading Asana configuration:', error);
+      logger.error('Error loading Asana configuration:', error);
       setConfig({
         provider: 'asana',
         username: '',
@@ -100,7 +101,7 @@ const AsanaConfigDialog = ({
       const response = await AsanaService.discoverTools(agentId);
       setAvailableTools(response.tools || []);
     } catch (error) {
-      console.error('Error loading Asana tools:', error);
+      logger.error('Error loading Asana tools:', error);
       toast.error('Erro ao carregar ferramentas disponíveis');
     } finally {
       setIsLoadingTools(false);
@@ -117,7 +118,7 @@ const AsanaConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to Asana:', error);
+      logger.error('Error connecting to Asana:', error);
       toast.error('Erro ao conectar com Asana');
     } finally {
       setIsConnecting(false);
@@ -159,7 +160,7 @@ const AsanaConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving Asana configuration:', error);
+      logger.error('Error saving Asana configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -173,7 +174,7 @@ const AsanaConfigDialog = ({
       toast.success('Asana desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting Asana:', error);
+      logger.error('Error disconnecting Asana:', error);
       toast.error('Erro ao desconectar Asana');
     }
   };

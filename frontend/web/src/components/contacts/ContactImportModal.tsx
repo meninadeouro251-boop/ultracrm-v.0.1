@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogDescription,
@@ -65,7 +66,7 @@ export default function ContactImportModal({
       handleRemoveFile();
       onOpenChange(false);
     } catch (error) {
-      console.error('Error importing contacts:', error);
+      logger.error('Error importing contacts:', error);
     } finally {
       setUploading(false);
     }

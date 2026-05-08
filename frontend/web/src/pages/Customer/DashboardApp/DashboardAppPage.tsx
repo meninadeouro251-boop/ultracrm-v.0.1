@@ -5,6 +5,7 @@ import { integrationsService } from '@/services/integrations';
 import { DashboardApp } from '@/types/integrations';
 import { Skeleton } from '@ultraapi/design-system';
 import { AlertCircle } from 'lucide-react';
+import logger from '@/utils/logger';
 
 /**
  * Generic page component for displaying embedded dashboard apps
@@ -49,7 +50,7 @@ export default function DashboardAppPage() {
 
         setApp(foundApp);
       } catch (err) {
-        console.error('Error loading dashboard app:', err);
+        logger.error('Error loading dashboard app:', err);
         setError('Failed to load dashboard app');
       } finally {
         setLoading(false);

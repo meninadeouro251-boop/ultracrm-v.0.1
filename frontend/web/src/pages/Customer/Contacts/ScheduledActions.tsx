@@ -11,6 +11,7 @@ import ScheduledActionsTable from '@/components/scheduledActions/ScheduledAction
 import EmptyState from '@/components/base/EmptyState';
 import { CalendarClock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import logger from '@/utils/logger';
 
 interface ScheduledActionsState {
   actions: ScheduledAction[];
@@ -95,7 +96,7 @@ export default function ScheduledActions() {
           loading: { ...prev.loading, list: false },
         }));
       } catch (error: any) {
-        console.error('Error loading scheduled actions:', error);
+        logger.error('Error loading scheduled actions:', error);
         toast.error(error.response?.data?.error || t('scheduledActions.errors.loadFailed'));
         setState(prev => ({ ...prev, loading: { ...prev.loading, list: false } }));
       }
@@ -168,7 +169,7 @@ export default function ScheduledActions() {
         selectedActionIds: prev.selectedActionIds.filter(id => id !== actionId),
       }));
     } catch (error: any) {
-      console.error('Error cancelling action:', error);
+      logger.error('Error cancelling action:', error);
       toast.error(error.response?.data?.error || t('scheduledActions.errors.cancelFailed'));
     }
   };
@@ -204,7 +205,7 @@ export default function ScheduledActions() {
       await loadActions();
       handleClearSelection();
     } catch (error: any) {
-      console.error('Error cancelling actions:', error);
+      logger.error('Error cancelling actions:', error);
       toast.error(error.response?.data?.error || t('scheduledActions.errors.bulkCancelFailed'));
     }
   };

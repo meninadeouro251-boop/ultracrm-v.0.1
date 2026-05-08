@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Button,
   Input,
   Label,
@@ -102,7 +103,7 @@ export default function CustomAttributesForm({
           const errorKey = translationKeys.loadError || 'contactSidebar.customAttributes.loadError';
           toast.error(t(errorKey));
         } else {
-          console.error('Error loading custom attributes:', error);
+          logger.error('Error loading custom attributes:', error);
         }
       } finally {
         setLoading(false);

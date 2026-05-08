@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -93,7 +94,7 @@ const GoogleSheetsConfigDialog = ({
       setAvailableSpreadsheets(spreadsheets);
       setConfig((prev: GoogleSheetsConfig) => ({ ...prev, spreadsheets }));
     } catch (error) {
-      console.error('Error loading spreadsheets:', error);
+      logger.error('Error loading spreadsheets:', error);
       toast.error('Erro ao carregar planilhas');
     } finally {
       setIsLoadingSpreadsheets(false);
@@ -115,7 +116,7 @@ const GoogleSheetsConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to Google Sheets:', error);
+      logger.error('Error connecting to Google Sheets:', error);
       toast.error('Erro ao conectar com Google Sheets');
     } finally {
       setIsConnecting(false);
@@ -137,7 +138,7 @@ const GoogleSheetsConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving Google Sheets configuration:', error);
+      logger.error('Error saving Google Sheets configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -155,7 +156,7 @@ const GoogleSheetsConfigDialog = ({
       toast.success('Google Sheets desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting Google Sheets:', error);
+      logger.error('Error disconnecting Google Sheets:', error);
       toast.error('Erro ao desconectar Google Sheets');
     }
   };

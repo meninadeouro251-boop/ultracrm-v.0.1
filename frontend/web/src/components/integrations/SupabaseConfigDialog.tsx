@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
+import logger from '@/utils/logger';
   Dialog,
   DialogContent,
   DialogHeader,
@@ -81,7 +82,7 @@ const SupabaseConfigDialog = ({
         });
       }
     } catch (error) {
-      console.error('Error loading Supabase configuration:', error);
+      logger.error('Error loading Supabase configuration:', error);
       setConfig({
         provider: 'supabase',
         username: '',
@@ -100,7 +101,7 @@ const SupabaseConfigDialog = ({
       const response = await SupabaseService.discoverTools(agentId);
       setAvailableTools(response.tools || []);
     } catch (error) {
-      console.error('Error loading Supabase tools:', error);
+      logger.error('Error loading Supabase tools:', error);
       toast.error('Erro ao carregar ferramentas disponíveis');
     } finally {
       setIsLoadingTools(false);
@@ -117,7 +118,7 @@ const SupabaseConfigDialog = ({
         window.location.href = response.url;
       }
     } catch (error) {
-      console.error('Error connecting to Supabase:', error);
+      logger.error('Error connecting to Supabase:', error);
       toast.error('Erro ao conectar com Supabase');
     } finally {
       setIsConnecting(false);
@@ -159,7 +160,7 @@ const SupabaseConfigDialog = ({
       toast.success('Configurações salvas com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error saving Supabase configuration:', error);
+      logger.error('Error saving Supabase configuration:', error);
       toast.error('Erro ao salvar configurações');
     }
   };
@@ -173,7 +174,7 @@ const SupabaseConfigDialog = ({
       toast.success('Supabase desconectado com sucesso!');
       onOpenChange(false);
     } catch (error) {
-      console.error('Error disconnecting Supabase:', error);
+      logger.error('Error disconnecting Supabase:', error);
       toast.error('Erro ao desconectar Supabase');
     }
   };

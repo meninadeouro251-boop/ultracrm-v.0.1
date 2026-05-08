@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Card,
   CardContent,
   Input,
@@ -62,7 +63,7 @@ const APIChannelConfig: React.FC<{
       });
       toast.success(t('settings.configuration.api.hmac.success.updated'));
     } catch (error) {
-      console.error('Erro ao atualizar HMAC:', error);
+      logger.error('Erro ao atualizar HMAC:', error);
       toast.error(t('settings.configuration.api.hmac.errors.updateError'));
       setHmacMandatory(!enabled); // Revert on error
     } finally {
@@ -146,7 +147,7 @@ const WhatsAppChannelConfig: React.FC<{
       });
       toast.success(t('settings.configuration.api.markAsRead.success.updated'));
     } catch (error) {
-      console.error('Erro ao atualizar marcar como lido:', error);
+      logger.error('Erro ao atualizar marcar como lido:', error);
       toast.error(t('settings.configuration.api.markAsRead.errors.updateError'));
       setMarkAsRead(!enabled); // Revert on error
     } finally {
@@ -268,7 +269,7 @@ const UltraPrivacySettings: React.FC<{
           groupadd: privacyData.GroupAdd || privacyData.groupAdd || privacyData.groupadd || 'all',
         });
       } catch (error) {
-        console.error('Erro ao carregar configurações de privacidade:', error);
+        logger.error('Erro ao carregar configurações de privacidade:', error);
       }
     };
 
@@ -299,7 +300,7 @@ const UltraPrivacySettings: React.FC<{
       setPrivacySettings(updatedSettings);
       toast.success(t('settings.configuration.whatsapp.instance.privacy.success.updated'));
     } catch (error: any) {
-      console.error(`Erro ao atualizar ${setting}:`, error);
+      logger.error(`Erro ao atualizar ${setting}:`, error);
       toast.error(
         error?.response?.data?.error ||
         t('settings.configuration.whatsapp.instance.privacy.errors.updateError', { setting }),
@@ -533,7 +534,7 @@ const BaileysWhatsAppConfig: React.FC<{
           }
         }
       } catch (error) {
-        console.error('Erro ao carregar status da instância:', error);
+        logger.error('Erro ao carregar status da instância:', error);
       }
     };
 
@@ -567,7 +568,7 @@ const BaileysWhatsAppConfig: React.FC<{
         toast.error(t('settings.configuration.whatsapp.instance.errors.qrCodeError'));
       }
     } catch (error) {
-      console.error('Erro ao gerar QR Code:', error);
+      logger.error('Erro ao gerar QR Code:', error);
       toast.error(t('settings.configuration.whatsapp.instance.errors.qrCodeError'));
     } finally {
       setIsLoading(false);
@@ -583,7 +584,7 @@ const BaileysWhatsAppConfig: React.FC<{
       setInstanceStatus('disconnected');
       toast.success(t('settings.configuration.whatsapp.instance.success.disconnected'));
     } catch (error) {
-      console.error('Erro ao desconectar:', error);
+      logger.error('Erro ao desconectar:', error);
       toast.error('Erro ao desconectar instância');
     } finally {
       setIsLoading(false);
@@ -779,7 +780,7 @@ const UltraWhatsAppConfig: React.FC<{
           }
         }
       } catch (error) {
-        console.error('Erro ao carregar configurações da instância:', error);
+        logger.error('Erro ao carregar configurações da instância:', error);
         // Keep default values on error
       }
     };
@@ -802,7 +803,7 @@ const UltraWhatsAppConfig: React.FC<{
           }));
         }
       } catch (error) {
-        console.error('Error loading profile settings:', error);
+        logger.error('Error loading profile settings:', error);
       }
     };
 
@@ -831,7 +832,7 @@ const UltraWhatsAppConfig: React.FC<{
           }
         }
       } catch (error) {
-        console.error('Erro ao carregar status da instância:', error);
+        logger.error('Erro ao carregar status da instância:', error);
       }
     };
 
@@ -877,7 +878,7 @@ const UltraWhatsAppConfig: React.FC<{
         toast.error(t('settings.configuration.whatsapp.instance.errors.qrCodeError'));
       }
     } catch (error) {
-      console.error('Erro ao gerar QR Code:', error);
+      logger.error('Erro ao gerar QR Code:', error);
       toast.error(t('settings.configuration.whatsapp.instance.errors.qrCodeError'));
     } finally {
       setIsLoading(false);
@@ -936,7 +937,7 @@ const UltraWhatsAppConfig: React.FC<{
 
       toast.success(t('settings.configuration.whatsapp.instance.success.updated'));
     } catch (error) {
-      console.error('Erro ao atualizar configurações da instância:', error);
+      logger.error('Erro ao atualizar configurações da instância:', error);
       toast.error(t('settings.configuration.whatsapp.instance.errors.updateError'));
     } finally {
       setIsLoading(false);
@@ -964,7 +965,7 @@ const UltraWhatsAppConfig: React.FC<{
       );
       toast.success(t('settings.configuration.whatsapp.instance.profile.success.nameUpdated'));
     } catch (error: any) {
-      console.error('Erro ao atualizar nome do perfil:', error);
+      logger.error('Erro ao atualizar nome do perfil:', error);
       toast.error(
         error?.response?.data?.error ||
         t('settings.configuration.whatsapp.instance.profile.errors.nameUpdateError'),
@@ -992,7 +993,7 @@ const UltraWhatsAppConfig: React.FC<{
       );
       toast.success(t('settings.configuration.whatsapp.instance.profile.success.statusUpdated'));
     } catch (error: any) {
-      console.error('Erro ao atualizar status do perfil:', error);
+      logger.error('Erro ao atualizar status do perfil:', error);
       toast.error(
         error?.response?.data?.error ||
         t('settings.configuration.whatsapp.instance.profile.errors.statusUpdateError'),
@@ -1022,7 +1023,7 @@ const UltraWhatsAppConfig: React.FC<{
       );
       toast.success(t('settings.configuration.whatsapp.instance.profile.success.pictureUpdated'));
     } catch (error: any) {
-      console.error('Erro ao atualizar foto do perfil:', error);
+      logger.error('Erro ao atualizar foto do perfil:', error);
       toast.error(
         error?.response?.data?.error ||
         t('settings.configuration.whatsapp.instance.profile.errors.pictureUpdateError'),
@@ -1050,7 +1051,7 @@ const UltraWhatsAppConfig: React.FC<{
       setProfileSettings(prev => ({ ...prev, profilePictureUrl: '' }));
       toast.success(t('settings.configuration.whatsapp.instance.profile.success.pictureRemoved'));
     } catch (error: any) {
-      console.error('Erro ao remover foto do perfil:', error);
+      logger.error('Erro ao remover foto do perfil:', error);
       toast.error(
         error?.response?.data?.error ||
         t('settings.configuration.whatsapp.instance.profile.errors.pictureRemoveError'),
@@ -1077,7 +1078,7 @@ const UltraWhatsAppConfig: React.FC<{
       setInstanceStatus('close');
       toast.success(t('settings.configuration.whatsapp.instance.actions.success.disconnected'));
     } catch (error: any) {
-      console.error('Erro ao desconectar instância:', error);
+      logger.error('Erro ao desconectar instância:', error);
       toast.error(
         error?.response?.data?.error ||
         t('settings.configuration.whatsapp.instance.actions.errors.disconnectError'),
@@ -1495,7 +1496,7 @@ const PrivacySettings: React.FC<{
           break;
       }
     } catch (error: any) {
-      console.error(`Erro ao atualizar ${setting}:`, error);
+      logger.error(`Erro ao atualizar ${setting}:`, error);
       toast.error(error?.response?.data?.error || `Erro ao atualizar ${setting}`);
     } finally {
       setIsLoading(false);
@@ -1512,7 +1513,7 @@ const PrivacySettings: React.FC<{
       await ZapiService.setMessagesDuration(instanceId, privacySettings.messagesDuration);
       toast.success('Duração das mensagens atualizada');
     } catch (error: any) {
-      console.error('Erro ao atualizar duração das mensagens:', error);
+      logger.error('Erro ao atualizar duração das mensagens:', error);
       toast.error(error?.response?.data?.error || 'Erro ao atualizar duração das mensagens');
     } finally {
       setIsLoading(false);
@@ -1714,7 +1715,7 @@ const ZapiWhatsAppConfig: React.FC<{
         display_name: instanceName,
       });
     } catch (error) {
-      console.error('Erro ao sincronizar inbox com Z-API:', error);
+      logger.error('Erro ao sincronizar inbox com Z-API:', error);
       // Don't show error toast as this is a background sync
     }
   };
@@ -1805,7 +1806,7 @@ const ZapiWhatsAppConfig: React.FC<{
           }
         }
       } catch (error) {
-        console.error('Erro ao carregar dados da instância Z-API:', error);
+        logger.error('Erro ao carregar dados da instância Z-API:', error);
       } finally {
         setIsLoading(false);
       }
@@ -1875,7 +1876,7 @@ const ZapiWhatsAppConfig: React.FC<{
           lastStatusRef.current = 'disconnected';
         }
       } catch (error) {
-        console.error('Erro ao verificar status da instância:', error);
+        logger.error('Erro ao verificar status da instância:', error);
       }
     }, 3000);
 
@@ -1962,7 +1963,7 @@ const ZapiWhatsAppConfig: React.FC<{
           }
         }
       } catch (error) {
-        console.error('Erro ao verificar status da instância:', error);
+        logger.error('Erro ao verificar status da instância:', error);
       }
     };
 
@@ -2002,7 +2003,7 @@ const ZapiWhatsAppConfig: React.FC<{
         toast.error('QR Code não encontrado');
       }
     } catch (error: any) {
-      console.error('Erro ao obter QR code:', error);
+      logger.error('Erro ao obter QR code:', error);
       toast.error(error?.response?.data?.error || 'Erro ao obter QR code');
     } finally {
       setIsLoading(false);
@@ -2033,7 +2034,7 @@ const ZapiWhatsAppConfig: React.FC<{
         toast.error('QR Code não encontrado');
       }
     } catch (error: any) {
-      console.error('Erro ao atualizar QR code:', error);
+      logger.error('Erro ao atualizar QR code:', error);
       toast.error(error?.response?.data?.error || 'Erro ao atualizar QR code');
     } finally {
       setIsLoading(false);
@@ -2057,7 +2058,7 @@ const ZapiWhatsAppConfig: React.FC<{
 
       toast.success('Nome do perfil atualizado com sucesso!');
     } catch (error: any) {
-      console.error('Erro ao atualizar nome do perfil:', error);
+      logger.error('Erro ao atualizar nome do perfil:', error);
       toast.error(error?.response?.data?.error || 'Erro ao atualizar nome do perfil');
     } finally {
       setIsLoading(false);
@@ -2072,7 +2073,7 @@ const ZapiWhatsAppConfig: React.FC<{
       await ZapiService.updateProfileDescription(instanceId, profileSettings.profileDescription);
       toast.success('Descrição do perfil atualizada com sucesso!');
     } catch (error: any) {
-      console.error('Erro ao atualizar descrição do perfil:', error);
+      logger.error('Erro ao atualizar descrição do perfil:', error);
       toast.error(error?.response?.data?.error || 'Erro ao atualizar descrição do perfil');
     } finally {
       setIsLoading(false);
@@ -2087,7 +2088,7 @@ const ZapiWhatsAppConfig: React.FC<{
       await ZapiService.updateCallReject(instanceId, profileSettings.callReject);
       toast.success('Configuração de rejeição de chamadas atualizada!');
     } catch (error: any) {
-      console.error('Erro ao atualizar configuração de rejeição de chamadas:', error);
+      logger.error('Erro ao atualizar configuração de rejeição de chamadas:', error);
       toast.error(error?.response?.data?.error || 'Erro ao atualizar configuração');
     } finally {
       setIsLoading(false);
@@ -2102,7 +2103,7 @@ const ZapiWhatsAppConfig: React.FC<{
       await ZapiService.updateCallRejectMessage(instanceId, profileSettings.callRejectMessage);
       toast.success('Mensagem de rejeição atualizada!');
     } catch (error: any) {
-      console.error('Erro ao atualizar mensagem de rejeição de chamadas:', error);
+      logger.error('Erro ao atualizar mensagem de rejeição de chamadas:', error);
       toast.error(error?.response?.data?.error || 'Erro ao atualizar mensagem');
     } finally {
       setIsLoading(false);
@@ -2119,7 +2120,7 @@ const ZapiWhatsAppConfig: React.FC<{
       await ZapiService.restartInstance(instanceId);
       toast.success('Instância reiniciada com sucesso!');
     } catch (error: any) {
-      console.error('Erro ao reiniciar instância:', error);
+      logger.error('Erro ao reiniciar instância:', error);
       toast.error(error?.response?.data?.error || 'Erro ao reiniciar instância');
     } finally {
       setIsLoading(false);
@@ -2137,7 +2138,7 @@ const ZapiWhatsAppConfig: React.FC<{
       toast.success('Instância desconectada com sucesso!');
       setInstanceStatus('disconnected');
     } catch (error: any) {
-      console.error('Erro ao desconectar instância:', error);
+      logger.error('Erro ao desconectar instância:', error);
       toast.error(error?.response?.data?.error || 'Erro ao desconectar instância');
     } finally {
       setIsLoading(false);
@@ -2357,7 +2358,7 @@ const ZapiWhatsAppConfig: React.FC<{
                   alt="QR Code"
                   className="w-64 h-64 border border-slate-200 dark:border-slate-700 rounded-lg bg-white p-2"
                   onError={e => {
-                    console.error('Erro ao carregar QR code:', e);
+                    logger.error('Erro ao carregar QR code:', e);
                     toast.error('Erro ao exibir QR code');
                   }}
                 />
@@ -2436,7 +2437,7 @@ const EmailChannelConfig: React.FC<{
       });
       toast.success(t('settings.configuration.email.success.updated'));
     } catch (error) {
-      console.error('Erro ao atualizar configurações de email:', error);
+      logger.error('Erro ao atualizar configurações de email:', error);
       toast.error(t('settings.configuration.email.errors.updateError'));
     } finally {
       setIsUpdating(false);
@@ -2664,7 +2665,7 @@ const ConfigurationForm: React.FC<ConfigurationFormProps> = ({ inbox, onUpdate }
     try {
       await onUpdate(data);
     } catch (error) {
-      console.error('Erro ao atualizar configuração:', error);
+      logger.error('Erro ao atualizar configuração:', error);
       throw error;
     }
   };

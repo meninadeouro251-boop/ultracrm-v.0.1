@@ -1,4 +1,5 @@
 import { createConsumer, Consumer, Subscription } from '@rails/actioncable';
+import logger from '@/utils/logger';
 
 class ActionCableService {
   private consumer: Consumer | null = null;
@@ -139,14 +140,14 @@ class ActionCableService {
       this.reconnectDelay = Math.min(this.reconnectDelay * 2, 30000);
       this.reconnectAttempts++;
     } else {
-      console.error('Max reconnection attempts reached');
+      logger.error('Max reconnection attempts reached');
       window.dispatchEvent(new CustomEvent('Ultra:connection_failed'));
     }
   }
 
   private reconnect() {
     if (this.pubsubToken && this.userId) {
-      console.error(
+      logger.error(
         `Reconnection attempt ${this.reconnectAttempts + 1}/${this.maxReconnectAttempts}`,
       );
       this.disconnect();
@@ -186,12 +187,12 @@ class ActionCableService {
   subscribeToConversation(conversationId: string) {
     // Conversation events are handled through RoomChannel in Ultra
     // No separate ConversationChannel needed
-    console.log(`Conversation ${conversationId} events will be received through RoomChannel`);
+    logger.debug(`Conversation ${conversationId} events will be received through RoomChannel`);
   }
 
   unsubscribeFromConversation(conversationId: string) {
     // No separate conversation subscriptions to unsubscribe from
-    console.log(`Conversation ${conversationId} - no separate subscription to remove`);
+    logger.debug(`Conversation ${conversationId} - no separate subscription to remove`);
   }
 
   disconnect() {

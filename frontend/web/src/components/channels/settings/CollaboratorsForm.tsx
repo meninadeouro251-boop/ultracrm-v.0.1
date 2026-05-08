@@ -3,6 +3,7 @@ import { Card, CardContent, Button, Switch } from '@ultraapi/design-system';
 import { Check, Users, Settings, Info } from 'lucide-react';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
+import logger from '@/utils/logger';
 
 // Services
 import AgentsService from '@/services/channels/agentsService';
@@ -58,7 +59,7 @@ export default function CollaboratorsForm({
       );
       setSelectedAgents(normalizedMembers);
     } catch (error) {
-      console.error('Error loading collaborators data:', error);
+      logger.error('Error loading collaborators data:', error);
       toast.error(t('settings.collaborators.errors.loadError'));
       // Set empty arrays on error
       setAgents([]);
@@ -116,7 +117,7 @@ export default function CollaboratorsForm({
       await InboxMembersService.update(inboxId, agentIds);
       toast.success(t('settings.collaborators.success.updated'));
     } catch (error) {
-      console.error('Error updating agents:', error);
+      logger.error('Error updating agents:', error);
       toast.error(t('settings.collaborators.errors.updateError'));
     } finally {
       setIsUpdatingAgents(false);
@@ -134,7 +135,7 @@ export default function CollaboratorsForm({
       }
       toast.success(t('settings.collaborators.autoAssignment.success.updated'));
     } catch (error) {
-      console.error('Error updating auto assignment:', error);
+      logger.error('Error updating auto assignment:', error);
       toast.error(t('settings.collaborators.autoAssignment.errors.updateError'));
       setEnableAutoAssignment(!checked); // Revert on error
     } finally {

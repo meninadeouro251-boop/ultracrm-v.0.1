@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import usersService from '@/services/users/usersService';
 import { toast } from 'sonner';
 import type { User } from '@/types/users';
+import logger from '@/utils/logger';
 
 export function useUserAvailability() {
   const [updating, setUpdating] = useState<string[]>([]);
@@ -14,7 +15,7 @@ export function useUserAvailability() {
         const response = await usersService.updateAvailability(userId, availability);
         return response;
       } catch (error) {
-        console.error('Erro ao atualizar disponibilidade:', error);
+        logger.error('Erro ao atualizar disponibilidade:', error);
         toast.error('Não foi possível atualizar o status de disponibilidade');
         return null;
       } finally {

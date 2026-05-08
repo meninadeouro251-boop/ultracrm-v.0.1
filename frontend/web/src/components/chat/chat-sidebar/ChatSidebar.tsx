@@ -3,6 +3,7 @@ import { Button } from '@ultraapi/design-system/button';
 import { Input } from '@ultraapi/design-system/input';
 import { Badge } from '@ultraapi/design-system/badge';
 import {
+import logger from '@/utils/logger';
   ContextMenu,
   ContextMenuTrigger,
   ContextMenuContent,
@@ -608,7 +609,7 @@ const ChatSidebar = ({
             {searchInput ? (
               <NoConversations
                 searchTerm={searchInput}
-                onCreateNew={() => console.log('Create new conversation')}
+                onCreateNew={() => logger.debug('Create new conversation')}
               />
             ) : (
               <div className="py-8">

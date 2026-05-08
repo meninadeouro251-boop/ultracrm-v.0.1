@@ -5,6 +5,7 @@ import { usePermissions } from '@/contexts/PermissionsContext';
 import { useAppDataStore } from '@/store/appDataStore';
 import { Conversation } from '@/types/chat/api';
 import type { AssignmentType } from '@/components/chat/assignment';
+import logger from '@/utils/logger';
 
 export const useAssignmentHandlers = () => {
   const { can } = usePermissions();
@@ -40,7 +41,7 @@ export const useAssignmentHandlers = () => {
             break;
         }
       } catch (error) {
-        console.error('Error loading assignment data:', error);
+        logger.error('Error loading assignment data:', error);
       } finally {
         setIsLoadingAssignmentData(false);
       }
@@ -104,7 +105,7 @@ export const useAssignmentHandlers = () => {
             break;
         }
       } catch (error) {
-        console.error('Error in assignment:', error);
+        logger.error('Error in assignment:', error);
         throw error; // Re-throw to let modal handle it
       }
     },

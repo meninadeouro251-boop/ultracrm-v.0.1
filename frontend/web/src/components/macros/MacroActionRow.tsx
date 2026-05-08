@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
 import {
+import logger from '@/utils/logger';
   Select,
   SelectContent,
   SelectItem,
@@ -76,7 +77,7 @@ export default function MacroActionRow({
 
       handleParamsChange([blobId]);
     } catch (error) {
-      console.error('Erro ao fazer upload:', error);
+      logger.error('Erro ao fazer upload:', error);
     } finally {
       setUploadingFile(false);
     }

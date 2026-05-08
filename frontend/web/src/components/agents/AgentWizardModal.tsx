@@ -7,6 +7,7 @@ import integrationService from '@/services/agents/integrationService';
 import { ApiKey, AgentCreate } from '@/types/agents';
 import { toast } from 'sonner';
 import { extractBackendErrorMessage } from '@/utils/agentUtils';
+import logger from '@/utils/logger';
 
 // Wizard components - novo fluxo
 import WizardProgress from '@/pages/Customer/Agents/Agent/wizard/WizardProgress';
@@ -118,7 +119,7 @@ const AgentWizardModal = ({ open, onOpenChange, onAgentCreated, embedded = false
       const apiKeysData = await listApiKeys();
       setApiKeys(apiKeysData);
     } catch (error) {
-      console.error(t('messages.apiKeysError'), error);
+      logger.error(t('messages.apiKeysError'), error);
     }
   }, [t]);
 
@@ -410,7 +411,7 @@ const AgentWizardModal = ({ open, onOpenChange, onAgentCreated, embedded = false
             config,
           });
         } catch (error) {
-          console.error('Error creating integration:', error);
+          logger.error('Error creating integration:', error);
           toast.error(t('messages.providerConfigError'), { id: toastId });
           // Não falhar a criação do agente se a integração falhar
         }
@@ -426,7 +427,7 @@ const AgentWizardModal = ({ open, onOpenChange, onAgentCreated, embedded = false
         onAgentCreated();
       }
     } catch (error: unknown) {
-      console.error(t('messages.createError'), error);
+      logger.error(t('messages.createError'), error);
 
       const errorMessage = extractBackendErrorMessage(error);
 

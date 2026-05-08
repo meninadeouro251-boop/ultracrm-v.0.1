@@ -6,6 +6,7 @@ import { openaiService } from '@/services/integrations/openaiService';
 import { useGlobalConfig } from '@/contexts/GlobalConfigContext';
 import { toast } from 'sonner';
 import PromptGeneratorModal from '@/components/agents/wizard/PromptGeneratorModal';
+import logger from '@/utils/logger';
 
 interface ProfileSectionProps {
   formData: {
@@ -49,7 +50,7 @@ const ProfileSection = ({ formData, onFormDataChange, agentType }: ProfileSectio
         toast.success(t('wizard.promptGenerator.messages.reviewSuccess'));
       }
     } catch (error) {
-      console.error('Error reviewing prompt:', error);
+      logger.error('Error reviewing prompt:', error);
       const errorMessage =
         error instanceof Error ? error.message : t('wizard.promptGenerator.messages.reviewError');
       toast.error(errorMessage);
