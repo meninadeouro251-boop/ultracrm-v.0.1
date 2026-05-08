@@ -20,7 +20,7 @@ class Api::V1::AiCustomToolsController < Api::V1::BaseController
 
     Rails.logger.info "AI Custom Tools Index - User: #{Current.user&.id}, Params: #{params_hash}"
 
-    response = ultraAiCoreService.list_custom_tools(params_hash, request.headers)
+    response = UltraAiCoreService.list_custom_tools(params_hash, request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Custom tools retrieved successfully'
@@ -32,7 +32,7 @@ class Api::V1::AiCustomToolsController < Api::V1::BaseController
   end
 
   def show
-    response = ultraAiCoreService.get_custom_tool(params[:id], request.headers)
+    response = UltraAiCoreService.get_custom_tool(params[:id], request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Custom tool retrieved successfully'
@@ -46,7 +46,7 @@ class Api::V1::AiCustomToolsController < Api::V1::BaseController
     create_params = custom_tool_create_params
     Rails.logger.info "AI Custom Tools Create - Processed Params: #{create_params.inspect}"
 
-    response = ultraAiCoreService.create_custom_tool(create_params, request.headers)
+    response = UltraAiCoreService.create_custom_tool(create_params, request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Custom tool created successfully'
@@ -58,7 +58,7 @@ class Api::V1::AiCustomToolsController < Api::V1::BaseController
   end
 
   def update
-    response = ultraAiCoreService.update_custom_tool(params[:id], custom_tool_update_params, request.headers)
+    response = UltraAiCoreService.update_custom_tool(params[:id], custom_tool_update_params, request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Custom tool updated successfully'
@@ -68,7 +68,7 @@ class Api::V1::AiCustomToolsController < Api::V1::BaseController
   end
 
   def destroy
-    response = ultraAiCoreService.delete_custom_tool(params[:id], request.headers)
+    response = UltraAiCoreService.delete_custom_tool(params[:id], request.headers)
     
     message = response.is_a?(Hash) ? response['message'] : 'Custom tool deleted successfully'
     success_response(message: message, status: :no_content)  
@@ -77,7 +77,7 @@ class Api::V1::AiCustomToolsController < Api::V1::BaseController
   end
 
   def test
-    response = ultraAiCoreService.test_custom_tool(params[:id], request.headers)
+    response = UltraAiCoreService.test_custom_tool(params[:id], request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Custom tool tested successfully'

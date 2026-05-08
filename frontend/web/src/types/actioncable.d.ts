@@ -6,7 +6,7 @@ declare module '@rails/actioncable' {
         callbacks?: {
           connected?: () => void;
           disconnected?: () => void;
-          received?: (data: unknown) => void;
+          received?: (data: any) => void;
         }
       ): Subscription;
     };
@@ -15,8 +15,8 @@ declare module '@rails/actioncable' {
 
   export interface Subscription {
     unsubscribe(): void;
-    perform(action: string, data?: unknown): void;
-    send(data: unknown): void;
+    perform(action: string, data?: any): void;
+    send(data: any): void;
   }
 
   export function createConsumer(url: string): Consumer;

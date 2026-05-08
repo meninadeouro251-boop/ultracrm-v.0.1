@@ -8,8 +8,8 @@
 
 declare global {
   interface Window {
-    dataLayer?: unknown[];
-    gtag?: (...args: unknown[]) => void;
+    dataLayer?: any[];
+    gtag?: (...args: any[]) => void;
   }
 }
 
@@ -32,7 +32,7 @@ export const initGA4 = (): void => {
 
   try {
     window.dataLayer = window.dataLayer || [];
-    const gtag = (...args: unknown[]) => window.dataLayer?.push(args);
+    const gtag = (...args: any[]) => window.dataLayer?.push(args);
     window.gtag = gtag;
 
     gtag('js', new Date());

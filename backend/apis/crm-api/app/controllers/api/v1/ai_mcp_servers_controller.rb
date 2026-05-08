@@ -10,7 +10,7 @@ class Api::V1::AiMcpServersController < Api::V1::BaseController
 
     Rails.logger.info "AI MCP Servers Index - User: #{Current.user&.id}, Params: #{params_hash}"
     
-    response = ultraAiCoreService.list_mcp_servers(params_hash, request.headers)
+    response = UltraAiCoreService.list_mcp_servers(params_hash, request.headers)
 
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'MCP servers retrieved successfully'
@@ -22,7 +22,7 @@ class Api::V1::AiMcpServersController < Api::V1::BaseController
   end
 
   def show
-    response = ultraAiCoreService.get_mcp_server(params[:id], request.headers)
+    response = UltraAiCoreService.get_mcp_server(params[:id], request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'MCP server retrieved successfully'
@@ -32,7 +32,7 @@ class Api::V1::AiMcpServersController < Api::V1::BaseController
   end
 
   def create
-    response = ultraAiCoreService.create_mcp_server(mcp_server_create_params, request.headers)
+    response = UltraAiCoreService.create_mcp_server(mcp_server_create_params, request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'MCP server created successfully'
@@ -42,7 +42,7 @@ class Api::V1::AiMcpServersController < Api::V1::BaseController
   end
 
   def update
-    response = ultraAiCoreService.update_mcp_server(params[:id], mcp_server_update_params, request.headers)
+    response = UltraAiCoreService.update_mcp_server(params[:id], mcp_server_update_params, request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'MCP server updated successfully'
@@ -52,7 +52,7 @@ class Api::V1::AiMcpServersController < Api::V1::BaseController
   end
 
   def destroy
-    response = ultraAiCoreService.delete_mcp_server(params[:id], request.headers)
+    response = UltraAiCoreService.delete_mcp_server(params[:id], request.headers)
     
     message = response.is_a?(Hash) ? response['message'] : 'MCP server deleted successfully'
     success_response(message: message, status: :no_content)  

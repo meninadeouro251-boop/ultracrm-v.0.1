@@ -384,7 +384,7 @@ const AgentPage = () => {
         toast.success(t('messages.updateSuccess'), { id: toastId });
         setIsDirty(false);
       }
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Erro ao salvar agente:', error);
 
       // Extrair mensagem de erro amigável do backend
@@ -424,7 +424,6 @@ const AgentPage = () => {
 
   const handleDuplicate = useCallback(() => {
     // TODO: Implementar duplicação
-    console.log('Duplicando agente...');
   }, []);
 
   const handleTabChange = useCallback((tab: string) => {

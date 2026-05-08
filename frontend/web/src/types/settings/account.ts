@@ -115,10 +115,10 @@ export interface UpdateAccount {
 
 // Form data options for account forms
 export interface FormDataOptions {
-  inboxes: unknown[];
-  agents: unknown[];
-  teams: unknown[];
-  labels: unknown[];
+  inboxes: any[];
+  agents: any[];
+  teams: any[];
+  labels: any[];
 }
 
 // Response types

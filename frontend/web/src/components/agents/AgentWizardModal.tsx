@@ -425,7 +425,7 @@ const AgentWizardModal = ({ open, onOpenChange, onAgentCreated, embedded = false
       if (onAgentCreated) {
         onAgentCreated();
       }
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error(t('messages.createError'), error);
 
       const errorMessage = extractBackendErrorMessage(error);

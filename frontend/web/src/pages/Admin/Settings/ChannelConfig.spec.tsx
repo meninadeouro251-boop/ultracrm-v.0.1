@@ -33,8 +33,8 @@ const mockSaveConfig = vi.fn();
 
 vi.mock('@/services/admin/adminConfigService', () => ({
   adminConfigService: {
-    getConfig: (...args: unknown[]) => mockGetConfig(...args),
-    saveConfig: (...args: unknown[]) => mockSaveConfig(...args),
+    getConfig: (...args: any[]) => mockGetConfig(...args),
+    saveConfig: (...args: any[]) => mockSaveConfig(...args),
   },
 }));
 

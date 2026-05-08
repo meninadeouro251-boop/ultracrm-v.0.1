@@ -75,7 +75,7 @@ export type ConditionType = {
   type: ConditionTypeEnum;
   field?: string;
   operator?: string;
-  value?: unknown;
+  value?: any;
   data?: Record<string, unknown>;
 };
 
@@ -221,7 +221,7 @@ export interface FlowEvent {
   type: string;
   nodeId?: string;
   edgeId?: string;
-  data?: unknown;
+  data?: any;
   timestamp: Date;
 }
 

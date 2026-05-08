@@ -96,7 +96,7 @@ const RESEND_DEFAULTS: ResendFormData = {
 
 const SECRET_FIELDS = ['SMTP_PASSWORD_SECRET', 'BMS_API_SECRET', 'RESEND_API_SECRET'];
 
-function isSecretMasked(value: unknown): boolean {
+function isSecretMasked(value: any): boolean {
   return typeof value === 'string' && value.includes('••••');
 }
 

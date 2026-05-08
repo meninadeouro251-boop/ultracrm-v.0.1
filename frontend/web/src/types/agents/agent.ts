@@ -159,7 +159,7 @@ export interface ChatSession {
   app_name: string;
   user_id: string;
   state: Record<string, unknown>;
-  events: unknown[];
+  events: any[];
   last_update_time: number;
   update_time: string;
   create_time: string;
@@ -170,27 +170,27 @@ export interface ChatSession {
 
 export interface ChatPart {
   text?: string;
-  functionCall?: unknown;
-  function_call?: unknown;
-  functionResponse?: unknown;
-  function_response?: unknown;
+  functionCall?: any;
+  function_call?: any;
+  functionResponse?: any;
+  function_response?: any;
   inline_data?: {
     data: string;
     mime_type: string;
     metadata?: {
       filename?: string;
-      [key: string]: unknown;
+      [key: string]: any;
     };
     fileId?: string;
   };
-  videoMetadata?: unknown;
-  thought?: unknown;
-  codeExecutionResult?: unknown;
-  executableCode?: unknown;
+  videoMetadata?: any;
+  thought?: any;
+  codeExecutionResult?: any;
+  executableCode?: any;
   file_data?: {
     filename?: string;
     fileId?: string;
-    [key: string]: unknown;
+    [key: string]: any;
   };
 }
 
@@ -199,22 +199,22 @@ export interface ChatMessage {
   content: {
     parts: ChatPart[];
     role: string;
-    inlineData?: unknown[];
-    files?: unknown[];
+    inlineData?: any[];
+    files?: any[];
   };
   author: string;
   timestamp: number;
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 export interface ChatRequest {
   message: string;
-  files?: unknown[];
+  files?: any[];
 }
 
 export interface ChatResponse {
   response: string;
-  message_history: unknown[];
+  message_history: any[];
   status: string;
   timestamp: string;
 }

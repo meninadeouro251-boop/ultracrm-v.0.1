@@ -253,7 +253,7 @@ export type ConversationUpdateResponse = StandardResponse<Conversation>;
 export interface ConversationFilter {
   attribute_key: string;
   filter_operator: FilterOperator;
-  values: unknown[];
+  values: any[];
   query_operator: 'and' | 'or';
 }
 
@@ -262,7 +262,7 @@ export interface FilterRequest {
   filters: Array<{
     attribute_key: string;
     filter_operator: string;
-    values: unknown[];
+    values: any[];
     query_operator: string | null;
     custom_attribute_type?: string;
   }>;

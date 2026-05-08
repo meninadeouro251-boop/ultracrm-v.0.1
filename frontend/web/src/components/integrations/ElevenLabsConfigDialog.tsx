@@ -225,7 +225,6 @@ const ElevenLabsConfigDialog = ({
                   size="icon"
                   onClick={() => {
                     // TODO: Implementar preview da voz
-                    console.log('Preview voice:', config.voice);
                   }}
                   disabled={!config.voice || loadingVoices}
                 >

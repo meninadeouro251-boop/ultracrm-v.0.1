@@ -307,17 +307,14 @@ const McpServers = () => {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
                             <DropdownMenuItem
-                              onClick={() => console.log('Ver detalhes', server.id)}
                             >
                               <Eye className="h-4 w-4" />
                               <span>{t('table.actions.viewDetails')}</span>
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => console.log('Editar', server.id)}>
                               <Edit className="h-4 w-4" />
                               <span>{t('table.actions.edit')}</span>
                             </DropdownMenuItem>
                             <DropdownMenuItem
-                              onClick={() => console.log('Excluir', server.id)}
                               className="text-destructive focus:text-destructive"
                             >
                               <Trash2 className="h-4 w-4" />

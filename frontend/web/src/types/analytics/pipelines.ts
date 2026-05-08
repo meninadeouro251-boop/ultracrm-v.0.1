@@ -44,7 +44,7 @@ export interface ConversationWithExtraFields {
     content: string | null;
     created_at: string;
   };
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 // For sender with all possible fields
@@ -55,7 +55,7 @@ export interface SenderWithAllFields {
   phone_number?: string | null;
   avatar_url?: string | null;
   thumbnail?: string;
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 export interface PipelineStage {

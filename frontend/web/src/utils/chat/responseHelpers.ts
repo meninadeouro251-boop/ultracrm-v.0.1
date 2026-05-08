@@ -76,7 +76,7 @@ const normalizePaginationMeta = (meta: any): PaginationMeta => {
 };
 
 // Helper function to extract conversations from API response
-export const extractConversationsData = (responseData: unknown): { conversations: Conversation[]; pagination: PaginationMeta } => {
+export const extractConversationsData = (responseData: any): { conversations: Conversation[]; pagination: PaginationMeta } => {
   let conversations: Conversation[];
   let paginationMeta: any;
 
@@ -151,7 +151,7 @@ const correctMessageStatus = (message: Message): Message => {
 };
 
 // Helper function to extract messages from API response
-export const extractMessagesData = (responseData: unknown): Message[] => {
+export const extractMessagesData = (responseData: any): Message[] => {
   let messages: Message[] = [];
 
   if (Array.isArray(responseData)) {
@@ -181,7 +181,7 @@ export const extractMessagesData = (responseData: unknown): Message[] => {
 };
 
 // Helper function to extract messages WITH pagination info
-export const extractMessagesWithMeta = (responseData: unknown) => {
+export const extractMessagesWithMeta = (responseData: any) => {
   const messages = extractMessagesData(responseData);
   let meta = null;
 

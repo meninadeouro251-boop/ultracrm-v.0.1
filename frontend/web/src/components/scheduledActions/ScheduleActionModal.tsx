@@ -242,7 +242,7 @@ export function ScheduleActionModal({
 
   useEffect(() => {
     if (action) {
-      const getStringValue = (value: unknown, defaultValue: string = ''): string => {
+      const getStringValue = (value: any, defaultValue: string = ''): string => {
         return typeof value === 'string' ? value : defaultValue;
       };
 

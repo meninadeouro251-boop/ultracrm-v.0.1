@@ -9,7 +9,7 @@ vi.mock('@/services/core/api', () => ({
 }));
 
 vi.mock('@/utils/apiHelpers', () => ({
-  extractData: vi.fn((response: { data: unknown }) => response.data),
+  extractData: vi.fn((response: { data: any }) => response.data),
   extractResponse: vi.fn(),
 }));
 

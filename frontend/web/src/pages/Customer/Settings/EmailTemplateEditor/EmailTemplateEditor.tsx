@@ -177,7 +177,7 @@ const EmailTemplateEditor: React.FC = () => {
       // Export both design JSON and HTML from editor
       // Design JSON is needed to load back into editor for editing
       // HTML is needed for sending emails
-      emailEditorRef.current.editor.exportHtml((data: { design: unknown; html: string }) => {
+      emailEditorRef.current.editor.exportHtml((data: { design: any; html: string }) => {
         const { design, html } = data;
 
         // Save design JSON in content (for editing) and HTML in metadata (for sending)

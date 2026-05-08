@@ -13,9 +13,9 @@ export interface ChatEventHandlers {
   onPresenceUpdate?: (data: PresenceUpdateEvent) => void;
   onContactUpdated?: (data: ContactUpdatedEvent) => void;
   onConversationRead?: (data: ConversationReadEvent) => void;
-  onNotificationCreated?: (data: unknown) => void;
-  onNotificationUpdated?: (data: unknown) => void;
-  onNotificationDeleted?: (data: unknown) => void;
+  onNotificationCreated?: (data: any) => void;
+  onNotificationUpdated?: (data: any) => void;
+  onNotificationDeleted?: (data: any) => void;
 }
 
 // Event types baseados no ActionCable do Ultra
@@ -355,7 +355,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para nova mensagem criada
    */
-  private onMessageCreated = (data: unknown): void => {
+  private onMessageCreated = (data: any): void => {
     const eventData = data as MessageCreatedEvent;
 
     // Chamar handler customizado
@@ -365,7 +365,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para mensagem atualizada
    */
-  private onMessageUpdated = (data: unknown): void => {
+  private onMessageUpdated = (data: any): void => {
     const eventData = data as MessageUpdatedEvent;
     this.chatEventHandlers.onMessageUpdated?.(eventData);
   };
@@ -373,7 +373,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para nova conversa criada
    */
-  private onConversationCreated = (data: unknown): void => {
+  private onConversationCreated = (data: any): void => {
     const eventData = data as ConversationCreatedEvent;
     this.chatEventHandlers.onConversationCreated?.(eventData);
   };
@@ -381,7 +381,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para conversa atualizada
    */
-  private onConversationUpdated = (data: unknown): void => {
+  private onConversationUpdated = (data: any): void => {
     const eventData = data as ConversationUpdatedEvent;
     this.chatEventHandlers.onConversationUpdated?.(eventData);
   };
@@ -389,7 +389,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para mudança de status da conversa
    */
-  private onConversationStatusChanged = (data: unknown): void => {
+  private onConversationStatusChanged = (data: any): void => {
     const eventData = data as ConversationStatusChangedEvent;
     this.chatEventHandlers.onConversationStatusChanged?.(eventData);
   };
@@ -397,7 +397,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para mudança de assignee
    */
-  private onAssigneeChanged = (data: unknown): void => {
+  private onAssigneeChanged = (data: any): void => {
     const eventData = data as AssigneeChangedEvent;
     this.chatEventHandlers.onAssigneeChanged?.(eventData);
   };
@@ -405,7 +405,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para notificação criada
    */
-  private onNotificationCreated = (data: unknown): void => {
+  private onNotificationCreated = (data: any): void => {
     // Dispatch custom event for global listeners
     window.dispatchEvent(
       new CustomEvent('Ultra:notification', {
@@ -418,7 +418,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para notificação atualizada
    */
-  private onNotificationUpdated = (data: unknown): void => {
+  private onNotificationUpdated = (data: any): void => {
     window.dispatchEvent(
       new CustomEvent('Ultra:notification', {
         detail: { event: 'notification.updated', payload: data },
@@ -430,7 +430,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para notificação deletada
    */
-  private onNotificationDeleted = (data: unknown): void => {
+  private onNotificationDeleted = (data: any): void => {
     window.dispatchEvent(
       new CustomEvent('Ultra:notification', {
         detail: { event: 'notification.deleted', payload: data },
@@ -442,7 +442,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para início de digitação
    */
-  private onTypingOn = (data: unknown): void => {
+  private onTypingOn = (data: any): void => {
     const eventData = data as TypingEvent;
 
     const conversationId = eventData.conversation.id;
@@ -460,7 +460,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para fim de digitação
    */
-  private onTypingOff = (data: unknown): void => {
+  private onTypingOff = (data: any): void => {
     const eventData = data as TypingEvent;
 
     const conversationId = eventData.conversation.id;
@@ -472,7 +472,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para atualização de presença
    */
-  private onPresenceUpdate = (data: unknown): void => {
+  private onPresenceUpdate = (data: any): void => {
     const eventData = data as PresenceUpdateEvent;
     this.chatEventHandlers.onPresenceUpdate?.(eventData);
   };
@@ -480,7 +480,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para contato atualizado
    */
-  private onContactUpdated = (data: unknown): void => {
+  private onContactUpdated = (data: any): void => {
     const eventData = data as ContactUpdatedEvent;
     this.chatEventHandlers.onContactUpdated?.(eventData);
   };
@@ -488,7 +488,7 @@ export class ChatActionCableConnector extends BaseActionCableConnector {
   /**
    * Handler para conversa lida
    */
-  private onConversationRead = (data: unknown): void => {
+  private onConversationRead = (data: any): void => {
     const eventData = data as ConversationReadEvent;
     this.chatEventHandlers.onConversationRead?.(eventData);
   };

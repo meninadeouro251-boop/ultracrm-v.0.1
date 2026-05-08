@@ -109,7 +109,7 @@ const ChatSidebar = ({
       } | null;
     };
     getUnreadCount: (conversationId: string) => number;
-    loadConversations: (params?: unknown) => Promise<void>;
+    loadConversations: (params?: any) => Promise<void>;
     loadMoreConversations: () => Promise<void>;
   };
   const filters = chatContext.filters;
@@ -608,7 +608,6 @@ const ChatSidebar = ({
             {searchInput ? (
               <NoConversations
                 searchTerm={searchInput}
-                onCreateNew={() => console.log('Create new conversation')}
               />
             ) : (
               <div className="py-8">

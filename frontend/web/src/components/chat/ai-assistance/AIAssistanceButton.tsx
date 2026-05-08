@@ -121,7 +121,7 @@ const AIAssistanceButton: React.FC<AIAssistanceButtonProps> = ({
       } else {
         setGeneratedContent(result);
       }
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Error processing AI action:', error);
       const errorMessage =
         error instanceof Error ? error.message : t('aiAssistance.errors.processError');

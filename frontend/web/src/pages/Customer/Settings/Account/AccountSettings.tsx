@@ -147,7 +147,7 @@ export default function AccountSettings() {
     }
   };
 
-  const handleFieldChange = (field: string, value: unknown) => {
+  const handleFieldChange = (field: string, value: any) => {
     setFormData(prev => ({
       ...prev,
       [field]: value,
@@ -201,7 +201,7 @@ export default function AccountSettings() {
 
       toast.success(t('messages.success.generalUpdated'));
       await loadAccountData(); // Recarregar dados
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Erro ao salvar:', error);
       toast.error((error as Error).message || t('messages.error.saveFailed'));
     } finally {
@@ -222,7 +222,7 @@ export default function AccountSettings() {
         });
         toast.success(t('messages.success.autoResolveDisabled'));
         await loadAccountData();
-      } catch (error: unknown) {
+      } catch (error: any) {
         toast.error((error as Error).message || t('messages.error.autoResolveDisableFailed'));
       } finally {
         setSaving(false);
@@ -245,7 +245,7 @@ export default function AccountSettings() {
       });
       toast.success(t('messages.success.autoResolveUpdated'));
       await loadAccountData();
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast.error((error as Error).message || t('messages.error.autoResolveSaveFailed'));
     } finally {
       setSaving(false);
@@ -263,7 +263,7 @@ export default function AccountSettings() {
           ? t('messages.success.audioTranscriptionEnabled')
           : t('messages.success.audioTranscriptionDisabled'),
       );
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast.error((error as Error).message || t('messages.error.audioTranscriptionFailed'));
     }
   };

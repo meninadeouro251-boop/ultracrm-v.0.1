@@ -5,7 +5,7 @@ const RECONNECT_INTERVAL = 1000; // 1 segundo
 
 export interface WebSocketEvent {
   event: string;
-  data: unknown;
+  data: any;
 }
 
 export interface ConnectionParams {
@@ -15,7 +15,7 @@ export interface ConnectionParams {
 }
 
 export interface EventHandlers {
-  [key: string]: (data: unknown) => void;
+  [key: string]: (data: any) => void;
 }
 
 /**
@@ -65,7 +65,7 @@ export class BaseActionCableConnector {
         },
         {
           // Receber mensagens do WebSocket
-          received: (data: unknown) => this.onReceived(data as WebSocketEvent),
+          received: (data: any) => this.onReceived(data as WebSocketEvent),
 
           // Conectado com sucesso
           connected: () => {
@@ -96,7 +96,7 @@ export class BaseActionCableConnector {
   /**
    * Verificar se o evento é válido para este cliente
    */
-  protected isAValidEvent(_data: unknown): boolean {
+  protected isAValidEvent(_data: any): boolean {
     // In single-tenant mode, all events are valid
     return true;
   }
@@ -217,7 +217,7 @@ export class BaseActionCableConnector {
   /**
    * Registrar event handler
    */
-  public onEvent(event: string, handler: (data: unknown) => void): void {
+  public onEvent(event: string, handler: (data: any) => void): void {
     this.events[event] = handler;
   }
 
@@ -231,7 +231,7 @@ export class BaseActionCableConnector {
   /**
    * Enviar ação para o servidor
    */
-  public perform(action: string, data?: unknown): void {
+  public perform(action: string, data?: any): void {
     if (this.subscription) {
       this.subscription.perform(action, data);
     } else {

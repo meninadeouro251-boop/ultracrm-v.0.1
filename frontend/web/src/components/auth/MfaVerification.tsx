@@ -59,7 +59,7 @@ const MfaVerification = ({
 
     try {
       await onVerificationSuccess(code);
-    } catch (error: unknown) {
+    } catch (error: any) {
       setAttemptCount(prev => prev + 1);
 
       const apiError = error as { response?: { data?: { attempts_remaining?: number }; status?: number } };
@@ -83,7 +83,7 @@ const MfaVerification = ({
       setCanResend(false);
       setResendCooldown(60); // 1 minute cooldown
       toast.success(t('auth.mfa.email.codeSent'));
-    } catch (error: unknown) {
+    } catch (error: any) {
       const apiError = error as { response?: { status?: number } };
       if (apiError.response?.status === 429) {
         toast.error(t('auth.mfa.email.waitBeforeResend'));

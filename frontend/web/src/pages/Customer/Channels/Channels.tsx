@@ -153,7 +153,7 @@ export default function Channels() {
 
       toast.success(t('success.removeSuccess'));
       closeDeleteModal();
-    } catch (e: unknown) {
+    } catch (e: any) {
       console.error('Erro ao remover canal:', e);
       toast.error((e as Error)?.message || t('errors.removeError'));
 

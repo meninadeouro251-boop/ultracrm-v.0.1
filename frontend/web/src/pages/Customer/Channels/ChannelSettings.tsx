@@ -864,7 +864,6 @@ export default function ChannelSettings() {
                 onUpdate={success => {
                   if (success) {
                     // Optionally refresh inbox data or show success feedback
-                    console.log('Agent bot configuration updated successfully');
                   }
                 }}
               />}

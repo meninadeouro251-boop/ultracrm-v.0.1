@@ -23,9 +23,9 @@ const mockTestConnection = vi.fn();
 
 vi.mock('@/services/admin/adminConfigService', () => ({
   adminConfigService: {
-    getConfig: (...args: unknown[]) => mockGetConfig(...args),
-    saveConfig: (...args: unknown[]) => mockSaveConfig(...args),
-    testConnection: (...args: unknown[]) => mockTestConnection(...args),
+    getConfig: (...args: any[]) => mockGetConfig(...args),
+    saveConfig: (...args: any[]) => mockSaveConfig(...args),
+    testConnection: (...args: any[]) => mockTestConnection(...args),
   },
 }));
 

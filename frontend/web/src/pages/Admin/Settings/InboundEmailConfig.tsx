@@ -81,7 +81,7 @@ const RELAY_DEFAULTS: InboundEmailFormData = {
 
 const SECRET_FIELDS = ['RAILS_INBOUND_EMAIL_PASSWORD_SECRET', 'MAILGUN_SIGNING_SECRET', 'MANDRILL_API_SECRET'];
 
-function isSecretMasked(value: unknown): boolean {
+function isSecretMasked(value: any): boolean {
   return typeof value === 'string' && value.includes('••••');
 }
 

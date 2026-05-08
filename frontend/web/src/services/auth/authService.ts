@@ -39,7 +39,7 @@ const processApiResponse = (response: any): LoginResponse => {
 
 export const login = async (
   data: LoginRequest,
-): Promise<{ response: LoginResponse; requiresMfa?: boolean; mfaData?: unknown }> => {
+): Promise<{ response: LoginResponse; requiresMfa?: boolean; mfaData?: any }> => {
   const response = await apiAuth.post('/auth/login', data);
 
   const responseData = extractData<{

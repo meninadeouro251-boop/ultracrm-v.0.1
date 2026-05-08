@@ -17,8 +17,8 @@ const authApi = axios.create({
 
 let isRefreshing = false;
 let failedQueue: Array<{
-  resolve: (value?: unknown) => void;
-  reject: (reason?: unknown) => void;
+  resolve: (value?: any) => void;
+  reject: (reason?: any) => void;
 }> = [];
 
 const processQueue = (error: Error | null, token: string | null = null) => {

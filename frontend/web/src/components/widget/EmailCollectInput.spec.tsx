@@ -22,7 +22,7 @@ vi.mock('@/hooks/useLanguage', () => ({
 const mockUpdateMessage = vi.fn();
 vi.mock('@/services/widget/widgetService', () => ({
   widgetService: {
-    updateMessage: (...args: unknown[]) => mockUpdateMessage(...args),
+    updateMessage: (...args: any[]) => mockUpdateMessage(...args),
   },
 }));
 

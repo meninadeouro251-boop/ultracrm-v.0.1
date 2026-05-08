@@ -32,12 +32,12 @@ interface BusinessHoursFormProps {
   inboxId: string;
   workingHoursEnabled?: boolean;
   outOfOfficeMessage?: string;
-  workingHours?: unknown[];
+  workingHours?: any[];
   timezone?: string;
   onUpdate?: (data: {
     working_hours_enabled: boolean;
     out_of_office_message: string;
-    working_hours: unknown[];
+    working_hours: any[];
     timezone: string;
   }) => Promise<void>;
 }

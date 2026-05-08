@@ -656,15 +656,15 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
           // data.users pode ser um objeto ou array, vamos verificar
           if (data.users) {
             const usersArray = Array.isArray(data.users) ? data.users : Object.values(data.users);
-            usersArray?.forEach((user: unknown) => {
+            usersArray?.forEach((user: any) => {
               // Type guard para verificar se user tem as propriedades necessárias
               if (
                 user &&
                 typeof user === 'object' &&
                 'id' in user &&
                 'availability_status' in user &&
-                typeof (user as { id: unknown }).id === 'string' &&
-                typeof (user as { availability_status: unknown }).availability_status === 'string'
+                typeof (user as { id: any }).id === 'string' &&
+                typeof (user as { availability_status: any }).availability_status === 'string'
               ) {
                 const typedUser = user as {
                   id: string;

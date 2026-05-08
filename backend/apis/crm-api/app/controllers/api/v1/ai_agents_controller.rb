@@ -12,7 +12,7 @@ class Api::V1::AiAgentsController < Api::V1::BaseController
     Rails.logger.info "AI Agents Index - User: #{Current.user&.id}, Params: #{params_hash}"
     Rails.logger.info "AI Agents Index - Request Headers: #{request.headers.env.select { |k,v| k.to_s.match?(/token|auth|uid|client/i) }.keys}"
     
-    response = ultraAiCoreService.list_agents(params_hash, request.headers)
+    response = UltraAiCoreService.list_agents(params_hash, request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Agents retrieved successfully'
@@ -24,7 +24,7 @@ class Api::V1::AiAgentsController < Api::V1::BaseController
   end
 
   def show
-    response = ultraAiCoreService.get_agent(params[:id], request.headers)
+    response = UltraAiCoreService.get_agent(params[:id], request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Agent retrieved successfully'
@@ -34,7 +34,7 @@ class Api::V1::AiAgentsController < Api::V1::BaseController
   end
 
   def create
-    response = ultraAiCoreService.create_agent(agent_create_params, request.headers)
+    response = UltraAiCoreService.create_agent(agent_create_params, request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Agent created successfully'
@@ -44,7 +44,7 @@ class Api::V1::AiAgentsController < Api::V1::BaseController
   end
 
   def update
-    response = ultraAiCoreService.update_agent(params[:id], agent_update_params, request.headers)
+    response = UltraAiCoreService.update_agent(params[:id], agent_update_params, request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Agent updated successfully'
@@ -54,14 +54,14 @@ class Api::V1::AiAgentsController < Api::V1::BaseController
   end
 
   def destroy
-    ultraAiCoreService.delete_agent(params[:id], request.headers)
+    UltraAiCoreService.delete_agent(params[:id], request.headers)
     head :no_content
   rescue StandardError => e
     error_response(ApiErrorCodes::EXTERNAL_SERVICE_ERROR, e.message, status: :unprocessable_entity)
   end
 
   def sync_ultralution
-    response = ultraAiCoreService.sync_ultralution_bot(params[:id], request.headers)
+    response = UltraAiCoreService.sync_ultralution_bot(params[:id], request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'ultralution bot synced successfully'
@@ -72,7 +72,7 @@ class Api::V1::AiAgentsController < Api::V1::BaseController
 
   def assign_folder
     folder_id = params[:folder_id]
-    response = ultraAiCoreService.assign_folder(params[:id], folder_id)
+    response = UltraAiCoreService.assign_folder(params[:id], folder_id)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Folder assigned successfully'
@@ -82,7 +82,7 @@ class Api::V1::AiAgentsController < Api::V1::BaseController
   end
 
   def share
-    response = ultraAiCoreService.get_share_agent(params[:id])
+    response = UltraAiCoreService.get_share_agent(params[:id])
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Share agent retrieved successfully'
@@ -92,7 +92,7 @@ class Api::V1::AiAgentsController < Api::V1::BaseController
   end
 
   def shared
-    response = ultraAiCoreService.get_shared_agent(params[:id])
+    response = UltraAiCoreService.get_shared_agent(params[:id])
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Shared agent retrieved successfully'

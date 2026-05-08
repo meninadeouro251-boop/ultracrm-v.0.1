@@ -115,7 +115,7 @@ export interface WidgetMessage {
   content: string;
   created_at?: string;
   message_type?: number; // 0=incoming, 1=outgoing, 2=activity, 3=template
-  attachments?: unknown[];
+  attachments?: any[];
   sender?: {
     name?: string;
     avatar_url?: string;
@@ -124,7 +124,7 @@ export interface WidgetMessage {
   content_attributes?: {
     in_reply_to?: string | number;
     deleted?: boolean;
-    submitted_values?: unknown[];
+    submitted_values?: any[];
     submitted_email?: string;
   };
 }

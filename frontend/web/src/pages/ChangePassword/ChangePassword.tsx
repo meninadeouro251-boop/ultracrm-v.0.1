@@ -56,7 +56,6 @@ const ChangePassword = () => {
     setIsLoading(true);
 
     setTimeout(() => {
-      console.log('Form data:', data);
       localStorage.setItem('token', 'teste1');
       navigate('/');
       setIsLoading(false);

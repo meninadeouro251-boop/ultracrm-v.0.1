@@ -1,4 +1,4 @@
-export function postParent(event: string, data?: unknown) {
+export function postParent(event: string, data?: any) {
   try {
     window.parent?.postMessage(
       `ultra-widget:${JSON.stringify({ event, data })}`,

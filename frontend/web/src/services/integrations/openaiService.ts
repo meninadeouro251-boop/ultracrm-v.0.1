@@ -83,7 +83,7 @@ class OpenAIService {
       }
 
       return message;
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('[OpenAI Service] Error processing event:', error);
 
       // Extract error message from response
