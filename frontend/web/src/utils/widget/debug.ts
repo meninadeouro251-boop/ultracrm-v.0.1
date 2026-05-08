@@ -15,7 +15,7 @@ function isDebugEnabled() {
   }
 }
 
-function safe(obj: unknown) {
+function safe(obj: any) {
   // remove sensible things
   const clone =
     typeof structuredClone === 'function'
@@ -29,7 +29,7 @@ function safe(obj: unknown) {
   return clone;
 }
 
-export function wdebug(event: string, payload?: unknown) {
+export function wdebug(event: string, payload?: any) {
   if (!isDebugEnabled()) return;
   // usa debug pra não poluir
   console.debug(`${event}`, safe(payload));

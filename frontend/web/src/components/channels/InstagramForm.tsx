@@ -33,7 +33,7 @@ export default function InstagramForm({ onCancel }: InstagramFormProps) {
 
       // Redirect to Instagram OAuth (no popup)
       window.location.href = response.url;
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Instagram: Error generating authorization URL:', error);
       const errorMessage =
         (error as { response?: { data?: { error?: { message?: string } } }; message?: string })

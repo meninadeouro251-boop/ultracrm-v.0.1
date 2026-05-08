@@ -84,7 +84,7 @@ export interface CustomMcpServersState {
 
     test: boolean;
   };
-  filters: unknown[];
+  filters: any[];
   searchQuery: string;
 }
 

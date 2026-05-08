@@ -121,7 +121,7 @@ export const useAuthStore = create<AuthState>((set, get) => {
         } catch (error) {
           console.error('Failed to initialize app data after validity check:', error);
         }
-      } catch (error: unknown) {
+      } catch (error: any) {
         const apiError = error as { response?: { status?: number } };
         if (apiError?.response?.status === 401) {
           get().clearUser();

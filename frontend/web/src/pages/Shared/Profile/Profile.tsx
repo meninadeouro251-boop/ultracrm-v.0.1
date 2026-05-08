@@ -208,7 +208,6 @@ const Profile = () => {
         const allAvailableFlags = [...new Set([...availableEmailFlags, ...availablePushFlags])];
         const availableTypes = allAvailableFlags.map(flag => extractNotificationType(flag));
 
-        console.log('📧 [Profile] Notification settings loaded:', {
           all_email_flags: settings.all_email_flags,
           all_push_flags: settings.all_push_flags,
           selected_email_flags: settings.selected_email_flags,
@@ -645,7 +644,6 @@ const Profile = () => {
       const emailFlags = settingsToFlags(updatedSettings.email_notifications, 'email');
       const pushFlags = settingsToFlags(updatedSettings.push_notifications, 'push');
 
-      console.log('📧 [Profile] Updating notification settings:', {
         emailFlags,
         pushFlags,
         setting,

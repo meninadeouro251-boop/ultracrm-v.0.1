@@ -8,7 +8,7 @@ import type {
   ChannelPayload,
 } from '@/types/channels/inbox';
 
-const appendFormDataValue = (formData: FormData, key: string, value: unknown): void => {
+const appendFormDataValue = (formData: FormData, key: string, value: any): void => {
   if (value === undefined || value === null) return;
 
   if (value instanceof Blob) {

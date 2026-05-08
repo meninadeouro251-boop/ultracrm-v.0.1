@@ -528,7 +528,7 @@ export default function Contacts() {
 
       // Refresh the list
       loadContacts();
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Error importing contacts:', error);
       const errorMessage =
         (error as { response?: { data?: { message?: string } } })?.response?.data?.message ||
@@ -568,7 +568,7 @@ export default function Contacts() {
 
       await contactsService.exportContacts(exportPayload);
       toast.success(t('messages.exportQueued'));
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Error exporting contacts:', error);
       const errorMessage =
         (error as { response?: { data?: { message?: string } } })?.response?.data?.message ||
@@ -714,7 +714,6 @@ export default function Contacts() {
   const handleConversationCreated = (conversationId: string) => {
     toast.success(t('messages.conversationStarted'));
     // TODO: Navigate to conversation
-    console.log('Navigate to conversation:', conversationId);
   };
 
   // Handle modal close

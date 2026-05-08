@@ -57,7 +57,7 @@ export interface ToolsState {
   loading: {
     list: boolean;
   };
-  filters: unknown[];
+  filters: any[];
   searchQuery: string;
 }
 

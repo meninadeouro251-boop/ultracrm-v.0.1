@@ -8,7 +8,7 @@ interface OAuthCallbackPayload {
 interface OAuthCallbackResponse {
   success: boolean;
   error?: string;
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 /**

@@ -102,7 +102,7 @@ class WidgetService {
     this.removeFromSessionStorage(key);
   }
 
-  private isTokenError(error: unknown): boolean {
+  private isTokenError(error: any): boolean {
     const err = error as AxiosError<{ error?: string; code?: string }>;
     if (err.response?.status !== 401) return false;
 
@@ -157,7 +157,7 @@ class WidgetService {
     });
   }
 
-  private shouldTryNextBase(error: unknown): boolean {
+  private shouldTryNextBase(error: any): boolean {
     const err = error as AxiosError;
     const status = err.response?.status;
     return !status || status === 403 || status === 404 || status === 405;
@@ -165,7 +165,7 @@ class WidgetService {
 
   private async requestWithBaseFallback<T>(requestFn: (client: AxiosInstance) => Promise<T>): Promise<T> {
     const bases = this.getCandidateApiBases();
-    let lastError: unknown = null;
+    let lastError: any = null;
 
     for (const base of bases) {
       const client = this.buildClient(base);

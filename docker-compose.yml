@@ -298,28 +298,6 @@ services:
       retries: 3
       start_period: 15s
 
-  # Ultra Go (High Performance WhatsApp API) — Port 8081
-  # Temporarily disabled due to build issues - uncomment when ready
-  # ultra-go:
-  #   build:
-  #     context: ./backend/shared/libs/ultra-go
-  #     dockerfile: Dockerfile
-  #   restart: unless-stopped
-  #   ports:
-  #     - "8081:8080"
-  #   env_file: .env
-  #   environment:
-  #     SERVER_PORT: "8080"
-  #     CLIENT_NAME: "ultracrm"
-  #     GLOBAL_API_KEY: ${ULTRA_GO_API_KEY:-ultracrm_secret_key}
-  #     POSTGRES_AUTH_DB: postgresql://${POSTGRES_USERNAME:-postgres}:${POSTGRES_PASSWORD:-ultra_dev_password}@postgres:5432/${POSTGRES_DATABASE:-ultra_community}?sslmode=disable
-  #     POSTGRES_USERS_DB: postgresql://${POSTGRES_USERNAME:-postgres}:${POSTGRES_PASSWORD:-ultra_dev_password}@postgres:5432/${POSTGRES_DATABASE:-ultra_community}?sslmode=disable
-  #     DATABASE_SAVE_MESSAGES: "true"
-  #     WADEBUG: "INFO"
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-
 volumes:
   postgres_data:
   redis_data:

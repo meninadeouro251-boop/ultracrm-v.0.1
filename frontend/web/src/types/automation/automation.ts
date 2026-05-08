@@ -113,7 +113,7 @@ export interface AutomationFlowValidation {
 export interface AutomationFlowContext {
   conversation_id: string;
   contact_id?: string;
-  message?: unknown;
+  message?: any;
   variables: Record<string, unknown>;
   currentNodeId?: string;
 }

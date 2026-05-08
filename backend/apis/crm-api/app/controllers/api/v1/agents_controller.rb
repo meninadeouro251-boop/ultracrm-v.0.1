@@ -8,22 +8,22 @@ class Api::V1::AgentsController < Api::V1::BaseController
   
   
   def index
-    result = ultraAiCoreService.list_agents(current_user, index_params)
+    result = UltraAiCoreService.list_agents(current_user, index_params)
     render json: result
   end
   
   def create
-    result = ultraAiCoreService.create_agent(current_user, agent_params)
+    result = UltraAiCoreService.create_agent(current_user, agent_params)
     render json: result, status: :created
   end
   
   def update
-    result = ultraAiCoreService.update_agent(current_user, params[:id], agent_params)
+    result = UltraAiCoreService.update_agent(current_user, params[:id], agent_params)
     render json: result
   end
   
   def destroy
-    ultraAiCoreService.delete_agent(current_user, params[:id])
+    UltraAiCoreService.delete_agent(current_user, params[:id])
     head :no_content
   end
   

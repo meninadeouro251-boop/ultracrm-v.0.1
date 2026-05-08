@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const UNSUPPORTED_ACTION_HTTP_STATUS = new Set([404, 405, 501]);
 
-export const isActionNotSupported = (error: unknown): boolean => {
+export const isActionNotSupported = (error: any): boolean => {
   if (!axios.isAxiosError(error)) {
     return false;
   }

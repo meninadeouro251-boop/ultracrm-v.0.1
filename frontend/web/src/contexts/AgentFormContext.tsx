@@ -16,8 +16,8 @@ export interface AgentFormState {
 // Interface para as ações do formulário
 export type AgentFormAction =
   | { type: 'SET_DATA'; payload: Partial<AgentCreate> }
-  | { type: 'UPDATE_FIELD'; payload: { field: string; value: unknown } }
-  | { type: 'UPDATE_CONFIG'; payload: { field: string; value: unknown } }
+  | { type: 'UPDATE_FIELD'; payload: { field: string; value: any } }
+  | { type: 'UPDATE_CONFIG'; payload: { field: string; value: any } }
   | { type: 'SET_ERROR'; payload: { field: string; error: string } }
   | { type: 'CLEAR_ERROR'; payload: string }
   | { type: 'SET_ERRORS'; payload: Record<string, string> }
@@ -184,8 +184,8 @@ interface AgentFormContextType {
   state: AgentFormState;
   dispatch: React.Dispatch<AgentFormAction>;
   // Métodos auxiliares
-  updateField: (field: string, value: unknown) => void;
-  updateConfig: (field: string, value: unknown) => void;
+  updateField: (field: string, value: any) => void;
+  updateConfig: (field: string, value: any) => void;
   setError: (field: string, error: string) => void;
   clearError: (field: string) => void;
   nextStep: () => void;
@@ -212,11 +212,11 @@ export const AgentFormProvider: React.FC<AgentFormProviderProps> = ({ children, 
   });
 
   // Métodos auxiliares
-  const updateField = (field: string, value: unknown) => {
+  const updateField = (field: string, value: any) => {
     dispatch({ type: 'UPDATE_FIELD', payload: { field, value } });
   };
 
-  const updateConfig = (field: string, value: unknown) => {
+  const updateConfig = (field: string, value: any) => {
     dispatch({ type: 'UPDATE_CONFIG', payload: { field, value } });
   };
 

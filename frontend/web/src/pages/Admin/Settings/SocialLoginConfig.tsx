@@ -55,7 +55,7 @@ const MICROSOFT_DEFAULTS: MicrosoftFormData = {
 const GOOGLE_SECRET_FIELDS = ['GOOGLE_OAUTH_CLIENT_SECRET'];
 const MICROSOFT_SECRET_FIELDS = ['AZURE_APP_SECRET'];
 
-function isSecretMasked(value: unknown): boolean {
+function isSecretMasked(value: any): boolean {
   return typeof value === 'string' && value.includes('••••');
 }
 

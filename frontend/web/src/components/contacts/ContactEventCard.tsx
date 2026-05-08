@@ -199,7 +199,7 @@ const formatDate = (dateString: string, t: (key: string, options?: Record<string
 };
 
 // Format property value for display
-const formatPropertyValue = (key: string, value: unknown, t: (key: string, options?: Record<string, unknown>) => string): string => {
+const formatPropertyValue = (key: string, value: any, t: (key: string, options?: Record<string, unknown>) => string): string => {
   if (value === null || value === undefined) return '-';
 
   // Special formatting for specific keys

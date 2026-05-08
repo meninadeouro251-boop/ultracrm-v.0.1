@@ -77,7 +77,6 @@ const PipelineTasksList = forwardRef<PipelineTasksListRef, PipelineTasksListProp
     }
   }, [pendingCount, overdueCount, ref]);
 
-  console.log('tasks', tasks);
   // Filter tasks - only root tasks (hierarchy handled by HierarchicalTaskItem)
   const filteredTasks = tasks
     .filter(task => !task.parent_task_id) // Only root tasks

@@ -10,7 +10,7 @@ class Api::V1::AiApikeysController < Api::V1::BaseController
 
     Rails.logger.info "AI API Keys Index - User: #{Current.user&.id}, Params: #{params_hash}"
     
-    response = ultraAiCoreService.list_api_keys(params_hash, request.headers)
+    response = UltraAiCoreService.list_api_keys(params_hash, request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'API keys retrieved successfully'
@@ -21,7 +21,7 @@ class Api::V1::AiApikeysController < Api::V1::BaseController
   end
 
   def show
-    response = ultraAiCoreService.get_api_key(params[:id], request.headers)
+    response = UltraAiCoreService.get_api_key(params[:id], request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'API key retrieved successfully'
@@ -31,7 +31,7 @@ class Api::V1::AiApikeysController < Api::V1::BaseController
   end
 
   def create
-    response = ultraAiCoreService.create_api_key(api_key_create_params, request.headers)
+    response = UltraAiCoreService.create_api_key(api_key_create_params, request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'API key created successfully'
@@ -41,7 +41,7 @@ class Api::V1::AiApikeysController < Api::V1::BaseController
   end
 
   def update
-    response = ultraAiCoreService.update_api_key(params[:id], api_key_update_params, request.headers)
+    response = UltraAiCoreService.update_api_key(params[:id], api_key_update_params, request.headers)
 
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'API key updated successfully'
@@ -51,7 +51,7 @@ class Api::V1::AiApikeysController < Api::V1::BaseController
   end
 
   def destroy
-    response = ultraAiCoreService.delete_api_key(params[:id], request.headers)
+    response = UltraAiCoreService.delete_api_key(params[:id], request.headers)
     message = response.is_a?(Hash) ? response['message'] : 'API key deleted successfully'
     success_response(message: message, status: :no_content)  
   rescue StandardError => e

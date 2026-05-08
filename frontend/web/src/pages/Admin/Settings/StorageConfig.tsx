@@ -94,7 +94,7 @@ const S3_COMPATIBLE_DEFAULTS = {
 
 const SECRET_FIELDS = ['STORAGE_ACCESS_SECRET'];
 
-function isSecretMasked(value: unknown): boolean {
+function isSecretMasked(value: any): boolean {
   return typeof value === 'string' && value.includes('••••');
 }
 

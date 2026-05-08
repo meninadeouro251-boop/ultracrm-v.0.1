@@ -35,8 +35,6 @@ export interface UseWebSocketReturn {
  * ```typescript
  * const { connector, isConnected, sendTypingOn } = useWebSocket(userId, token, {
  *   handlers: {
- *     onMessageCreated: (data) => console.log('Nova mensagem:', data),
- *     onTypingOn: (data) => console.log('Usuário digitando:', data)
  *   }
  * });
  * ```

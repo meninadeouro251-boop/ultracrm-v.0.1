@@ -11,10 +11,10 @@ const mockGetPipelines = vi.fn().mockResolvedValue({ data: [] });
 
 vi.mock('@/services/pipelines/pipelinesService', () => ({
   pipelinesService: {
-    moveItem: (...args: unknown[]) => mockMoveItem(...args),
-    addItemToPipeline: (...args: unknown[]) => mockAddItemToPipeline(...args),
-    removeItemFromPipeline: (...args: unknown[]) => mockRemoveItemFromPipeline(...args),
-    getPipelines: (...args: unknown[]) => mockGetPipelines(...args),
+    moveItem: (...args: any[]) => mockMoveItem(...args),
+    addItemToPipeline: (...args: any[]) => mockAddItemToPipeline(...args),
+    removeItemFromPipeline: (...args: any[]) => mockRemoveItemFromPipeline(...args),
+    getPipelines: (...args: any[]) => mockGetPipelines(...args),
   },
 }));
 
@@ -23,8 +23,8 @@ const mockToastSuccess = vi.fn();
 const mockToastError = vi.fn();
 vi.mock('sonner', () => ({
   toast: {
-    success: (...args: unknown[]) => mockToastSuccess(...args),
-    error: (...args: unknown[]) => mockToastError(...args),
+    success: (...args: any[]) => mockToastSuccess(...args),
+    error: (...args: any[]) => mockToastError(...args),
   },
 }));
 

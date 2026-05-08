@@ -32,7 +32,7 @@ const DEFAULTS: IntegrationFormData = {
   clientSecret: null,
 };
 
-function isSecretMasked(value: unknown): boolean {
+function isSecretMasked(value: any): boolean {
   return typeof value === 'string' && value.includes('••••');
 }
 

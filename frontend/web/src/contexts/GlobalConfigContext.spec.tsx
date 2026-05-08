@@ -27,7 +27,7 @@ const mockApi = {
 
 vi.mock('@/services/core', () => ({
   api: {
-    get: (...args: unknown[]) => mockApi.get(...args),
+    get: (...args: any[]) => mockApi.get(...args),
   },
 }));
 

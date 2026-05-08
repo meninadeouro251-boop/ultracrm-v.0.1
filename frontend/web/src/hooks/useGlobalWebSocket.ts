@@ -3,11 +3,11 @@ import { useAuth } from '@/contexts/AuthContext';
 import { ChatActionCableConnector, type ChatEventHandlers, type ConnectionParams } from '@/services/chat';
 
 interface GlobalWebSocketHandlers {
-  onMessageCreated?: (data: unknown) => void;
-  onNotificationCreated?: (data: unknown) => void;
-  onNotificationUpdated?: (data: unknown) => void;
-  onNotificationDeleted?: (data: unknown) => void;
-  onConversationUpdated?: (data: unknown) => void;
+  onMessageCreated?: (data: any) => void;
+  onNotificationCreated?: (data: any) => void;
+  onNotificationUpdated?: (data: any) => void;
+  onNotificationDeleted?: (data: any) => void;
+  onConversationUpdated?: (data: any) => void;
 }
 
 export const useGlobalWebSocket = (handlers: GlobalWebSocketHandlers) => {

@@ -95,13 +95,11 @@ export default function ContactEventsTimeline({
   // Expand all events
   const expandAll = () => {
     // TODO: Implement expand all functionality
-    console.log('Expand all events');
   };
 
   // Collapse all events
   const collapseAll = () => {
     // TODO: Implement collapse all functionality
-    console.log('Collapse all events');
   };
 
   if (loading.events && events.length === 0) {

@@ -65,7 +65,7 @@ export interface Inbox {
   // Business hours
   working_hours_enabled?: boolean;
   out_of_office_message?: string;
-  working_hours?: unknown[];
+  working_hours?: any[];
   timezone?: string;
   // CSAT
   csat_survey_enabled?: boolean;
@@ -530,7 +530,7 @@ export interface WhatsappChannel {
   name: string;
   phone_number: string;
   provider: string;
-  provider_config: unknown;
+  provider_config: any;
 }
 
 // ============================================
@@ -683,7 +683,7 @@ export interface NotificameChannel {
   phone_number: string;
   status?: string;
   provider?: string;
-  provider_config?: unknown;
+  provider_config?: any;
 }
 
 export interface NotificameVerifyResponse {

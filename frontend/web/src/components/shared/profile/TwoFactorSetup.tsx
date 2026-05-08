@@ -67,7 +67,7 @@ const TwoFactorSetup = ({ onUpdate }: TwoFactorSetupProps) => {
         setSetupStep('verify');
         toast.success(t('twoFactor.notifications.emailCodeSent'));
       }
-    } catch (error: unknown) {
+    } catch (error: any) {
       const apiError = error as { response?: { status?: number } };
       if (apiError.response?.status === 401) {
         toast.error(t('twoFactor.notifications.passwordIncorrect'));
@@ -97,7 +97,7 @@ const TwoFactorSetup = ({ onUpdate }: TwoFactorSetupProps) => {
         resetSetupState();
         onUpdate?.();
       }
-    } catch (error: unknown) {
+    } catch (error: any) {
       const apiError = error as { response?: { data?: { attempts_remaining?: number } } };
       const attemptsRemaining = apiError.response?.data?.attempts_remaining;
       if (attemptsRemaining !== undefined) {
@@ -117,7 +117,7 @@ const TwoFactorSetup = ({ onUpdate }: TwoFactorSetupProps) => {
       toast.success(t('twoFactor.notifications.disabled'));
       setDisableDialogOpen(false);
       onUpdate?.();
-    } catch (error: unknown) {
+    } catch (error: any) {
       const apiError = error as { response?: { status?: number } };
       if (apiError.response?.status === 401) {
         toast.error(t('twoFactor.notifications.passwordIncorrect'));
@@ -149,7 +149,7 @@ const TwoFactorSetup = ({ onUpdate }: TwoFactorSetupProps) => {
     try {
       await twoFactorService.sendEmailCode();
       toast.success(t('twoFactor.notifications.emailCodeResent'));
-    } catch (error: unknown) {
+    } catch (error: any) {
       const apiError = error as { response?: { status?: number } };
       if (apiError.response?.status === 429) {
         toast.error(t('twoFactor.notifications.emailCodeRateLimit'));

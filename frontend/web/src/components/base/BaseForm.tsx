@@ -53,11 +53,11 @@ export interface FormField {
     minLength?: number;
     maxLength?: number;
     pattern?: RegExp;
-    custom?: (value: unknown) => string | null;
+    custom?: (value: any) => string | null;
   };
   options?: FormFieldOption[];
-  defaultValue?: unknown;
-  render?: (field: FormField, value: unknown, onChange: (value: unknown) => void, error?: string) => ReactNode;
+  defaultValue?: any;
+  render?: (field: FormField, value: any, onChange: (value: any) => void, error?: string) => ReactNode;
   show?: (values: Record<string, unknown>) => boolean;
   width?: 'full' | 'half' | 'third' | 'quarter';
   section?: string;
@@ -77,7 +77,7 @@ export interface BaseFormProps {
   sections?: FormSection[];
   values: Record<string, unknown>;
   errors?: Record<string, string>;
-  onChange: (key: string, value: unknown) => void;
+  onChange: (key: string, value: any) => void;
   onSubmit: (values: Record<string, unknown>) => void;
   onCancel?: () => void;
   loading?: boolean;
@@ -114,7 +114,7 @@ export default function BaseForm({
     onSubmit(values);
   };
 
-  const validateField = (field: FormField, value: unknown): string | null => {
+  const validateField = (field: FormField, value: any): string | null => {
     if (field.required && (value === null || value === undefined || value === '')) {
       return t('base.form.required', { field: field.label });
     }

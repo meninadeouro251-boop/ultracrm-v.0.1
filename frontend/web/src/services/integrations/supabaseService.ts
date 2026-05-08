@@ -54,7 +54,7 @@ const SupabaseService = {
         `/agents/${agentId}/integrations/supabase`
       );
       return data.config || null;
-    } catch (error: unknown) {
+    } catch (error: any) {
       if (error && typeof error === 'object' && 'response' in error) {
         const httpError = error as { response?: { status?: number } };
         if (httpError.response?.status === 404) {

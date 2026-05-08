@@ -71,7 +71,7 @@ export interface MCPServersState {
     update: boolean;
     delete: boolean;
   };
-  filters: unknown[];
+  filters: any[];
   searchQuery: string;
 }
 

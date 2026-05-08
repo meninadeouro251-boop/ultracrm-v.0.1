@@ -317,7 +317,7 @@ export const useChannelSubmission = (form?: FormData) => {
                 return;
               }
               toast.error('Não foi possível iniciar o OAuth do Google');
-            } catch (e: unknown) {
+            } catch (e: any) {
               toast.error((e as Error)?.message || 'Falha no OAuth do Google');
             }
             setIsSubmitting(false);
@@ -338,7 +338,7 @@ export const useChannelSubmission = (form?: FormData) => {
                 return;
               }
               toast.error('Não foi possível iniciar o OAuth da Microsoft');
-            } catch (e: unknown) {
+            } catch (e: any) {
               toast.error((e as Error)?.message || 'Falha no OAuth da Microsoft');
             }
             setIsSubmitting(false);
@@ -703,7 +703,7 @@ export const useChannelSubmission = (form?: FormData) => {
 
       toast.success('Canal criado com sucesso');
       navigate(`/channels/${createdId}/settings`);
-    } catch (e: unknown) {
+    } catch (e: any) {
       const err = e as Error;
       toast.error(err?.message || 'Falha ao criar canal');
     } finally {

@@ -95,7 +95,7 @@ export interface UISettings {
   conversation_display_type?: string;
   editor_message_key?: 'enter' | 'cmd_enter';
   font_size?: 'small' | 'medium' | 'large';
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 export interface UserResponse {
@@ -123,7 +123,7 @@ export interface UserResponse {
   created_at?: string;
   custom_attributes?: Record<string, unknown>;
   setup_survey_completed?: boolean;
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 export interface ApiError {

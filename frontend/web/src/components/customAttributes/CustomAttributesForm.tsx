@@ -140,7 +140,7 @@ export default function CustomAttributesForm({
     onAttributesChange(newAttributes);
   };
 
-  const handleUpdateAttribute = (key: string, value: unknown) => {
+  const handleUpdateAttribute = (key: string, value: any) => {
     if (!onAttributesChange) return;
     
     onAttributesChange({
@@ -150,7 +150,7 @@ export default function CustomAttributesForm({
   };
 
   // Editable mode handlers
-  const handleStartEdit = (key: string, currentValue: unknown) => {
+  const handleStartEdit = (key: string, currentValue: any) => {
     setEditingKey(key);
     const rawValue = currentValue ? String(currentValue) : '';
     const attributeDefinition = definedAttributes.find(attribute => attribute.attribute_key === key);
@@ -220,7 +220,7 @@ export default function CustomAttributesForm({
   };
 
   // Helper function to convert value to string, handling objects
-  const valueToString = (val: unknown): string => {
+  const valueToString = (val: any): string => {
     if (val === null || val === undefined) return '';
     if (typeof val === 'object') {
       try {

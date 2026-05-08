@@ -10,7 +10,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
 
     Rails.logger.info "AI Folders Index - User: #{Current.user&.id}, Params: #{params_hash}"
     
-    response = ultraAiCoreService.list_folders(params_hash, request.headers)
+    response = UltraAiCoreService.list_folders(params_hash, request.headers)
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Folders retrieved successfully'
@@ -21,7 +21,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
   end
 
   def show
-    response = ultraAiCoreService.get_folder(params[:id])
+    response = UltraAiCoreService.get_folder(params[:id])
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Folder retrieved successfully'
@@ -31,7 +31,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
   end
 
   def create
-    response = ultraAiCoreService.create_folder(folder_create_params)
+    response = UltraAiCoreService.create_folder(folder_create_params)
 
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Folder created successfully'
@@ -41,7 +41,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
   end
 
   def update
-    response = ultraAiCoreService.update_folder(params[:id], folder_update_params)
+    response = UltraAiCoreService.update_folder(params[:id], folder_update_params)
 
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Folder updated successfully'
@@ -51,7 +51,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
   end
 
   def destroy
-    response = ultraAiCoreService.delete_folder(params[:id])
+    response = UltraAiCoreService.delete_folder(params[:id])
 
     message = response.is_a?(Hash) ? response['message'] : 'Folder deleted successfully'
     success_response(message: message, status: :no_content)  
@@ -60,7 +60,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
   end
 
   def agents
-    response = ultraAiCoreService.list_folder_agents(params[:id])
+    response = UltraAiCoreService.list_folder_agents(params[:id])
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Folder agents retrieved successfully'
@@ -75,7 +75,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
       user_ids: params[:user_ids]
     }.compact
     
-    response = ultraAiCoreService.share_folder(params[:id], share_data)
+    response = UltraAiCoreService.share_folder(params[:id], share_data)
 
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Folder shared successfully'
@@ -85,7 +85,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
   end
 
   def shared
-    response = ultraAiCoreService.get_shared_folder(params[:id])
+    response = UltraAiCoreService.get_shared_folder(params[:id])
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Shared folder retrieved successfully'
@@ -95,7 +95,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
   end
 
   def shared_folders
-    response = ultraAiCoreService.list_shared_folders
+    response = UltraAiCoreService.list_shared_folders
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Shared folders retrieved successfully'
@@ -105,7 +105,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
   end
 
   def accessible_folders
-    response = ultraAiCoreService.list_accessible_folders
+    response = UltraAiCoreService.list_accessible_folders
 
     data = response.is_a?(Hash) ? (response['data'] || response) : response
     message = response.is_a?(Hash) ? response['message'] : 'Accessible folders retrieved successfully'
@@ -120,7 +120,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
       user_ids: params[:user_ids]
     }.compact
     
-    response = ultraAiCoreService.update_shared_folder(params[:id], share_data)
+    response = UltraAiCoreService.update_shared_folder(params[:id], share_data)
     
     
     data = response.is_a?(Hash) ? (response['data'] || response) : response
@@ -131,7 +131,7 @@ class Api::V1::AiFoldersController < Api::V1::BaseController
   end
 
   def delete_shared
-    response = ultraAiCoreService.delete_shared_folder(params[:id])
+    response = UltraAiCoreService.delete_shared_folder(params[:id])
 
     message = response.is_a?(Hash) ? response['message'] : 'Shared folder deleted successfully'
     success_response(message: message, status: :no_content)  

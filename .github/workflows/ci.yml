@@ -56,3 +56,34 @@ jobs:
         with:
           dockerfile: backend/apis/core-api/Dockerfile
           failure-threshold: error
+
+  frontend-qa:
+    name: Frontend Lint & Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: frontend/web/package-lock.json
+
+      - name: Install dependencies
+        working-directory: frontend/web
+        run: npm install
+        # IMPORTANT: This step currently has continue-on-error enabled because @ultraapi/design-system
+        # is a private dependency and might not be accessible during CI in some environments.
+        # This should be fixed by providing proper NPM_TOKEN once the private registry is configured.
+        continue-on-error: true
+
+      - name: Run Lint
+        working-directory: frontend/web
+        run: npm run lint
+
+      - name: Run Type Check
+        working-directory: frontend/web
+        run: npm run build

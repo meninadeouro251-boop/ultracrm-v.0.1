@@ -12,7 +12,7 @@ interface UseAgentWebSocketProps {
   userId?: string;
   jwt?: string;
   apiKey?: string;
-  onEvent: (event: unknown) => void;
+  onEvent: (event: any) => void;
   onTurnComplete?: () => void;
 }
 

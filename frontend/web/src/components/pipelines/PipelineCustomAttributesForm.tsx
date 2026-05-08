@@ -319,7 +319,7 @@ export default function PipelineCustomAttributesForm({
     onAttributesChange(newAttributes);
   };
 
-  const handleUpdateAttribute = (key: string, value: unknown) => {
+  const handleUpdateAttribute = (key: string, value: any) => {
     onAttributesChange({
       ...(attributes || {}),
       [key]: value,
@@ -327,7 +327,7 @@ export default function PipelineCustomAttributesForm({
   };
 
   // Helper function to convert value to string, handling objects
-  const valueToString = (val: unknown): string => {
+  const valueToString = (val: any): string => {
     if (val === null || val === undefined) return '';
     if (typeof val === 'object') {
       try {

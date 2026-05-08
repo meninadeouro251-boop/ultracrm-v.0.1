@@ -1,4 +1,4 @@
 declare module '@ultraapi/design-system/styles' {
-  const css: unknown;
+  const css: any;
   export default css;
 }

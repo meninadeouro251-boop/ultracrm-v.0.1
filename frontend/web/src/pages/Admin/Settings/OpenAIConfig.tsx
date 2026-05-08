@@ -72,11 +72,11 @@ const PROMPT_FIELDS = [
   'OPENAI_PROMPT_SIMPLIFY',
 ] as const;
 
-function isSecretMasked(value: unknown): boolean {
+function isSecretMasked(value: any): boolean {
   return typeof value === 'string' && value.includes('••••');
 }
 
-function toBool(value: unknown): boolean {
+function toBool(value: any): boolean {
   if (typeof value === 'boolean') return value;
   if (typeof value === 'string') return value === 'true';
   return false;

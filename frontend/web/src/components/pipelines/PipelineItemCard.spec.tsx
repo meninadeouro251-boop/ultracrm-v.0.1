@@ -10,7 +10,7 @@ vi.mock('@ultraapi/design-system', () => ({
   Button: ({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
     <button type="button" {...props}>{children}</button>
   ),
-  Badge: ({ children, ...props }: { children: React.ReactNode; [key: string]: unknown }) => (
+  Badge: ({ children, ...props }: { children: React.ReactNode; [key: string]: any }) => (
     <span {...props}>{children}</span>
   ),
   DropdownMenu: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,

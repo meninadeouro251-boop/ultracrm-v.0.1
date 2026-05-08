@@ -154,11 +154,11 @@ const TWITTER_SECRET_FIELDS = ['TWITTER_CONSUMER_SECRET'];
 const FACEBOOK_BOOLEAN_FIELDS = ['ENABLE_MESSENGER_CHANNEL_HUMAN_AGENT', 'FB_FEED_COMMENTS_ENABLED'];
 const INSTAGRAM_BOOLEAN_FIELDS = ['ENABLE_INSTAGRAM_CHANNEL_HUMAN_AGENT'];
 
-function isSecretMasked(value: unknown): boolean {
+function isSecretMasked(value: any): boolean {
   return typeof value === 'string' && value.includes('••••');
 }
 
-function toBool(value: unknown): boolean {
+function toBool(value: any): boolean {
   if (typeof value === 'boolean') return value;
   if (typeof value === 'string') return value === 'true';
   return false;

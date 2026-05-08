@@ -14,11 +14,11 @@ export const useAgentForm = () => {
     context.dispatch({ type: 'SET_DATA', payload: newData });
   };
 
-  const handleFieldChange = (field: keyof AgentCreate, value: unknown) => {
+  const handleFieldChange = (field: keyof AgentCreate, value: any) => {
     context.updateField(field, value);
   };
 
-  const handleConfigChange = (field: string, value: unknown) => {
+  const handleConfigChange = (field: string, value: any) => {
     context.updateConfig(field, value);
   };
 

@@ -35,7 +35,7 @@ export async function withRetry<T>(
 /**
  * Verifica se um erro é passível de retry
  */
-function isRetriableError(error: unknown): boolean {
+function isRetriableError(error: any): boolean {
   if (error instanceof Error) {
     // Erros de rede geralmente são retryáveis
     if (error.message.includes('network') || error.message.includes('timeout')) {

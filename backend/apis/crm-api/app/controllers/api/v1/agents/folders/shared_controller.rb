@@ -9,12 +9,12 @@ class Api::V1::Agents::Folders::SharedController < Api::V1::BaseController
   
   
   def update
-    result = ultraAiCoreService.update_shared_folder(current_user, params[:id], share_params)
+    result = UltraAiCoreService.update_shared_folder(current_user, params[:id], share_params)
     render json: result
   end
   
   def destroy
-    ultraAiCoreService.delete_shared_folder(current_user, params[:id])
+    UltraAiCoreService.delete_shared_folder(current_user, params[:id])
     head :no_content
   end
   

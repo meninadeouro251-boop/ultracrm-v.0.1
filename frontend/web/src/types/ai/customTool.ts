@@ -105,7 +105,7 @@ export interface CustomToolsState {
     delete: boolean;
     test: boolean;
   };
-  filters: unknown[];
+  filters: any[];
   searchQuery: string;
 }
 

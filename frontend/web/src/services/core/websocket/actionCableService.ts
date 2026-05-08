@@ -186,12 +186,10 @@ class ActionCableService {
   subscribeToConversation(conversationId: string) {
     // Conversation events are handled through RoomChannel in Ultra
     // No separate ConversationChannel needed
-    console.log(`Conversation ${conversationId} events will be received through RoomChannel`);
   }
 
   unsubscribeFromConversation(conversationId: string) {
     // No separate conversation subscriptions to unsubscribe from
-    console.log(`Conversation ${conversationId} - no separate subscription to remove`);
   }
 
   disconnect() {

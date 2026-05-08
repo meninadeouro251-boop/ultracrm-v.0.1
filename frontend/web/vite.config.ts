@@ -10,12 +10,7 @@ export default defineConfig({
     tailwindcss(),
   ],
   build: {
-    // Reduce chunking to minimize requests via ngrok
-    rollupOptions: {
-      output: {
-        manualChunks: undefined, // Disable auto chunking
-      },
-    },
+    // Restore default chunking for better performance
   },
   resolve: {
     alias: {

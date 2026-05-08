@@ -1,6 +1,6 @@
 export interface IntegrationFormProps {
   config: Record<string, unknown>;
-  onConfigChange: (key: string, value: unknown) => void;
+  onConfigChange: (key: string, value: any) => void;
   isExpanded?: boolean;
 }
 
