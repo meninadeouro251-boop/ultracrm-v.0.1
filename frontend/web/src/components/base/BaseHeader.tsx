@@ -1,5 +1,6 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useRef } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
+import { useKeyboardShortcut } from '@/hooks/useKeyboardShortcut';
 import {
   Button,
   Input,
@@ -78,6 +79,12 @@ export default function BaseHeader({
   children,
 }: BaseHeaderProps) {
   const { t } = useLanguage('common');
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useKeyboardShortcut('/', () => {
+    searchInputRef.current?.focus();
+  });
+
   const placeholder = searchPlaceholder || t('base.header.searchPlaceholder');
   const hasSelection = selectedCount > 0;
   const visibleSecondaryActions = secondaryActions.filter(action => action.show !== false);
@@ -119,12 +126,18 @@ export default function BaseHeader({
             <div className="relative flex-1 max-w-md" data-tour={searchDataTour}>
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-sidebar-foreground/60" />
               <Input
+                ref={searchInputRef}
                 type="search"
                 placeholder={placeholder}
                 value={searchValue}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="pl-9 bg-sidebar border-sidebar-border text-sidebar-foreground placeholder:text-sidebar-foreground/50 focus:border-sidebar-border"
+                className="pl-9 pr-12 bg-sidebar border-sidebar-border text-sidebar-foreground placeholder:text-sidebar-foreground/50 focus:border-sidebar-border"
               />
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none hidden sm:block">
+                <kbd className="inline-flex h-5 select-none items-center gap-1 rounded border border-sidebar-border bg-sidebar-accent/50 px-1.5 font-mono text-[10px] font-medium text-sidebar-foreground/50 opacity-100">
+                  <span className="text-xs">/</span>
+                </kbd>
+              </div>
             </div>
           )}
 
