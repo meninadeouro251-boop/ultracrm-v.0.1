@@ -22,6 +22,7 @@ jobs:
   frontend-lint:
     name: Frontend Lint
     runs-on: ubuntu-latest
+    if: ${{ secrets.NPM_TOKEN != '' }}
     defaults:
       run:
         working-directory: frontend/web
@@ -37,10 +38,7 @@ jobs:
           cache-dependency-path: frontend/web/package-lock.json
 
       - name: Configure private registry
-        if: env.NPM_TOKEN != ''
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Install dependencies
         run: npm install
@@ -51,6 +49,7 @@ jobs:
   frontend-typecheck:
     name: Frontend Typecheck
     runs-on: ubuntu-latest
+    if: ${{ secrets.NPM_TOKEN != '' }}
     defaults:
       run:
         working-directory: frontend/web
@@ -66,10 +65,7 @@ jobs:
           cache-dependency-path: frontend/web/package-lock.json
 
       - name: Configure private registry
-        if: env.NPM_TOKEN != ''
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Install dependencies
         run: npm install
@@ -80,6 +76,7 @@ jobs:
   frontend-build:
     name: Frontend Build
     runs-on: ubuntu-latest
+    if: ${{ secrets.NPM_TOKEN != '' }}
     defaults:
       run:
         working-directory: frontend/web
@@ -95,10 +92,7 @@ jobs:
           cache-dependency-path: frontend/web/package-lock.json
 
       - name: Configure private registry
-        if: env.NPM_TOKEN != ''
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Install dependencies
         run: npm install
@@ -109,6 +103,7 @@ jobs:
   frontend-test:
     name: Frontend Tests
     runs-on: ubuntu-latest
+    if: ${{ secrets.NPM_TOKEN != '' }}
     defaults:
       run:
         working-directory: frontend/web
@@ -124,10 +119,7 @@ jobs:
           cache-dependency-path: frontend/web/package-lock.json
 
       - name: Configure private registry
-        if: env.NPM_TOKEN != ''
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Install dependencies
         run: npm install
