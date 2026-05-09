@@ -14,7 +14,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@ultraapi/design-system';
-import { MoreHorizontal, ArrowUpDown, ArrowUp, ArrowDown, LucideIcon } from 'lucide-react';
+import { MoreHorizontal, ArrowUpDown, ArrowUp, ArrowDown, LucideIcon, Loader2 } from 'lucide-react';
 import EmptyState from './EmptyState';
 
 export interface TableColumn<T> {
@@ -160,6 +160,7 @@ export default function BaseTable<T extends Record<string, any>>({
             variant="ghost"
             size="sm"
             className="h-8 w-8 p-0 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+            aria-label={t('base.table.actions')}
           >
             <MoreHorizontal className="h-4 w-4" />
           </Button>
@@ -188,7 +189,10 @@ export default function BaseTable<T extends Record<string, any>>({
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12 bg-sidebar rounded-lg border border-sidebar-border">
-        <div className="text-sidebar-foreground/70">{t('base.table.loading')}</div>
+        <div className="flex flex-col items-center gap-2">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <div className="text-sidebar-foreground/70">{t('base.table.loading')}</div>
+        </div>
       </div>
     );
   }
