@@ -16,6 +16,7 @@ import {
   RadioGroupItem,
   Separator,
 } from '@ultraapi/design-system';
+import { Loader2 } from 'lucide-react';
 
 
 export type FormFieldType =
@@ -374,7 +375,14 @@ export default function BaseForm({
             disabled={loading}
             className="bg-primary hover:bg-primary/85 text-primary-foreground border-0 font-semibold flex-1"
           >
-            {loading ? t('base.form.saving') : finalSubmitLabel}
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                {t('base.form.saving')}
+              </>
+            ) : (
+              finalSubmitLabel
+            )}
           </Button>
         </div>
       </form>
