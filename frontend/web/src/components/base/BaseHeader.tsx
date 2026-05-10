@@ -192,6 +192,7 @@ export default function BaseHeader({
                   variant="outline"
                   size="sm"
                   className="bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent"
+                  aria-label={t('base.header.moreActions')}
                 >
                   <MoreVertical className="h-4 w-4" />
                 </Button>
