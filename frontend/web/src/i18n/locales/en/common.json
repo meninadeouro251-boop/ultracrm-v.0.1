@@ -19,11 +19,14 @@
     "pagination": {
       "itemsPerPage": "Items per page:",
       "showing": "Showing {{start}} to {{end}} of {{total}} items",
-      "page": "Page {{current}} of {{total}}"
+      "page": "Page {{current}} of {{total}}",
+      "previous": "Previous page",
+      "next": "Next page"
     },
     "header": {
       "searchPlaceholder": "Search...",
       "filters": "Filters",
+      "moreActions": "More actions",
       "selected": "{{count}} item selected",
       "selected_other": "{{count}} items selected",
       "clear": "Clear"
@@ -35,7 +38,8 @@
       "no": "No",
       "selectAll": "Select all",
       "selectItem": "Select item {{key}}",
-      "actions": "Actions"
+      "actions": "Actions",
+      "sortBy": "Sort by {{column}}"
     },
     "buttons": {
       "save": "Save",

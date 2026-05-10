@@ -19,11 +19,14 @@
     "pagination": {
       "itemsPerPage": "Itens por página:",
       "showing": "Mostrando {{start}} a {{end}} de {{total}} itens",
-      "page": "Página {{current}} de {{total}}"
+      "page": "Página {{current}} de {{total}}",
+      "previous": "Página anterior",
+      "next": "Próxima página"
     },
     "header": {
       "searchPlaceholder": "Pesquisar...",
       "filters": "Filtros",
+      "moreActions": "Mais ações",
       "selected": "{{count}} item selecionado",
       "selected_other": "{{count}} itens selecionados",
       "clear": "Limpar"
@@ -35,7 +38,8 @@
       "no": "Não",
       "selectAll": "Selecionar todos",
       "selectItem": "Selecionar item {{key}}",
-      "actions": "Ações"
+      "actions": "Ações",
+      "sortBy": "Ordenar por {{column}}"
     },
     "buttons": {
       "save": "Salvar",

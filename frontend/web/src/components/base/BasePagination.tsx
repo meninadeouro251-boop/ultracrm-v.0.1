@@ -183,6 +183,7 @@ export default function BasePagination({
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={!canGoPrevious}
           className="min-w-9 bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label={t('base.pagination.previous')}
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
@@ -231,6 +232,7 @@ export default function BasePagination({
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={!canGoNext}
           className="min-w-9 bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label={t('base.pagination.next')}
         >
           <ChevronRight className="h-4 w-4" />
         </Button>
