@@ -1,0 +1,3 @@
+## 2025-05-15 - [Accessibility & Localization in Base Components]
+**Learning:** Hardcoding locales for date formatting (e.g., `date-fns/locale/pt`) and missing `aria-label` on icon-only buttons are recurring patterns in the base UI components. Using `import * as locales` for dynamic locale selection causes significant bundle bloat.
+**Action:** Always check base components (`BaseTable`, `BasePagination`, `BaseHeader`, `BaseFilterRow`) for missing `aria-label` when adding new features. Use the `useDateFormat` hook for localized date formatting instead of manual `date-fns` locale mapping to keep the bundle size optimized.
