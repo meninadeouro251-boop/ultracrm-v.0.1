@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '@/hooks/useLanguage';
+import { useDateFormat } from '@/hooks/useDateFormat';
 import {
   Select,
   SelectContent,
@@ -15,7 +16,6 @@ import {
 } from '@ultraapi/design-system';
 import { CalendarIcon, X } from 'lucide-react';
 import { format } from 'date-fns';
-import { pt } from 'date-fns/locale';
 
 import { BaseFilter, FilterType } from '@/types/core';
 
@@ -40,9 +40,11 @@ export default function BaseFilterRow<T extends BaseFilter>({
   className = '',
   translationNamespace = 'common',
 }: BaseFilterRowProps<T>) {
-  const { t } = useLanguage(translationNamespace);
+  const { t, currentLanguage } = useLanguage(translationNamespace);
   const { t: tCommon } = useLanguage('common');
+  const { formatDate } = useDateFormat();
   const [calendarOpen, setCalendarOpen] = useState(false);
+
   const currentFilterType = filterTypes.find(ft => ft.attributeKey === filter.attributeKey);
 
   const handleDateSelect = (date: Date | undefined) => {
@@ -71,7 +73,7 @@ export default function BaseFilterRow<T extends BaseFilter>({
                 <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
                 <span className="truncate">
                   {filter.values
-                    ? format(new Date(filter.values as string), 'dd/MM/yyyy', { locale: pt })
+                    ? formatDate(new Date(filter.values as string))
                     : tCommon('base.filter.selectDate')}
                 </span>
               </Button>
@@ -219,6 +221,7 @@ export default function BaseFilterRow<T extends BaseFilter>({
         variant="ghost"
         size="sm"
         onClick={() => onRemove(index)}
+        aria-label={tCommon('base.filter.removeFilter')}
         className="flex-shrink-0 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
       >
         <X className="h-4 w-4" />
