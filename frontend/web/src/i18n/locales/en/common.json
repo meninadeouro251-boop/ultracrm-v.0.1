@@ -19,14 +19,17 @@
     "pagination": {
       "itemsPerPage": "Items per page:",
       "showing": "Showing {{start}} to {{end}} of {{total}} items",
-      "page": "Page {{current}} of {{total}}"
+      "page": "Page {{current}} of {{total}}",
+      "previousPage": "Previous page",
+      "nextPage": "Next page"
     },
     "header": {
       "searchPlaceholder": "Search...",
       "filters": "Filters",
       "selected": "{{count}} item selected",
       "selected_other": "{{count}} items selected",
-      "clear": "Clear"
+      "clear": "Clear",
+      "moreActions": "More actions"
     },
     "table": {
       "emptyMessage": "No items found",
@@ -35,7 +38,9 @@
       "no": "No",
       "selectAll": "Select all",
       "selectItem": "Select item {{key}}",
-      "actions": "Actions"
+      "actions": "Actions",
+      "sort": "Sort",
+      "moreActions": "More actions"
     },
     "buttons": {
       "save": "Save",
@@ -62,6 +67,7 @@
       "applyFilters": "Apply Filters",
       "clearFilters": "Clear Filters",
       "addFilter": "Add Filter",
+      "removeFilter": "Remove filter",
       "cancel": "Cancel",
       "and": "AND",
       "or": "OR",

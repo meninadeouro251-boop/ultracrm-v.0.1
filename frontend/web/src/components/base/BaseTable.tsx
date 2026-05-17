@@ -117,6 +117,7 @@ export default function BaseTable<T extends Record<string, any>>({
           size="sm"
           className="ml-2 h-8 px-2 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
           onClick={() => onSort(column.key)}
+          aria-label={t('base.table.sort')}
         >
           <ArrowUpDown className="h-4 w-4" />
         </Button>
@@ -129,6 +130,7 @@ export default function BaseTable<T extends Record<string, any>>({
         size="sm"
         className="ml-2 h-8 px-2 text-sidebar-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent"
         onClick={() => onSort(column.key)}
+        aria-label={t('base.table.sort')}
       >
         {sortOrder === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
       </Button>
@@ -160,6 +162,7 @@ export default function BaseTable<T extends Record<string, any>>({
             variant="ghost"
             size="sm"
             className="h-8 w-8 p-0 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+            aria-label={t('base.table.moreActions')}
           >
             <MoreHorizontal className="h-4 w-4" />
           </Button>
