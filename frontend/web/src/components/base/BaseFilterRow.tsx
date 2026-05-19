@@ -220,6 +220,7 @@ export default function BaseFilterRow<T extends BaseFilter>({
         size="sm"
         onClick={() => onRemove(index)}
         className="flex-shrink-0 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+        aria-label={tCommon('base.filter.removeFilter')}
       >
         <X className="h-4 w-4" />
       </Button>
