@@ -1472,6 +1472,12 @@
     "selectOrCreateSession": "Select a conversation or create a new one",
     "selectSessionMessage": "Choose an existing conversation from the list on the side or click \"New Conversation\" to start.",
     "typeMessage": "Type your message...",
+    "send": "Send",
+    "attachFile": "Attach file",
+    "removeAttachment": "Remove attachment",
+    "maxFilesError": "You can attach a maximum of 5 files",
+    "maxSizeError": "File {{name}} exceeds the maximum size of {{size}}",
+    "processError": "Error processing file {{name}}",
     "deleteSession": "Delete Session",
     "deleteSessionConfirm": "Are you sure you want to delete this session? This action cannot be undone.",
     "session": "Session"

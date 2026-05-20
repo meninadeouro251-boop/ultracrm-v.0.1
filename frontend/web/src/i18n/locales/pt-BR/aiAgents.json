@@ -1467,6 +1467,12 @@
     "selectOrCreateSession": "Selecione uma conversa ou crie uma nova",
     "selectSessionMessage": "Escolha uma conversa existente na lista ao lado ou clique em \"Nova Conversa\" para começar.",
     "typeMessage": "Digite sua mensagem...",
+    "send": "Enviar",
+    "attachFile": "Anexar arquivo",
+    "removeAttachment": "Remover anexo",
+    "maxFilesError": "Você pode anexar no máximo 5 arquivos",
+    "maxSizeError": "Arquivo {{name}} excede o tamanho máximo de {{size}}",
+    "processError": "Erro ao processar arquivo {{name}}",
     "deleteSession": "Deletar Sessão",
     "deleteSessionConfirm": "Tem certeza que deseja deletar esta sessão? Esta ação não pode ser desfeita.",
     "session": "Sessão"

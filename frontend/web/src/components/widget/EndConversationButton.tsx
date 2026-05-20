@@ -48,6 +48,7 @@ const EndConversationButton: React.FC<EndConversationButtonProps> = ({
       onClick={handleEndConversation}
       disabled={disabled || isLoading}
       title={t('endConversation.tooltip')}
+      aria-label={t('endConversation.tooltip')}
       className={`
         inline-flex items-center justify-center w-8 h-8
         rounded-md transition-all duration-200
