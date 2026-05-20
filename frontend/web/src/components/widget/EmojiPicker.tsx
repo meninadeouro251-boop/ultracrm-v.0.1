@@ -57,6 +57,7 @@ export const EmojiPickerComponent: React.FC<EmojiPickerComponentProps> = ({
           isOpen ? 'bg-slate-100' : ''
         }`}
         title={t('emoji.addEmoji')}
+        aria-label={t('emoji.addEmoji')}
         type="button"
       >
         <Smile

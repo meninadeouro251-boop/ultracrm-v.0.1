@@ -47,7 +47,7 @@ export function AgentMessageInput({
     const maxFileSize = 10 * 1024 * 1024; // 10MB
 
     if (selectedFiles.length + newFiles.length > 5) {
-      toast.error('Você pode anexar no máximo 5 arquivos');
+      toast.error(t('chat.maxFilesError') || 'Você pode anexar no máximo 5 arquivos');
       return;
     }
 
@@ -55,7 +55,10 @@ export function AgentMessageInput({
 
     for (const file of newFiles) {
       if (file.size > maxFileSize) {
-        toast.error(`Arquivo ${file.name} excede o tamanho máximo de ${formatFileSize(maxFileSize)}`);
+        toast.error(
+          t('chat.maxSizeError', { name: file.name, size: formatFileSize(maxFileSize) }) ||
+            `Arquivo ${file.name} excede o tamanho máximo de ${formatFileSize(maxFileSize)}`
+        );
         continue;
       }
 
@@ -83,7 +86,9 @@ export function AgentMessageInput({
         });
       } catch (error) {
         console.error('Error processing file:', error);
-        toast.error(`Erro ao processar arquivo ${file.name}`);
+        toast.error(
+          t('chat.processError', { name: file.name }) || `Erro ao processar arquivo ${file.name}`
+        );
       }
     }
 
@@ -115,11 +120,14 @@ export function AgentMessageInput({
               <span className="max-w-[120px] truncate">{file.filename}</span>
               <span className="text-muted-foreground">({formatFileSize(file.size)})</span>
               <button
+                type="button"
                 onClick={() => {
                   const updatedFiles = selectedFiles.filter((_, i) => i !== index);
                   setSelectedFiles(updatedFiles);
                 }}
                 className="ml-1 text-muted-foreground hover:text-foreground transition-colors"
+                title={t('chat.removeAttachment') || 'Remover anexo'}
+                aria-label={t('chat.removeAttachment') || 'Remover anexo'}
               >
                 <X className="h-3 w-3" />
               </button>
@@ -134,6 +142,8 @@ export function AgentMessageInput({
             type="button"
             onClick={() => fileInputRef.current?.click()}
             className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-muted transition-colors border"
+            title={t('chat.attachFile') || 'Anexar arquivo'}
+            aria-label={t('chat.attachFile') || 'Anexar arquivo'}
           >
             <Paperclip className="h-4 w-4" />
           </button>
@@ -147,12 +157,15 @@ export function AgentMessageInput({
           className="flex-1 min-h-[40px] max-h-[240px] resize-none"
           disabled={isDisabled}
           rows={1}
+          aria-label={placeholder || t('chat.typeMessage') || 'Mensagem'}
         />
 
         <Button
           type="submit"
           disabled={isDisabled || (!messageInput.trim() && selectedFiles.length === 0)}
           size="icon"
+          title={t('chat.send') || 'Enviar'}
+          aria-label={t('chat.send') || 'Enviar'}
         >
           {isDisabled ? (
             <Loader2 className="h-4 w-4 animate-spin" />
