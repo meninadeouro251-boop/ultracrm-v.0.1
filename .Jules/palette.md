@@ -1,0 +1,3 @@
+## 2025-05-15 - [Standardized Tooltips and ARIA Labels in Chat Input]
+**Learning:** Found that the main chat message input area had inconsistent tooltip implementations (some manual CSS, some `title` attributes) and was missing `aria-label` on several icon-only buttons (Emoji, Mic, Canned Responses), which hindered accessibility for screen readers. Standardizing on the design system's `Tooltip` component provides a much smoother and accessible experience.
+**Action:** Always prefer the design system's `<Tooltip>` component over `title` or custom CSS overlays. Ensure every icon-only button has an explicit `aria-label` using a localized translation key for consistent accessibility across supported languages.
