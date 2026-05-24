@@ -619,7 +619,8 @@
     "restrictedPlaceholder": "Não é possível enviar mensagens devido à janela de mensagem de 24 horas",
     "defaultPlaceholder": "Digite sua mensagem...",
     "emojiPicker": {
-      "searchPlaceholder": "Buscar emojis..."
+      "searchPlaceholder": "Buscar emojis...",
+      "tooltip": "Seletor de Emojis"
     },
     "filePreview": {
       "file": "arquivo",
@@ -651,14 +652,17 @@
       }
     },
     "audio": {
+      "tooltip": "Gravar áudio",
       "sentSuccess": "Áudio enviado com sucesso!",
       "sendError": "Erro ao enviar áudio",
       "converting": "Convertendo áudio...",
       "conversionWarning": "Aviso de conversão",
       "conversionWarningDescription": "Não foi possível converter o áudio para MP3. Tentando enviar no formato original."
     },
+    "send": "Enviar mensagem",
     "templates": {
-      "inDevelopment": "Templates de mensagem em desenvolvimento 📝"
+      "inDevelopment": "Templates de mensagem em desenvolvimento 📝",
+      "tooltip": "Templates de Mensagem"
     },
     "cannedResponses": {
       "tooltip": "Respostas Rápidas (ou digite /)"
