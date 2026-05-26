@@ -1,0 +1,3 @@
+## 2025-05-14 - Standardized Tooltips and ARIA Labels for Chat Actions
+**Learning:** Icon-only buttons in the chat interface lacked consistent accessibility. Providing both an `aria-label` and a visible `Tooltip` using localized keys ensures the interface remains intuitive for both screen reader users and sighted users across all supported languages. Centralizing `TooltipProvider` within the component scope avoids redundant provider instances while ensuring child components are properly wrapped.
+**Action:** Always verify that every icon-only button has a corresponding localized `aria-label` and is wrapped in a `Tooltip`. Ensure translation keys for these accessibility features are added to all locale files (en, es, fr, it, pt, pt-BR).
