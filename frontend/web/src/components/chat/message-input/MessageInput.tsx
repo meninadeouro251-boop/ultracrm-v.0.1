@@ -626,195 +626,231 @@ const MessageInput: React.FC<MessageInputProps> = ({
             />
           )}
 
-          {/* Primeira linha: Reply Mode Toggle + Botões de ação rápida */}
-          <div className="flex items-center justify-between mb-3 gap-3">
-            {/* Reply Mode Toggle */}
-            <ReplyModeToggle
-              currentMode={isPendingConversation ? ReplyMode.NOTE : replyMode}
-              onModeChange={isPendingConversation ? () => { } : setReplyMode}
-              disabled={isDisabled || isSending || isPendingConversation}
-              forcedMode={isPendingConversation ? ReplyMode.NOTE : undefined}
-            />
-
-            {/* Botões de ação rápida - à direita */}
-            <div className="flex-shrink-0 flex items-center gap-1.5">
-              {/* Message Signature Button */}
-              {hasSignature && replyMode === ReplyMode.REPLY && !isPendingConversation && (
-                <div className="relative group">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    disabled={isDisabled || isSending}
-                    className={`h-9 w-9 flex-shrink-0 border-input hover:bg-accent hover:border-accent-foreground/20 disabled:opacity-50 transition-colors ${isSignatureEnabled
-                        ? 'bg-green-50 border-green-500 dark:bg-green-950/30 dark:border-green-500'
-                        : ''
-                      }`}
-                    onClick={toggleSignature}
-                  >
-                    <PenLine
-                      className={`h-4 w-4 ${isSignatureEnabled ? 'text-green-600 dark:text-green-400' : ''
-                        }`}
-                    />
-                  </Button>
-                  <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-gray-900 dark:bg-gray-700 text-white text-xs rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
-                    {isSignatureEnabled
-                      ? t('messageInput.signature.disable')
-                      : t('messageInput.signature.enable')}
-                    <div className="absolute top-full right-3 -mt-1">
-                      <div className="border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* AI Assistance Button */}
-              <AIAssistanceButton
-                currentMessage={currentEditorMessage}
-                onApplyText={text => {
-                  richEditorRef.current?.setContent(text);
-                  setCurrentEditorMessage(text);
-                }}
+          <TooltipProvider>
+            {/* Primeira linha: Reply Mode Toggle + Botões de ação rápida */}
+            <div className="flex items-center justify-between mb-3 gap-3">
+              {/* Reply Mode Toggle */}
+              <ReplyModeToggle
+                currentMode={isPendingConversation ? ReplyMode.NOTE : replyMode}
+                onModeChange={isPendingConversation ? () => { } : setReplyMode}
                 disabled={isDisabled || isSending || isPendingConversation}
-                conversationId={conversationId?.toString()}
-              />
-            </div>
-          </div>
-
-          {/* Segunda linha: Botões de formatação + Input + Botões de envio */}
-          <div className="flex items-end gap-2 w-full overflow-visible">
-            {/* Botões de formatação à esquerda */}
-            <div className="flex-shrink-0 flex items-center gap-1.5 pb-1">
-              {/* File Upload Button */}
-              <FileUpload
-                onFilesSelected={handleFilesSelected}
-                maxFileSize={10}
-                multiple={true}
-                disabled={isDisabled || isSending || isPendingConversation || hasCannedMedia}
+                forcedMode={isPendingConversation ? ReplyMode.NOTE : undefined}
               />
 
-              {/* Emoji Button */}
-              <div className="relative">
-                <Button
-                  variant="ghost"
-                  size="icon"
+              {/* Botões de ação rápida - à direita */}
+              <div className="flex-shrink-0 flex items-center gap-1.5">
+                {/* Message Signature Button */}
+                {hasSignature && replyMode === ReplyMode.REPLY && !isPendingConversation && (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        disabled={isDisabled || isSending}
+                        className={`h-9 w-9 flex-shrink-0 border-input hover:bg-accent hover:border-accent-foreground/20 disabled:opacity-50 transition-colors ${isSignatureEnabled
+                            ? 'bg-green-50 border-green-500 dark:bg-green-950/30 dark:border-green-500'
+                            : ''
+                          }`}
+                        onClick={toggleSignature}
+                        aria-label={
+                          isSignatureEnabled
+                            ? t('messageInput.signature.disable')
+                            : t('messageInput.signature.enable')
+                        }
+                      >
+                        <PenLine
+                          className={`h-4 w-4 ${isSignatureEnabled ? 'text-green-600 dark:text-green-400' : ''
+                            }`}
+                        />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>
+                        {isSignatureEnabled
+                          ? t('messageInput.signature.disable')
+                          : t('messageInput.signature.enable')}
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                )}
+
+                {/* AI Assistance Button */}
+                <AIAssistanceButton
+                  currentMessage={currentEditorMessage}
+                  onApplyText={text => {
+                    richEditorRef.current?.setContent(text);
+                    setCurrentEditorMessage(text);
+                  }}
                   disabled={isDisabled || isSending || isPendingConversation}
-                  className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                  onClick={handleEmojiClick}
-                >
-                  <Smile className="h-4 w-4" />
-                </Button>
-                <EmojiPicker
-                  isOpen={showEmojiPicker}
-                  onEmojiSelect={handleEmojiSelect}
-                  onClose={() => setShowEmojiPicker(false)}
+                  conversationId={conversationId?.toString()}
                 />
               </div>
-              {/* Canned Responses Button */}
-              <Button
-                variant={showCannedResponses ? 'default' : 'ghost'}
-                size="icon"
-                disabled={isDisabled || isSending || isPendingConversation}
-                className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                onClick={handleCannedResponsesClick}
-                title={t('messageInput.cannedResponses.tooltip')}
-              >
-                <MessageSquareText className="h-4 w-4" />
-              </Button>
-
-              {/* Template Button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                disabled={isSending || isPendingConversation}
-                className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                onClick={handleTemplateClick}
-                title={t('messageTemplates.button.title')}
-              >
-                <FileText className="h-4 w-4" />
-              </Button>
             </div>
 
-            {/* Text Input Container */}
-            <div className="flex-1 min-w-0 overflow-hidden">
-              <RichTextEditor
-                ref={richEditorRef}
-                placeholder={
-                  isPendingConversation
-                    ? t('messageInput.placeholders.pendingNote')
-                    : replyMode === ReplyMode.NOTE
-                      ? t('messageInput.placeholders.privateNote')
-                      : t('messageInput.placeholders.default')
-                }
-                onChange={content => {
-                  setCurrentEditorMessage(content);
-                  detectCannedResponseTrigger(content);
-                  if (content.trim()) {
-                    handleTypingStart();
-                  } else {
-                    handleTypingStop();
-                  }
-                }}
-                onKeyDown={event => {
-                  if (handleCannedResponseKeyDown(event as unknown as React.KeyboardEvent)) {
-                    return true;
-                  }
+            {/* Segunda linha: Botões de formatação + Input + Botões de envio */}
+            <div className="flex items-end gap-2 w-full overflow-visible">
+              {/* Botões de formatação à esquerda */}
+              <div className="flex-shrink-0 flex items-center gap-1.5 pb-1">
+                {/* File Upload Button */}
+                <FileUpload
+                  onFilesSelected={handleFilesSelected}
+                  maxFileSize={10}
+                  multiple={true}
+                  disabled={isDisabled || isSending || isPendingConversation || hasCannedMedia}
+                />
 
-                  if (event.altKey) {
-                    if (event.key === 'p' || event.key === 'P') {
-                      event.preventDefault();
-                      setReplyMode(ReplyMode.NOTE);
+                {/* Emoji Button */}
+                <div className="relative">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        disabled={isDisabled || isSending || isPendingConversation}
+                        className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
+                        onClick={handleEmojiClick}
+                        aria-label={t('messageInput.emojiPicker.tooltip')}
+                      >
+                        <Smile className="h-4 w-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{t('messageInput.emojiPicker.tooltip')}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  <EmojiPicker
+                    isOpen={showEmojiPicker}
+                    onEmojiSelect={handleEmojiSelect}
+                    onClose={() => setShowEmojiPicker(false)}
+                  />
+                </div>
+                {/* Canned Responses Button */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={showCannedResponses ? 'default' : 'ghost'}
+                      size="icon"
+                      disabled={isDisabled || isSending || isPendingConversation}
+                      className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
+                      onClick={handleCannedResponsesClick}
+                      aria-label={t('messageInput.cannedResponses.tooltip')}
+                    >
+                      <MessageSquareText className="h-4 w-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{t('messageInput.cannedResponses.tooltip')}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                {/* Template Button */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      disabled={isSending || isPendingConversation}
+                      className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
+                      onClick={handleTemplateClick}
+                      aria-label={t('messageTemplates.button.title')}
+                    >
+                      <FileText className="h-4 w-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{t('messageTemplates.button.title')}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+
+              {/* Text Input Container */}
+              <div className="flex-1 min-w-0 overflow-hidden">
+                <RichTextEditor
+                  ref={richEditorRef}
+                  placeholder={
+                    isPendingConversation
+                      ? t('messageInput.placeholders.pendingNote')
+                      : replyMode === ReplyMode.NOTE
+                        ? t('messageInput.placeholders.privateNote')
+                        : t('messageInput.placeholders.default')
+                  }
+                  onChange={content => {
+                    setCurrentEditorMessage(content);
+                    detectCannedResponseTrigger(content);
+                    if (content.trim()) {
+                      handleTypingStart();
+                    } else {
+                      handleTypingStop();
+                    }
+                  }}
+                  onKeyDown={event => {
+                    if (handleCannedResponseKeyDown(event as unknown as React.KeyboardEvent)) {
                       return true;
                     }
-                    if (event.key === 'l' || event.key === 'L') {
-                      event.preventDefault();
-                      setReplyMode(ReplyMode.REPLY);
-                      return true;
+
+                    if (event.altKey) {
+                      if (event.key === 'p' || event.key === 'P') {
+                        event.preventDefault();
+                        setReplyMode(ReplyMode.NOTE);
+                        return true;
+                      }
+                      if (event.key === 'l' || event.key === 'L') {
+                        event.preventDefault();
+                        setReplyMode(ReplyMode.REPLY);
+                        return true;
+                      }
                     }
-                  }
 
-                  const messageKey = user?.ui_settings?.editor_message_key || 'enter';
+                    const messageKey = user?.ui_settings?.editor_message_key || 'enter';
 
-                  if (messageKey === 'enter') {
-                    if (event.key === 'Enter' && !event.shiftKey) {
-                      event.preventDefault();
-                      handleSend();
-                      return true;
+                    if (messageKey === 'enter') {
+                      if (event.key === 'Enter' && !event.shiftKey) {
+                        event.preventDefault();
+                        handleSend();
+                        return true;
+                      }
+                    } else if (messageKey === 'cmd_enter') {
+                      if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) {
+                        event.preventDefault();
+                        handleSend();
+                        return true;
+                      }
                     }
-                  } else if (messageKey === 'cmd_enter') {
-                    if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) {
-                      event.preventDefault();
-                      handleSend();
-                      return true;
-                    }
-                  }
 
-                  return false;
-                }}
-                disabled={isDisabled || isSending || (isPendingConversation && replyMode !== ReplyMode.NOTE)}
-                className="min-h-[100px]"
-                showToolbar={!isPendingConversation}
-              />
-            </div>
+                    return false;
+                  }}
+                  disabled={isDisabled || isSending || (isPendingConversation && replyMode !== ReplyMode.NOTE)}
+                  className="min-h-[100px]"
+                  showToolbar={!isPendingConversation}
+                />
+              </div>
 
-            {/* Action Buttons */}
-            <div className="flex-shrink-0 flex items-center gap-1.5 pb-1">
-              {replyMode === ReplyMode.REPLY && !isPendingConversation && (
-                <Button
-                  variant={isRecordingAudio ? 'default' : 'ghost'}
-                  size="icon"
-                  disabled={isDisabled || isSending}
-                  className={
-                    isRecordingAudio
-                      ? 'bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 shadow-md transition-all duration-200'
-                      : 'h-9 w-9 flex-shrink-0 hover:bg-accent transition-all duration-200'
-                  }
-                  onClick={startAudioRecording}
-                >
-                  <Mic className="h-4 w-4" />
-                </Button>
-              )}
+              {/* Action Buttons */}
+              <div className="flex-shrink-0 flex items-center gap-1.5 pb-1">
+                {replyMode === ReplyMode.REPLY && !isPendingConversation && (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant={isRecordingAudio ? 'default' : 'ghost'}
+                        size="icon"
+                        disabled={isDisabled || isSending}
+                        className={
+                          isRecordingAudio
+                            ? 'bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 shadow-md transition-all duration-200'
+                            : 'h-9 w-9 flex-shrink-0 hover:bg-accent transition-all duration-200'
+                        }
+                        onClick={startAudioRecording}
+                        aria-label={t('messageInput.audio.tooltip')}
+                      >
+                        <Mic className="h-4 w-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{t('messageInput.audio.tooltip')}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                )}
 
-              <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
@@ -822,6 +858,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
                       onClick={handleSend}
                       disabled={!canSend}
                       className="bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 disabled:bg-muted disabled:text-muted-foreground disabled:opacity-50"
+                      aria-label={canSend ? t('messageInput.send') : t('messageInput.send')}
                     >
                       {isSending ? (
                         <Loader2 className="h-4 w-4 animate-spin" />
@@ -834,9 +871,10 @@ const MessageInput: React.FC<MessageInputProps> = ({
                     <p>{sendButtonTooltip}</p>
                   </TooltipContent>
                 </Tooltip>
-              </TooltipProvider>
+              </div>
             </div>
-          </div>
+          </TooltipProvider>
+
         </CardContent>
       </Card>
 

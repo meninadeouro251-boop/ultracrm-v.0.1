@@ -610,7 +610,8 @@
     "restrictedPlaceholder": "Impossible d'envoyer des messages en raison de la fenêtre de messagerie de 24 heures",
     "defaultPlaceholder": "Tapez votre message...",
     "emojiPicker": {
-      "searchPlaceholder": "Rechercher des emojis..."
+      "searchPlaceholder": "Rechercher des emojis...",
+      "tooltip": "Sélecteur d'Emojis"
     },
     "filePreview": {
       "file": "fichier",
@@ -643,11 +644,16 @@
     },
     "audio": {
       "sentSuccess": "Audio envoyé avec succès !",
-      "sendError": "Erreur lors de l'envoi de l'audio"
+      "sendError": "Erreur lors de l'envoi de l'audio",
+      "tooltip": "Message Vocal"
     },
     "templates": {
       "inDevelopment": "Modèles de messages en développement 📝"
     },
+    "cannedResponses": {
+      "tooltip": "Réponses Prédéfinies (ou tapez /)"
+    },
+    "send": "Envoyer",
     "replyPreview": {
       "replyingTo": "Réponse à {{name}}",
       "userFallback": "Utilisateur",
