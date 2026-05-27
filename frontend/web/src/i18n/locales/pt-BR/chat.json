@@ -619,8 +619,13 @@
     "restrictedPlaceholder": "Não é possível enviar mensagens devido à janela de mensagem de 24 horas",
     "defaultPlaceholder": "Digite sua mensagem...",
     "emojiPicker": {
-      "searchPlaceholder": "Buscar emojis..."
+      "searchPlaceholder": "Buscar emojis...",
+      "tooltip": "Seletor de Emojis"
     },
+    "audio": {
+      "tooltip": "Gravar Áudio"
+    },
+    "send": "Enviar",
     "filePreview": {
       "file": "arquivo",
       "files": "arquivos",

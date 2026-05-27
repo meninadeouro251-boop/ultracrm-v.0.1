@@ -610,8 +610,16 @@
     "restrictedPlaceholder": "Impossible d'envoyer des messages en raison de la fenêtre de messagerie de 24 heures",
     "defaultPlaceholder": "Tapez votre message...",
     "emojiPicker": {
-      "searchPlaceholder": "Rechercher des emojis..."
+      "searchPlaceholder": "Rechercher des emojis...",
+      "tooltip": "Sélecteur d'emojis"
     },
+    "audio": {
+      "tooltip": "Enregistrer l'audio"
+    },
+    "cannedResponses": {
+      "tooltip": "Réponses préenregistrées (ou tapez /)"
+    },
+    "send": "Envoyer",
     "filePreview": {
       "file": "fichier",
       "files": "fichiers",

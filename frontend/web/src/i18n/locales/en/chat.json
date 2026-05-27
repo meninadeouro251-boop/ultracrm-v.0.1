@@ -647,8 +647,16 @@
     "restrictedPlaceholder": "Cannot send messages due to 24-hour messaging window",
     "defaultPlaceholder": "Type your message...",
     "emojiPicker": {
-      "searchPlaceholder": "Search emojis..."
+      "searchPlaceholder": "Search emojis...",
+      "tooltip": "Emoji Picker"
     },
+    "audio": {
+      "tooltip": "Record Audio"
+    },
+    "cannedResponses": {
+      "tooltip": "Canned Responses (or type /)"
+    },
+    "send": "Send",
     "filePreview": {
       "file": "file",
       "files": "files",

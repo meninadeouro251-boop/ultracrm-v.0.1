@@ -610,8 +610,16 @@
     "restrictedPlaceholder": "Impossibile inviare messaggi a causa della finestra di messaggistica di 24 ore",
     "defaultPlaceholder": "Digita il tuo messaggio...",
     "emojiPicker": {
-      "searchPlaceholder": "Cerca emoji..."
+      "searchPlaceholder": "Cerca emoji...",
+      "tooltip": "Selettore Emoji"
     },
+    "audio": {
+      "tooltip": "Registra Audio"
+    },
+    "cannedResponses": {
+      "tooltip": "Risposte rapide (o digita /)"
+    },
+    "send": "Invia",
     "filePreview": {
       "file": "file",
       "files": "file",
