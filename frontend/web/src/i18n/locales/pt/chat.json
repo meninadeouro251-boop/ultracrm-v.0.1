@@ -619,6 +619,7 @@
     "restrictedPlaceholder": "Não é possível enviar mensagens devido à janela de mensagem de 24 horas",
     "defaultPlaceholder": "Digite sua mensagem...",
     "emojiPicker": {
+      "tooltip": "Seletor de Emojis",
       "searchPlaceholder": "Buscar emojis..."
     },
     "filePreview": {
@@ -651,6 +652,7 @@
       }
     },
     "audio": {
+      "tooltip": "Gravar Áudio",
       "sentSuccess": "Áudio enviado com sucesso!",
       "sendError": "Erro ao enviar áudio",
       "converting": "Convertendo áudio...",
@@ -679,6 +681,8 @@
       "enable": "Habilitar assinatura",
       "disable": "Desabilitar assinatura"
     },
+    "send": "Enviar (Enter)",
+    "sendWithCmd": "Enviar ({{modifier}} + Enter)",
     "placeholders": {
       "default": "Digite sua mensagem... (digite / para respostas prontas)",
       "pendingNote": "Digite sua nota privada (conversa pendente)...",

@@ -1,0 +1,3 @@
+## 2025-05-15 - Standardizing Accessibility for Chat Action Buttons
+**Learning:** Icon-only buttons in complex input areas often lack consistent ARIA labels and accessible tooltips, especially when they have dynamic states (like message signatures) or keyboard shortcut hints. Relying on browser-native `title` attributes provides a poor user experience and doesn't adhere to the design system.
+**Action:** Always wrap icon-only buttons with the design system's `Tooltip` component and ensure they have a matching `aria-label`. Use centralized `TooltipProvider` at the parent component level to serve multiple child actions. Localize all tooltip and ARIA label strings, including dynamic hints for keyboard shortcuts.
