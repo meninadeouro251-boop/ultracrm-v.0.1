@@ -1,0 +1,3 @@
+## 2025-05-15 - [Accessibility for Core Components]
+**Learning:** Core components like `BaseTable`, `BasePagination`, `BaseHeader`, and `BaseFilterRow` often use icon-only buttons that lack `aria-label` attributes. Additionally, hardcoded locales (like `pt`) and namespaces in translation hooks can cause issues.
+**Action:** Always ensure `aria-label` is present on icon-only buttons in base components. Use the `useDateFormat` hook for localized date formatting and define a separate `tCommon` translation function (using the `common` namespace) in components that accept a `translationNamespace` prop to avoid key collisions.

@@ -14,10 +14,9 @@ import {
   Button,
 } from '@ultraapi/design-system';
 import { CalendarIcon, X } from 'lucide-react';
-import { format } from 'date-fns';
-import { pt } from 'date-fns/locale';
 
 import { BaseFilter, FilterType } from '@/types/core';
+import { useDateFormat } from '@/hooks/useDateFormat';
 
 interface BaseFilterRowProps<T extends BaseFilter> {
   filter: T;
@@ -42,12 +41,16 @@ export default function BaseFilterRow<T extends BaseFilter>({
 }: BaseFilterRowProps<T>) {
   const { t } = useLanguage(translationNamespace);
   const { t: tCommon } = useLanguage('common');
+  const { formatDate } = useDateFormat();
   const [calendarOpen, setCalendarOpen] = useState(false);
   const currentFilterType = filterTypes.find(ft => ft.attributeKey === filter.attributeKey);
 
   const handleDateSelect = (date: Date | undefined) => {
     if (date) {
-      onUpdate(index, 'values' as keyof T, format(date, 'yyyy-MM-dd'));
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      onUpdate(index, 'values' as keyof T, `${year}-${month}-${day}`);
       setCalendarOpen(false);
     }
   };
@@ -71,7 +74,7 @@ export default function BaseFilterRow<T extends BaseFilter>({
                 <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
                 <span className="truncate">
                   {filter.values
-                    ? format(new Date(filter.values as string), 'dd/MM/yyyy', { locale: pt })
+                    ? formatDate(filter.values as string)
                     : tCommon('base.filter.selectDate')}
                 </span>
               </Button>
@@ -220,6 +223,7 @@ export default function BaseFilterRow<T extends BaseFilter>({
         size="sm"
         onClick={() => onRemove(index)}
         className="flex-shrink-0 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+        aria-label={tCommon('base.filter.removeFilter')}
       >
         <X className="h-4 w-4" />
       </Button>

@@ -78,6 +78,7 @@ export default function BaseHeader({
   children,
 }: BaseHeaderProps) {
   const { t } = useLanguage('common');
+  const { t: tCommon } = useLanguage('common');
   const placeholder = searchPlaceholder || t('base.header.searchPlaceholder');
   const hasSelection = selectedCount > 0;
   const visibleSecondaryActions = secondaryActions.filter(action => action.show !== false);
@@ -192,6 +193,7 @@ export default function BaseHeader({
                   variant="outline"
                   size="sm"
                   className="bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent"
+                  aria-label={tCommon('base.header.moreActions')}
                 >
                   <MoreVertical className="h-4 w-4" />
                 </Button>
