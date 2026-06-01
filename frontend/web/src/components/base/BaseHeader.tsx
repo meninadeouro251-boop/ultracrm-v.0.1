@@ -15,6 +15,11 @@ import {
   MoreVertical,
   X,
 } from 'lucide-react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@ultraapi/design-system';
 import PrimaryActionButton from './PrimaryActionButton';
 
 export interface HeaderAction {
@@ -187,15 +192,23 @@ export default function BaseHeader({
           {/* More Actions Dropdown */}
           {visibleMoreActions.length > 0 && (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent"
-                >
-                  <MoreVertical className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent"
+                      aria-label={t('base.header.moreActions')}
+                    >
+                      <MoreVertical className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{t('base.header.moreActions')}</p>
+                </TooltipContent>
+              </Tooltip>
               <DropdownMenuContent
                 align="end"
                 className="bg-sidebar border-sidebar-border text-sidebar-foreground"

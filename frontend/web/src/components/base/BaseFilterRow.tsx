@@ -12,6 +12,9 @@ import {
   PopoverContent,
   PopoverTrigger,
   Button,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
 } from '@ultraapi/design-system';
 import { CalendarIcon, X } from 'lucide-react';
 import { format } from 'date-fns';
@@ -215,14 +218,22 @@ export default function BaseFilterRow<T extends BaseFilter>({
       <div className="flex-1 min-w-0">{renderValueInput()}</div>
 
       {/* Remove Button */}
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => onRemove(index)}
-        className="flex-shrink-0 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
-      >
-        <X className="h-4 w-4" />
-      </Button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => onRemove(index)}
+            className="flex-shrink-0 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+            aria-label={tCommon('base.filter.removeFilter')}
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{tCommon('base.filter.removeFilter')}</p>
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 }

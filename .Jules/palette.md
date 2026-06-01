@@ -1,0 +1,3 @@
+## 2025-05-14 - Centralized TooltipProvider and Base Component Accessibility
+**Learning:** Redundant `TooltipProvider` instances in foundational components like `BaseTable` or `BaseHeader` cause unnecessary DOM nesting. A single provider at the app root (`App.tsx`) is sufficient and cleaner. Icon-only buttons in base components must always include localized `aria-label` and `Tooltip` to ensure consistent accessibility across the platform.
+**Action:** Always check for a root `TooltipProvider` before adding one to a component. Use the `base` namespace in `common.json` for shared UI accessibility strings (sort, more actions, pagination).
