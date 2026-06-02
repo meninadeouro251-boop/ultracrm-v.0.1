@@ -8,7 +8,7 @@ import { NotificationsProvider } from './contexts/NotificationsContext';
 import { PermissionsProvider } from './contexts/PermissionsContext';
 import { UISettingsApplier } from './components/UISettingsApplier';
 
-import { Toaster } from '@ultraapi/design-system';
+import { Toaster, TooltipProvider } from '@ultraapi/design-system';
 
 import { useIsDarkClass } from '@/hooks/chat/useIsDarkClass';
 
@@ -36,9 +36,11 @@ function App() {
           <PermissionsProvider>
           <NotificationsProvider>
             <AppInitializer>
-              <ImpersonationBar />
-              <AppRouter />
-              <ThemedToaster />
+              <TooltipProvider>
+                <ImpersonationBar />
+                <AppRouter />
+                <ThemedToaster />
+              </TooltipProvider>
             </AppInitializer>
           </NotificationsProvider>
           </PermissionsProvider>
