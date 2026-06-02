@@ -610,7 +610,19 @@
     "restrictedPlaceholder": "Impossibile inviare messaggi a causa della finestra di messaggistica di 24 ore",
     "defaultPlaceholder": "Digita il tuo messaggio...",
     "emojiPicker": {
+      "tooltip": "Selettore Emoji",
       "searchPlaceholder": "Cerca emoji..."
+    },
+    "cannedResponses": {
+      "tooltip": "Risposte predefinite (o digita /)"
+    },
+    "audio": {
+      "tooltip": "Registra audio",
+      "sentSuccess": "Audio inviato con successo!",
+      "sendError": "Errore durante l'invio dell'audio",
+      "converting": "Conversione audio in corso...",
+      "conversionWarning": "Avviso di conversione",
+      "conversionWarningDescription": "Impossibile convertire l'audio in MP3. Tentativo di invio nel formato originale."
     },
     "filePreview": {
       "file": "file",

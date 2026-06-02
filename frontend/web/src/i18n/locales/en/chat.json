@@ -647,7 +647,19 @@
     "restrictedPlaceholder": "Cannot send messages due to 24-hour messaging window",
     "defaultPlaceholder": "Type your message...",
     "emojiPicker": {
+      "tooltip": "Emoji Picker",
       "searchPlaceholder": "Search emojis..."
+    },
+    "cannedResponses": {
+      "tooltip": "Canned Responses (or type /)"
+    },
+    "audio": {
+      "tooltip": "Record Audio",
+      "sentSuccess": "Audio sent successfully!",
+      "sendError": "Error sending audio",
+      "converting": "Converting audio...",
+      "conversionWarning": "Conversion warning",
+      "conversionWarningDescription": "Could not convert audio to MP3. Attempting to send in original format."
     },
     "filePreview": {
       "file": "file",
@@ -677,10 +689,6 @@
         "fileAdded": "File added",
         "filesAdded": "{{count}} files added"
       }
-    },
-    "audio": {
-      "sentSuccess": "Audio sent successfully!",
-      "sendError": "Error sending audio"
     },
     "templates": {
       "inDevelopment": "Message templates in development 📝"

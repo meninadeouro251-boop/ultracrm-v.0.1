@@ -1,0 +1,3 @@
+## 2025-05-22 - [Standardized Tooltips and ARIA labels in Message Input]
+**Learning:** Icon-only buttons in the chat interface (MessageInput, FileUpload, AI Assistance) should always provide a visible `Tooltip` on hover and a corresponding `aria-label` in all interactive states, replacing browser-native `title` attributes or custom implementations. This ensures a consistent and accessible experience across the application.
+**Action:** Always wrap icon-only buttons with the design system's `Tooltip` and provide an `aria-label` using localized keys. Centralize `TooltipProvider` at the component root level when multiple tooltips are present in a single functional area.
