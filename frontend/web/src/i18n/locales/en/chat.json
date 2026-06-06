@@ -647,7 +647,8 @@
     "restrictedPlaceholder": "Cannot send messages due to 24-hour messaging window",
     "defaultPlaceholder": "Type your message...",
     "emojiPicker": {
-      "searchPlaceholder": "Search emojis..."
+      "searchPlaceholder": "Search emojis...",
+      "tooltip": "Emoji Picker"
     },
     "filePreview": {
       "file": "file",
@@ -680,7 +681,11 @@
     },
     "audio": {
       "sentSuccess": "Audio sent successfully!",
-      "sendError": "Error sending audio"
+      "sendError": "Error sending audio",
+      "tooltip": "Record audio"
+    },
+    "cannedResponses": {
+      "tooltip": "Canned Responses (or type /)"
     },
     "templates": {
       "inDevelopment": "Message templates in development 📝"

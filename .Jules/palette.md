@@ -1,0 +1,3 @@
+## 2026-06-06 - [Chat Input Accessibility Standardization]
+**Learning:** Icon-only buttons in the chat interface were inconsistently using browser-native `title` attributes or missing labels entirely. Standardizing these with the design system's `Tooltip` and `aria-label` improves both visual affordance and screen reader accessibility. Explicitly setting `type="button"` on these triggers also prevents accidental form submissions if they are eventually nested within a form.
+**Action:** Always wrap icon-only buttons in a `Tooltip` and provide a localized `aria-label` that matches the tooltip text. Ensure all buttons have an explicit `type` attribute.
