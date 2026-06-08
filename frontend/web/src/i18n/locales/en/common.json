@@ -19,7 +19,9 @@
     "pagination": {
       "itemsPerPage": "Items per page:",
       "showing": "Showing {{start}} to {{end}} of {{total}} items",
-      "page": "Page {{current}} of {{total}}"
+      "page": "Page {{current}} of {{total}}",
+      "previousPage": "Previous page",
+      "nextPage": "Next page"
     },
     "header": {
       "searchPlaceholder": "Search...",

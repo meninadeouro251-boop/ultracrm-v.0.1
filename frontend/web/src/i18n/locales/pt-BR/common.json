@@ -19,7 +19,9 @@
     "pagination": {
       "itemsPerPage": "Itens por página:",
       "showing": "Mostrando {{start}} a {{end}} de {{total}} itens",
-      "page": "Página {{current}} de {{total}}"
+      "page": "Página {{current}} de {{total}}",
+      "previousPage": "Página anterior",
+      "nextPage": "Próxima página"
     },
     "header": {
       "searchPlaceholder": "Pesquisar...",

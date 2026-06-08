@@ -3,7 +3,9 @@
     "pagination": {
       "itemsPerPage": "Éléments par page :",
       "showing": "Affichage de {{start}} à {{end}} sur {{total}} éléments",
-      "page": "Page {{current}} sur {{total}}"
+      "page": "Page {{current}} sur {{total}}",
+      "previousPage": "Page précédente",
+      "nextPage": "Page suivante"
     },
     "header": {
       "searchPlaceholder": "Rechercher...",
