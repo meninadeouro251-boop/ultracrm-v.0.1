@@ -1,0 +1,3 @@
+## 2025-05-15 - Standardizing Chat Action Accessibility
+**Learning:** Icon-only buttons in the chat interface should always provide a visible `Tooltip` on hover and a corresponding `aria-label` in all interactive states, replacing browser-native `title` attributes or custom implementations. This ensures parity between visual and screen-reader accessibility. Centralizing the `TooltipProvider` at the parent component level (e.g., wrapping the message input card) is more efficient than wrapping individual buttons.
+**Action:** Always pair `Tooltip` with `aria-label` for icon-only buttons. Explicitly set `type="button"` to prevent unintended form submissions within cards. Wrap related action groups in a single `TooltipProvider`.
