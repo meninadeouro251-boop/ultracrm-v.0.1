@@ -1,0 +1,3 @@
+## 2025-03-24 - [Standardizing Chat Tooltips]
+**Learning:** In Radix-based UI systems, tooltips require a `TooltipProvider` context. When adding tooltips to multiple child components (like icon-only buttons in `MessageInput.tsx`), it's more efficient and robust to wrap the entire parent component's return once rather than individual buttons. Additionally, nesting `TooltipTrigger` with other triggers (like `DropdownMenuTrigger`) can cause interaction conflicts.
+**Action:** Always wrap the top-level return of complex interactive components with `TooltipProvider` if tooltips are used within. For dropdown triggers, prioritize `aria-label` or check if the design system supports a unified trigger.
