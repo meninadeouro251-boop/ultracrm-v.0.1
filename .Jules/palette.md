@@ -1,0 +1,3 @@
+## 2025-05-22 - [ChatHeader Accessibility & Tooltip Patterns]
+**Learning:** Icon-only buttons in headers (Back, More Actions, Close) often lack proper accessibility markers. When adding tooltips, `TooltipProvider` should be placed at the highest necessary level in the component tree to avoid redundancy. Crucially, `TooltipTrigger` should not wrap other triggers like `DropdownMenuTrigger` to avoid event conflicts; in such cases, `aria-label` is the primary accessibility tool.
+**Action:** Always check for `TooltipProvider` availability and wrap icon-only buttons with `Tooltip` and `aria-label`. Use only `aria-label` for dropdown triggers.

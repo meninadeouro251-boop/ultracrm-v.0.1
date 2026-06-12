@@ -1,5 +1,11 @@
 import { Button } from '@ultraapi/design-system/button';
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@ultraapi/design-system/tooltip';
+import {
   ArrowLeft,
   X,
   MessageCircle,
@@ -82,6 +88,7 @@ const ChatHeader = ({
   unreadCount,
 }: ChatHeaderProps) => {
   const { t } = useLanguage('chat');
+  const { t: tCommon } = useLanguage('common');
   const currentStatus = conversation.status;
   const hasUnreadMessages = unreadCount > 0;
   const isPinned = Boolean(conversation.custom_attributes?.pinned);
@@ -93,7 +100,12 @@ const ChatHeader = ({
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-8 w-8 p-0"
+            aria-label={tCommon('base.table.actions')}
+          >
             <MoreVertical className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
@@ -274,13 +286,25 @@ const ChatHeader = ({
   };
 
   return (
-    <div className="flex-shrink-0 p-4 border-b bg-background/95 backdrop-blur-sm">
-      <div className="flex items-center justify-between">
+    <TooltipProvider>
+      <div className="flex-shrink-0 p-4 border-b bg-background/95 backdrop-blur-sm">
+        <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           {/* Back button for mobile */}
-          <Button variant="ghost" size="sm" className="md:hidden" onClick={onBackClick}>
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="md:hidden"
+                onClick={onBackClick}
+                aria-label={tCommon('base.buttons.back')}
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">{tCommon('base.buttons.back')}</TooltipContent>
+          </Tooltip>
           <div
             className="cursor-pointer hover:ring-2 hover:ring-primary/20 transition-all rounded-full"
             onClick={onContactSidebarOpen}
@@ -323,18 +347,25 @@ const ChatHeader = ({
           {renderConversationStatusDropdown()}
 
           {/* Botão fechar conversa */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onCloseConversation}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <X className="h-4 w-4" />
-            <span className="sr-only">{t('chatHeader.closeConversation')}</span>
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onCloseConversation}
+                className="text-muted-foreground hover:text-foreground"
+                aria-label={t('chatHeader.closeConversation')}
+              >
+                <X className="h-4 w-4" />
+                <span className="sr-only">{t('chatHeader.closeConversation')}</span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">{t('chatHeader.closeConversation')}</TooltipContent>
+          </Tooltip>
+        </div>
         </div>
       </div>
-    </div>
+    </TooltipProvider>
   );
 };
 
