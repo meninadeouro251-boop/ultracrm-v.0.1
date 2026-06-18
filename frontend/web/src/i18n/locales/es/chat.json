@@ -610,6 +610,7 @@
     "restrictedPlaceholder": "No se pueden enviar mensajes debido a la ventana de mensajería de 24 horas",
     "defaultPlaceholder": "Escribe tu mensaje...",
     "emojiPicker": {
+      "tooltip": "Selector de Emojis",
       "searchPlaceholder": "Buscar emojis..."
     },
     "filePreview": {
@@ -642,11 +643,15 @@
       }
     },
     "audio": {
+      "tooltip": "Grabar Audio",
       "sentSuccess": "¡Audio enviado con éxito!",
       "sendError": "Error al enviar audio"
     },
     "templates": {
       "inDevelopment": "Plantillas de mensaje en desarrollo 📝"
+    },
+    "cannedResponses": {
+      "tooltip": "Respuestas rápidas (o escribe /)"
     },
     "replyPreview": {
       "replyingTo": "Respondiendo a {{name}}",
@@ -664,7 +669,9 @@
       "default": "Escribe tu mensaje... (escribe / para respuestas rápidas)",
       "pendingNote": "Escribe tu nota privada (conversación pendiente)...",
       "privateNote": "Escribe tu nota privada... (escribe / para respuestas rápidas)"
-    }
+    },
+    "send": "Enviar (Enter)",
+    "sendWithCmd": "Enviar ({{modifier}} + Enter)"
   },
   "conversationsFilter": {
     "title": "Filtrar Conversaciones",
