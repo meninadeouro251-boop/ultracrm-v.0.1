@@ -13,6 +13,10 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from '@ultraapi/design-system';
 import { MoreHorizontal, ArrowUpDown, ArrowUp, ArrowDown, LucideIcon } from 'lucide-react';
 import EmptyState from './EmptyState';
@@ -110,28 +114,46 @@ export default function BaseTable<T extends Record<string, any>>({
   const renderSortIcon = (column: TableColumn<T>) => {
     if (!column.sortable || !onSort) return null;
 
+    const sortLabel = t('base.table.sort', { column: column.label });
+
     if (sortBy !== column.key) {
       return (
-        <Button
-          variant="ghost"
-          size="sm"
-          className="ml-2 h-8 px-2 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
-          onClick={() => onSort(column.key)}
-        >
-          <ArrowUpDown className="h-4 w-4" />
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              aria-label={sortLabel}
+              className="ml-2 h-8 px-2 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+              onClick={() => onSort(column.key)}
+            >
+              <ArrowUpDown className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{sortLabel}</p>
+          </TooltipContent>
+        </Tooltip>
       );
     }
 
     return (
-      <Button
-        variant="ghost"
-        size="sm"
-        className="ml-2 h-8 px-2 text-sidebar-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent"
-        onClick={() => onSort(column.key)}
-      >
-        {sortOrder === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
-      </Button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            size="sm"
+            aria-label={sortLabel}
+            className="ml-2 h-8 px-2 text-sidebar-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent"
+            onClick={() => onSort(column.key)}
+          >
+            {sortOrder === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{sortLabel}</p>
+        </TooltipContent>
+      </Tooltip>
     );
   };
 
@@ -155,15 +177,23 @@ export default function BaseTable<T extends Record<string, any>>({
 
     return (
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-8 w-8 p-0 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
-          >
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                aria-label={t('base.table.moreActions')}
+                className="h-8 w-8 p-0 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+              >
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{t('base.table.moreActions')}</p>
+          </TooltipContent>
+        </Tooltip>
         <DropdownMenuContent
           align="end"
           className="bg-sidebar border-sidebar-border text-sidebar-foreground"
@@ -216,10 +246,11 @@ export default function BaseTable<T extends Record<string, any>>({
   }
 
   return (
-    <div
-      className={`rounded-lg border border-sidebar-border bg-sidebar overflow-hidden ${className}`}
-    >
-      <Table>
+    <TooltipProvider>
+      <div
+        className={`rounded-lg border border-sidebar-border bg-sidebar overflow-hidden ${className}`}
+      >
+        <Table>
         <TableHeader>
           <TableRow className="border-sidebar-border hover:bg-sidebar-accent/50">
             {selectable && (
@@ -287,7 +318,8 @@ export default function BaseTable<T extends Record<string, any>>({
             );
           })}
         </TableBody>
-      </Table>
-    </div>
+        </Table>
+      </div>
+    </TooltipProvider>
   );
 }

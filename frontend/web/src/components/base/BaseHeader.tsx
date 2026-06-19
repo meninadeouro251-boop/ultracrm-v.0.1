@@ -8,6 +8,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   Badge,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from '@ultraapi/design-system';
 import {
   Search,
@@ -84,8 +88,9 @@ export default function BaseHeader({
   const visibleMoreActions = moreActions.filter(action => action.show !== false);
 
   return (
-    <div className={`space-y-6 ${className}`}>
-      <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+    <TooltipProvider>
+      <div className={`space-y-6 ${className}`}>
+        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         {/* Title Section */}
         <div className="flex-1">
           <h1 className="text-2xl font-bold tracking-tight leading-8 text-sidebar-foreground mb-2">{title}</h1>
@@ -187,15 +192,23 @@ export default function BaseHeader({
           {/* More Actions Dropdown */}
           {visibleMoreActions.length > 0 && (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent"
-                >
-                  <MoreVertical className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      aria-label={t('base.header.moreActions')}
+                      className="bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent"
+                    >
+                      <MoreVertical className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{t('base.header.moreActions')}</p>
+                </TooltipContent>
+              </Tooltip>
               <DropdownMenuContent
                 align="end"
                 className="bg-sidebar border-sidebar-border text-sidebar-foreground"
@@ -303,8 +316,9 @@ export default function BaseHeader({
         </div>
       )}
 
-      {/* Custom Content */}
-      {children}
-    </div>
+        {/* Custom Content */}
+        {children}
+      </div>
+    </TooltipProvider>
   );
 }
