@@ -19,14 +19,17 @@
     "pagination": {
       "itemsPerPage": "Itens por página:",
       "showing": "Mostrando {{start}} a {{end}} de {{total}} itens",
-      "page": "Página {{current}} de {{total}}"
+      "page": "Página {{current}} de {{total}}",
+      "previousPage": "Página anterior",
+      "nextPage": "Próxima página"
     },
     "header": {
       "searchPlaceholder": "Pesquisar...",
       "filters": "Filtros",
       "selected": "{{count}} item selecionado",
       "selected_other": "{{count}} itens selecionados",
-      "clear": "Limpar"
+      "clear": "Limpar",
+      "moreActions": "Mais ações"
     },
     "table": {
       "emptyMessage": "Nenhum item encontrado",
@@ -35,7 +38,9 @@
       "no": "Não",
       "selectAll": "Selecionar todos",
       "selectItem": "Selecionar item {{key}}",
-      "actions": "Ações"
+      "actions": "Ações",
+      "moreActions": "Mais ações",
+      "sort": "Ordenar por {{column}}"
     },
     "buttons": {
       "save": "Salvar",
@@ -62,6 +67,7 @@
       "applyFilters": "Aplicar Filtros",
       "clearFilters": "Limpar Filtros",
       "addFilter": "Adicionar Filtro",
+      "removeFilter": "Remover filtro",
       "cancel": "Cancelar",
       "and": "E",
       "or": "OU",

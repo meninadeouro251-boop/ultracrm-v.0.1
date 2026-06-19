@@ -12,6 +12,10 @@ import {
   PopoverContent,
   PopoverTrigger,
   Button,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from '@ultraapi/design-system';
 import { CalendarIcon, X } from 'lucide-react';
 import { format } from 'date-fns';
@@ -138,9 +142,10 @@ export default function BaseFilterRow<T extends BaseFilter>({
   };
 
   return (
-    <div
-      className={`flex items-center gap-3 p-4 rounded-lg bg-sidebar-accent/30 border border-sidebar-border min-w-0 overflow-hidden ${className}`}
-    >
+    <TooltipProvider>
+      <div
+        className={`flex items-center gap-3 p-4 rounded-lg bg-sidebar-accent/30 border border-sidebar-border min-w-0 overflow-hidden ${className}`}
+      >
       {/* Query Operator */}
       {showQueryOperator && (
         <div className="flex-shrink-0">
@@ -215,14 +220,23 @@ export default function BaseFilterRow<T extends BaseFilter>({
       <div className="flex-1 min-w-0">{renderValueInput()}</div>
 
       {/* Remove Button */}
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => onRemove(index)}
-        className="flex-shrink-0 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
-      >
-        <X className="h-4 w-4" />
-      </Button>
-    </div>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            size="sm"
+            aria-label={tCommon('base.filter.removeFilter')}
+            onClick={() => onRemove(index)}
+            className="flex-shrink-0 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{tCommon('base.filter.removeFilter')}</p>
+        </TooltipContent>
+      </Tooltip>
+      </div>
+    </TooltipProvider>
   );
 }
