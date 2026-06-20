@@ -8,6 +8,7 @@ import { openaiService } from '@/services/integrations/openaiService';
 import { integrationsService } from '@/services/integrations';
 import AIActionsModal from './AIActionsModal';
 import AIResultModal from './AIResultModal';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@ultraapi/design-system/tooltip';
 import { AI_ACTIONS, AI_ACTIONS_NO_DRAFT, AIActionType } from '@/types/chat/ai-assistance';
 import { hasVisibleMessageContent } from '@/utils/chat/aiAssistanceMessage';
 
@@ -154,17 +155,22 @@ const AIAssistanceButton: React.FC<AIAssistanceButtonProps> = ({
   };
 
   return (
-    <>
-      <Button
-        variant="outline"
-        size="icon"
-        disabled={disabled}
-        className="h-10 w-10 flex-shrink-0 border-input hover:bg-accent hover:border-accent-foreground/20 disabled:opacity-50 group"
-        onClick={handleOpenActions}
-        title={t('aiAssistance.button.title')}
-      >
-        <Sparkles className="h-4 w-4 group-hover:text-primary transition-colors" />
-      </Button>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            disabled={disabled}
+            className="h-10 w-10 flex-shrink-0 border-input hover:bg-accent hover:border-accent-foreground/20 disabled:opacity-50 group"
+            onClick={handleOpenActions}
+            aria-label={t('aiAssistance.button.title')}
+          >
+            <Sparkles className="h-4 w-4 group-hover:text-primary transition-colors" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>{t('aiAssistance.button.title')}</TooltipContent>
+      </Tooltip>
 
       <AIActionsModal
         isOpen={showActionsModal}
@@ -183,7 +189,7 @@ const AIAssistanceButton: React.FC<AIAssistanceButtonProps> = ({
         isLoading={isGenerating}
         actionLabel={getActionLabel()}
       />
-    </>
+    </TooltipProvider>
   );
 };
 
