@@ -1,0 +1,3 @@
+## 2025-06-21 - [Chat Interface Accessibility Standardization]
+**Learning:** Icon-only buttons in the chat interface were using browser-native 'title' attributes or custom CSS tooltips, which are inconsistent and less accessible than the design system's Tooltip component combined with explicit aria-label attributes. Centralizing TooltipProvider at the parent level (MessageInput.tsx) reduces DOM nesting while ensuring all children (FileUpload, AIAssistanceButton) have access to tooltip context.
+**Action:** Always replace 'title' with 'Tooltip' + 'aria-label' for icon-only buttons. Prefer TooltipProvider at the component root or entry point to simplify child component implementations.
