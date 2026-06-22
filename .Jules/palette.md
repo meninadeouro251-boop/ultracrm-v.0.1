@@ -1,0 +1,3 @@
+## 2026-06-22 - [Standardizing Chat Action Accessibility]
+**Learning:** Icon-only buttons in the chat interface lacked consistent accessibility features. Using a centralized TooltipProvider at the parent component level (like MessageInput.tsx) allows for efficient management of tooltips for multiple child action components (Emoji, Audio, Canned Responses) while maintaining a clean DOM and following design system patterns. Also, syncing aria-label with dynamic tooltip text (including shortcut hints) is crucial for screen reader parity.
+**Action:** Always provide both aria-label and Tooltip for icon-only buttons. Wrap groups of related action buttons in a TooltipProvider to avoid redundant provider instances and simplify the implementation of accessible tooltips.
