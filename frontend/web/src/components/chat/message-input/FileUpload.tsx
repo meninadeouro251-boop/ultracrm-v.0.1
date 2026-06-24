@@ -3,6 +3,11 @@ import { Button } from '@ultraapi/design-system/button';
 import { Paperclip, Upload } from 'lucide-react';
 import { toast } from 'sonner';
 import { useLanguage } from '@/hooks/useLanguage';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@ultraapi/design-system/tooltip';
 
 interface FileUploadProps {
   onFilesSelected: (files: File[]) => void;
@@ -158,20 +163,28 @@ const FileUpload: React.FC<FileUploadProps> = ({
       />
 
       {/* Upload Button */}
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => {
-          if (!disabled) {
-            document.getElementById('file-input')?.click();
-          }
-        }}
-        disabled={disabled}
-        className="flex-shrink-0"
-        title={t('messageInput.fileUpload.attachFiles')}
-      >
-        <Paperclip className="h-4 w-4" />
-      </Button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            onClick={() => {
+              if (!disabled) {
+                document.getElementById('file-input')?.click();
+              }
+            }}
+            disabled={disabled}
+            className="flex-shrink-0"
+            aria-label={t('messageInput.fileUpload.attachFiles')}
+          >
+            <Paperclip className="h-4 w-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{t('messageInput.fileUpload.attachFiles')}</p>
+        </TooltipContent>
+      </Tooltip>
 
       {/* Drag overlay when dragging over the entire chat */}
       {isDragOver && (

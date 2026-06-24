@@ -6,6 +6,11 @@ import { useGlobalConfig } from '@/contexts/GlobalConfigContext';
 import { useLanguage } from '@/hooks/useLanguage';
 import { openaiService } from '@/services/integrations/openaiService';
 import { integrationsService } from '@/services/integrations';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@ultraapi/design-system/tooltip';
 import AIActionsModal from './AIActionsModal';
 import AIResultModal from './AIResultModal';
 import { AI_ACTIONS, AI_ACTIONS_NO_DRAFT, AIActionType } from '@/types/chat/ai-assistance';
@@ -155,16 +160,24 @@ const AIAssistanceButton: React.FC<AIAssistanceButtonProps> = ({
 
   return (
     <>
-      <Button
-        variant="outline"
-        size="icon"
-        disabled={disabled}
-        className="h-10 w-10 flex-shrink-0 border-input hover:bg-accent hover:border-accent-foreground/20 disabled:opacity-50 group"
-        onClick={handleOpenActions}
-        title={t('aiAssistance.button.title')}
-      >
-        <Sparkles className="h-4 w-4 group-hover:text-primary transition-colors" />
-      </Button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            disabled={disabled}
+            aria-label={t('aiAssistance.button.title')}
+            className="h-10 w-10 flex-shrink-0 border-input hover:bg-accent hover:border-accent-foreground/20 disabled:opacity-50 group"
+            onClick={handleOpenActions}
+          >
+            <Sparkles className="h-4 w-4 group-hover:text-primary transition-colors" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{t('aiAssistance.button.title')}</p>
+        </TooltipContent>
+      </Tooltip>
 
       <AIActionsModal
         isOpen={showActionsModal}
