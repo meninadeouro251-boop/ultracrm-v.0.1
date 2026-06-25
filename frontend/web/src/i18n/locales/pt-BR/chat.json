@@ -639,6 +639,7 @@
         "video": "vídeo",
         "word": "Word"
       },
+    "send": "Enviar",
       "errors": {
         "fileTooLarge": "Arquivo muito grande",
         "fileTooLargeDescription": "{{fileName}} excede o limite de {{maxSize}}MB",
@@ -655,8 +656,10 @@
       "sendError": "Erro ao enviar áudio",
       "converting": "Convertendo áudio...",
       "conversionWarning": "Aviso de conversão",
-      "conversionWarningDescription": "Não foi possível converter o áudio para MP3. Tentando enviar no formato original."
+      "conversionWarningDescription": "Não foi possível converter o áudio para MP3. Tentando enviar no formato original.",
+      "tooltip": "Mensagem de voz"
     },
+    "send": "Enviar",
     "templates": {
       "inDevelopment": "Templates de mensagem em desenvolvimento 📝"
     },

@@ -667,6 +667,7 @@
         "video": "video",
         "word": "Word"
       },
+    "send": "Send",
       "errors": {
         "fileTooLarge": "File too large",
         "fileTooLargeDescription": "{{fileName}} exceeds the limit of {{maxSize}}MB",
@@ -680,8 +681,10 @@
     },
     "audio": {
       "sentSuccess": "Audio sent successfully!",
-      "sendError": "Error sending audio"
+      "sendError": "Error sending audio",
+      "tooltip": "Voice Message"
     },
+    "send": "Send",
     "templates": {
       "inDevelopment": "Message templates in development 📝"
     },

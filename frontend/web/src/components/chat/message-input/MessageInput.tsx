@@ -509,14 +509,15 @@ const MessageInput: React.FC<MessageInputProps> = ({
   // Texto do tooltip do botão de enviar
   const sendButtonTooltip = React.useMemo(() => {
     const messageKey = user?.ui_settings?.editor_message_key || 'enter';
+    const sendText = t('messageInput.send') || 'Send';
 
     if (messageKey === 'cmd_enter') {
       const modifier = getModifierSymbol();
-      return `Enviar (${modifier} + Enter)`;
+      return `${sendText} (${modifier} + Enter)`;
     }
 
-    return 'Enviar (Enter)';
-  }, [user?.ui_settings?.editor_message_key]);
+    return `${sendText} (Enter)`;
+  }, [user?.ui_settings?.editor_message_key, t]);
 
   const cardClassNames = `
     w-full border-t border-x-0 border-b-0 rounded-none shadow-lg py-0 gap-0 transition-all duration-200 bg-background
@@ -798,30 +799,41 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
             {/* Action Buttons */}
             <div className="flex-shrink-0 flex items-center gap-1.5 pb-1">
-              {replyMode === ReplyMode.REPLY && !isPendingConversation && (
-                <Button
-                  variant={isRecordingAudio ? 'default' : 'ghost'}
-                  size="icon"
-                  disabled={isDisabled || isSending}
-                  className={
-                    isRecordingAudio
-                      ? 'bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 shadow-md transition-all duration-200'
-                      : 'h-9 w-9 flex-shrink-0 hover:bg-accent transition-all duration-200'
-                  }
-                  onClick={startAudioRecording}
-                >
-                  <Mic className="h-4 w-4" />
-                </Button>
-              )}
-
               <TooltipProvider>
+                {replyMode === ReplyMode.REPLY && !isPendingConversation && (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        type="button"
+                        variant={isRecordingAudio ? 'default' : 'ghost'}
+                        size="icon"
+                        disabled={isDisabled || isSending}
+                        className={
+                          isRecordingAudio
+                            ? 'bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 shadow-md transition-all duration-200'
+                            : 'h-9 w-9 flex-shrink-0 hover:bg-accent transition-all duration-200'
+                        }
+                        onClick={startAudioRecording}
+                        aria-label={t('messageInput.audio.tooltip')}
+                      >
+                        <Mic className="h-4 w-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{t('messageInput.audio.tooltip')}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                )}
+
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
+                      type="button"
                       size="icon"
                       onClick={handleSend}
                       disabled={!canSend}
                       className="bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 disabled:bg-muted disabled:text-muted-foreground disabled:opacity-50"
+                      aria-label={sendButtonTooltip}
                     >
                       {isSending ? (
                         <Loader2 className="h-4 w-4 animate-spin" />
