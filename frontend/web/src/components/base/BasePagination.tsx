@@ -6,6 +6,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from '@ultraapi/design-system';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/utils/cn';
@@ -175,17 +179,26 @@ export default function BasePagination({
       )}
 
       {/* Pagination controls */}
-      <div className="flex items-center gap-1">
-        {/* Previous page */}
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={!canGoPrevious}
-          className="min-w-9 bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </Button>
+      <TooltipProvider>
+        <div className="flex items-center gap-1">
+          {/* Previous page */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={!canGoPrevious}
+                aria-label={t('base.pagination.previousPage')}
+                className="min-w-9 bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{t('base.pagination.previousPage')}</p>
+            </TooltipContent>
+          </Tooltip>
 
         {/* Page numbers */}
         {showPageNumbers && totalPages <= 7 ? (
@@ -224,17 +237,26 @@ export default function BasePagination({
           </div>
         )}
 
-        {/* Next page */}
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={!canGoNext}
-          className="min-w-9 bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-      </div>
+          {/* Next page */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={!canGoNext}
+                aria-label={t('base.pagination.nextPage')}
+                className="min-w-9 bg-sidebar border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{t('base.pagination.nextPage')}</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+      </TooltipProvider>
     </div>
   );
 }
