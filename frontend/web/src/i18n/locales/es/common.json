@@ -3,7 +3,9 @@
     "pagination": {
       "itemsPerPage": "Ítems por página:",
       "showing": "Mostrando {{start}} a {{end}} de {{total}} ítems",
-      "page": "Página {{current}} de {{total}}"
+      "page": "Página {{current}} de {{total}}",
+      "previousPage": "Página anterior",
+      "nextPage": "Próxima página"
     },
     "header": {
       "searchPlaceholder": "Buscar...",
@@ -19,7 +21,9 @@
       "no": "No",
       "selectAll": "Seleccionar todos",
       "selectItem": "Seleccionar ítem {{key}}",
-      "actions": "Acciones"
+      "actions": "Acciones",
+      "sort": "Ordenar por {{column}}",
+      "moreActions": "Más acciones"
     },
     "buttons": {
       "save": "Guardar",
