@@ -229,6 +229,7 @@
     "send": "Enviar"
   },
   "cannedResponses": {
+    "tooltip": "Respostas Rápidas (ou digite /)",
     "loading": "Carregando respostas prontas...",
     "noResults": "Nenhuma resposta encontrada",
     "tryAnotherTerm": "Tente outro termo de busca ou crie uma nova resposta pronta",
@@ -619,7 +620,8 @@
     "restrictedPlaceholder": "Não é possível enviar mensagens devido à janela de mensagem de 24 horas",
     "defaultPlaceholder": "Digite sua mensagem...",
     "emojiPicker": {
-      "searchPlaceholder": "Buscar emojis..."
+      "searchPlaceholder": "Buscar emojis...",
+      "tooltip": "Seletor de Emoji"
     },
     "filePreview": {
       "file": "arquivo",
@@ -653,6 +655,7 @@
     "audio": {
       "sentSuccess": "Áudio enviado com sucesso!",
       "sendError": "Erro ao enviar áudio",
+      "tooltip": "Gravar Áudio",
       "converting": "Convertendo áudio...",
       "conversionWarning": "Aviso de conversão",
       "conversionWarningDescription": "Não foi possível converter o áudio para MP3. Tentando enviar no formato original."
