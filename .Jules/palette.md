@@ -1,0 +1,3 @@
+## 2025-05-15 - [Standardizing Chat Input Tooltips]
+**Learning:** Icon-only buttons in the chat interface often relied on browser-native `title` attributes or custom CSS tooltips, leading to inconsistent UX and accessibility. Centralizing `TooltipProvider` at the parent component level (e.g., `MessageInput.tsx`) allows for efficient application of design system tooltips across multiple child components without redundant providers or event conflicts.
+**Action:** Always wrap the root of complex action bars with `TooltipProvider` and replace `title` attributes with the standardized `Tooltip` + `aria-label` + `type="button"` pattern for all icon-only buttons.
