@@ -610,6 +610,7 @@
     "restrictedPlaceholder": "Impossibile inviare messaggi a causa della finestra di messaggistica di 24 ore",
     "defaultPlaceholder": "Digita il tuo messaggio...",
     "emojiPicker": {
+      "tooltip": "Emoji",
       "searchPlaceholder": "Cerca emoji..."
     },
     "filePreview": {
@@ -642,12 +643,19 @@
       }
     },
     "audio": {
+      "tooltip": "Registra audio",
       "sentSuccess": "Audio inviato con successo!",
       "sendError": "Errore nell'invio dell'audio"
     },
     "templates": {
+      "tooltip": "Modelli di messaggio",
       "inDevelopment": "Modelli di messaggio in sviluppo 📝"
     },
+    "cannedResponses": {
+      "tooltip": "Risposte predefinite (o digita /)"
+    },
+    "send": "Invia",
+    "sendWithCmd": "Invia ({{modifier}} + Invio)",
     "replyPreview": {
       "replyingTo": "Rispondendo a {{name}}",
       "userFallback": "Utente",
