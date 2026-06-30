@@ -647,6 +647,7 @@
     "restrictedPlaceholder": "Cannot send messages due to 24-hour messaging window",
     "defaultPlaceholder": "Type your message...",
     "emojiPicker": {
+      "tooltip": "Emojis",
       "searchPlaceholder": "Search emojis..."
     },
     "filePreview": {
@@ -679,12 +680,19 @@
       }
     },
     "audio": {
+      "tooltip": "Record Audio",
       "sentSuccess": "Audio sent successfully!",
       "sendError": "Error sending audio"
     },
     "templates": {
+      "tooltip": "Message Templates",
       "inDevelopment": "Message templates in development 📝"
     },
+    "cannedResponses": {
+      "tooltip": "Canned Responses (or type /)"
+    },
+    "send": "Send",
+    "sendWithCmd": "Send ({{modifier}} + Enter)",
     "replyPreview": {
       "replyingTo": "Replying to {{name}}",
       "userFallback": "User",

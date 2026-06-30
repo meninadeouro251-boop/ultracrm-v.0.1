@@ -512,11 +512,11 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
     if (messageKey === 'cmd_enter') {
       const modifier = getModifierSymbol();
-      return `Enviar (${modifier} + Enter)`;
+      return t('messageInput.sendWithCmd', { modifier });
     }
 
-    return 'Enviar (Enter)';
-  }, [user?.ui_settings?.editor_message_key]);
+    return t('messageInput.send');
+  }, [user?.ui_settings?.editor_message_key, t]);
 
   const cardClassNames = `
     w-full border-t border-x-0 border-b-0 rounded-none shadow-lg py-0 gap-0 transition-all duration-200 bg-background
@@ -568,7 +568,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
   );
 
   return (
-    <>
+    <TooltipProvider>
       {/* Preview de resposta */}
       {replyToMessage && (
         <ReplyPreview message={replyToMessage} onCancel={() => onCancelReply?.()} />
@@ -640,31 +640,36 @@ const MessageInput: React.FC<MessageInputProps> = ({
             <div className="flex-shrink-0 flex items-center gap-1.5">
               {/* Message Signature Button */}
               {hasSignature && replyMode === ReplyMode.REPLY && !isPendingConversation && (
-                <div className="relative group">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    disabled={isDisabled || isSending}
-                    className={`h-9 w-9 flex-shrink-0 border-input hover:bg-accent hover:border-accent-foreground/20 disabled:opacity-50 transition-colors ${isSignatureEnabled
-                        ? 'bg-green-50 border-green-500 dark:bg-green-950/30 dark:border-green-500'
-                        : ''
-                      }`}
-                    onClick={toggleSignature}
-                  >
-                    <PenLine
-                      className={`h-4 w-4 ${isSignatureEnabled ? 'text-green-600 dark:text-green-400' : ''
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      disabled={isDisabled || isSending}
+                      aria-label={
+                        isSignatureEnabled
+                          ? t('messageInput.signature.disable')
+                          : t('messageInput.signature.enable')
+                      }
+                      className={`h-9 w-9 flex-shrink-0 border-input hover:bg-accent hover:border-accent-foreground/20 disabled:opacity-50 transition-colors ${isSignatureEnabled
+                          ? 'bg-green-50 border-green-500 dark:bg-green-950/30 dark:border-green-500'
+                          : ''
                         }`}
-                    />
-                  </Button>
-                  <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-gray-900 dark:bg-gray-700 text-white text-xs rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                      onClick={toggleSignature}
+                    >
+                      <PenLine
+                        className={`h-4 w-4 ${isSignatureEnabled ? 'text-green-600 dark:text-green-400' : ''
+                          }`}
+                      />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
                     {isSignatureEnabled
                       ? t('messageInput.signature.disable')
                       : t('messageInput.signature.enable')}
-                    <div className="absolute top-full right-3 -mt-1">
-                      <div className="border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
-                    </div>
-                  </div>
-                </div>
+                  </TooltipContent>
+                </Tooltip>
               )}
 
               {/* AI Assistance Button */}
@@ -694,15 +699,24 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
               {/* Emoji Button */}
               <div className="relative">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  disabled={isDisabled || isSending || isPendingConversation}
-                  className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                  onClick={handleEmojiClick}
-                >
-                  <Smile className="h-4 w-4" />
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      disabled={isDisabled || isSending || isPendingConversation}
+                      aria-label={t('messageInput.emojiPicker.tooltip')}
+                      className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
+                      onClick={handleEmojiClick}
+                    >
+                      <Smile className="h-4 w-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {t('messageInput.emojiPicker.tooltip')}
+                  </TooltipContent>
+                </Tooltip>
                 <EmojiPicker
                   isOpen={showEmojiPicker}
                   onEmojiSelect={handleEmojiSelect}
@@ -710,28 +724,44 @@ const MessageInput: React.FC<MessageInputProps> = ({
                 />
               </div>
               {/* Canned Responses Button */}
-              <Button
-                variant={showCannedResponses ? 'default' : 'ghost'}
-                size="icon"
-                disabled={isDisabled || isSending || isPendingConversation}
-                className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                onClick={handleCannedResponsesClick}
-                title={t('messageInput.cannedResponses.tooltip')}
-              >
-                <MessageSquareText className="h-4 w-4" />
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    type="button"
+                    variant={showCannedResponses ? 'default' : 'ghost'}
+                    size="icon"
+                    disabled={isDisabled || isSending || isPendingConversation}
+                    aria-label={t('messageInput.cannedResponses.tooltip')}
+                    className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
+                    onClick={handleCannedResponsesClick}
+                  >
+                    <MessageSquareText className="h-4 w-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {t('messageInput.cannedResponses.tooltip')}
+                </TooltipContent>
+              </Tooltip>
 
               {/* Template Button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                disabled={isSending || isPendingConversation}
-                className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                onClick={handleTemplateClick}
-                title={t('messageTemplates.button.title')}
-              >
-                <FileText className="h-4 w-4" />
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    disabled={isSending || isPendingConversation}
+                    aria-label={t('messageInput.templates.tooltip')}
+                    className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
+                    onClick={handleTemplateClick}
+                  >
+                    <FileText className="h-4 w-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {t('messageInput.templates.tooltip')}
+                </TooltipContent>
+              </Tooltip>
             </div>
 
             {/* Text Input Container */}
@@ -799,42 +829,51 @@ const MessageInput: React.FC<MessageInputProps> = ({
             {/* Action Buttons */}
             <div className="flex-shrink-0 flex items-center gap-1.5 pb-1">
               {replyMode === ReplyMode.REPLY && !isPendingConversation && (
-                <Button
-                  variant={isRecordingAudio ? 'default' : 'ghost'}
-                  size="icon"
-                  disabled={isDisabled || isSending}
-                  className={
-                    isRecordingAudio
-                      ? 'bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 shadow-md transition-all duration-200'
-                      : 'h-9 w-9 flex-shrink-0 hover:bg-accent transition-all duration-200'
-                  }
-                  onClick={startAudioRecording}
-                >
-                  <Mic className="h-4 w-4" />
-                </Button>
-              )}
-
-              <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
+                      type="button"
+                      variant={isRecordingAudio ? 'default' : 'ghost'}
                       size="icon"
-                      onClick={handleSend}
-                      disabled={!canSend}
-                      className="bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 disabled:bg-muted disabled:text-muted-foreground disabled:opacity-50"
+                      disabled={isDisabled || isSending}
+                      aria-label={t('messageInput.audio.tooltip')}
+                      className={
+                        isRecordingAudio
+                          ? 'bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 shadow-md transition-all duration-200'
+                          : 'h-9 w-9 flex-shrink-0 hover:bg-accent transition-all duration-200'
+                      }
+                      onClick={startAudioRecording}
                     >
-                      {isSending ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        <Send className="h-4 w-4" />
-                      )}
+                      <Mic className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>{sendButtonTooltip}</p>
+                    {t('messageInput.audio.tooltip')}
                   </TooltipContent>
                 </Tooltip>
-              </TooltipProvider>
+              )}
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    type="button"
+                    size="icon"
+                    onClick={handleSend}
+                    disabled={!canSend}
+                    aria-label={sendButtonTooltip}
+                    className="bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 disabled:bg-muted disabled:text-muted-foreground disabled:opacity-50"
+                  >
+                    {isSending ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Send className="h-4 w-4" />
+                    )}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{sendButtonTooltip}</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           </div>
         </CardContent>
@@ -861,7 +900,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
         isWhatsAppCloud={isWhatsAppCloud}
         onSend={handleSendTemplate}
       />
-    </>
+    </TooltipProvider>
   );
 };
 
