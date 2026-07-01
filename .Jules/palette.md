@@ -1,0 +1,3 @@
+## 2026-07-01 - [Accessibility] Standardized Chat Input Actions
+**Learning:** Icon-only buttons in complex UI components like `MessageInput` often rely on browser-native `title` attributes or custom CSS tooltips, which are inconsistent and less accessible. Centralizing `TooltipProvider` at the component root allows for efficient application of the design system's `Tooltip` and `aria-label` across multiple child actions (Emoji, Canned Responses, Files, AI).
+**Action:** Always replace `title` with `Tooltip` + `aria-label` for icon-only buttons, ensure `type="button"` to prevent form side-effects, and centralize `TooltipProvider` to serve all sibling interactive elements.

@@ -113,10 +113,10 @@ const AIResultModal: React.FC<AIResultModalProps> = ({
         </div>
 
         <DialogFooter>
-          <Button variant="outline" onClick={onClose} disabled={isLoading}>
+          <Button type="button" variant="outline" onClick={onClose} disabled={isLoading}>
             {t('aiAssistance.resultModal.actions.cancel')}
           </Button>
-          <Button onClick={onApply} disabled={isLoading || !generatedMessage}>
+          <Button type="button" onClick={onApply} disabled={isLoading || !generatedMessage}>
             {t('aiAssistance.resultModal.actions.apply')}
           </Button>
         </DialogFooter>
