@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
 import { Button } from '@ultraapi/design-system/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@ultraapi/design-system/tooltip';
 import { Badge } from '@ultraapi/design-system/badge';
 import {
   DropdownMenu,
@@ -147,14 +153,27 @@ const ConversationActionsDropdown: React.FC<ConversationActionsDropdownProps> = 
   };
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-          <MoreVertical className="h-4 w-4" />
-          <span className="sr-only">{t('conversationActionsDropdown.srOnly')}</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+    <TooltipProvider>
+      <DropdownMenu open={open} onOpenChange={setOpen}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 w-8 p-0"
+                aria-label={t('conversationActionsDropdown.srOnly')}
+              >
+                <MoreVertical className="h-4 w-4" />
+                <span className="sr-only">{t('conversationActionsDropdown.srOnly')}</span>
+              </Button>
+            </DropdownMenuTrigger>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{t('conversationActionsDropdown.srOnly')}</p>
+          </TooltipContent>
+        </Tooltip>
+        <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="flex items-center gap-2">
           <Settings className="h-4 w-4" />
           {t('conversationActionsDropdown.title')}
@@ -387,8 +406,9 @@ const ConversationActionsDropdown: React.FC<ConversationActionsDropdownProps> = 
           <Trash2 className="h-4 w-4" />
           {t('conversationActionsDropdown.deleteConversation')}
         </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </TooltipProvider>
   );
 };
 
