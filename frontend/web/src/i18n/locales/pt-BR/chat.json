@@ -619,7 +619,8 @@
     "restrictedPlaceholder": "Não é possível enviar mensagens devido à janela de mensagem de 24 horas",
     "defaultPlaceholder": "Digite sua mensagem...",
     "emojiPicker": {
-      "searchPlaceholder": "Buscar emojis..."
+      "searchPlaceholder": "Buscar emojis...",
+      "tooltip": "Emojis"
     },
     "filePreview": {
       "file": "arquivo",
@@ -655,13 +656,15 @@
       "sendError": "Erro ao enviar áudio",
       "converting": "Convertendo áudio...",
       "conversionWarning": "Aviso de conversão",
-      "conversionWarningDescription": "Não foi possível converter o áudio para MP3. Tentando enviar no formato original."
+      "conversionWarningDescription": "Não foi possível converter o áudio para MP3. Tentando enviar no formato original.",
+      "tooltip": "Gravar áudio"
     },
     "templates": {
       "inDevelopment": "Templates de mensagem em desenvolvimento 📝"
     },
     "cannedResponses": {
-      "tooltip": "Respostas Rápidas (ou digite /)"
+      "tooltip": "Respostas Rápidas (ou digite /)",
+      "close": "Fechar resposta rápida selecionada"
     },
     "replyPreview": {
       "replyingTo": "Respondendo {{name}}",
@@ -670,6 +673,7 @@
       "fileAttachment": "📎 {{fileType}}",
       "fileFallback": "Arquivo",
       "noContent": "Mensagem sem conteúdo",
+      "close": "Cancelar resposta",
       "imageAttachment": "📷 Imagem",
       "audioAttachment": "🎵 Áudio",
       "videoAttachment": "🎥 Vídeo",

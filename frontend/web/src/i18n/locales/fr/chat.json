@@ -610,7 +610,8 @@
     "restrictedPlaceholder": "Impossible d'envoyer des messages en raison de la fenêtre de messagerie de 24 heures",
     "defaultPlaceholder": "Tapez votre message...",
     "emojiPicker": {
-      "searchPlaceholder": "Rechercher des emojis..."
+      "searchPlaceholder": "Rechercher des emojis...",
+      "tooltip": "Émojis"
     },
     "filePreview": {
       "file": "fichier",
@@ -643,10 +644,15 @@
     },
     "audio": {
       "sentSuccess": "Audio envoyé avec succès !",
-      "sendError": "Erreur lors de l'envoi de l'audio"
+      "sendError": "Erreur lors de l'envoi de l'audio",
+      "tooltip": "Enregistrer un message vocal"
     },
     "templates": {
       "inDevelopment": "Modèles de messages en développement 📝"
+    },
+    "cannedResponses": {
+      "tooltip": "Réponses prédéfinies (ou tapez /)",
+      "close": "Effacer la réponse sélectionnée"
     },
     "replyPreview": {
       "replyingTo": "Réponse à {{name}}",
@@ -654,7 +660,8 @@
       "asPrivateNote": "(comme note privée)",
       "fileAttachment": "📎 {{fileType}}",
       "fileFallback": "Fichier",
-      "noContent": "Message sans contenu"
+      "noContent": "Message sans contenu",
+      "close": "Annuler la réponse"
     },
     "signature": {
       "enable": "Activer la signature",

@@ -1,0 +1,3 @@
+## 2025-05-15 - [Standardizing Chat Input Accessibility]
+**Learning:** Icon-only buttons in the chat interface often relied on browser-native `title` attributes or custom CSS tooltips, which are inconsistent and less accessible than the design system's `Tooltip` and explicit `aria-label` attributes. Centralizing `TooltipProvider` at the parent component level (e.g., `MessageInput.tsx`) efficiently serves multiple child action components without nesting conflicts.
+**Action:** Always provide both a `Tooltip` and a matching `aria-label` for icon-only buttons, and prefer centralizing `TooltipProvider` at the root of complex interactive areas to maintain a clean DOM and consistent event handling.
