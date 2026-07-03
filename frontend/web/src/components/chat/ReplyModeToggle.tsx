@@ -27,6 +27,7 @@ export const ReplyModeToggle = ({
       <div className="flex items-center gap-1 p-1 bg-muted rounded-lg border w-fit">
         {/* Botão Resposta Pública */}
         <Button
+          type="button"
           variant={isReplyMode ? 'default' : 'ghost'}
           size="sm"
           onClick={() => onModeChange(ReplyMode.REPLY)}
@@ -47,6 +48,7 @@ export const ReplyModeToggle = ({
 
         {/* Botão Nota Privada */}
         <Button
+          type="button"
           variant={isNoteMode ? 'default' : 'ghost'}
           size="sm"
           onClick={() => onModeChange(ReplyMode.NOTE)}
