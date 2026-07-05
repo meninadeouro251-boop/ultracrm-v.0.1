@@ -1,0 +1,3 @@
+## 2025-05-14 - Standardizing Chat Input Accessibility and Localization
+**Learning:** Icon-only buttons in complex UI components like `MessageInput` often suffer from inconsistent accessibility (missing `aria-label`) and hardcoded tooltips. Centralizing `TooltipProvider` at the component root level provides a clean context for all child tooltips without redundant nesting. Localizing shortcut hints (e.g., "Enter" vs "Cmd + Enter") using interpolation for the modifier ensures a consistent experience for global users.
+**Action:** Always wrap component root in `TooltipProvider` when adding multiple tooltips, replace native `title` with design system `Tooltip`, and move all interactive strings to namespace-specific localization files.
