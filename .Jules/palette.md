@@ -1,0 +1,3 @@
+## 2025-05-15 - [Standardizing Chat Input Accessibility]
+**Learning:** Icon-only buttons in complex components like `MessageInput` often rely on native `title` attributes or custom CSS tooltips, which are suboptimal for screen readers and touch devices. Centralizing `TooltipProvider` at the root of such components allows all child components (`FileUpload`, `AIAssistanceButton`, etc.) to share the same context, reducing DOM overhead and potential event conflicts.
+**Action:** When standardizing icon-only buttons, wrap the entire parent component in a single `TooltipProvider`, replace `title` with the design system's `Tooltip`, and always pair it with an `aria-label` and `type="button"` for consistent form and accessibility behavior.
